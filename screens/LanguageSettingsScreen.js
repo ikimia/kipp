@@ -10,23 +10,20 @@ import {
   List,
   ListItem,
   Text,
-  Icon,
-  Button
+  Icon
 } from "native-base";
 import { useTranslation } from "react-i18next";
+import BackButton from "../components/BackButton";
 
 const ITEMS = ["en", "he"];
 
-export default function LanguageSettingsScreen({ navigation }) {
+export default function LanguageSettingsScreen() {
   const { t, i18n } = useTranslation("settings");
   return (
     <Container>
       <Header>
         <Left>
-          <Button transparent onPress={() => navigation.goBack()}>
-            <Icon name="arrow-back" />
-            <Text>{t("common:back")}</Text>
-          </Button>
+          <BackButton />
         </Left>
         <Body>
           <Title>{t("language")}</Title>
