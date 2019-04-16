@@ -12,7 +12,7 @@ import ProcessTransactionScreen from "../screens/ProcessTransactionScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import { Footer, FooterTab, Button, Text, Icon } from "native-base";
-import { withNamespaces } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const stack = (stacks, initialRouteName) =>
   createStackNavigator(stacks, { headerMode: "none", initialRouteName });
@@ -43,30 +43,29 @@ export default createBottomTabNavigator(
     )
   },
   {
-    tabBarComponent: withNamespaces([], { wait: true })(
-      function BottomTabsNavigator({ navigation, t }) {
-        return (
-          <Footer>
-            <FooterTab>
-              {[
-                ["PayStack", "wallet", "pay:pay"],
-                ["PurchasesStack", "paper", "purchases:purchases"],
-                ["SettingsStack", "options", "settings:settings"]
-              ].map(([stack, icon, label], i) => (
-                <Button
-                  key={stack}
-                  vertical
-                  active={navigation.state.index === i}
-                  onPress={() => navigation.navigate(stack)}
-                >
-                  <Icon name={icon} />
-                  <Text>{t(label)}</Text>
-                </Button>
-              ))}
-            </FooterTab>
-          </Footer>
-        );
-      }
-    )
+    tabBarComponent: function BottomTabsNavigator({ navigation }) {
+      const { t } = useTranslation();
+      return (
+        <Footer>
+          <FooterTab>
+            {[
+              ["PayStack", "wallet", "pay:pay"],
+              ["PurchasesStack", "paper", "purchases:purchases"],
+              ["SettingsStack", "options", "settings:settings"]
+            ].map(([stack, icon, label], i) => (
+              <Button
+                key={stack}
+                vertical
+                active={navigation.state.index === i}
+                onPress={() => navigation.navigate(stack)}
+              >
+                <Icon name={icon} />
+                <Text>{t(label)}</Text>
+              </Button>
+            ))}
+          </FooterTab>
+        </Footer>
+      );
+    }
   }
 );

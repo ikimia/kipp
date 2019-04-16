@@ -14,7 +14,7 @@
     "react": "16.8.3",
     "react-art": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-i18next": "^9.0.10",
+    "react-i18next": "^10.8.0",
     "react-native": "0.59.4",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-localize": "^1.1.2",
