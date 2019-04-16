@@ -9,10 +9,11 @@ import {
   Content,
   List,
   ListItem,
-  Text,
-  Icon
+  Text
 } from "native-base";
 import { useTranslation } from "react-i18next";
+import AlignedText from "../components/AlignedText";
+import ArrowIcon from "../components/ArrowIcon";
 
 const ITEMS = [
   ["myAccount"],
@@ -45,11 +46,11 @@ export default function SettingsScreen({ navigation }) {
               onPress={screen && (() => navigation.navigate(screen))}
             >
               <Body>
-                <Text>{t(item)}</Text>
+                <AlignedText>{t(item)}</AlignedText>
               </Body>
               <Right>
                 {right && <Text>{right(t, i18n)}</Text>}
-                <Icon name="arrow-forward" />
+                <ArrowIcon />
               </Right>
             </ListItem>
           ))}

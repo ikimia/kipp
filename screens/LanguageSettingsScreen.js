@@ -9,24 +9,21 @@ import {
   Content,
   List,
   ListItem,
-  Text,
-  Icon,
-  Button
+  Icon
 } from "native-base";
 import { useTranslation } from "react-i18next";
+import BackButton from "../components/BackButton";
+import AlignedText from "../components/AlignedText";
 
 const ITEMS = ["en", "he"];
 
-export default function LanguageSettingsScreen({ navigation }) {
+export default function LanguageSettingsScreen() {
   const { t, i18n } = useTranslation("settings");
   return (
     <Container>
       <Header>
         <Left>
-          <Button transparent onPress={() => navigation.goBack()}>
-            <Icon name="arrow-back" />
-            <Text>{t("common:back")}</Text>
-          </Button>
+          <BackButton />
         </Left>
         <Body>
           <Title>{t("language")}</Title>
@@ -36,7 +33,7 @@ export default function LanguageSettingsScreen({ navigation }) {
       <Content style={{ backgroundColor: "#f4f4f4" }}>
         <List>
           <ListItem itemDivider>
-            <Text>{t("chooseLanguage")}</Text>
+            <AlignedText>{t("chooseLanguage")}</AlignedText>
           </ListItem>
           {ITEMS.map((code, i) => (
             <ListItem
@@ -51,7 +48,7 @@ export default function LanguageSettingsScreen({ navigation }) {
               }}
             >
               <Body>
-                <Text>{t(code)}</Text>
+                <AlignedText>{t(code)}</AlignedText>
               </Body>
               {code === i18n.language ? (
                 <Right>

@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View, StyleSheet } from "react-native";
-import { Text } from "native-base";
 
 import StyleSheets from "../constants/StyleSheets";
 import Colors from "../constants/Colors";
 import { useTranslation } from "react-i18next";
+import AlignedText from "./AlignedText";
+
+const { f1, f2, textBold, mt4, f4 } = StyleSheets;
 
 export default function ReceiptItemsTable({ items, taxes }) {
   const { t } = useTranslation("common");
@@ -15,21 +17,17 @@ export default function ReceiptItemsTable({ items, taxes }) {
   return (
     <View style={{ flexDirection: "column" }}>
       <View style={style.row}>
-        <Text style={[StyleSheets.f2, StyleSheets.textBold]}>
-          {t("description")}
-        </Text>
-        <Text style={[StyleSheets.f1, StyleSheets.textBold]}>{t("count")}</Text>
-        <Text style={[StyleSheets.f1, StyleSheets.textBold]}>{t("price")}</Text>
-        <Text style={[StyleSheets.f1, StyleSheets.textBold]}>
-          {t("amount")}
-        </Text>
+        <AlignedText style={[f2, textBold]}>{t("description")}</AlignedText>
+        <AlignedText style={[f1, textBold]}>{t("count")}</AlignedText>
+        <AlignedText style={[f1, textBold]}>{t("price")}</AlignedText>
+        <AlignedText style={[f1, textBold]}>{t("amount")}</AlignedText>
       </View>
       {items.map(({ description, count, price }) => (
         <View key={description} style={style.row}>
-          <Text style={StyleSheets.f2}>{description}</Text>
-          <Text style={StyleSheets.f1}>{count}</Text>
-          <Text style={StyleSheets.f1}>${price}</Text>
-          <Text style={StyleSheets.f1}>${count * price}</Text>
+          <AlignedText style={f2}>{description}</AlignedText>
+          <AlignedText style={f1}>{count}</AlignedText>
+          <AlignedText style={f1}>${price}</AlignedText>
+          <AlignedText style={f1}>${count * price}</AlignedText>
         </View>
       ))}
       <View
@@ -38,14 +36,12 @@ export default function ReceiptItemsTable({ items, taxes }) {
           { borderBottomWidth: 1, borderBottomColor: Colors.borderColor }
         ]}
       >
-        <Text style={[StyleSheets.textBold, StyleSheets.f4]}>{t("taxes")}</Text>
-        <Text style={[StyleSheets.textBold, StyleSheets.f1]}>${taxes}</Text>
+        <AlignedText style={[textBold, f4]}>{t("taxes")}</AlignedText>
+        <AlignedText style={[textBold, f1]}>${taxes}</AlignedText>
       </View>
-      <View style={[style.row, StyleSheets.mt4]}>
-        <Text style={[StyleSheets.textBold, StyleSheets.f4]}>Total</Text>
-        <Text style={[StyleSheets.textBold, StyleSheets.f1]}>
-          ${total + taxes}
-        </Text>
+      <View style={[style.row, mt4]}>
+        <AlignedText style={[textBold, f4]}>Total</AlignedText>
+        <AlignedText style={[textBold, f1]}>${total + taxes}</AlignedText>
       </View>
     </View>
   );
