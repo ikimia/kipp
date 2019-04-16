@@ -7,12 +7,12 @@ import {
   Body,
   Right,
   Text,
-  Icon,
   Header,
   Left,
   Title
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
+import ArrowIcon from "../components/ArrowIcon";
 
 const data = [
   {
@@ -71,7 +71,7 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
                   <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
                     ${item.price}
                   </Text>
-                  <Icon name="ios-arrow-forward" />
+                  <ArrowIcon />
                 </Right>
               </ListItem>
             )
