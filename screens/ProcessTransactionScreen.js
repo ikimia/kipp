@@ -7,10 +7,15 @@ export default function ProcessTransactionScreen({ navigation: { navigate } }) {
   const [text, setText] = useState("Sending Transaction");
   const [done, setDone] = useState(false);
   useEffect(() => {
-    setTimeout(() => setText("Authorizing"), 1000);
-    setTimeout(() => setText("Capturing"), 2000);
-    setTimeout(() => setDone(true), 3200);
-  });
+    const timers = [
+      setTimeout(() => setText("Authorizing"), 1000),
+      setTimeout(() => setText("Capturing"), 2000),
+      setTimeout(() => setDone(true), 3200)
+    ];
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+  }, []);
   return (
     <Container>
       <Header />
