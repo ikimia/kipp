@@ -7,23 +7,19 @@
     "test": "jest"
   },
   "dependencies": {
-    "adm-zip": "^0.4.13",
     "eslint-plugin-jest": "^22.4.1",
     "i18next": "^15.0.9",
     "native-base": "^2.12.1",
     "open-color": "^1.6.3",
-    "plist": "^3.0.1",
     "react": "16.8.3",
     "react-art": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-i18next": "^10.8.0",
     "react-native": "0.59.4",
-    "react-native-fbsdk": "0.8.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-localize": "^1.1.2",
     "react-native-web": "^0.11.2",
-    "react-navigation": "^3.8.1",
-    "xcode": "^2.0.0"
+    "react-navigation": "^3.8.1"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
