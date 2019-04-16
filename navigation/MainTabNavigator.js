@@ -13,9 +13,33 @@ import PastOrderScreen from "../screens/PastOrderScreen";
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import { Footer, FooterTab, Button, Text, Icon } from "native-base";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
+const isRTL = () => i18next.language.startsWith("he");
 
 const stack = (stacks, initialRouteName) =>
-  createStackNavigator(stacks, { headerMode: "none", initialRouteName });
+  createStackNavigator(stacks, {
+    headerMode: "none",
+    initialRouteName,
+    transitionConfig: () => ({
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps;
+        const { index } = scene;
+        const width = layout.initWidth;
+
+        const [inputRange, outputRange] = isRTL()
+          ? [[index, index + 1], [0, width]]
+          : [[index - 1, index], [width, 0]];
+        return {
+          transform: [
+            {
+              translateX: position.interpolate({ inputRange, outputRange })
+            }
+          ]
+        };
+      }
+    })
+  });
 
 export default createBottomTabNavigator(
   {
