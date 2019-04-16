@@ -5,11 +5,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import MainTabNavigator from "./MainTabNavigator";
 
-const Stack = createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator
-});
+const Stack = createSwitchNavigator({ MainTabNavigator });
 
 function WrappedStack(props) {
   const { t } = useTranslation("common");
