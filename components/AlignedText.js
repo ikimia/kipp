@@ -11,6 +11,6 @@ export default function AlignedText({ children, style, ...props }) {
 }
 AlignedText.propTypes = {
   children: PropTypes.node,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   props: PropTypes.object
 };

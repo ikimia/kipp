@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
 import ArrowIcon from "../components/ArrowIcon";
+import AlignedText from "../components/AlignedText";
 
 const data = [
   {
@@ -62,10 +63,12 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
             ) : (
               <ListItem key={item.name} onPress={() => navigate("PastOrder")}>
                 <Body>
-                  <Text style={[StyleSheets.textSize3]}>{item.name}</Text>
-                  <Text note>
+                  <AlignedText style={[StyleSheets.textSize3]}>
+                    {item.name}
+                  </AlignedText>
+                  <AlignedText note>
                     {item.date} | {item.location}
-                  </Text>
+                  </AlignedText>
                 </Body>
                 <Right style={{ display: "flex", flexDirection: "row" }}>
                   <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
