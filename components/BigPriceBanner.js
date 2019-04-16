@@ -12,7 +12,7 @@ class BigPriceBanner extends Component {
 
   static propTypes = {
     price: PropTypes.number.isRequired,
-    receiptNumber: PropTypes.number.isRequired,
+    receiptNumber: PropTypes.string.isRequired,
     storeName: PropTypes.string.isRequired
   };
 
