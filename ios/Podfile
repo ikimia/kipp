@@ -7,6 +7,7 @@ target 'StreetPay' do
   rn_path = '../node_modules/react-native'
 
   pod 'yoga', path: "#{rn_path}/ReactCommon/yoga"
+  # https://github.com/facebook/react-native/blob/v0.59.4/React.podspec
   pod 'React', path: rn_path, subspecs: [
     'Core',
     'CxxBridge',
@@ -19,28 +20,18 @@ target 'StreetPay' do
     'RCTNetwork',
     'RCTSettings',
     'RCTText',
-    'RCTVibration',
     'RCTWebSocket',
   ]
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+  # Remove after https://github.com/facebook/react-native-fbsdk/issues/509 fixed
   pod 'FBSDKCoreKit', '~> 4.42.0'
   pod 'FBSDKLoginKit', '~> 4.42.0'
   pod 'FBSDKShareKit', '~> 4.42.0'
 
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
-
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
-
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
-
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      if target.name == "React"
-        target.remove_from_project
-      end
-    end
-  end
 
 end
 

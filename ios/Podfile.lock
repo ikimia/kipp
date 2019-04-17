@@ -81,8 +81,6 @@ PODS:
     - React/Core
   - React/RCTText (0.59.4):
     - React/Core
-  - React/RCTVibration (0.59.4):
-    - React/Core
   - React/RCTWebSocket (0.59.4):
     - React/Core
     - React/fishhook
@@ -110,7 +108,6 @@ DEPENDENCIES:
   - React/RCTNetwork (from `../node_modules/react-native`)
   - React/RCTSettings (from `../node_modules/react-native`)
   - React/RCTText (from `../node_modules/react-native`)
-  - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
@@ -155,6 +152,6 @@ SPEC CHECKSUMS:
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
   yoga: 596e61c9b57751d08a22b07aba310dbd3e65ab75
 
-PODFILE CHECKSUM: 8a5a2ba400b4fc97a68b0e19a4cf22062c9ffe62
+PODFILE CHECKSUM: 2900e8ee2c8d8b92a93c9f747adfb887b2ed24ae
 
 COCOAPODS: 1.6.1
