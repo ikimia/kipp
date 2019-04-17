@@ -9,6 +9,7 @@
   "dependencies": {
     "eslint-plugin-jest": "^22.4.1",
     "i18next": "^15.0.9",
+    "moment": "^2.24.0",
     "native-base": "^2.12.1",
     "open-color": "^1.6.3",
     "react": "16.8.3",

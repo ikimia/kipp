@@ -15,35 +15,48 @@ import StyleSheets from "../constants/StyleSheets";
 import ArrowIcon from "../components/ArrowIcon";
 import AlignedText from "../components/AlignedText";
 
+import moment from "moment";
+import "moment/locale/he";
+import { useTranslation } from "react-i18next";
+
 const data = [
   {
     name: "McDonald's",
-    date: "4 days ago",
+    timeAgo: [3, "hours"],
     location: "Times Square",
     price: "45"
   },
   {
     name: "Macy's",
-    date: "7 days ago",
+    timeAgo: [5, "days"],
     location: "100m from Home",
     price: "245"
   },
   { name: "Last month", div: true },
   {
     name: "Walmart",
-    date: "22/03/2019",
+    timeAgo: [2, "weeks"],
     location: "Valley Stream, NY",
     price: "92"
   },
   {
     name: "Target",
-    date: "13/03/2019",
+    timeAgo: [1, "month"],
     location: "521 W 25th St, NY",
     price: "142"
   }
 ];
 
+const m = language => {
+  const localizedMoment = moment();
+  localizedMoment.locale(language);
+  return localizedMoment;
+};
+
 export default function PurchasesScreen({ navigation: { navigate } }) {
+  const {
+    i18n: { language }
+  } = useTranslation();
   return (
     <Container style={StyleSheets.container}>
       <Header>
@@ -66,8 +79,11 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
                   <AlignedText style={[StyleSheets.textSize3]}>
                     {item.name}
                   </AlignedText>
+                  <AlignedText note>{item.location}</AlignedText>
                   <AlignedText note>
-                    {item.date} | {item.location}
+                    {m(language)
+                      .subtract(...item.timeAgo)
+                      .calendar()}
                   </AlignedText>
                 </Body>
                 <Right style={{ display: "flex", flexDirection: "row" }}>
