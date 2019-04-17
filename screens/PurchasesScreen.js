@@ -20,31 +20,10 @@ import "moment/locale/he";
 import { useTranslation } from "react-i18next";
 
 const data = [
-  {
-    name: "McDonald's",
-    timeAgo: [3, "hours"],
-    location: "Times Square",
-    price: "45"
-  },
-  {
-    name: "Macy's",
-    timeAgo: [5, "days"],
-    location: "100m from Home",
-    price: "245"
-  },
-  { name: "Last month", div: true },
-  {
-    name: "Walmart",
-    timeAgo: [2, "weeks"],
-    location: "Valley Stream, NY",
-    price: "92"
-  },
-  {
-    name: "Target",
-    timeAgo: [1, "month"],
-    location: "521 W 25th St, NY",
-    price: "142"
-  }
+  ["McDonald's", [3, "hours"], "Times Square", "45"],
+  ["Macy's", [5, "days"], "100m from Home", "245"],
+  ["Walmart", [2, "weeks"], "Valley Stream, NY", "92"],
+  ["Target", [1, "month"], "521 W 25th St, NY", "142"]
 ];
 
 const m = language => {
@@ -68,33 +47,27 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
       </Header>
       <Content>
         <List>
-          {data.map(item =>
-            item.div ? (
-              <ListItem key={item.name} itemDivider>
-                <Text>{item.name}</Text>
-              </ListItem>
-            ) : (
-              <ListItem key={item.name} onPress={() => navigate("PastOrder")}>
-                <Body>
-                  <AlignedText style={[StyleSheets.textSize3]}>
-                    {item.name}
-                  </AlignedText>
-                  <AlignedText note>{item.location}</AlignedText>
-                  <AlignedText note>
-                    {m(language)
-                      .subtract(...item.timeAgo)
-                      .calendar()}
-                  </AlignedText>
-                </Body>
-                <Right style={{ display: "flex", flexDirection: "row" }}>
-                  <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
-                    ${item.price}
-                  </Text>
-                  <ArrowIcon />
-                </Right>
-              </ListItem>
-            )
-          )}
+          {data.map(([name, timeAgo, location, price]) => (
+            <ListItem key={name} onPress={() => navigate("PastOrder")}>
+              <Body>
+                <AlignedText style={[StyleSheets.textSize3]}>
+                  {name}
+                </AlignedText>
+                <AlignedText note>{location}</AlignedText>
+                <AlignedText note>
+                  {m(language)
+                    .subtract(...timeAgo)
+                    .calendar()}
+                </AlignedText>
+              </Body>
+              <Right style={{ display: "flex", flexDirection: "row" }}>
+                <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
+                  ${price}
+                </Text>
+                <ArrowIcon />
+              </Right>
+            </ListItem>
+          ))}
         </List>
       </Content>
     </Container>
