@@ -33,14 +33,13 @@ export default function SettingsScreen({ navigation }) {
         <Right />
       </Header>
       <Content style={{ backgroundColor: "#f4f4f4" }}>
-        <List>
+        <List style={{ backgroundColor: "white" }}>
           <ListItem itemDivider />
           {ITEMS.map(([item, right, screen], i) => (
             <ListItem
               key={item}
               noIndent
               icon
-              style={{ backgroundColor: "white" }}
               first={i === 0}
               last={i === ITEMS.length - 1}
               onPress={screen && (() => navigation.navigate(screen))}
