@@ -58,7 +58,7 @@ export default function NewCreditCardScreen() {
       <Content style={{ backgroundColor: "#f4f4f4" }}>
         <Form>
           <Item inlineLabel>
-            <Label>Card Number</Label>
+            <Label>{t("cardNumber")}</Label>
             <Input
               keyboardType="decimal-pad"
               value={formatCardNumber(cardNumber)}
@@ -72,7 +72,7 @@ export default function NewCreditCardScreen() {
             <Icon type="FontAwesome" name={getCreditCardIcon(cardNumber)} />
           </Item>
           <Item inlineLabel>
-            <Label>Expiration</Label>
+            <Label>{t("expiry")}</Label>
             <Input
               keyboardType="decimal-pad"
               placeholder="MM/YY"
@@ -85,7 +85,7 @@ export default function NewCreditCardScreen() {
             />
           </Item>
           <Item inlineLabel last>
-            <Label>CVV</Label>
+            <Label>{t("securityCode")}</Label>
             <Input
               keyboardType="decimal-pad"
               placeholder="•••"
