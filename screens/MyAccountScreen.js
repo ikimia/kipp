@@ -29,12 +29,11 @@ export default function PaymentSettingsScreen({ navigation }) {
         <Right />
       </Header>
       <Content style={{ backgroundColor: "#f4f4f4" }}>
-        <List>
+        <List style={{ backgroundColor: "white" }}>
           <ListItem itemDivider />
           <ListItem
             noIndent
             icon
-            style={{ backgroundColor: "white" }}
             last
             onPress={() => navigation.navigate("SocialProfile")}
           >

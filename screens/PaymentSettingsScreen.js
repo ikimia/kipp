@@ -48,7 +48,7 @@ export default function PaymentSettingsScreen({ navigation }) {
         <Right />
       </Header>
       <Content style={{ backgroundColor: "#f4f4f4" }}>
-        <List>
+        <List style={{ backgroundColor: "white" }}>
           {storedPaymentMethods.length > 0 && (
             <View>
               <ListItem itemDivider />
@@ -60,7 +60,6 @@ export default function PaymentSettingsScreen({ navigation }) {
                   key={cardNumber}
                   noIndent
                   icon
-                  style={{ backgroundColor: "white" }}
                   last={i === storedPaymentMethods.length - 1}
                   onPress={() =>
                     navigation.navigate("SavedCreditCard", { cardNumber })
@@ -90,7 +89,6 @@ export default function PaymentSettingsScreen({ navigation }) {
           <ListItem
             noIndent
             icon
-            style={{ backgroundColor: "white" }}
             last
             onPress={() => navigation.navigate("NewCreditCard")}
           >

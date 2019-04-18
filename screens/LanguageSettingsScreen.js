@@ -32,7 +32,7 @@ export default function LanguageSettingsScreen() {
         <Right />
       </Header>
       <Content style={{ backgroundColor: "#f4f4f4" }}>
-        <List>
+        <List style={{ backgroundColor: "white" }}>
           <ListItem itemDivider>
             <AlignedText>{t("chooseLanguage")}</AlignedText>
           </ListItem>
@@ -41,7 +41,6 @@ export default function LanguageSettingsScreen() {
               key={code}
               noIndent
               icon
-              style={{ backgroundColor: "white" }}
               first={i === 0}
               last={i === ITEMS.length - 1}
               onPress={() => {
