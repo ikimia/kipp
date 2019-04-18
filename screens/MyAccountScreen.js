@@ -8,7 +8,7 @@ import {
   Title,
   Content,
   List,
-  ListItem,
+  ListItem
 } from "native-base";
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";

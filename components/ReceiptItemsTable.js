@@ -27,12 +27,8 @@ export default function ReceiptItemsTable({ items, taxes }) {
         <View key={description} style={style.row}>
           <AlignedText style={f2}>{t(`stores:${description}`)}</AlignedText>
           <AlignedText style={f1}>{count}</AlignedText>
-          <AlignedText style={f1}>
-            <CurrencyText>{price}</CurrencyText>
-          </AlignedText>
-          <AlignedText style={f1}>
-            <CurrencyText>{count * price}</CurrencyText>
-          </AlignedText>
+          <AlignedText style={f1}>{price}</AlignedText>
+          <AlignedText style={f1}>{count * price}</AlignedText>
         </View>
       ))}
       <View
@@ -42,9 +38,7 @@ export default function ReceiptItemsTable({ items, taxes }) {
         ]}
       >
         <AlignedText style={[textBold, f4]}>{t("taxes")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>
-          <CurrencyText>{taxes}</CurrencyText>
-        </AlignedText>
+        <AlignedText style={[textBold, f1]}>{taxes}</AlignedText>
       </View>
       <View style={[style.row, mt4]}>
         <AlignedText style={[textBold, f4]}>{t("total")}</AlignedText>
