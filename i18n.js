@@ -31,7 +31,10 @@ i18n.use(initReactI18next).init({
       settings: {
         settings: "Settings",
         myAccount: "My Account",
-        paymentSettings: "Payment Settings",
+        paymentSettings: "Payment",
+        addPaymentMethods: "Add Payment Methods",
+        creditCard: "Credit card",
+        newCreditCard: "New Credit Card",
         language: "Language",
         chooseLanguage: "Choose Language",
         en: "English",
@@ -67,7 +70,10 @@ i18n.use(initReactI18next).init({
       settings: {
         settings: "הגדרות",
         myAccount: "החשבון שלי",
-        paymentSettings: "הגדרות תשלום",
+        paymentSettings: "תשלום",
+        addPaymentMethods: "הוסף אמצעי תשלום",
+        creditCard: "כרטיס אשראי",
+        newCreditCard: "כרטיס אשראי חדש",
         language: "שפה",
         chooseLanguage: "בחר שפה",
         en: "אנגלית",

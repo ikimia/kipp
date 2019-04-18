@@ -17,7 +17,7 @@ import ArrowIcon from "../components/ArrowIcon";
 
 const ITEMS = [
   ["myAccount"],
-  ["paymentSettings"],
+  ["paymentSettings", null, "PaymentSettings"],
   ["language", (t, i18n) => t(i18n.language), "LanguageSettings"],
   ["socialNetworks:socialProfile", null, "SocialProfile"]
 ];
