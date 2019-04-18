@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { Button, Spinner, Container, Text, Header } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function ProcessTransactionScreen({ navigation: { navigate } }) {
   const [text, setText] = useState("sendingTransaction");
