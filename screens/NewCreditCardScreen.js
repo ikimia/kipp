@@ -20,6 +20,7 @@ import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
+import { useTextAlign } from "../hooks/direction";
 
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
@@ -38,6 +39,7 @@ function isCreditCardValid(cardNumber, date, cvv) {
 
 export default function NewCreditCardScreen() {
   const { t } = useTranslation("settings");
+  const textAlign = useTextAlign();
   const { goBack } = useContext(NavigationContext);
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -49,7 +51,7 @@ export default function NewCreditCardScreen() {
           <BackButton />
         </Left>
         <Body>
-          <Title>{t("newCreditCard")}</Title>
+          <Title>{t("creditCardTitle")}</Title>
         </Body>
         <Right />
       </Header>
@@ -65,6 +67,7 @@ export default function NewCreditCardScreen() {
               }}
               placeholder="•••• •••• •••• ••••"
               maxLength={19}
+              style={{ textAlign }}
             />
             <Icon type="FontAwesome" name={getCreditCardIcon(cardNumber)} />
           </Item>
@@ -78,6 +81,7 @@ export default function NewCreditCardScreen() {
               onChangeText={newText => {
                 setExpirationDate(newText.replace(/\//g, ""));
               }}
+              style={{ textAlign }}
             />
           </Item>
           <Item inlineLabel last>
@@ -88,6 +92,7 @@ export default function NewCreditCardScreen() {
               maxLength={3}
               value={cvv}
               onChangeText={setCVV}
+              style={{ textAlign }}
             />
           </Item>
         </Form>
@@ -105,7 +110,7 @@ export default function NewCreditCardScreen() {
             goBack();
           }}
         >
-          <Text>Save</Text>
+          <Text>{t("saveCreditCard")}</Text>
         </Button>
       </Content>
     </Container>

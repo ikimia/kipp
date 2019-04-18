@@ -20,6 +20,7 @@ import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
+import { useTextAlign } from "../hooks/direction";
 
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
@@ -29,6 +30,7 @@ const formatDate = date => (date ? date.match(/.{1,2}/g).join("/") : "");
 export default function SavedCreditCardScreen() {
   const { t } = useTranslation("settings");
   const { goBack, getParam } = useContext(NavigationContext);
+  const textAlign = useTextAlign();
   const [allCreditCards, setAllCreditCards] = useState({});
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -69,17 +71,25 @@ export default function SavedCreditCardScreen() {
       <Content style={{ backgroundColor: "#f4f4f4" }}>
         <Form>
           <Item inlineLabel>
-            <Label>Card Number</Label>
-            <Input value={formatCardNumber(cardNumber)} disabled />
+            <Label>{t("cardNumber")}</Label>
+            <Input
+              value={formatCardNumber(cardNumber)}
+              style={{ textAlign }}
+              disabled
+            />
             <Icon type="FontAwesome" name={getCreditCardIcon(cardNumber)} />
           </Item>
           <Item inlineLabel>
-            <Label>Expiration</Label>
-            <Input value={formatDate(expirationDate)} disabled />
+            <Label>{t("expiry")}</Label>
+            <Input
+              value={formatDate(expirationDate)}
+              style={{ textAlign }}
+              disabled
+            />
           </Item>
           <Item inlineLabel last>
-            <Label>CVV</Label>
-            <Input value={cvv} disabled />
+            <Label>{t("securityCode")}</Label>
+            <Input value={cvv} style={{ textAlign }} disabled />
           </Item>
         </Form>
         <Button
@@ -95,7 +105,7 @@ export default function SavedCreditCardScreen() {
             goBack();
           }}
         >
-          <Text>Delete</Text>
+          <Text>{t("removeCreditCard")}</Text>
         </Button>
       </Content>
     </Container>
