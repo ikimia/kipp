@@ -20,10 +20,14 @@ import NewCreditCardScreen from "../screens/NewCreditCardScreen";
 import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 import MyAccountScreen from "../screens/MyAccountScreen";
 
-const isRTL = () => i18next.language.startsWith("he");
+const isRTL = () => (i18next.language || "").startsWith("he");
 
 const stack = (stacks, initialRouteName) =>
   createStackNavigator(stacks, {
+    defaultNavigationOptions: () => ({
+      gesturesEnabled: true,
+      gestureDirection: isRTL() ? "inverted" : "default"
+    }),
     headerMode: "none",
     initialRouteName,
     transitionConfig: () => ({
