@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import NewCreditCardScreen from "../screens/NewCreditCardScreen";
+import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 
 const isRTL = () => i18next.language.startsWith("he");
 
@@ -67,7 +68,8 @@ export default createBottomTabNavigator(
         LanguageSettings: LanguageSettingsScreen,
         SocialProfile: SocialProfileScreen,
         PaymentSettings: PaymentSettingsScreen,
-        NewCreditCard: NewCreditCardScreen
+        NewCreditCard: NewCreditCardScreen,
+        SavedCreditCard: SavedCreditCardScreen
       },
       "Settings"
     )

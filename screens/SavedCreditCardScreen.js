@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Left,
   Title,
@@ -26,22 +26,35 @@ const formatCardNumber = cardNumber =>
 
 const formatDate = date => (date ? date.match(/.{1,2}/g).join("/") : "");
 
-function isCreditCardValid(cardNumber, date, cvv) {
-  return (
-    cardNumber.length === 16 &&
-    date.length === 4 &&
-    +date.slice(0, 2) >= 1 &&
-    +date.slice(0, 2) <= 12 &&
-    cvv.length === 3
-  );
-}
-
-export default function NewCreditCardScreen() {
+export default function SavedCreditCardScreen() {
   const { t } = useTranslation("settings");
-  const { goBack } = useContext(NavigationContext);
+  const { goBack, getParam } = useContext(NavigationContext);
+  const [allCreditCards, setAllCreditCards] = useState({});
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCVV] = useState("");
+  useEffect(() => {
+    AsyncStorage.getItem("@StreetPay_CreditCards")
+      .then(JSON.parse)
+      .then(allCreditCards => {
+        setAllCreditCards(allCreditCards);
+        const navigationCardNumber = getParam("cardNumber", "");
+        if (
+          navigationCardNumber &&
+          Object.prototype.hasOwnProperty.call(
+            allCreditCards,
+            navigationCardNumber
+          )
+        ) {
+          const [cardNumber, expirationDate, cvv] = allCreditCards[
+            navigationCardNumber
+          ];
+          setCardNumber(cardNumber);
+          setExpirationDate(expirationDate);
+          setCVV(cvv);
+        }
+      });
+  }, []);
   return (
     <Container>
       <Header>
@@ -49,7 +62,7 @@ export default function NewCreditCardScreen() {
           <BackButton />
         </Left>
         <Body>
-          <Title>{t("newCreditCard")}</Title>
+          <Title>{t("creditCardTitle")}</Title>
         </Body>
         <Right />
       </Header>
@@ -57,55 +70,32 @@ export default function NewCreditCardScreen() {
         <Form>
           <Item inlineLabel>
             <Label>Card Number</Label>
-            <Input
-              keyboardType="decimal-pad"
-              value={formatCardNumber(cardNumber)}
-              onChangeText={newText => {
-                setCardNumber(newText.replace(/ /g, ""));
-              }}
-              placeholder="•••• •••• •••• ••••"
-              maxLength={19}
-            />
+            <Input value={formatCardNumber(cardNumber)} disabled />
             <Icon type="FontAwesome" name={getCreditCardIcon(cardNumber)} />
           </Item>
           <Item inlineLabel>
             <Label>Expiration</Label>
-            <Input
-              keyboardType="decimal-pad"
-              placeholder="MM/YY"
-              maxLength={5}
-              value={formatDate(expirationDate)}
-              onChangeText={newText => {
-                setExpirationDate(newText.replace(/\//g, ""));
-              }}
-            />
+            <Input value={formatDate(expirationDate)} disabled />
           </Item>
           <Item inlineLabel last>
             <Label>CVV</Label>
-            <Input
-              keyboardType="decimal-pad"
-              placeholder="•••"
-              maxLength={3}
-              value={cvv}
-              onChangeText={setCVV}
-            />
+            <Input value={cvv} disabled />
           </Item>
         </Form>
         <Button
           full
-          disabled={!isCreditCardValid(cardNumber, expirationDate, cvv)}
+          danger
           style={{ marginTop: 20 }}
           onPress={async () => {
-            await await AsyncStorage.mergeItem(
+            delete allCreditCards[cardNumber];
+            await AsyncStorage.setItem(
               "@StreetPay_CreditCards",
-              JSON.stringify({
-                [cardNumber]: [cardNumber, expirationDate, cvv]
-              })
+              JSON.stringify(allCreditCards)
             );
             goBack();
           }}
         >
-          <Text>Save</Text>
+          <Text>Delete</Text>
         </Button>
       </Content>
     </Container>

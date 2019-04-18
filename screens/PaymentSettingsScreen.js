@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Header,
@@ -9,17 +9,35 @@ import {
   Content,
   List,
   ListItem,
-  Text
+  Text,
+  Icon,
+  View
 } from "native-base";
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import ArrowIcon from "../components/ArrowIcon";
 import AlignedText from "../components/AlignedText";
+import AsyncStorage from "@react-native-community/async-storage";
+import { getCreditCardIcon } from "./CreditCardFunctions";
+import { NavigationEvents } from "react-navigation";
 
 export default function PaymentSettingsScreen({ navigation }) {
   const { t } = useTranslation("settings");
+  const [storedPaymentMethods, setStoredPaymentMethods] = useState([]);
   return (
     <Container>
+      <NavigationEvents
+        onWillFocus={() => {
+          AsyncStorage.getItem("@StreetPay_CreditCards")
+            .then(value => JSON.parse(value) || {})
+            .then(Object.values)
+            .then(creditCards => {
+              setStoredPaymentMethods(
+                creditCards.map(([cardNumber]) => cardNumber)
+              );
+            });
+        }}
+      />
       <Header>
         <Left>
           <BackButton />
@@ -31,6 +49,39 @@ export default function PaymentSettingsScreen({ navigation }) {
       </Header>
       <Content style={{ backgroundColor: "#f4f4f4" }}>
         <List>
+          {storedPaymentMethods.length > 0 && (
+            <View>
+              <ListItem itemDivider />
+              <ListItem itemDivider>
+                <Text>{t("savedPaymentMethods")}</Text>
+              </ListItem>
+              {storedPaymentMethods.map(cardNumber => (
+                <ListItem
+                  key={cardNumber}
+                  noIndent
+                  icon
+                  style={{ backgroundColor: "white" }}
+                  last
+                  onPress={() =>
+                    navigation.navigate("SavedCreditCard", { cardNumber })
+                  }
+                >
+                  <Left>
+                    <Icon
+                      type="FontAwesome5"
+                      name={getCreditCardIcon(cardNumber)}
+                    />
+                  </Left>
+                  <Body>
+                    <AlignedText>{cardNumber.slice(-4)}</AlignedText>
+                  </Body>
+                  <Right>
+                    <ArrowIcon />
+                  </Right>
+                </ListItem>
+              ))}
+            </View>
+          )}
           <ListItem itemDivider />
           <ListItem itemDivider>
             <Text>{t("addPaymentMethods")}</Text>
@@ -43,7 +94,7 @@ export default function PaymentSettingsScreen({ navigation }) {
             onPress={() => navigation.navigate("NewCreditCard")}
           >
             <Body>
-              <AlignedText>{t("creditCard")}</AlignedText>
+              <AlignedText>{t("newCreditCardAction")}</AlignedText>
             </Body>
             <Right>
               <ArrowIcon />
