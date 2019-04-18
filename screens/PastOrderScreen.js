@@ -5,11 +5,12 @@ import { Container, Content, Left, Header, Right } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
 import BigPriceBanner from "../components/BigPriceBanner";
 import ReceiptItemsTable from "../components/ReceiptItemsTable";
-import { items, storeName, taxes, totalAmount } from "../constants/Data";
+import { items, taxes, totalAmount } from "../constants/Data";
 import BackButton from "../components/BackButton";
 import ShareButton from "../components/ShareButton";
 
-export default function PastOrderScreen() {
+export default function PastOrderScreen({ navigation }) {
+  const storeName = navigation.getParam("storeName");
   return (
     <Container style={StyleSheets.container}>
       <Header>
