@@ -1,11 +1,13 @@
 import React from "react";
 import { View } from "react-native";
-import { Container, Content, Left, Header } from "native-base";
+import { Container, Content, Left, Header, Right } from "native-base";
+
 import StyleSheets from "../constants/StyleSheets";
 import BigPriceBanner from "../components/BigPriceBanner";
 import ReceiptItemsTable from "../components/ReceiptItemsTable";
 import { items, storeName, taxes, totalAmount } from "../constants/Data";
 import BackButton from "../components/BackButton";
+import ShareButton from "../components/ShareButton";
 
 export default function PastOrderScreen() {
   return (
@@ -14,6 +16,9 @@ export default function PastOrderScreen() {
         <Left>
           <BackButton />
         </Left>
+        <Right>
+          <ShareButton />
+        </Right>
       </Header>
       <Content>
         <BigPriceBanner
