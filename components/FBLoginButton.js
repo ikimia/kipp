@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import {
   LoginButton,
@@ -8,8 +8,9 @@ import {
 } from "react-native-fbsdk";
 import { SocialProfile } from "../contexes/SocialProfile";
 
-function setLoginData(setUserProfile) {
+function setLoginData(setUserProfile, setInitialized) {
   return AccessToken.getCurrentAccessToken().then(data => {
+    setInitialized(true);
     if (data === null) {
       setUserProfile({
         isLoggedIn: false
@@ -50,9 +51,13 @@ function setLoginData(setUserProfile) {
 
 export default function FBLoginButton() {
   const { setUserProfile } = useContext(SocialProfile);
+  const [initialized, setInitialized] = useState(false);
   useEffect(() => {
-    setLoginData(setUserProfile);
+    setLoginData(setUserProfile, setInitialized);
   }, []);
+  if (!initialized) {
+    return null;
+  }
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <View style={{ margin: 40 }}>
