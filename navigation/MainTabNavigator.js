@@ -11,6 +11,7 @@ import PayConfirmScreen from "../screens/PayConfirmScreen";
 import ProcessTransactionScreen from "../screens/ProcessTransactionScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
+import SocialProfileScreen from "../screens/SocialProfileScreen";
 import { Footer, FooterTab, Button, Text, Icon } from "native-base";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -61,7 +62,8 @@ export default createBottomTabNavigator(
     SettingsStack: stack(
       {
         Settings: SettingsScreen,
-        LanguageSettings: LanguageSettingsScreen
+        LanguageSettings: LanguageSettingsScreen,
+        SocialProfile: SocialProfileScreen
       },
       "Settings"
     )

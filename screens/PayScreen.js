@@ -14,7 +14,6 @@ import {
   Title
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
-import FBLoginButton from "../components/FBLoginButton";
 
 export default function PayScreen({ navigation }) {
   const { navigate } = navigation;
@@ -67,7 +66,6 @@ export default function PayScreen({ navigation }) {
             {t("pay:proceed")}
           </Text>
         </Button>
-        <FBLoginButton />
       </Content>
     </Container>
   );

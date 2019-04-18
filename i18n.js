@@ -36,6 +36,10 @@ i18n.use(initReactI18next).init({
         chooseLanguage: "Choose Language",
         en: "English",
         he: "Hebrew"
+      },
+      socialNetworks: {
+        logout: "Logout",
+        socialProfile: "Social Profile"
       }
     },
     he: {
@@ -68,6 +72,10 @@ i18n.use(initReactI18next).init({
         chooseLanguage: "בחר שפה",
         en: "אנגלית",
         he: "עברית"
+      },
+      socialNetworks: {
+        logout: "התנתק",
+        socialProfile: "פרופיל"
       }
     }
   },
