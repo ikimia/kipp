@@ -100,7 +100,7 @@ i18n.use(initReactI18next).init({
         back: "חזור",
         currencySign: "₪",
         confirm: "אישור",
-        done: "בוצא"
+        done: "בוצע"
       },
       purchases: {
         purchases: "רכישות"

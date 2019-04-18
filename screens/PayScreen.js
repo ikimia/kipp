@@ -29,7 +29,7 @@ export default function PayScreen({ navigation }) {
       <Header>
         <Left />
         <Body>
-          <Title>Pay</Title>
+          <Title>{t("pay:pay")}</Title>
         </Body>
         <Right />
       </Header>

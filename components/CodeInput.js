@@ -22,7 +22,7 @@ export default class CodeInput extends React.Component {
 
   render() {
     return (
-      <View style={[styles.code, this.props.style]}>
+      <View style={[styles.code, this.props.style, { direction: "ltr" }]}>
         <TextInput
           style={{ display: "none" }}
           ref={ref => (this.text = ref)}
