@@ -15,6 +15,8 @@ import SocialProfileScreen from "../screens/SocialProfileScreen";
 import { Footer, FooterTab, Button, Text, Icon } from "native-base";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
+import NewCreditCardScreen from "../screens/NewCreditCardScreen";
 
 const isRTL = () => i18next.language.startsWith("he");
 
@@ -63,12 +65,15 @@ export default createBottomTabNavigator(
       {
         Settings: SettingsScreen,
         LanguageSettings: LanguageSettingsScreen,
-        SocialProfile: SocialProfileScreen
+        SocialProfile: SocialProfileScreen,
+        PaymentSettings: PaymentSettingsScreen,
+        NewCreditCard: NewCreditCardScreen
       },
       "Settings"
     )
   },
   {
+    initialRouteName: "PayStack",
     tabBarComponent: function BottomTabsNavigator({ navigation }) {
       const { t } = useTranslation();
       return (
