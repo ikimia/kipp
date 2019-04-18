@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import AlignedText from "../components/AlignedText";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const ITEMS = ["en", "he"];
 
@@ -45,6 +46,7 @@ export default function LanguageSettingsScreen() {
               last={i === ITEMS.length - 1}
               onPress={() => {
                 i18n.changeLanguage(code);
+                AsyncStorage.setItem("@StreetPay_language", code);
               }}
             >
               <Body>
