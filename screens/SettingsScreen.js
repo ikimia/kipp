@@ -16,10 +16,9 @@ import AlignedText from "../components/AlignedText";
 import ArrowIcon from "../components/ArrowIcon";
 
 const ITEMS = [
-  ["myAccount"],
+  ["myAccount", null, "MyAccount"],
   ["paymentSettings", null, "PaymentSettings"],
-  ["language", (t, i18n) => t(i18n.language), "LanguageSettings"],
-  ["socialNetworks:socialProfile", null, "SocialProfile"]
+  ["language", (t, i18n) => t(i18n.language), "LanguageSettings"]
 ];
 
 export default function SettingsScreen({ navigation }) {

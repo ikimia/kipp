@@ -12,7 +12,10 @@ i18n.use(initReactI18next).init({
         proceed: "Proceed",
         receiptNumber: "Receipt Number",
         makePaymentFor: "Make payment for",
-        makePayment: "Make Payment"
+        makePayment: "Make Payment",
+        authorizing: "Authorizing",
+        capturing: "Capturing",
+        sendingTransaction: "Sending Transaction"
       },
       common: {
         cancel: "Cancel",
@@ -23,7 +26,11 @@ i18n.use(initReactI18next).init({
         price: "Price",
         amount: "Amount",
         taxes: "Taxes",
-        back: "Back"
+        total: "Total",
+        back: "Back",
+        currencySign: "$",
+        confirm: "Confirm",
+        done: "Done"
       },
       purchases: {
         purchases: "Purchases"
@@ -50,6 +57,23 @@ i18n.use(initReactI18next).init({
       socialNetworks: {
         logout: "Logout",
         socialProfile: "Social Profile"
+      },
+      stores: {
+        foodStore: "McDonald's",
+        foodStoreLocation: "Times Square",
+        apparelStore: "Zara",
+        apparelStoreLocation: "100m from Home",
+        gasStation: "Amoco",
+        gasStationLocation: "Valley Stream, NY",
+        ShoesStore: "Clarks",
+        ShoesStoreLocation: "521 W 25th St, NY",
+        product1: "Cheese Burger",
+        product2: "Chicken Nuggets",
+        product3: "French Fries",
+        product4: "French Pizza",
+        product5: "Shamrock Fries",
+        product6: "French Burger",
+        product7: "Shamrock Shake"
       }
     },
     he: {
@@ -58,7 +82,10 @@ i18n.use(initReactI18next).init({
         proceed: "המשך",
         receiptNumber: "מספר חשבונית",
         makePaymentFor: "תשלום עבור",
-        makePayment: "בצע תשלום"
+        makePayment: "בצע תשלום",
+        authorizing: "מבקש הרשאה",
+        capturing: "מחייב",
+        sendingTransaction: "שולח עסקה"
       },
       common: {
         cancel: "ביטול",
@@ -69,7 +96,11 @@ i18n.use(initReactI18next).init({
         price: "מחיר",
         amount: 'סה"כ',
         taxes: "מסים",
-        back: "חזור"
+        total: "סכום",
+        back: "חזור",
+        currencySign: "₪",
+        confirm: "אישור",
+        done: "בוצא"
       },
       purchases: {
         purchases: "רכישות"
@@ -96,6 +127,23 @@ i18n.use(initReactI18next).init({
       socialNetworks: {
         logout: "התנתק",
         socialProfile: "פרופיל"
+      },
+      stores: {
+        foodStore: "מקדונלדס",
+        foodStoreLocation: "שרונה, תל אביב",
+        apparelStore: "זארה",
+        apparelStoreLocation: "בקרבת הבית",
+        gasStation: "פז",
+        gasStationLocation: "חנקין 27, חולון",
+        ShoesStore: "אדידס",
+        ShoesStoreLocation: "הרצל 82, תל אביב",
+        product1: "המבורגר גדול",
+        product2: "קוקה קולה",
+        product3: "מיץ תפוזים",
+        product4: "מגש משפחתי",
+        product5: "פוטטוס ענק",
+        product6: "עוד מוצרים",
+        product7: "ואפילו יותר מוצרים"
       }
     }
   },

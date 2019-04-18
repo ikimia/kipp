@@ -6,7 +6,6 @@ import {
   ListItem,
   Body,
   Right,
-  Text,
   Header,
   Left,
   Title
@@ -18,12 +17,13 @@ import AlignedText from "../components/AlignedText";
 import moment from "moment";
 import "moment/locale/he";
 import { useTranslation } from "react-i18next";
+import CurrencyText from "../components/CurrencyText";
 
 const data = [
-  ["McDonald's", [3, "hours"], "Times Square", "45"],
-  ["Macy's", [5, "days"], "100m from Home", "245"],
-  ["Walmart", [2, "weeks"], "Valley Stream, NY", "92"],
-  ["Target", [1, "month"], "521 W 25th St, NY", "142"]
+  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
+  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
+  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"]
 ];
 
 const m = language => {
@@ -34,26 +34,30 @@ const m = language => {
 
 export default function PurchasesScreen({ navigation: { navigate } }) {
   const {
+    t,
     i18n: { language }
-  } = useTranslation();
+  } = useTranslation("stores");
   return (
     <Container style={StyleSheets.container}>
       <Header>
         <Left />
         <Body>
-          <Title>Purchases</Title>
+          <Title>{t("purchases:purchases")}</Title>
         </Body>
         <Right />
       </Header>
       <Content>
         <List>
           {data.map(([name, timeAgo, location, price]) => (
-            <ListItem key={name} onPress={() => navigate("PastOrder")}>
+            <ListItem
+              key={name}
+              onPress={() => navigate("PastOrder", { storeName: t(name) })}
+            >
               <Body>
                 <AlignedText style={[StyleSheets.textSize3]}>
-                  {name}
+                  {t(name)}
                 </AlignedText>
-                <AlignedText note>{location}</AlignedText>
+                <AlignedText note>{t(location)}</AlignedText>
                 <AlignedText note>
                   {m(language)
                     .subtract(...timeAgo)
@@ -61,9 +65,11 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
                 </AlignedText>
               </Body>
               <Right style={{ display: "flex", flexDirection: "row" }}>
-                <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
-                  ${price}
-                </Text>
+                <CurrencyText
+                  style={[{ paddingRight: 20 }, StyleSheets.textSize3]}
+                >
+                  {price}
+                </CurrencyText>
                 <ArrowIcon />
               </Right>
             </ListItem>

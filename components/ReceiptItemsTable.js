@@ -6,6 +6,7 @@ import StyleSheets from "../constants/StyleSheets";
 import Colors from "../constants/Colors";
 import { useTranslation } from "react-i18next";
 import AlignedText from "./AlignedText";
+import CurrencyText from "./CurrencyText";
 
 const { f1, f2, textBold, mt4, f4 } = StyleSheets;
 
@@ -24,10 +25,14 @@ export default function ReceiptItemsTable({ items, taxes }) {
       </View>
       {items.map(({ description, count, price }) => (
         <View key={description} style={style.row}>
-          <AlignedText style={f2}>{description}</AlignedText>
+          <AlignedText style={f2}>{t(`stores:${description}`)}</AlignedText>
           <AlignedText style={f1}>{count}</AlignedText>
-          <AlignedText style={f1}>${price}</AlignedText>
-          <AlignedText style={f1}>${count * price}</AlignedText>
+          <AlignedText style={f1}>
+            <CurrencyText>{price}</CurrencyText>
+          </AlignedText>
+          <AlignedText style={f1}>
+            <CurrencyText>{count * price}</CurrencyText>
+          </AlignedText>
         </View>
       ))}
       <View
@@ -37,11 +42,15 @@ export default function ReceiptItemsTable({ items, taxes }) {
         ]}
       >
         <AlignedText style={[textBold, f4]}>{t("taxes")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>${taxes}</AlignedText>
+        <AlignedText style={[textBold, f1]}>
+          <CurrencyText>{taxes}</CurrencyText>
+        </AlignedText>
       </View>
       <View style={[style.row, mt4]}>
-        <AlignedText style={[textBold, f4]}>Total</AlignedText>
-        <AlignedText style={[textBold, f1]}>${total + taxes}</AlignedText>
+        <AlignedText style={[textBold, f4]}>{t("total")}</AlignedText>
+        <AlignedText style={[textBold, f1]}>
+          <CurrencyText>{total + taxes}</CurrencyText>
+        </AlignedText>
       </View>
     </View>
   );

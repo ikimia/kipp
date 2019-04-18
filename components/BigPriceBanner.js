@@ -6,6 +6,7 @@ import StyleSheets from "../constants/StyleSheets";
 
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import CurrencyText from "./CurrencyText";
 
 export default function BigPriceBanner({ price, receiptNumber, storeName }) {
   const { t } = useTranslation("common");
@@ -27,7 +28,7 @@ export default function BigPriceBanner({ price, receiptNumber, storeName }) {
             {storeName}
           </Text>
         </View>
-        <Text style={styles.bigText}>${price}</Text>
+        <CurrencyText style={styles.bigText}>{price}</CurrencyText>
         <Text style={{ color: Colors.white }}>{receiptNumber}</Text>
       </View>
     </View>

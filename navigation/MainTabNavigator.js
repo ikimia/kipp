@@ -18,6 +18,7 @@ import i18next from "i18next";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import NewCreditCardScreen from "../screens/NewCreditCardScreen";
 import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
+import MyAccountScreen from "../screens/MyAccountScreen";
 
 const isRTL = () => i18next.language.startsWith("he");
 
@@ -68,6 +69,7 @@ export default createBottomTabNavigator(
         LanguageSettings: LanguageSettingsScreen,
         SocialProfile: SocialProfileScreen,
         PaymentSettings: PaymentSettingsScreen,
+        MyAccount: MyAccountScreen,
         NewCreditCard: NewCreditCardScreen,
         SavedCreditCard: SavedCreditCardScreen
       },

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { Button, Spinner, Container, Text, Header } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
+import { useTranslation } from "react-i18next";
 
 export default function ProcessTransactionScreen({ navigation: { navigate } }) {
-  const [text, setText] = useState("Sending Transaction");
+  const [text, setText] = useState("sendingTransaction");
   const [done, setDone] = useState(false);
+  const { t } = useTranslation("pay");
   useEffect(() => {
     const timers = [
-      setTimeout(() => setText("Authorizing"), 1000),
-      setTimeout(() => setText("Capturing"), 2000),
+      setTimeout(() => setText("authorizing"), 1000),
+      setTimeout(() => setText("capturing"), 2000),
       setTimeout(() => setDone(true), 3200)
     ];
     return () => {
@@ -22,7 +24,7 @@ export default function ProcessTransactionScreen({ navigation: { navigate } }) {
       <View alignItems={"center"} style={StyleSheets.f1}>
         <View style={StyleSheets.f1}>
           {done ? null : <Spinner />}
-          {done ? null : <Text>{text}</Text>}
+          {done ? null : <Text>{t(text)}</Text>}
         </View>
         <View style={StyleSheets.f4}>
           <Button
@@ -40,7 +42,7 @@ export default function ProcessTransactionScreen({ navigation: { navigate } }) {
                 StyleSheets.textBold
               ]}
             >
-              Done
+              {t("common:done")}
             </Text>
           </Button>
         </View>
