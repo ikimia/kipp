@@ -28,7 +28,7 @@ target 'StreetPay' do
   pod 'FBSDKLoginKit', '~> 4.42.0'
   pod 'FBSDKShareKit', '~> 4.42.0'
 
-
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'

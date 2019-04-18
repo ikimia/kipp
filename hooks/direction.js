@@ -11,4 +11,9 @@ export function useDirection() {
   return isLanguageRTL(i18n.language) ? RTL : LTR;
 }
 
+export function useTextAlign() {
+  const { i18n } = useTranslation();
+  return isLanguageRTL(i18n.language) ? "right" : "left";
+}
+
 export const isRTL = () => isLanguageRTL(i18next.language);

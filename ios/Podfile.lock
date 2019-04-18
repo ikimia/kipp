@@ -85,6 +85,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNCAsyncStorage (1.3.3):
+    - React
   - RNGestureHandler (1.1.0):
     - React
   - RNLocalize (1.1.2):
@@ -109,6 +111,7 @@ DEPENDENCIES:
   - React/RCTSettings (from `../node_modules/react-native`)
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -130,6 +133,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-community/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNLocalize:
@@ -148,10 +153,11 @@ SPEC CHECKSUMS:
   glog: 1de0bb937dccdc981596d3b5825ebfb765017ded
   React: 5cb71fb1a15b5ce04794ab49e24b48ebe4c94e65
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
+  RNCAsyncStorage: e71d854855f99b1fc46d468858265608b917bbb8
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
   yoga: 596e61c9b57751d08a22b07aba310dbd3e65ab75
 
-PODFILE CHECKSUM: 2900e8ee2c8d8b92a93c9f747adfb887b2ed24ae
+PODFILE CHECKSUM: d4a34e77fedf8f54dd3e743718e1ab928d078c1d
 
 COCOAPODS: 1.6.1
