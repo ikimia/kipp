@@ -10,5 +10,5 @@ export function getCreditCardIcon(cardNumber) {
       return iconName;
     }
   }
-  return "credit-card";
+  return "credit-card-alt";
 }

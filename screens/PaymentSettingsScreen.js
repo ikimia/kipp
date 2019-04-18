@@ -55,21 +55,22 @@ export default function PaymentSettingsScreen({ navigation }) {
               <ListItem itemDivider>
                 <Text>{t("savedPaymentMethods")}</Text>
               </ListItem>
-              {storedPaymentMethods.map(cardNumber => (
+              {storedPaymentMethods.map((cardNumber, i) => (
                 <ListItem
                   key={cardNumber}
                   noIndent
                   icon
                   style={{ backgroundColor: "white" }}
-                  last
+                  last={i === storedPaymentMethods.length - 1}
                   onPress={() =>
                     navigation.navigate("SavedCreditCard", { cardNumber })
                   }
                 >
                   <Left>
                     <Icon
-                      type="FontAwesome5"
+                      type="FontAwesome"
                       name={getCreditCardIcon(cardNumber)}
+                      style={{ width: 36, fontSize: 28 }}
                     />
                   </Left>
                   <Body>
