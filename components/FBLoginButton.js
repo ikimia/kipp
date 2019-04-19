@@ -10,7 +10,9 @@ import { SocialProfile } from "../contexes/SocialProfile";
 
 function setLoginData(setUserProfile, setInitialized) {
   return AccessToken.getCurrentAccessToken().then(data => {
-    setInitialized(true);
+    if (setInitialized) {
+      setInitialized(true);
+    }
     if (data === null) {
       setUserProfile({
         isLoggedIn: false
