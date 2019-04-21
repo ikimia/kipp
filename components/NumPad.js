@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function NumPad({ onPress }) {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, direction: "ltr" }}>
       {[
         [..."123"],
         [..."456"],
