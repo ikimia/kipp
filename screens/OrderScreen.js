@@ -26,7 +26,7 @@ import { SafeAreaView, NavigationContext } from "react-navigation";
 
 export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
   const { t } = useTranslation("common");
-  const { goBack } = useContext(NavigationContext);
+  const { goBack, navigate } = useContext(NavigationContext);
   return (
     <Container>
       <View style={{ backgroundColor: gray[9] }}>
