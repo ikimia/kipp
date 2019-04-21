@@ -18,6 +18,7 @@ import moment from "moment";
 import "moment/locale/he";
 import { useTranslation } from "react-i18next";
 import CurrencyText from "../components/CurrencyText";
+import BackButton from "../components/BackButton";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -40,7 +41,9 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
   return (
     <Container style={StyleSheets.container}>
       <Header>
-        <Left />
+        <Left>
+          <BackButton />
+        </Left>
         <Body>
           <Title>{t("purchases:purchases")}</Title>
         </Body>

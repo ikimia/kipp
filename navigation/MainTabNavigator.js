@@ -1,8 +1,4 @@
-import React from "react";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import PurchasesScreen from "../screens/PurchasesScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -12,8 +8,6 @@ import ProcessTransactionScreen from "../screens/ProcessTransactionScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import SocialProfileScreen from "../screens/SocialProfileScreen";
-import { Footer, FooterTab, Button, Text, Icon } from "native-base";
-import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import NewCreditCardScreen from "../screens/NewCreditCardScreen";
@@ -22,20 +16,34 @@ import MyAccountScreen from "../screens/MyAccountScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
-const stack = (stacks, initialRouteName) =>
-  createStackNavigator(stacks, {
+export default createStackNavigator(
+  {
+    Pay: PayScreen,
+    ProcessTransactionScreen: ProcessTransactionScreen,
+    Confirm: PayConfirmScreen,
+    Purchases: PurchasesScreen,
+    PastOrder: PastOrderScreen,
+    Settings: SettingsScreen,
+    LanguageSettings: LanguageSettingsScreen,
+    SocialProfile: SocialProfileScreen,
+    PaymentSettings: PaymentSettingsScreen,
+    MyAccount: MyAccountScreen,
+    NewCreditCard: NewCreditCardScreen,
+    SavedCreditCard: SavedCreditCardScreen
+  },
+  {
     defaultNavigationOptions: () => ({
       gesturesEnabled: true,
       gestureDirection: isRTL() ? "inverted" : "default"
     }),
     headerMode: "none",
-    initialRouteName,
+    initialRouteName: "Pay",
     transitionConfig: () => ({
-      screenInterpolator: sceneProps => {
-        const { layout, position, scene } = sceneProps;
-        const { index } = scene;
-        const width = layout.initWidth;
-
+      screenInterpolator: ({
+        layout: { initWidth: width },
+        position,
+        scene: { index }
+      }) => {
         const [inputRange, outputRange] = isRTL()
           ? [[index, index + 1], [0, width]]
           : [[index - 1, index], [width, 0]];
@@ -48,63 +56,5 @@ const stack = (stacks, initialRouteName) =>
         };
       }
     })
-  });
-
-export default createBottomTabNavigator(
-  {
-    PayStack: stack(
-      {
-        Pay: PayScreen,
-        ProcessTransactionScreen: ProcessTransactionScreen,
-        Confirm: PayConfirmScreen
-      },
-      "Pay"
-    ),
-    PurchasesStack: stack(
-      {
-        Purchases: PurchasesScreen,
-        PastOrder: PastOrderScreen
-      },
-      "Purchases"
-    ),
-    SettingsStack: stack(
-      {
-        Settings: SettingsScreen,
-        LanguageSettings: LanguageSettingsScreen,
-        SocialProfile: SocialProfileScreen,
-        PaymentSettings: PaymentSettingsScreen,
-        MyAccount: MyAccountScreen,
-        NewCreditCard: NewCreditCardScreen,
-        SavedCreditCard: SavedCreditCardScreen
-      },
-      "Settings"
-    )
-  },
-  {
-    initialRouteName: "PayStack",
-    tabBarComponent: function BottomTabsNavigator({ navigation }) {
-      const { t } = useTranslation();
-      return (
-        <Footer>
-          <FooterTab>
-            {[
-              ["PayStack", "wallet", "pay:pay"],
-              ["PurchasesStack", "paper", "purchases:purchases"],
-              ["SettingsStack", "options", "settings:settings"]
-            ].map(([stack, icon, label], i) => (
-              <Button
-                key={stack}
-                vertical
-                active={navigation.state.index === i}
-                onPress={() => navigation.navigate(stack)}
-              >
-                <Icon name={icon} />
-                <Text>{t(label)}</Text>
-              </Button>
-            ))}
-          </FooterTab>
-        </Footer>
-      );
-    }
   }
 );
