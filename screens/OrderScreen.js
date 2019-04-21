@@ -26,13 +26,13 @@ import { SafeAreaView, NavigationContext } from "react-navigation";
 
 export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
   const { t } = useTranslation("common");
-  const { navigate } = useContext(NavigationContext);
+  const { goBack } = useContext(NavigationContext);
   return (
     <Container>
       <View style={{ backgroundColor: gray[9] }}>
         <Header transparent iosBarStyle="light-content">
           <Left>
-            <Button transparent light onPress={() => navigate("Pay")}>
+            <Button transparent light onPress={() => goBack()}>
               <ArrowIcon back />
             </Button>
           </Left>
