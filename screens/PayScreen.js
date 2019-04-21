@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
 import CodeInput from "../components/CodeInput";
 import {
   Button,
@@ -10,77 +9,80 @@ import {
   Left,
   Body,
   Right,
-  Content,
-  Title
+  Icon,
+  View
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
+import NumPad from "../components/NumPad";
+
+const CODE_SIZE = 5;
 
 export default function PayScreen({ navigation }) {
   const { navigate } = navigation;
   const { t } = useTranslation("common");
 
-  let textInput = React.createRef();
-
   const [receiptNumber, setReceiptNumber] = useState("12345");
-  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   return (
     <Container>
-      <Header>
-        <Left />
-        <Body>
-          <Title>{t("pay:pay")}</Title>
-        </Body>
+      <Header transparent>
+        <Left>
+          <Icon name="menu" />
+        </Left>
+        <Body />
         <Right />
       </Header>
-      <Content
-        style={[styles.container, StyleSheets.container]}
-        contentContainerStyle={{ alignItems: "center" }}
+      <View
+        style={{
+          alignItems: "center",
+          flex: 1
+        }}
       >
-        <Text style={styles.title}>{t("pay:receiptNumber")}</Text>
-        <CodeInput
-          size={5}
-          style={{ marginBottom: 15 }}
-          onUpdate={receiptNumber => {
-            setReceiptNumber(receiptNumber);
-            setButtonDisabled(receiptNumber.length !== 5);
-          }}
-          ref={ref => (textInput = ref)}
-        />
-        <Button
-          disabled={buttonDisabled}
-          title={"Proceed"}
-          onPress={() => {
-            textInput.blur();
-            navigate("Confirm", { receiptNumber });
-          }}
-          style={[StyleSheets.button, StyleSheets.mt5, { height: 80 }]}
-        >
-          <Text
-            style={[
-              StyleSheets.textCenter,
-              StyleSheets.textSize3,
-              StyleSheets.textBold
-            ]}
+        <View style={{ marginVertical: 30 }}>
+          <CodeInput
+            size={CODE_SIZE}
+            onUpdate={receiptNumber => {
+              setReceiptNumber(receiptNumber);
+            }}
+            value={receiptNumber}
+          />
+        </View>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <NumPad
+            onPress={key => {
+              if ("1234567890".includes(key)) {
+                if (receiptNumber.length < CODE_SIZE) {
+                  setReceiptNumber(receiptNumber + key);
+                }
+              } else {
+                if (receiptNumber.length > 0) {
+                  setReceiptNumber(receiptNumber.slice(0, -1));
+                }
+              }
+            }}
+          />
+        </View>
+        <View style={{ marginVertical: 30 }}>
+          <Button
+            disabled={receiptNumber.length !== 5}
+            onPress={() => {
+              navigate("Confirm", { receiptNumber });
+            }}
+            transparent
+            full
           >
-            {t("pay:proceed")}
-          </Text>
-        </Button>
-      </Content>
+            <Text
+              style={[
+                StyleSheets.textCenter,
+                StyleSheets.textSize3,
+                StyleSheets.textBold
+              ]}
+            >
+              {t("pay:proceed")}
+            </Text>
+          </Button>
+        </View>
+      </View>
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 30,
-    flex: 1
-  },
-  title: {
-    fontSize: 15,
-    marginBottom: 10
-  },
-  button: {
-    alignSelf: "center"
-  }
-});

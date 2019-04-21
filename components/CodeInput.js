@@ -1,54 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  TextInput,
-  StyleSheet,
-  ViewPropTypes
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-export default class CodeInput extends React.Component {
-  static propTypes = {
-    style: ViewPropTypes.style,
-    size: PropTypes.number.isRequired,
-    onUpdate: PropTypes.func
-  };
-
-  state = {
-    value: ""
-  };
-
-  render() {
-    return (
-      <View style={[styles.code, this.props.style, { direction: "ltr" }]}>
-        <TextInput
-          style={{ display: "none" }}
-          ref={ref => (this.text = ref)}
-          returnKeyType="done"
-          keyboardType="number-pad"
-          onChangeText={text => {
-            this.setState({ value: text });
-            if (this.props.onUpdate) this.props.onUpdate(text);
-          }}
-          maxLength={this.props.size}
-        />
-        {new Array(this.props.size).fill(null).map((_, i) => (
-          <TouchableWithoutFeedback key={i} onPress={() => this.text.focus()}>
-            <View style={styles.receiptNumber}>
-              <Text style={styles.digit}>{this.state.value[i] || ""}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-      </View>
-    );
-  }
-
-  blur() {
-    this.text.blur();
-  }
+export default function CodeInput({ value, size }) {
+  return (
+    <View style={[styles.code, { direction: "ltr" }]}>
+      {new Array(size).fill(null).map((_, i) => (
+        <View key={i} style={styles.receiptNumber}>
+          <Text style={styles.digit}>{value[i] || ""}</Text>
+        </View>
+      ))}
+    </View>
+  );
 }
+CodeInput.propTypes = {
+  size: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired
+};
 
 const styles = StyleSheet.create({
   code: {
@@ -61,10 +29,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 40,
     height: 50,
-    borderBottomWidth: 3,
     borderColor: "black",
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
+    borderRadius: 10,
+    backgroundColor: "#d3d3d3"
   },
   digit: {
     fontSize: 30
