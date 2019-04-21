@@ -56,6 +56,9 @@ export default function PayScreen() {
         <SafeAreaView style={{ flex: 1 }}>
           <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 15 }}>
             <View style={{ alignSelf: "center" }}>
+              <Text style={{ alignSelf: "center", marginBottom: 10 }}>
+                Enter Receipt Number
+              </Text>
               <CodeInput
                 size={CODE_SIZE}
                 onUpdate={receiptNumber => {
