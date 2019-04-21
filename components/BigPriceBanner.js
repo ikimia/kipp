@@ -25,7 +25,7 @@ export default function BigPriceBanner({ price, receiptNumber, storeName }) {
               { color: Colors.white }
             ]}
           >
-            {storeName}
+            {t(`stores:${storeName}`)}
           </Text>
         </View>
         <CurrencyText style={styles.bigText}>{price}</CurrencyText>

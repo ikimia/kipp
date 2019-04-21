@@ -25,7 +25,7 @@ export default function PayConfirmScreen({ navigation }) {
   const { t } = useTranslation("common");
   const { navigate } = navigation;
   const receiptNumber = navigation.getParam("receiptNumber", "NO-ID");
-  const storeName = t("stores:apparelStore");
+  const storeName = "stores:apparelStore";
   return (
     <Container style={StyleSheets.container}>
       <Header>

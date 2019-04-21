@@ -51,7 +51,7 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
           {data.map(([name, timeAgo, location, price]) => (
             <ListItem
               key={name}
-              onPress={() => navigate("PastOrder", { storeName: t(name) })}
+              onPress={() => navigate("PastOrder", { storeName: name })}
             >
               <Body>
                 <AlignedText style={[StyleSheets.textSize3]}>
