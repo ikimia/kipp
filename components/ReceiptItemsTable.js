@@ -16,7 +16,7 @@ export default function ReceiptItemsTable({ items, taxes }) {
     .map(({ count, price }) => count * price)
     .reduce((a, b) => a + b, 0);
   return (
-    <View style={{ flexDirection: "column" }}>
+    <View style={{ flexDirection: "column", width: "100%" }}>
       <View style={style.row}>
         <AlignedText style={[f2, textBold]}>{t("description")}</AlignedText>
         <AlignedText style={[f1, textBold]}>{t("count")}</AlignedText>
