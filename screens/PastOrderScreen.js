@@ -1,36 +1,9 @@
 import React from "react";
-import { View } from "react-native";
-import { Container, Content, Left, Header, Right } from "native-base";
-
-import StyleSheets from "../constants/StyleSheets";
-import BigPriceBanner from "../components/BigPriceBanner";
-import ReceiptItemsTable from "../components/ReceiptItemsTable";
-import { items, taxes, totalAmount } from "../constants/Data";
-import BackButton from "../components/BackButton";
-import ShareButton from "../components/ShareButton";
+import OrderScreen from "./OrderScreen";
 
 export default function PastOrderScreen({ navigation }) {
   const storeName = navigation.getParam("storeName");
   return (
-    <Container style={StyleSheets.container}>
-      <Header>
-        <Left>
-          <BackButton />
-        </Left>
-        <Right>
-          <ShareButton />
-        </Right>
-      </Header>
-      <Content>
-        <BigPriceBanner
-          price={totalAmount}
-          receiptNumber=""
-          storeName={storeName}
-        />
-        <View style={[StyleSheets.p5, StyleSheets.f1]}>
-          <ReceiptItemsTable items={items} taxes={taxes} />
-        </View>
-      </Content>
-    </Container>
+    <OrderScreen hidePayment storeName={storeName} receiptNumber="12345" />
   );
 }
