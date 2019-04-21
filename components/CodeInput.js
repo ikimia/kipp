@@ -4,10 +4,10 @@ import { View, Text, StyleSheet } from "react-native";
 
 export default function CodeInput({ value, size }) {
   return (
-    <View style={[styles.code, { direction: "ltr" }]}>
+    <View style={[styles.view, { direction: "ltr" }]}>
       {new Array(size).fill(null).map((_, i) => (
-        <View key={i} style={styles.receiptNumber}>
-          <Text style={styles.digit}>{value[i] || ""}</Text>
+        <View key={i} style={styles.digit}>
+          <Text style={styles.digitText}>{value[i] || "•"}</Text>
         </View>
       ))}
     </View>
@@ -19,23 +19,18 @@ CodeInput.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  code: {
+  view: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    width: "80%"
   },
-  receiptNumber: {
+  digit: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: 40,
-    height: 50,
-    borderColor: "black",
-    marginRight: 10,
-    marginLeft: 10,
-    borderRadius: 10,
-    backgroundColor: "#d3d3d3"
+    flex: 1
   },
-  digit: {
-    fontSize: 30
+  digitText: {
+    fontSize: 45
   }
 });
