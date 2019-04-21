@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-  <dict>
+<dict>
 	<key>CFBundleURLTypes</key>
 	<array>
-	  <dict>
-		<key>CFBundleURLSchemes</key>
-		<array>
-		  <string>fb633862357078952</string>
-		</array>
-	  </dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb633862357078952</string>
+			</array>
+		</dict>
 	</array>
 	<key>FacebookAppID</key>
 	<string>633862357078952</string>
@@ -17,10 +17,10 @@
 	<string>Street Pay</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-	  <string>fbapi</string>
-	  <string>fb-messenger-share-api</string>
-	  <string>fbauth2</string>
-	  <string>fbshareextension</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -93,6 +93,16 @@
 		<string>Roboto_medium.ttf</string>
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-BoldItalic.ttf</string>
+		<string>OpenSans-ExtraBold.ttf</string>
+		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>OpenSans-Italic.ttf</string>
+		<string>OpenSans-Light.ttf</string>
+		<string>OpenSans-LightItalic.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-SemiBold.ttf</string>
+		<string>OpenSans-SemiBoldItalic.ttf</string>
 	</array>
 </dict>
 </plist>
