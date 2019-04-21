@@ -17,9 +17,9 @@ import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import ArrowIcon from "../components/ArrowIcon";
 import AlignedText from "../components/AlignedText";
-import AsyncStorage from "@react-native-community/async-storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
 import { NavigationEvents } from "react-navigation";
+import { CreditCardStorage } from "../Storage";
 
 export default function PaymentSettingsScreen({ navigation }) {
   const { t } = useTranslation("settings");
@@ -28,14 +28,11 @@ export default function PaymentSettingsScreen({ navigation }) {
     <Container>
       <NavigationEvents
         onWillFocus={() => {
-          AsyncStorage.getItem("@StreetPay_CreditCards")
-            .then(value => JSON.parse(value) || {})
-            .then(Object.values)
-            .then(creditCards => {
-              setStoredPaymentMethods(
-                creditCards.map(([cardNumber]) => cardNumber)
-              );
-            });
+          CreditCardStorage.getAll().then(creditCards => {
+            setStoredPaymentMethods(
+              creditCards.map(([cardNumber]) => cardNumber)
+            );
+          });
         }}
       />
       <Header>

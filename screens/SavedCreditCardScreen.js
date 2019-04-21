@@ -18,9 +18,9 @@ import {
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
-import AsyncStorage from "@react-native-community/async-storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
 import { useTextAlign } from "../hooks/direction";
+import { CreditCardStorage } from "../Storage";
 
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
@@ -31,31 +31,21 @@ export default function SavedCreditCardScreen() {
   const { t } = useTranslation("settings");
   const { goBack, getParam } = useContext(NavigationContext);
   const textAlign = useTextAlign();
-  const [allCreditCards, setAllCreditCards] = useState({});
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [cvv, setCVV] = useState("");
   useEffect(() => {
-    AsyncStorage.getItem("@StreetPay_CreditCards")
-      .then(JSON.parse)
-      .then(allCreditCards => {
-        setAllCreditCards(allCreditCards);
-        const navigationCardNumber = getParam("cardNumber", "");
-        if (
-          navigationCardNumber &&
-          Object.prototype.hasOwnProperty.call(
-            allCreditCards,
-            navigationCardNumber
-          )
-        ) {
-          const [cardNumber, expirationDate, cvv] = allCreditCards[
-            navigationCardNumber
-          ];
+    const navigationCardNumber = getParam("cardNumber", "");
+    if (navigationCardNumber) {
+      CreditCardStorage.get(navigationCardNumber).then(result => {
+        if (result) {
+          const [cardNumber, expirationDate, cvv] = result;
           setCardNumber(cardNumber);
           setExpirationDate(expirationDate);
           setCVV(cvv);
         }
       });
+    }
   }, []);
   return (
     <Container>
@@ -97,11 +87,7 @@ export default function SavedCreditCardScreen() {
           danger
           style={{ marginTop: 20 }}
           onPress={async () => {
-            delete allCreditCards[cardNumber];
-            await AsyncStorage.setItem(
-              "@StreetPay_CreditCards",
-              JSON.stringify(allCreditCards)
-            );
+            await CreditCardStorage.delete(cardNumber);
             goBack();
           }}
         >

@@ -18,9 +18,9 @@ import {
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
-import AsyncStorage from "@react-native-community/async-storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
 import { useTextAlign } from "../hooks/direction";
+import { CreditCardStorage } from "../Storage";
 
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
@@ -101,12 +101,7 @@ export default function NewCreditCardScreen() {
           disabled={!isCreditCardValid(cardNumber, expirationDate, cvv)}
           style={{ marginTop: 20 }}
           onPress={async () => {
-            await await AsyncStorage.mergeItem(
-              "@StreetPay_CreditCards",
-              JSON.stringify({
-                [cardNumber]: [cardNumber, expirationDate, cvv]
-              })
-            );
+            await CreditCardStorage.set(cardNumber, expirationDate, cvv);
             goBack();
           }}
         >

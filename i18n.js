@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { getLocales } from "react-native-localize";
-import AsyncStorage from "@react-native-community/async-storage";
+import { LanguageStorage } from "./Storage";
 
 i18n
   .use(initReactI18next)
@@ -10,7 +10,7 @@ i18n
     async: true,
     init: () => {},
     detect: function(callback) {
-      AsyncStorage.getItem("@StreetPay_language").then(code =>
+      LanguageStorage.get().then(code =>
         callback(code || getLocales()[0].languageCode)
       );
     },
