@@ -6,7 +6,8 @@ import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
 import FBLoginButton from "./components/FBLoginButton";
 import { SocialProfile } from "./contexes/SocialProfile";
-
+import { StyleProvider } from "native-base";
+import getTheme from "./native-base-theme/components";
 function App() {
   const [userProfile, setUserProfile] = useState({ isLoggedIn: false });
 
@@ -19,10 +20,12 @@ function App() {
 
   return (
     <SocialProfile.Provider value={{ setUserProfile, userProfile, logOut }}>
-      <View style={[styles.container, { direction }]}>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-        {userProfile.isLoggedIn ? <AppNavigator /> : <FBLoginButton />}
-      </View>
+      <StyleProvider style={getTheme()}>
+        <View style={[styles.container, { direction }]}>
+          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+          {userProfile.isLoggedIn ? <AppNavigator /> : <FBLoginButton />}
+        </View>
+      </StyleProvider>
     </SocialProfile.Provider>
   );
 }
