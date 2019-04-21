@@ -10,21 +10,22 @@ export class LanguageStorage {
   }
 }
 
+const creditCardStorageKey = "@StreetPay_CreditCards";
 export class CreditCardStorage {
   static set(cardNumber, expirationDate, cvv) {
     return AsyncStorage.mergeItem(
-      "@StreetPay_CreditCards",
+      creditCardStorageKey,
       JSON.stringify({ [cardNumber]: [cardNumber, expirationDate, cvv] })
     );
   }
   static getAll() {
-    return AsyncStorage.getItem("@StreetPay_CreditCards")
+    return AsyncStorage.getItem(creditCardStorageKey)
       .then(value => JSON.parse(value) || {})
       .then(Object.values)
       .then(creditCards => creditCards.filter(v => v));
   }
   static get(cardNumber) {
-    return AsyncStorage.getItem("@StreetPay_CreditCards")
+    return AsyncStorage.getItem(creditCardStorageKey)
       .then(JSON.parse)
       .then(allCreditCards => {
         return allCreditCards[cardNumber] || null;
@@ -32,7 +33,7 @@ export class CreditCardStorage {
   }
   static delete(cardNumber) {
     return AsyncStorage.mergeItem(
-      "@StreetPay_CreditCards",
+      creditCardStorageKey,
       JSON.stringify({ [cardNumber]: null })
     );
   }
