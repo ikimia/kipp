@@ -42,7 +42,14 @@ export default function PayScreen() {
       onClose={closeDrawer}
       content={<SideBar closeDrawer={closeDrawer} />}
     >
-      <NavigationEvents onDidBlur={closeDrawer} />
+      <NavigationEvents
+        onDidBlur={closeDrawer}
+        onWillFocus={e => {
+          if ((e.state.params || {}).resetCode && receiptNumber !== "") {
+            setReceiptNumber("");
+          }
+        }}
+      />
       <Container>
         <Header transparent>
           <Left>

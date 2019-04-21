@@ -31,7 +31,7 @@ export default function ProcessTransactionScreen({ navigation: { navigate } }) {
             title={"Done"}
             disabled={!done}
             onPress={() => {
-              navigate("Pay");
+              navigate("Pay", { resetCode: true });
             }}
             style={[StyleSheets.button, { height: 80, width: 200 }]}
           >
