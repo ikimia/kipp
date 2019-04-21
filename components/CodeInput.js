@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function CodeInput({ value, size }) {
   return (
     <View style={[styles.view, { direction: "ltr" }]}>
-      {new Array(size).fill(null).map((_, i) => (
+      {[...Array(size)].map((_, i) => (
         <View key={i} style={styles.digit}>
           <Text style={styles.digitText}>{value[i] || "•"}</Text>
         </View>

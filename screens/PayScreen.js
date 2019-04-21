@@ -24,7 +24,10 @@ export default function PayScreen() {
   const { navigate } = useContext(NavigationContext);
   const { t } = useTranslation("common");
 
-  const [receiptNumber, setReceiptNumber] = useState("12345");
+  const initialReceiptNumber = [...Array(CODE_SIZE)]
+    .map(() => Math.floor(Math.random() * 10))
+    .join("");
+  const [receiptNumber, setReceiptNumber] = useState(initialReceiptNumber);
   let drawer = null;
   const closeDrawer = () => drawer._root.close();
 
