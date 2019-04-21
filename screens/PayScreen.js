@@ -29,24 +29,22 @@ export default function PayScreen() {
     .join("");
   const [receiptNumber, setReceiptNumber] = useState(initialReceiptNumber);
   let drawer = null;
+  const openDrawer = () => drawer._root.open();
   const closeDrawer = () => drawer._root.close();
 
   return (
     <Drawer
       ref={ref => (drawer = ref)}
       onClose={closeDrawer}
-      content={<SideBar />}
+      content={<SideBar closeDrawer={closeDrawer} />}
     >
       <NavigationEvents onDidBlur={closeDrawer} />
       <Container>
         <Header transparent>
           <Left>
-            <Icon
-              name="menu"
-              onPress={() => {
-                drawer._root.open();
-              }}
-            />
+            <Button transparent onPress={openDrawer}>
+              <Icon name="menu" style={{ color: "black" }} />
+            </Button>
           </Left>
           <Body />
           <Right />

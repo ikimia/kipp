@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import {
   Text,
   Header,
@@ -7,7 +8,10 @@ import {
   Container,
   Content,
   ListItem,
-  List
+  List,
+  Icon,
+  Left,
+  Button
 } from "native-base";
 import { NavigationContext } from "react-navigation";
 import AlignedText from "./AlignedText";
@@ -20,12 +24,18 @@ const ITEMS = [
   ["language", "LanguageSettings", (t, i18n) => t(i18n.language)]
 ];
 
-export default function SideBar() {
+export default function SideBar({ closeDrawer }) {
   const navigation = useContext(NavigationContext);
   const { t, i18n } = useTranslation("settings");
   return (
     <Container>
-      <Header transparent />
+      <Header transparent>
+        <Left>
+          <Button transparent onPress={closeDrawer}>
+            <Icon name="close" style={{ color: "black" }} />
+          </Button>
+        </Left>
+      </Header>
       <Content>
         <List>
           <ListItem first last onPress={() => navigation.navigate("Purchases")}>
@@ -61,3 +71,6 @@ export default function SideBar() {
     </Container>
   );
 }
+SideBar.propTypes = {
+  closeDrawer: PropTypes.func.isRequired
+};
