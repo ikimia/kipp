@@ -76,7 +76,7 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 15 }}>
           <Content contentContainerStyle={{ alignItems: "center" }}>
-            <Card transparent>
+            <Card>
               <CardItem>
                 <ReceiptItemsTable items={items} taxes={taxes} />
               </CardItem>
