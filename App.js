@@ -5,7 +5,7 @@ import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
 import { StyleProvider, Text } from "native-base";
 import getTheme from "./native-base-theme/components";
-import WelcomeScreen from "./screens/WelcomeScreen";
+import AuthenticationFlow from "./screens/AuthenticationFlow";
 function App() {
   const direction = useDirection();
 
@@ -14,7 +14,7 @@ function App() {
       <View style={[styles.container, { direction }]}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         {
-          <WelcomeScreen
+          <AuthenticationFlow
             loadingScreen={() => (
               <View
                 style={{

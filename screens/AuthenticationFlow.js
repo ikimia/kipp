@@ -77,7 +77,7 @@ async function initFacebookProfile() {
   return profile;
 }
 
-export default function WelcomeScreen({ loadingScreen, App }) {
+export default function AuthenticationFlow({ loadingScreen, App }) {
   const [userProfile, setUserProfile] = useState({ isLoggedIn: false });
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -139,7 +139,7 @@ export default function WelcomeScreen({ loadingScreen, App }) {
   );
 }
 
-WelcomeScreen.propTypes = {
+AuthenticationFlow.propTypes = {
   loadingScreen: PropTypes.func.isRequired,
   App: PropTypes.func.isRequired
 };
