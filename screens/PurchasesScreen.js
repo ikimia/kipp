@@ -39,7 +39,7 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
     i18n: { language }
   } = useTranslation("stores");
   return (
-    <Container style={StyleSheets.container}>
+    <Container>
       <Header>
         <Left>
           <BackButton />
