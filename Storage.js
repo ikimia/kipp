@@ -55,7 +55,7 @@ export class FacebookAccessTokenStorage {
   }
 }
 
-const facebookProfileKey = "@StreetPay_facebookAccessToken";
+const facebookProfileKey = "@StreetPay_facebookProfile";
 export class FacebookProfileStorage {
   static set(profile) {
     return AsyncStorage.setItem(facebookProfileKey, JSON.stringify(profile));

@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 
 export default function SocialProfileScreen() {
-  const { userProfile, logOut } = useContext(SocialProfile);
+  const { userProfile, logout } = useContext(SocialProfile);
   const { t } = useTranslation("socialNetworks");
   return (
     <Container>
@@ -54,9 +54,7 @@ export default function SocialProfileScreen() {
               <Button
                 transparent
                 textStyle={{ color: "#87838B" }}
-                onPress={() => {
-                  logOut();
-                }}
+                onPress={logout}
               >
                 <Icon name="log-out" />
                 <Text>{t("logout")}</Text>
