@@ -77,7 +77,7 @@ async function initFacebookProfile() {
   return profile;
 }
 
-export default function AuthenticationFlow({ loadingScreen, App }) {
+export default function AuthenticationFlow({ Loading, App }) {
   const [userProfile, setUserProfile] = useState({ isLoggedIn: false });
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -98,7 +98,7 @@ export default function AuthenticationFlow({ loadingScreen, App }) {
 
   useEffect(login, []);
   if (!isInitialized) {
-    return loadingScreen();
+    return <Loading />;
   }
   if (userProfile.isLoggedIn) {
     return (
@@ -140,6 +140,6 @@ export default function AuthenticationFlow({ loadingScreen, App }) {
 }
 
 AuthenticationFlow.propTypes = {
-  loadingScreen: PropTypes.func.isRequired,
-  App: PropTypes.func.isRequired
+  Loading: PropTypes.elementType.isRequired,
+  App: PropTypes.elementType.isRequired
 };

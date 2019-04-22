@@ -6,6 +6,7 @@ import { useDirection } from "./hooks/direction";
 import { StyleProvider, Text } from "native-base";
 import getTheme from "./native-base-theme/components";
 import AuthenticationFlow from "./screens/AuthenticationFlow";
+
 function App() {
   const direction = useDirection();
 
@@ -15,14 +16,8 @@ function App() {
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         {
           <AuthenticationFlow
-            loadingScreen={() => (
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
+            Loading={() => (
+              <View style={styles.loading}>
                 <Text>Loading...</Text>
               </View>
             )}
@@ -46,5 +41,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
