@@ -21,7 +21,6 @@ import { gray } from "open-color";
 
 import { items, taxes, totalAmount } from "../constants/Data";
 import { useTranslation } from "react-i18next";
-import CurrencyText from "../components/CurrencyText";
 import ArrowIcon from "../components/ArrowIcon";
 import { SafeAreaView, NavigationContext } from "react-navigation";
 
@@ -58,11 +57,10 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
             <Text style={{ color: "white", fontSize: 25, fontWeight: "900" }}>
               {t(`stores:${storeName}`)}
             </Text>
-            <CurrencyText
-              style={{ color: "white", fontSize: 25, fontWeight: "900" }}
-            >
+            <Text style={{ color: "white", fontSize: 25, fontWeight: "900" }}>
+              {t("currencySign")}
               {totalAmount}
-            </CurrencyText>
+            </Text>
           </View>
           <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
             <Icon

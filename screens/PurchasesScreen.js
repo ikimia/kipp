@@ -8,7 +8,8 @@ import {
   Right,
   Header,
   Left,
-  Title
+  Title,
+  Text
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
 import ArrowIcon from "../components/ArrowIcon";
@@ -17,7 +18,6 @@ import AlignedText from "../components/AlignedText";
 import moment from "moment";
 import "moment/locale/he";
 import { useTranslation } from "react-i18next";
-import CurrencyText from "../components/CurrencyText";
 import BackButton from "../components/BackButton";
 
 const data = [
@@ -68,11 +68,10 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
                 </AlignedText>
               </Body>
               <Right style={{ display: "flex", flexDirection: "row" }}>
-                <CurrencyText
-                  style={[{ paddingRight: 20 }, StyleSheets.textSize3]}
-                >
+                <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
+                  {t("currencySign")}
                   {price}
-                </CurrencyText>
+                </Text>
                 <ArrowIcon />
               </Right>
             </ListItem>
