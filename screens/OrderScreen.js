@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import {
   Container,
   Content,
@@ -101,3 +102,8 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
     </Container>
   );
 }
+OrderScreen.propTypes = {
+  receiptNumber: PropTypes.string.isRequired,
+  storeName: PropTypes.string.isRequired,
+  hidePayment: PropTypes.bool
+};
