@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Header,
@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import AlignedText from "../components/AlignedText";
 import ArrowIcon from "../components/ArrowIcon";
+import { NavigationContext } from "react-navigation";
 
 const ITEMS = [
   ["myAccount", null, "MyAccount"],
@@ -21,7 +22,8 @@ const ITEMS = [
   ["language", (t, i18n) => t(i18n.language), "LanguageSettings"]
 ];
 
-export default function SettingsScreen({ navigation }) {
+export default function SettingsScreen() {
+  const navigation = useContext(NavigationContext);
   const { t, i18n } = useTranslation("settings");
   return (
     <Container>

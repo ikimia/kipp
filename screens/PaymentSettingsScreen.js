@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Container,
   Header,
@@ -18,10 +18,11 @@ import BackButton from "../components/BackButton";
 import ArrowIcon from "../components/ArrowIcon";
 import AlignedText from "../components/AlignedText";
 import { getCreditCardIcon } from "./CreditCardFunctions";
-import { NavigationEvents } from "react-navigation";
+import { NavigationEvents, NavigationContext } from "react-navigation";
 import { CreditCardStorage } from "../Storage";
 
-export default function PaymentSettingsScreen({ navigation }) {
+export default function PaymentSettingsScreen() {
+  const navigation = useContext(NavigationContext);
   const { t } = useTranslation("settings");
   const [storedPaymentMethods, setStoredPaymentMethods] = useState([]);
   return (

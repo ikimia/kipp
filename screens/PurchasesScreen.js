@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Content,
@@ -19,6 +19,7 @@ import moment from "moment";
 import "moment/locale/he";
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
+import { NavigationContext } from "react-navigation";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -33,11 +34,10 @@ const m = language => {
   return localizedMoment;
 };
 
-export default function PurchasesScreen({ navigation: { navigate } }) {
-  const {
-    t,
-    i18n: { language }
-  } = useTranslation("stores");
+export default function PurchasesScreen() {
+  const { navigate } = useContext(NavigationContext);
+  const { t, i18n } = useTranslation("stores");
+  const { language } = i18n;
   return (
     <Container>
       <Header>

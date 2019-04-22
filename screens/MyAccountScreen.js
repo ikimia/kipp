@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Header,
@@ -14,8 +14,10 @@ import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import ArrowIcon from "../components/ArrowIcon";
 import AlignedText from "../components/AlignedText";
+import { NavigationContext } from "react-navigation";
 
-export default function PaymentSettingsScreen({ navigation }) {
+export default function PaymentSettingsScreen() {
+  const navigation = useContext(NavigationContext);
   const { t } = useTranslation("settings");
   return (
     <Container>

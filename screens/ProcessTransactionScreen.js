@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View } from "react-native";
 import { Button, Spinner, Container, Text, Header } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
 import { useTranslation } from "react-i18next";
+import { NavigationContext } from "react-navigation";
 
-export default function ProcessTransactionScreen({ navigation: { navigate } }) {
+export default function ProcessTransactionScreen() {
   const [text, setText] = useState("sendingTransaction");
   const [done, setDone] = useState(false);
   const { t } = useTranslation("pay");
+  const { navigate } = useContext(NavigationContext);
   useEffect(() => {
     const timers = [
       setTimeout(() => setText("authorizing"), 1000),
