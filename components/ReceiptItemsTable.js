@@ -1,51 +1,73 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 
-import StyleSheets from "../constants/StyleSheets";
-import Colors from "../constants/Colors";
 import { useTranslation } from "react-i18next";
-import AlignedText from "./AlignedText";
-import CurrencyText from "./CurrencyText";
+import { Text } from "native-base";
 
-const { f1, f2, textBold, mt4, f4 } = StyleSheets;
+const LINE_LENGTH = 32;
 
+const lineTextStyle = { fontFamily: "Courier", textAlign: "left" };
+const boldLineTextStyle = { ...lineTextStyle, fontWeight: "bold" };
+
+/* eslint-disable react/prop-types */
+const ItemLine = ({ item, price }) => (
+  <Text style={lineTextStyle}>
+    {item}
+    {" ".repeat(LINE_LENGTH - item.length - price.length)}
+    {price}
+  </Text>
+);
+const CommentLine = ({ comment }) => (
+  <Text style={boldLineTextStyle}>
+    {"  "}
+    {comment}
+  </Text>
+);
+const DividerLine = () => (
+  <Text style={lineTextStyle}>{"-".repeat(LINE_LENGTH)}</Text>
+);
+const SummaryLine = ({ label, amount, bold, showCurrency }) => {
+  const { t } = useTranslation("common");
+  return (
+    <Text style={bold ? boldLineTextStyle : lineTextStyle}>
+      {" ".repeat(LINE_LENGTH - label.length - amount.length - 3)}
+      {label}
+      {"  "}
+      {showCurrency ? t("currencySign") : " "}
+      {amount}
+    </Text>
+  );
+};
+/* eslint-enable */
+
+const s = n => "" + n;
 export default function ReceiptItemsTable({ items, taxes }) {
   const { t } = useTranslation("common");
   const total = items
     .map(({ count, price }) => count * price)
     .reduce((a, b) => a + b, 0);
   return (
-    <View style={{ flexDirection: "column", width: "100%" }}>
-      <View style={style.row}>
-        <AlignedText style={[f2, textBold]}>{t("description")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("count")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("price")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("amount")}</AlignedText>
-      </View>
+    <View>
       {items.map(({ description, count, price }) => (
-        <View key={description} style={style.row}>
-          <AlignedText style={f2}>{t(`stores:${description}`)}</AlignedText>
-          <AlignedText style={f1}>{count}</AlignedText>
-          <AlignedText style={f1}>{price}</AlignedText>
-          <AlignedText style={f1}>{count * price}</AlignedText>
+        <View key={description}>
+          <ItemLine
+            item={t(`stores:${description}`)}
+            price={s(count * price)}
+          />
+          {count > 1 && (
+            <CommentLine comment={`${count} * ${price} ${t("perUnit")}`} />
+          )}
         </View>
       ))}
-      <View
-        style={[
-          style.row,
-          { borderBottomWidth: 1, borderBottomColor: Colors.borderColor }
-        ]}
-      >
-        <AlignedText style={[textBold, f4]}>{t("taxes")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>{taxes}</AlignedText>
-      </View>
-      <View style={[style.row, mt4]}>
-        <AlignedText style={[textBold, f4]}>{t("total")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>
-          <CurrencyText>{total + taxes}</CurrencyText>
-        </AlignedText>
-      </View>
+      <DividerLine />
+      <SummaryLine label={t("taxes")} amount={s(taxes)} />
+      <SummaryLine
+        bold
+        showCurrency
+        label={t("total")}
+        amount={s(total + taxes)}
+      />
     </View>
   );
 }
@@ -58,10 +80,3 @@ ReceiptItemsTable.propTypes = {
   ),
   taxes: PropTypes.number
 };
-
-const style = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  }
-});

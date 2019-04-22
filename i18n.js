@@ -42,6 +42,7 @@ i18n
           total: "Total",
           back: "Back",
           currencySign: "$",
+          perUnit: "per unit",
           confirm: "Confirm",
           done: "Done"
         },
@@ -112,6 +113,7 @@ i18n
           total: "סכום",
           back: "חזור",
           currencySign: "₪",
+          perUnit: "ליחידה",
           confirm: "אישור",
           done: "סיום"
         },
