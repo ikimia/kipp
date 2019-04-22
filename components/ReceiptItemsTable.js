@@ -10,63 +10,52 @@ const LINE_LENGTH = 32;
 const lineTextStyle = { fontFamily: "Courier", textAlign: "left" };
 const boldLineTextStyle = { ...lineTextStyle, fontWeight: "bold" };
 
-/* eslint-disable react/prop-types */
-const ItemLine = ({ item, price }) => (
-  <Text style={lineTextStyle}>
-    {item}
-    {" ".repeat(LINE_LENGTH - item.length - price.length)}
-    {price}
-  </Text>
-);
-const CommentLine = ({ comment }) => (
-  <Text style={boldLineTextStyle}>
-    {"  "}
-    {comment}
-  </Text>
-);
-const DividerLine = () => (
-  <Text style={lineTextStyle}>{"-".repeat(LINE_LENGTH)}</Text>
-);
-const SummaryLine = ({ label, amount, bold, showCurrency }) => {
-  const { t } = useTranslation("common");
-  return (
-    <Text style={bold ? boldLineTextStyle : lineTextStyle}>
-      {" ".repeat(LINE_LENGTH - label.length - amount.length - 3)}
-      {label}
-      {"  "}
-      {showCurrency ? t("currencySign") : " "}
-      {amount}
-    </Text>
-  );
+const PAD = Symbol();
+const toText = elements => {
+  const textLength = elements
+    .filter(e => e !== PAD)
+    .map(e => String(e).length)
+    .reduce((a, b) => a + b, 0);
+  const padLength = LINE_LENGTH - textLength;
+  return elements.map(e => (e === PAD ? " ".repeat(padLength) : e)).join("");
 };
-/* eslint-enable */
 
-const s = n => "" + n;
+const Line = ({ elements, bold }) => (
+  <Text style={bold ? boldLineTextStyle : lineTextStyle}>
+    {toText(elements)}
+  </Text>
+);
+Line.propTypes = {
+  elements: PropTypes.array.isRequired,
+  bold: PropTypes.bool
+};
+
 export default function ReceiptItemsTable({ items, taxes }) {
   const { t } = useTranslation("common");
   const total = items
     .map(({ count, price }) => count * price)
     .reduce((a, b) => a + b, 0);
+
   return (
     <View>
-      {items.map(({ description, count, price }) => (
-        <View key={description}>
-          <ItemLine
-            item={t(`stores:${description}`)}
-            price={s(count * price)}
+      {items.map(({ description, count, price }, i) => [
+        <Line
+          key={i}
+          elements={[t(`stores:${description}`), PAD, count * price]}
+        />,
+        count > 1 ? (
+          <Line
+            bold
+            key={`${i}-comment`}
+            elements={["  ", `${count} * ${price} ${t("perUnit")}`]}
           />
-          {count > 1 && (
-            <CommentLine comment={`${count} * ${price} ${t("perUnit")}`} />
-          )}
-        </View>
-      ))}
-      <DividerLine />
-      <SummaryLine label={t("taxes")} amount={s(taxes)} />
-      <SummaryLine
+        ) : null
+      ])}
+      <Line elements={["-".repeat(LINE_LENGTH)]} />
+      <Line elements={[PAD, t("taxes"), "   ", taxes]} />
+      <Line
         bold
-        showCurrency
-        label={t("total")}
-        amount={s(total + taxes)}
+        elements={[PAD, t("total"), "  ", t("currencySign"), total + taxes]}
       />
     </View>
   );
