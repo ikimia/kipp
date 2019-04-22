@@ -1,51 +1,62 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 
-import StyleSheets from "../constants/StyleSheets";
-import Colors from "../constants/Colors";
 import { useTranslation } from "react-i18next";
-import AlignedText from "./AlignedText";
-import CurrencyText from "./CurrencyText";
+import { Text } from "native-base";
 
-const { f1, f2, textBold, mt4, f4 } = StyleSheets;
+const LINE_LENGTH = 32;
+
+const lineTextStyle = { fontFamily: "Courier", textAlign: "left" };
+const boldLineTextStyle = { ...lineTextStyle, fontWeight: "bold" };
+
+const PAD = Symbol();
+const toText = elements => {
+  const textLength = elements
+    .filter(e => e !== PAD)
+    .map(e => String(e).length)
+    .reduce((a, b) => a + b, 0);
+  const padLength = LINE_LENGTH - textLength;
+  return elements.map(e => (e === PAD ? " ".repeat(padLength) : e)).join("");
+};
+
+const Line = ({ elements, bold }) => (
+  <Text style={bold ? boldLineTextStyle : lineTextStyle}>
+    {toText(elements)}
+  </Text>
+);
+Line.propTypes = {
+  elements: PropTypes.array.isRequired,
+  bold: PropTypes.bool
+};
 
 export default function ReceiptItemsTable({ items, taxes }) {
   const { t } = useTranslation("common");
   const total = items
     .map(({ count, price }) => count * price)
     .reduce((a, b) => a + b, 0);
+
   return (
-    <View style={{ flexDirection: "column", width: "100%" }}>
-      <View style={style.row}>
-        <AlignedText style={[f2, textBold]}>{t("description")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("count")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("price")}</AlignedText>
-        <AlignedText style={[f1, textBold]}>{t("amount")}</AlignedText>
-      </View>
-      {items.map(({ description, count, price }) => (
-        <View key={description} style={style.row}>
-          <AlignedText style={f2}>{t(`stores:${description}`)}</AlignedText>
-          <AlignedText style={f1}>{count}</AlignedText>
-          <AlignedText style={f1}>{price}</AlignedText>
-          <AlignedText style={f1}>{count * price}</AlignedText>
-        </View>
-      ))}
-      <View
-        style={[
-          style.row,
-          { borderBottomWidth: 1, borderBottomColor: Colors.borderColor }
-        ]}
-      >
-        <AlignedText style={[textBold, f4]}>{t("taxes")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>{taxes}</AlignedText>
-      </View>
-      <View style={[style.row, mt4]}>
-        <AlignedText style={[textBold, f4]}>{t("total")}</AlignedText>
-        <AlignedText style={[textBold, f1]}>
-          <CurrencyText>{total + taxes}</CurrencyText>
-        </AlignedText>
-      </View>
+    <View>
+      {items.map(({ description, count, price }, i) => [
+        <Line
+          key={i}
+          elements={[t(`stores:${description}`), PAD, count * price]}
+        />,
+        count > 1 ? (
+          <Line
+            bold
+            key={`${i}-comment`}
+            elements={["  ", `${count} * ${price} ${t("perUnit")}`]}
+          />
+        ) : null
+      ])}
+      <Line elements={["-".repeat(LINE_LENGTH)]} />
+      <Line elements={[PAD, t("taxes"), "   ", taxes]} />
+      <Line
+        bold
+        elements={[PAD, t("total"), "  ", t("currencySign"), total + taxes]}
+      />
     </View>
   );
 }
@@ -58,10 +69,3 @@ ReceiptItemsTable.propTypes = {
   ),
   taxes: PropTypes.number
 };
-
-const style = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between"
-  }
-});

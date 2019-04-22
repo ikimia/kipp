@@ -103,6 +103,10 @@
 		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-SemiBold.ttf</string>
 		<string>OpenSans-SemiBoldItalic.ttf</string>
+		<string>UbuntuMono-Bold.ttf</string>
+		<string>UbuntuMono-BoldItalic.ttf</string>
+		<string>UbuntuMono-Italic.ttf</string>
+		<string>UbuntuMono-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
