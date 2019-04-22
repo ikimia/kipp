@@ -69,7 +69,7 @@ export default function PurchasesScreen({ navigation: { navigate } }) {
               </Body>
               <Right style={{ display: "flex", flexDirection: "row" }}>
                 <Text style={[{ paddingRight: 20 }, StyleSheets.textSize3]}>
-                  {t("currencySign")}
+                  {t("common:currencySign")}
                   {price}
                 </Text>
                 <ArrowIcon />
