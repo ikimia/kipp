@@ -38,3 +38,32 @@ export class CreditCardStorage {
     );
   }
 }
+
+const facebookAccessTokenKey = "@StreetPay_facebookAccessToken";
+export class FacebookAccessTokenStorage {
+  static set(accessToken) {
+    return AsyncStorage.setItem(
+      facebookAccessTokenKey,
+      JSON.stringify(accessToken)
+    );
+  }
+  static get() {
+    return AsyncStorage.getItem(facebookAccessTokenKey).then(JSON.parse);
+  }
+  static delete() {
+    return AsyncStorage.removeItem(facebookAccessTokenKey);
+  }
+}
+
+const facebookProfileKey = "@StreetPay_facebookAccessToken";
+export class FacebookProfileStorage {
+  static set(profile) {
+    return AsyncStorage.setItem(facebookProfileKey, JSON.stringify(profile));
+  }
+  static get() {
+    return AsyncStorage.getItem(facebookProfileKey).then(JSON.parse);
+  }
+  static delete() {
+    return AsyncStorage.removeItem(facebookProfileKey);
+  }
+}

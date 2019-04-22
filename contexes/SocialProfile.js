@@ -5,5 +5,7 @@ export const SocialProfile = React.createContext({
   logOut: () => {},
   userProfile: {
     isLoggedIn: false
-  }
+  },
+  setIsInitialized: () => {},
+  isInitialized: false
 });
