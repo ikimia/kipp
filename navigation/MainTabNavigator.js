@@ -13,12 +13,13 @@ import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import NewCreditCardScreen from "../screens/NewCreditCardScreen";
 import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 import MyAccountScreen from "../screens/MyAccountScreen";
+import MainScreen from "../screens/MainScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
 export default createStackNavigator(
   {
-    Pay: PayScreen,
+    Pay: MainScreen,
     ProcessTransactionScreen: ProcessTransactionScreen,
     Confirm: PayConfirmScreen,
     Purchases: PurchasesScreen,

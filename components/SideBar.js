@@ -38,14 +38,6 @@ export default function SideBar({ closeDrawer }) {
       </Header>
       <Content>
         <List>
-          <ListItem first last onPress={() => navigation.navigate("Purchases")}>
-            <Body>
-              <Text>Purchases</Text>
-            </Body>
-            <Right>
-              <ArrowIcon />
-            </Right>
-          </ListItem>
           <ListItem itemHeader>
             <Text>Settings</Text>
           </ListItem>
