@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Container,
@@ -12,7 +12,8 @@ import {
   Title,
   Right,
   Card,
-  CardItem
+  CardItem,
+  Spinner
 } from "native-base";
 import { View } from "react-native";
 import StyleSheets from "../constants/StyleSheets";
@@ -24,8 +25,48 @@ import { useTranslation } from "react-i18next";
 import ArrowIcon from "../components/ArrowIcon";
 import { SafeAreaView, NavigationContext } from "react-navigation";
 
+function Overlay({ onClose }) {
+  const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSuccess(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  return (
+    <SafeAreaView
+      style={{
+        position: "absolute",
+        backgroundColor: "black",
+        opacity: 0.95,
+        width: "100%",
+        height: "100%",
+        paddingTop: "30%"
+      }}
+    >
+      <Text style={{ color: "white", fontSize: 30, alignSelf: "center" }}>
+        Paying $83 to Zara
+      </Text>
+      {!success && <Spinner />}
+      {success && (
+        <Button
+          success
+          style={{ marginTop: 50, alignSelf: "center" }}
+          onPress={onClose}
+        >
+          <Text>Got It</Text>
+        </Button>
+      )}
+    </SafeAreaView>
+  );
+}
+Overlay.propTypes = {
+  onClose: PropTypes.func
+};
+
 export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
   const { t } = useTranslation("common");
+  const [showOverlay, setShowOverlay] = useState(false);
   const { goBack, navigate } = useContext(NavigationContext);
   return (
     <Container>
@@ -83,7 +124,12 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
             </Card>
           </Content>
           {!hidePayment && (
-            <Button onPress={() => navigate("ProcessTransactionScreen")} block>
+            <Button
+              onPress={() => {
+                setShowOverlay(true);
+              }}
+              block
+            >
               <Text
                 style={[
                   StyleSheets.textCenter,
@@ -97,6 +143,9 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
           )}
         </View>
       </SafeAreaView>
+      {showOverlay && (
+        <Overlay onClose={() => navigate("Pay", { resetCode: true })} />
+      )}
     </Container>
   );
 }
