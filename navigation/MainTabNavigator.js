@@ -2,7 +2,6 @@ import { createStackNavigator } from "react-navigation";
 
 import PurchasesScreen from "../screens/PurchasesScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import PayScreen from "../screens/PayScreen";
 import PayConfirmScreen from "../screens/PayConfirmScreen";
 import ProcessTransactionScreen from "../screens/ProcessTransactionScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
