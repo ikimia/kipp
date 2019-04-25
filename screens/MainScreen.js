@@ -1,6 +1,5 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef } from "react";
 import ImageBackground from "react-native/Libraries/Image/ImageBackground";
-import { useTranslation } from "react-i18next";
 import {
   Button,
   Text,
@@ -13,34 +12,16 @@ import {
   View,
   Drawer,
   Content,
-  CardItem,
-  Card,
   Title,
   Badge
 } from "native-base";
-import { NavigationContext } from "react-navigation";
 import SideBar from "../components/SideBar";
-import moment from "moment";
 import PayCard from "../components/PayCard";
+import Purchases from "../components/Purchases";
 
 const headerTextColor = { color: "#F4F4F4" };
-const data = [
-  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
-  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
-  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
-  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"]
-];
-
-const m = language => {
-  const localizedMoment = moment();
-  localizedMoment.locale(language);
-  return localizedMoment;
-};
 
 export default function MainScreen() {
-  const { navigate } = useContext(NavigationContext);
-  const { t, i18n } = useTranslation("common");
-  const { language } = i18n;
   const drawer = useRef(null);
   const openDrawer = () => drawer.current._root.open();
   const closeDrawer = () => drawer.current._root.close();
@@ -53,7 +34,12 @@ export default function MainScreen() {
     >
       <Container>
         <ImageBackground source={require("../img/backdrop.jpg")} style={{}}>
-          <View style={{ backgroundColor: "rgba(0,0,0,0.65)" }}>
+          <View
+            style={{
+              backgroundColor: "rgba(0,0,0,0.65)",
+              paddingBottom: 10
+            }}
+          >
             <Header transparent iosBarStyle="light-content">
               <Left>
                 <Button transparent onPress={openDrawer}>
@@ -70,7 +56,9 @@ export default function MainScreen() {
                     type="SimpleLineIcons"
                     name="present"
                   />
-                  <Badge success style={{ position: "absolute" }}>
+                  <Badge
+                    style={{ position: "absolute", backgroundColor: "#20BC62" }}
+                  >
                     <Text>2</Text>
                   </Badge>
                 </Button>
@@ -79,34 +67,23 @@ export default function MainScreen() {
             <PayCard />
           </View>
         </ImageBackground>
-        <Content padder style={{ backgroundColor: "#F4F4F4" }}>
-          {data.map(([name, timeAgo, location, amount]) => (
-            <Card key={name}>
-              <CardItem
-                style={{ alignItems: "flex-start" }}
-                button
-                onPress={() => navigate("PastOrder", { storeName: name })}
-              >
-                <View style={{ flex: 1 }}>
-                  <Text note>
-                    {m(language)
-                      .subtract(...timeAgo)
-                      .calendar()}
-                  </Text>
-                  <View>
-                    <Text style={{ fontSize: 20 }}>{t(`stores:${name}`)}</Text>
-                    <Text style={{ fontSize: 12 }}>
-                      {t(`stores:${location}`)}
-                    </Text>
-                  </View>
-                </View>
-                <Text style={{ fontSize: 20 }}>
-                  {t("common:currencySign")}
-                  {amount}
-                </Text>
-              </CardItem>
-            </Card>
-          ))}
+        <View
+          style={{
+            backgroundColor: "#20BC62",
+            flexDirection: "row"
+          }}
+        >
+          <View style={{ padding: 10, flex: 1, alignItems: "center" }}>
+            <Text
+              style={{ color: "#f4f4f4", fontWeight: "bold", fontSize: 16 }}
+            >
+              Psst... you have %20 waiting for you at Zara
+            </Text>
+          </View>
+        </View>
+
+        <Content style={{ backgroundColor: "#F4F4F4", paddingVertical: 10 }}>
+          <Purchases />
         </Content>
       </Container>
     </Drawer>
