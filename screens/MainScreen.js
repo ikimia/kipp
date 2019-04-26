@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import ImageBackground from "react-native/Libraries/Image/ImageBackground";
 import {
   Button,
@@ -18,10 +18,12 @@ import {
 import SideBar from "../components/SideBar";
 import PayCard from "../components/PayCard";
 import Purchases from "../components/Purchases";
+import { NavigationContext } from "react-navigation";
 
 const headerTextColor = { color: "#F4F4F4" };
 
 export default function MainScreen() {
+  const { navigate } = useContext(NavigationContext);
   const drawer = useRef(null);
   const openDrawer = () => drawer.current._root.open();
   const closeDrawer = () => drawer.current._root.close();
@@ -50,7 +52,7 @@ export default function MainScreen() {
                 <Title style={headerTextColor}>Pay</Title>
               </Body>
               <Right>
-                <Button transparent>
+                <Button transparent onPress={() => navigate("Rewards")}>
                   <Icon
                     style={headerTextColor}
                     type="SimpleLineIcons"

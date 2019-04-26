@@ -1,4 +1,5 @@
 import { createStackNavigator } from "react-navigation";
+import i18next from "i18next";
 
 import PurchasesScreen from "../screens/PurchasesScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -7,18 +8,19 @@ import ProcessTransactionScreen from "../screens/ProcessTransactionScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import SocialProfileScreen from "../screens/SocialProfileScreen";
-import i18next from "i18next";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import NewCreditCardScreen from "../screens/NewCreditCardScreen";
 import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 import MyAccountScreen from "../screens/MyAccountScreen";
 import MainScreen from "../screens/MainScreen";
+import RewardsScreen from "../screens/RewardsScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
 export default createStackNavigator(
   {
     Pay: MainScreen,
+    Rewards: RewardsScreen,
     ProcessTransactionScreen: ProcessTransactionScreen,
     Confirm: PayConfirmScreen,
     Purchases: PurchasesScreen,
