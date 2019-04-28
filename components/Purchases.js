@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import moment from "moment";
-import { Card, CardItem, View, Text } from "native-base";
+import { View, Text } from "native-base";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
+import { TouchableHighlight, FlatList } from "react-native-gesture-handler";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -22,32 +23,47 @@ export default function Purchases() {
   const { t, i18n } = useTranslation("common");
   const { language } = i18n;
   return (
-    <View>
-      {data.map(([name, timeAgo, location, amount]) => (
-        <Card key={name}>
-          <CardItem
-            style={{ alignItems: "flex-start" }}
-            button
-            onPress={() => navigate("PastOrder", { storeName: name })}
+    <FlatList
+      data={data}
+      keyExtractor={([name]) => name}
+      renderItem={({ item: [name, timeAgo, location, amount] }) => (
+        <TouchableHighlight
+          style={{ marginBottom: 2 }}
+          onPress={() => navigate("PastOrder", { storeName: name })}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              paddingVertical: 10,
+              paddingHorizontal: 15
+            }}
           >
-            <View style={{ flex: 1 }}>
-              <Text note>
-                {m(language)
-                  .subtract(...timeAgo)
-                  .calendar()}
-              </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}
+            >
               <View>
-                <Text style={{ fontSize: 20 }}>{t(`stores:${name}`)}</Text>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                  {t(`stores:${name}`)}
+                </Text>
                 <Text style={{ fontSize: 12 }}>{t(`stores:${location}`)}</Text>
+                <Text style={{ fontSize: 12, color: "#666" }}>
+                  {m(language)
+                    .subtract(...timeAgo)
+                    .calendar()}
+                </Text>
               </View>
+              <Text style={{ fontSize: 20 }}>
+                {t("common:currencySign")}
+                {amount}
+              </Text>
             </View>
-            <Text style={{ fontSize: 20 }}>
-              {t("common:currencySign")}
-              {amount}
-            </Text>
-          </CardItem>
-        </Card>
-      ))}
-    </View>
+          </View>
+        </TouchableHighlight>
+      )}
+    />
   );
 }
