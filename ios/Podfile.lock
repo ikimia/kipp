@@ -91,6 +91,8 @@ PODS:
     - React
   - RNLocalize (1.1.2):
     - React
+  - RNSVG (9.4.0):
+    - React
   - yoga (0.59.4.React)
 
 DEPENDENCIES:
@@ -114,6 +116,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -139,6 +142,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -156,8 +161,9 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: e71d854855f99b1fc46d468858265608b917bbb8
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
+  RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   yoga: 596e61c9b57751d08a22b07aba310dbd3e65ab75
 
-PODFILE CHECKSUM: d4a34e77fedf8f54dd3e743718e1ab928d078c1d
+PODFILE CHECKSUM: f71a3c4978d8013832607a8f5cb7ae2ab80228be
 
 COCOAPODS: 1.6.1
