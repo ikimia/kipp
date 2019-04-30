@@ -71,8 +71,8 @@ const settingsStack = stack(
 export default createBottomTabNavigator(
   {
     Pay: payStack,
-    Purchases: purchasesStack,
     Rewards: rewardsStack,
+    Purchases: purchasesStack,
     Stores: storesStack,
     Me: settingsStack
   },
@@ -81,7 +81,7 @@ export default createBottomTabNavigator(
       // eslint-disable-next-line react/prop-types
       tabBarIcon: ({ tintColor: color }) => {
         const name = {
-          Pay: "money",
+          Pay: "coins",
           Purchases: "history",
           Rewards: "gift",
           Stores: "search",
@@ -89,9 +89,9 @@ export default createBottomTabNavigator(
         }[navigation.state.routeName];
         return (
           <Icon
-            type="FontAwesome"
+            type="FontAwesome5"
             name={name}
-            style={{ fontSize: 25, color }}
+            style={{ fontSize: 22, color }}
           />
         );
       }
@@ -100,7 +100,7 @@ export default createBottomTabNavigator(
       activeTintColor: "#1E1E24",
       inactiveBackgroundColor: "#d8d8d8",
       activeBackgroundColor: "#e8e8e8",
-      style: { backgroundColor: "#d8d8d8" }
+      style: { backgroundColor: "#d8d8d8", height: 60 }
     }
   }
 );
