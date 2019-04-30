@@ -3,7 +3,6 @@ import { StatusBar } from "react-native";
 import { View, Text, Icon } from "native-base";
 import { NavigationEvents, SafeAreaView } from "react-navigation";
 import { TouchableHighlight } from "react-native-gesture-handler";
-import Hedgehog from "../components/Hedgehog";
 import Logo from "../components/Logo";
 
 const BACKGROUND_COLOR = "#1E1E24";
