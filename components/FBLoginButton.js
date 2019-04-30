@@ -1,8 +1,13 @@
 import React from "react";
 import { Button, Icon, Text } from "native-base";
 import { LoginManager } from "react-native-fbsdk";
-import * as PropTypes from "prop-types";
 
+/**
+ * @param {object} props
+ * @param {function} props.onLogin
+ * @param {function=} props.onCancel
+ * @param {function=} props.onError
+ * */
 export default function FBLoginButton({ onLogin, onCancel, onError }) {
   return (
     <Button
@@ -27,9 +32,3 @@ export default function FBLoginButton({ onLogin, onCancel, onError }) {
     </Button>
   );
 }
-
-FBLoginButton.propTypes = {
-  onLogin: PropTypes.func,
-  onCancel: PropTypes.func,
-  onError: PropTypes.func
-};

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import PropTypes from "prop-types";
 import {
   Text,
   Header,
@@ -18,12 +17,18 @@ import AlignedText from "./AlignedText";
 import ArrowIcon from "./ArrowIcon";
 import { useTranslation } from "react-i18next";
 
+// eslint-disable-next-line jsdoc/require-param
+/**
+ * @typedef {(t: (language: string)=>string, i18n: object)=>string} rightCallback
+ * @type {[string, string, rightCallback][]}
+ */
 const ITEMS = [
-  ["myAccount", "MyAccount"],
-  ["paymentSettings", "PaymentSettings"],
+  ["myAccount", "MyAccount", null],
+  ["paymentSettings", "PaymentSettings", null],
   ["language", "LanguageSettings", (t, i18n) => t(i18n.language)]
 ];
 
+/** @param {{closeDrawer: () => void}} props */
 export default function SideBar({ closeDrawer }) {
   const navigation = useContext(NavigationContext);
   const { t, i18n } = useTranslation("settings");
@@ -63,6 +68,3 @@ export default function SideBar({ closeDrawer }) {
     </Container>
   );
 }
-SideBar.propTypes = {
-  closeDrawer: PropTypes.func.isRequired
-};

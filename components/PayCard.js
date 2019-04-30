@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { View, Text } from "native-base";
 import { SocialProfile } from "../contexes/SocialProfile";
 
@@ -26,6 +25,7 @@ function CountdownTimer() {
   return <CardText text={`${minutes}:${seconds}`} />;
 }
 
+/** @param {{text: string}} props */
 function CardLabel({ text }) {
   return (
     <Text style={[headerTextColor, { fontWeight: "bold", fontSize: 12 }]}>
@@ -33,8 +33,12 @@ function CardLabel({ text }) {
     </Text>
   );
 }
-CardLabel.propTypes = { text: PropTypes.string.isRequired };
 
+/**
+ * @param {object} props
+ * @param {string} props.text
+ * @param {number=} props.fontSize
+ */
 function CardText({ text, fontSize }) {
   return (
     <Text style={[headerTextColor, { fontWeight: "bold", fontSize }]}>
@@ -42,10 +46,6 @@ function CardText({ text, fontSize }) {
     </Text>
   );
 }
-CardText.propTypes = {
-  text: PropTypes.string.isRequired,
-  fontSize: PropTypes.number
-};
 
 export default function PayCard() {
   const cardNumber = Math.random()

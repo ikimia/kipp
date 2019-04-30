@@ -12,7 +12,8 @@ const generateCode = () =>
     .toString(10)
     .slice(2, 8);
 
-function CountdownTimer({ round }) {
+/** @param {number} round */
+function useTimer(round) {
   const [total, setTotal] = useState(600);
   useEffect(() => {
     setTotal(600);
@@ -81,7 +82,7 @@ export default function MainScren() {
           {code.match(/.{3}/g).join(" ")}
         </Text>
         <Text style={{ fontWeight: "bold", fontSize: 14, color: "#EEE" }}>
-          valid for the next <CountdownTimer round={validUntil} /> minutes
+          valid for the next {useTimer(validUntil)} minutes
         </Text>
         <TouchableHighlight
           onPress={() => {

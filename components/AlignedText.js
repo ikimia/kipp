@@ -1,7 +1,13 @@
 import React from "react";
-import * as PropTypes from "prop-types";
 import { Text } from "native-base";
 
+/**
+ * @typedef {import("react-native").TextStyle} TextStyle
+ * @typedef {import("react-native").StyleProp<TextStyle>} TextStyleProp
+ * @param {object} props
+ * @param {React.ReactChildren=} props.children
+ * @param {TextStyleProp=} props.style
+ */
 export default function AlignedText({ children, style, ...props }) {
   return (
     <Text style={[{ textAlign: "left" }, style]} {...props}>
@@ -9,8 +15,3 @@ export default function AlignedText({ children, style, ...props }) {
     </Text>
   );
 }
-AlignedText.propTypes = {
-  children: PropTypes.node,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  props: PropTypes.object
-};

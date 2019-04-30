@@ -15,7 +15,6 @@ import FBLoginButton from "../components/FBLoginButton";
 import { SocialProfile } from "../contexes/SocialProfile";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
-import PropTypes from "prop-types";
 
 const cards = [
   {
@@ -77,6 +76,7 @@ async function initFacebookProfile() {
   return profile;
 }
 
+/** @param {{Loading: React.ElementType, App: React.ElementType}} props */
 export default function AuthenticationFlow({ Loading, App }) {
   const [userProfile, setUserProfile] = useState({ isLoggedIn: false });
   const [isInitialized, setIsInitialized] = useState(false);
@@ -138,8 +138,3 @@ export default function AuthenticationFlow({ Loading, App }) {
     </Container>
   );
 }
-
-AuthenticationFlow.propTypes = {
-  Loading: PropTypes.elementType.isRequired,
-  App: PropTypes.elementType.isRequired
-};

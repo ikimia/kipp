@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View, Icon, Text } from "native-base";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+/** @param {{onPress: function}} props */
 export default function NumPad({ onPress }) {
   return (
     <View style={{ flex: 1, direction: "ltr" }}>
@@ -56,6 +56,3 @@ export default function NumPad({ onPress }) {
     </View>
   );
 }
-NumPad.propTypes = {
-  onPress: PropTypes.func.isRequired
-};

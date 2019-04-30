@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import Svg, { Circle, G, Path } from "react-native-svg";
 import { View } from "react-native";
 
+/** @param {{color:string, size:number}} props */
 export default function Hedgehog({ color = "black", size = 100 }) {
   return (
     <View style={{ height: size / 1.42, width: size }}>
@@ -60,7 +60,3 @@ export default function Hedgehog({ color = "black", size = 100 }) {
     </View>
   );
 }
-Hedgehog.propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.number
-};

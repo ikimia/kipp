@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 
 import { useTranslation } from "react-i18next";
@@ -7,7 +6,12 @@ import { Text } from "native-base";
 
 const LINE_LENGTH = 32;
 
-const lineTextStyle = { fontFamily: "Courier", textAlign: "left" };
+/** @type {"left"} */
+const TEXT_ALIGN_LEFT = "left";
+const lineTextStyle = {
+  fontFamily: "Courier",
+  textAlign: TEXT_ALIGN_LEFT
+};
 const boldLineTextStyle = { ...lineTextStyle, fontWeight: "bold" };
 
 const PAD = Symbol();
@@ -20,16 +24,21 @@ const toText = elements => {
   return elements.map(e => (e === PAD ? " ".repeat(padLength) : e)).join("");
 };
 
+/**
+ * @param {object} props
+ * @param {any[]} props.elements
+ * @param {boolean=} props.bold
+ */
 const Line = ({ elements, bold }) => (
   <Text style={bold ? boldLineTextStyle : lineTextStyle}>
     {toText(elements)}
   </Text>
 );
-Line.propTypes = {
-  elements: PropTypes.array.isRequired,
-  bold: PropTypes.bool
-};
 
+/**
+ * @typedef {{description: string, count: number, price: number}} Item
+ * @param {{items: Item[], taxes: number}} props
+ */
 export default function ReceiptItemsTable({ items, taxes }) {
   const { t } = useTranslation("common");
   const total = items
@@ -60,12 +69,3 @@ export default function ReceiptItemsTable({ items, taxes }) {
     </View>
   );
 }
-ReceiptItemsTable.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      count: PropTypes.number
-    })
-  ),
-  taxes: PropTypes.number
-};

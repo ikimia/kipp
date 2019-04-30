@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import {
   Container,
   Content,
@@ -25,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import ArrowIcon from "../components/ArrowIcon";
 import { SafeAreaView, NavigationContext } from "react-navigation";
 
+/** @param {{onClose: ()=>void}} props */
 function Overlay({ onClose }) {
   const [success, setSuccess] = useState(false);
   useEffect(() => {
@@ -60,10 +60,13 @@ function Overlay({ onClose }) {
     </SafeAreaView>
   );
 }
-Overlay.propTypes = {
-  onClose: PropTypes.func
-};
 
+/**
+ * @param {object} props
+ * @param {string} props.receiptNumber
+ * @param {string} props.storeName
+ * @param {boolean=} props.hidePayment
+ */
 export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
   const { t } = useTranslation("common");
   const [showOverlay, setShowOverlay] = useState(false);
@@ -149,8 +152,3 @@ export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
     </Container>
   );
 }
-OrderScreen.propTypes = {
-  receiptNumber: PropTypes.string.isRequired,
-  storeName: PropTypes.string.isRequired,
-  hidePayment: PropTypes.bool
-};

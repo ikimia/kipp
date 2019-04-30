@@ -78,7 +78,7 @@ export default createBottomTabNavigator(
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      // eslint-disable-next-line react/prop-types
+      // eslint-disable-next-line require-jsdoc/react-components
       tabBarIcon: ({ tintColor: color }) => {
         const name = {
           Pay: "money",

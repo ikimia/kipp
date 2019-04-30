@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View, Text, StyleSheet } from "react-native";
 
+/** @param {{value: string, size: number}} props */
 export default function CodeInput({ value, size }) {
   return (
     <View style={[styles.view, { direction: "ltr" }]}>
@@ -13,10 +13,6 @@ export default function CodeInput({ value, size }) {
     </View>
   );
 }
-CodeInput.propTypes = {
-  size: PropTypes.number.isRequired,
-  value: PropTypes.string.isRequired
-};
 
 const styles = StyleSheet.create({
   view: {
