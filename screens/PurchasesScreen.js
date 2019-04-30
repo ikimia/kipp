@@ -6,9 +6,6 @@ import {
   ListItem,
   Body,
   Right,
-  Header,
-  Left,
-  Title,
   Text
 } from "native-base";
 import StyleSheets from "../constants/StyleSheets";
@@ -18,8 +15,8 @@ import AlignedText from "../components/AlignedText";
 import moment from "moment";
 import "moment/locale/he";
 import { useTranslation } from "react-i18next";
-import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
+import DarkHeader from "../components/DarkHeader";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -40,15 +37,7 @@ export default function PurchasesScreen() {
   const { language } = i18n;
   return (
     <Container>
-      <Header>
-        <Left>
-          <BackButton />
-        </Left>
-        <Body>
-          <Title>{t("purchases:purchases")}</Title>
-        </Body>
-        <Right />
-      </Header>
+      <DarkHeader title={t("purchases:purchases")} />
       <Content>
         <List>
           {data.map(([name, timeAgo, location, price]) => (

@@ -47,10 +47,10 @@ i18n
           done: "Done"
         },
         purchases: {
-          purchases: "Purchases"
+          purchases: "PURCHASES"
         },
         settings: {
-          settings: "Settings",
+          settings: "SETTINGS",
           myAccount: "My Account",
           paymentSettings: "Payments",
           savedPaymentMethods: "Saved Payment Methods",

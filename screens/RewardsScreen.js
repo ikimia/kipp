@@ -1,17 +1,6 @@
 import React from "react";
-import {
-  Container,
-  Body,
-  Title,
-  Left,
-  Header,
-  Right,
-  Text,
-  Content,
-  Card,
-  CardItem
-} from "native-base";
-import BackButton from "../components/BackButton";
+import { Container, Text, Content, Card, CardItem } from "native-base";
+import DarkHeader from "../components/DarkHeader";
 
 const REWARDS = [
   ["20% off for the next month", "Zara"],
@@ -23,15 +12,7 @@ const REWARDS = [
 export default function RewardsScreen() {
   return (
     <Container>
-      <Header>
-        <Left>
-          <BackButton />
-        </Left>
-        <Body>
-          <Title>My Rewards</Title>
-        </Body>
-        <Right />
-      </Header>
+      <DarkHeader title="REWARDS" />
       <Content style={{ backgroundColor: "#F4F4F4" }}>
         {REWARDS.map(([reward, store], i) => (
           <Card key={i}>

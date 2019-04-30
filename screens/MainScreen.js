@@ -4,8 +4,7 @@ import { View, Text, Icon } from "native-base";
 import { NavigationEvents, SafeAreaView } from "react-navigation";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import Logo from "../components/Logo";
-
-const BACKGROUND_COLOR = "#1E1E24";
+import { DARK_GRAY, OFFWHITE } from "../constants/Colors";
 
 const generateCode = () =>
   Math.random()
@@ -44,7 +43,7 @@ export default function MainScren() {
       style={{
         flex: 1,
         alignItems: "stretch",
-        backgroundColor: BACKGROUND_COLOR
+        backgroundColor: DARK_GRAY
       }}
     >
       <NavigationEvents
@@ -64,7 +63,7 @@ export default function MainScren() {
       >
         <Text
           style={{
-            color: "#EEE",
+            color: OFFWHITE,
             fontWeight: "bold",
             fontSize: 18
           }}
@@ -73,14 +72,14 @@ export default function MainScren() {
         </Text>
         <Text
           style={{
-            color: "#EEE",
+            color: OFFWHITE,
             fontWeight: "bold",
             fontSize: 55
           }}
         >
           {code.match(/.{3}/g).join(" ")}
         </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 14, color: "#EEE" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 14, color: OFFWHITE }}>
           valid for the next <CountdownTimer round={validUntil} /> minutes
         </Text>
         <TouchableHighlight

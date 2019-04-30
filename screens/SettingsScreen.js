@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
 import {
   Container,
-  Header,
-  Left,
-  Title,
   Right,
   Body,
   Content,
@@ -15,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import AlignedText from "../components/AlignedText";
 import ArrowIcon from "../components/ArrowIcon";
 import { NavigationContext } from "react-navigation";
+import DarkHeader from "../components/DarkHeader";
 
 const ITEMS = [
   ["myAccount", null, "MyAccount"],
@@ -27,13 +25,7 @@ export default function SettingsScreen() {
   const { t, i18n } = useTranslation("settings");
   return (
     <Container>
-      <Header>
-        <Left />
-        <Body>
-          <Title>{t("settings")}</Title>
-        </Body>
-        <Right />
-      </Header>
+      <DarkHeader title={t("settings")} />
       <Content style={{ backgroundColor: "#f4f4f4" }}>
         <List style={{ backgroundColor: "white" }}>
           <ListItem itemDivider />

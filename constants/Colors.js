@@ -1,6 +1,9 @@
 const tintColor = "#2f95dc";
 const openColor = require("open-color");
 
+export const DARK_GRAY = "#1E1E1E";
+export const OFFWHITE = "#EEEEEE";
+
 export default {
   black: openColor.gray[8],
   white: openColor.white,
