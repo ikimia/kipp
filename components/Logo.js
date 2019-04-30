@@ -9,7 +9,7 @@ export default function Logo() {
         <Hedgehog color="#EEE" size={50} />
       </View>
       <Text style={{ fontWeight: "bold", fontSize: 30, color: "#EEE" }}>
-        KEEPI
+        KEEPY
       </Text>
     </View>
   );
