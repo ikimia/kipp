@@ -34,8 +34,8 @@ export default function Purchases() {
           <View
             style={{
               backgroundColor: "white",
-              paddingVertical: 10,
-              paddingHorizontal: 15
+              paddingVertical: 15,
+              paddingHorizontal: 20
             }}
           >
             <View
