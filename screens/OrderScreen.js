@@ -6,11 +6,6 @@ import {
   Text,
   Button,
   Icon,
-  Left,
-  Header,
-  Body,
-  Title,
-  Right,
   Card,
   CardItem,
   Spinner
@@ -18,12 +13,12 @@ import {
 import { View } from "react-native";
 import StyleSheets from "../constants/StyleSheets";
 import ReceiptItemsTable from "../components/ReceiptItemsTable";
-import { gray } from "open-color";
 
 import { items, taxes, totalAmount } from "../constants/Data";
 import { useTranslation } from "react-i18next";
-import ArrowIcon from "../components/ArrowIcon";
 import { SafeAreaView, NavigationContext } from "react-navigation";
+import { DARK_GRAY } from "../constants/Colors";
+import DarkHeader from "../components/DarkHeader";
 
 function Overlay({ onClose }) {
   const [success, setSuccess] = useState(false);
@@ -67,21 +62,11 @@ Overlay.propTypes = {
 export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
   const { t } = useTranslation("common");
   const [showOverlay, setShowOverlay] = useState(false);
-  const { goBack, navigate } = useContext(NavigationContext);
+  const { navigate } = useContext(NavigationContext);
   return (
     <Container>
-      <View style={{ backgroundColor: gray[9] }}>
-        <Header transparent iosBarStyle="light-content">
-          <Left>
-            <Button transparent light onPress={() => goBack()}>
-              <ArrowIcon back />
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: "white" }}>Pay</Title>
-          </Body>
-          <Right />
-        </Header>
+      <View style={{ backgroundColor: DARK_GRAY }}>
+        <DarkHeader title="PURCHASE" back />
         <View
           style={{
             paddingHorizontal: 15,
