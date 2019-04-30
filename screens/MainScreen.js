@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { View, Text, Icon } from "native-base";
-import { NavigationEvents } from "react-navigation";
+import { NavigationEvents, SafeAreaView } from "react-navigation";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import Hedgehog from "../components/Hedgehog";
+import Logo from "../components/Logo";
 
 const BACKGROUND_COLOR = "#1E1E24";
 
@@ -39,74 +41,75 @@ export default function MainScren() {
   const [code, setCode] = useState(generateCode());
   const [validUntil, setValidUntil] = useState(Date.now() + 600000);
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        alignItems: "stretch",
+        backgroundColor: BACKGROUND_COLOR
+      }}
+    >
       <NavigationEvents
         onWillFocus={() => {
           StatusBar.setBarStyle("light-content");
         }}
       />
+      <View style={{ marginTop: 50, alignItems: "center" }}>
+        <Logo />
+      </View>
       <View
         style={{
-          backgroundColor: BACKGROUND_COLOR,
-          alignItems: "stretch",
-          flex: 1
+          alignItems: "center",
+          justifyContent: "center",
+          flex: 3
         }}
       >
-        <View
+        <Text
           style={{
-            alignItems: "center",
-            justifyContent: "center",
-            flex: 3
+            color: "#EEE",
+            fontWeight: "bold",
+            fontSize: 18
           }}
         >
-          <Text
+          One-Time Code:
+        </Text>
+        <Text
+          style={{
+            color: "#EEE",
+            fontWeight: "bold",
+            fontSize: 55
+          }}
+        >
+          {code.match(/.{3}/g).join(" ")}
+        </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 14, color: "#EEE" }}>
+          valid for the next <CountdownTimer round={validUntil} /> minutes
+        </Text>
+        <TouchableHighlight
+          onPress={() => {
+            setCode(generateCode());
+            setValidUntil(Date.now() + 600000);
+          }}
+          style={{ marginTop: 30, width: 60, height: 60, borderRadius: 30 }}
+        >
+          <View
             style={{
-              color: "#EEE",
-              fontWeight: "bold",
-              fontSize: 18
+              backgroundColor: "rgba(0,255,125,0.7)",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 60,
+              height: 60,
+              borderRadius: 30
             }}
           >
-            One-Time Code:
-          </Text>
-          <Text
-            style={{
-              color: "#EEE",
-              fontWeight: "bold",
-              fontSize: 55
-            }}
-          >
-            {code.match(/.{3}/g).join(" ")}
-          </Text>
-          <Text style={{ fontWeight: "bold", fontSize: 14, color: "#EEE" }}>
-            valid for the next <CountdownTimer round={validUntil} /> minutes
-          </Text>
-          <TouchableHighlight
-            onPress={() => {
-              setCode(generateCode());
-              setValidUntil(Date.now() + 600000);
-            }}
-            style={{ marginTop: 30, width: 60, height: 60, borderRadius: 30 }}
-          >
-            <View
-              style={{
-                backgroundColor: "rgba(0,255,125,0.7)",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 60,
-                height: 60,
-                borderRadius: 30
-              }}
-            >
-              <Icon
-                type="FontAwesome"
-                name="refresh"
-                style={{ color: "#222", fontSize: 35 }}
-              />
-            </View>
-          </TouchableHighlight>
-        </View>
-        <View style={{ flex: 1 }} />
+            <Icon
+              type="FontAwesome"
+              name="refresh"
+              style={{ color: "#222", fontSize: 35 }}
+            />
+          </View>
+        </TouchableHighlight>
       </View>
-    </View>
+      <View style={{ flex: 1 }} />
+    </SafeAreaView>
   );
 }
