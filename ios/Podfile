@@ -33,5 +33,7 @@ target 'StreetPay' do
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
 
