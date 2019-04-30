@@ -1,3 +1,4 @@
+/** @type {[RegExp, string][]} */
 const CC_TESTERS = [
   [/^4/, "cc-visa"],
   [/^5\d/, "cc-mastercard"],

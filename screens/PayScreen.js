@@ -66,13 +66,7 @@ export default function PayScreen() {
               <Text style={{ alignSelf: "center", marginBottom: 10 }}>
                 Enter Receipt Number
               </Text>
-              <CodeInput
-                size={CODE_SIZE}
-                onUpdate={receiptNumber => {
-                  setReceiptNumber(receiptNumber);
-                }}
-                value={receiptNumber}
-              />
+              <CodeInput size={CODE_SIZE} value={receiptNumber} />
             </View>
             <View style={{ flex: 1, marginVertical: 30 }}>
               <NumPad

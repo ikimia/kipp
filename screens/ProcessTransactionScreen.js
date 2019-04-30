@@ -23,14 +23,13 @@ export default function ProcessTransactionScreen() {
   return (
     <Container>
       <Header />
-      <View alignItems={"center"} style={StyleSheets.f1}>
+      <View style={[StyleSheets.f1, { alignItems: "center" }]}>
         <View style={StyleSheets.f1}>
           {done ? null : <Spinner />}
           {done ? null : <Text>{t(text)}</Text>}
         </View>
         <View style={StyleSheets.f4}>
           <Button
-            title={"Done"}
             disabled={!done}
             onPress={() => {
               navigate("Pay", { resetCode: true });

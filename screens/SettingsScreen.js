@@ -16,6 +16,8 @@ import AlignedText from "../components/AlignedText";
 import ArrowIcon from "../components/ArrowIcon";
 import { NavigationContext } from "react-navigation";
 
+// eslint-disable-next-line jsdoc/require-param
+/** @type {[string, function, string][]} */
 const ITEMS = [
   ["myAccount", null, "MyAccount"],
   ["paymentSettings", null, "PaymentSettings"],

@@ -7,10 +7,11 @@ import { Text } from "native-base";
  * @param {object} props
  * @param {React.ReactChildren=} props.children
  * @param {TextStyleProp=} props.style
+ * @param {boolean=} props.note
  */
-export default function AlignedText({ children, style, ...props }) {
+export default function AlignedText({ children, style, note }) {
   return (
-    <Text style={[{ textAlign: "left" }, style]} {...props}>
+    <Text style={[{ textAlign: "left" }, style]} note={note}>
       {children}
     </Text>
   );

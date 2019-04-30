@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
 
+/** @type {[string, [number, string], string, string][]} */
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
   ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
@@ -51,7 +52,7 @@ export default function PurchasesScreen() {
       </Header>
       <Content>
         <List>
-          {data.map(([name, timeAgo, location, price]) => (
+          {data.map(([name, [amount, unit], location, price]) => (
             <ListItem
               key={name}
               onPress={() => navigate("PastOrder", { storeName: name })}
@@ -63,7 +64,7 @@ export default function PurchasesScreen() {
                 <AlignedText note>{t(location)}</AlignedText>
                 <AlignedText note>
                   {m(language)
-                    .subtract(...timeAgo)
+                    .subtract(amount, unit)
                     .calendar()}
                 </AlignedText>
               </Body>

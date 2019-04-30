@@ -7,10 +7,10 @@ export default function NumPad({ onPress }) {
   return (
     <View style={{ flex: 1, direction: "ltr" }}>
       {[
-        [..."123"],
-        [..."456"],
-        [..."789"],
-        [" ", "0", <Icon key="bs" name="backspace" />]
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"],
+        [" ", "0", "backspace"]
       ].map((row, i) => (
         <View
           key={`row-${i}`}
@@ -46,7 +46,11 @@ export default function NumPad({ onPress }) {
                     paddingHorizontal: 40
                   }}
                 >
-                  {digit}
+                  {digit === "backspace" ? (
+                    <Icon key="bs" name="backspace" />
+                  ) : (
+                    digit
+                  )}
                 </Text>
               </TouchableOpacity>
             </View>
