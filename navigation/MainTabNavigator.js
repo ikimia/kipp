@@ -17,6 +17,7 @@ import MyAccountScreen from "../screens/MyAccountScreen";
 import MainScreen from "../screens/MainScreen";
 import RewardsScreen from "../screens/RewardsScreen";
 import { Icon } from "native-base";
+import { DARK_GRAY } from "../constants/Colors";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -97,7 +98,7 @@ export default createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: "#1E1E24",
+      activeTintColor: DARK_GRAY,
       inactiveBackgroundColor: "#d8d8d8",
       activeBackgroundColor: "#e8e8e8",
       style: { backgroundColor: "#d8d8d8", height: 60 }
