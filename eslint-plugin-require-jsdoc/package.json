@@ -1,0 +1,5 @@
+{
+  "name": "eslint-plugin-require-jsdoc",
+  "version": "0.0.1",
+  "main": "index.js"
+}
