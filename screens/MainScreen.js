@@ -1,93 +1,112 @@
-import React, { useRef, useContext } from "react";
-import ImageBackground from "react-native/Libraries/Image/ImageBackground";
-import {
-  Button,
-  Text,
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Icon,
-  View,
-  Drawer,
-  Content,
-  Title,
-  Badge
-} from "native-base";
-import SideBar from "../components/SideBar";
-import PayCard from "../components/PayCard";
-import Purchases from "../components/Purchases";
-import { NavigationContext } from "react-navigation";
+import React, { useEffect, useState } from "react";
+import { StatusBar } from "react-native";
+import { View, Text, Icon } from "native-base";
+import { NavigationEvents } from "react-navigation";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
-const headerTextColor = { color: "#F4F4F4" };
+const BACKGROUND_COLOR = "#1E1E24";
 
-export default function MainScreen() {
-  const { navigate } = useContext(NavigationContext);
-  const drawer = useRef(null);
-  const openDrawer = () => drawer.current._root.open();
-  const closeDrawer = () => drawer.current._root.close();
+const generateCode = () =>
+  Math.random()
+    .toString(10)
+    .slice(2, 8);
 
+function CountdownTimer({ round }) {
+  const [total, setTotal] = useState(600);
+  useEffect(() => {
+    setTotal(600);
+    const timer = setInterval(() => {
+      setTotal(prevTotal => {
+        if (prevTotal > 0) {
+          return prevTotal - 1;
+        }
+        clearInterval(timer);
+        return prevTotal;
+      });
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [round]);
+  const minutes = Math.floor(total / 60)
+    .toString(10)
+    .padStart(2, "0");
+  const seconds = (total % 60).toString(10).padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+export default function MainScren() {
+  const [code, setCode] = useState(generateCode());
+  const [validUntil, setValidUntil] = useState(Date.now() + 600000);
   return (
-    <Drawer
-      ref={drawer}
-      onClose={closeDrawer}
-      content={<SideBar closeDrawer={closeDrawer} />}
-    >
-      <Container>
-        <ImageBackground source={require("../img/backdrop.jpg")} style={{}}>
-          <View
-            style={{
-              backgroundColor: "rgba(0,0,0,0.65)",
-              paddingBottom: 10
-            }}
-          >
-            <Header transparent iosBarStyle="light-content">
-              <Left>
-                <Button transparent onPress={openDrawer}>
-                  <Icon name="menu" style={headerTextColor} />
-                </Button>
-              </Left>
-              <Body>
-                <Title style={headerTextColor}>Pay</Title>
-              </Body>
-              <Right>
-                <Button transparent onPress={() => navigate("Rewards")}>
-                  <Icon
-                    style={headerTextColor}
-                    type="SimpleLineIcons"
-                    name="present"
-                  />
-                  <Badge
-                    style={{ position: "absolute", backgroundColor: "#20BC62" }}
-                  >
-                    <Text>2</Text>
-                  </Badge>
-                </Button>
-              </Right>
-            </Header>
-            <PayCard />
-          </View>
-        </ImageBackground>
+    <View style={{ flex: 1 }}>
+      <NavigationEvents
+        onWillFocus={() => {
+          StatusBar.setBarStyle("light-content");
+        }}
+      />
+      <View
+        style={{
+          backgroundColor: BACKGROUND_COLOR,
+          alignItems: "stretch",
+          flex: 1
+        }}
+      >
         <View
           style={{
-            backgroundColor: "#20BC62",
-            flexDirection: "row"
+            alignItems: "center",
+            justifyContent: "center",
+            flex: 3
           }}
         >
-          <View style={{ padding: 10, flex: 1, alignItems: "center" }}>
-            <Text
-              style={{ color: "#f4f4f4", fontWeight: "bold", fontSize: 16 }}
+          <Text
+            style={{
+              color: "#EEE",
+              fontWeight: "bold",
+              fontSize: 18
+            }}
+          >
+            One-Time Code:
+          </Text>
+          <Text
+            style={{
+              color: "#EEE",
+              fontWeight: "bold",
+              fontSize: 55
+            }}
+          >
+            {code.match(/.{3}/g).join(" ")}
+          </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 14, color: "#EEE" }}>
+            valid for the next <CountdownTimer round={validUntil} /> minutes
+          </Text>
+          <TouchableHighlight
+            onPress={() => {
+              setCode(generateCode());
+              setValidUntil(Date.now() + 600000);
+            }}
+            style={{ marginTop: 30, width: 60, height: 60, borderRadius: 30 }}
+          >
+            <View
+              style={{
+                backgroundColor: "rgba(0,255,125,0.7)",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 60,
+                height: 60,
+                borderRadius: 30
+              }}
             >
-              Psst... you have %20 waiting for you at Zara
-            </Text>
-          </View>
+              <Icon
+                type="FontAwesome"
+                name="refresh"
+                style={{ color: "#222", fontSize: 35 }}
+              />
+            </View>
+          </TouchableHighlight>
         </View>
-
-        <Content style={{ backgroundColor: "#F4F4F4", paddingVertical: 10 }}>
-          <Purchases />
-        </Content>
-      </Container>
-    </Drawer>
+        <View style={{ flex: 1 }} />
+      </View>
+    </View>
   );
 }
