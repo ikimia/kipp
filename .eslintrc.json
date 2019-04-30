@@ -6,7 +6,7 @@
     "plugin:prettier/recommended",
     "prettier/react"
   ],
-  "plugins": ["jest"],
+  "plugins": ["jest", "require-jsdoc", "jsdoc"],
   "globals": {
     "require": true
   },
@@ -20,7 +20,10 @@
     }
   },
   "rules": {
-    "eqeqeq": 2
+    "eqeqeq": 2,
+    "require-jsdoc/react-components": 2,
+    "jsdoc/require-param": 2,
+    "react/prop-types": 0
   },
   "overrides": [{
     "files": ["**/__tests__/*-test.js"],
