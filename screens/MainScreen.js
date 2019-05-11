@@ -49,11 +49,7 @@ export default function MainScren() {
           height: "100%"
         }}
       />
-      <SafeAreaView
-        style={{
-          backgroundColor: "rgba(255, 255, 255, 0.8)"
-        }}
-      >
+      <SafeAreaView style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
         <View
           style={{
             flexDirection: "row",
@@ -81,9 +77,24 @@ export default function MainScren() {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
+      <View style={{ marginTop: 1, alignItems: "flex-end" }}>
+        <TouchableOpacity>
+          <View
+            style={{
+              flexDirection: "row",
+              padding: 10,
+              borderBottomLeftRadius: 10,
+              backgroundColor: "rgba(255, 255, 255, 0.8)"
+            }}
+          >
+            <Icon name="shopping-bag" size={15} />
+            <Text style={{ fontWeight: "bold" }}> Stores</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
       <SafeAreaView style={{ flex: 1 }}>
         <View
-          style={{ flex: 3, justifyContent: "center", alignItems: "center" }}
+          style={{ flex: 2, justifyContent: "center", alignItems: "center" }}
         >
           <View
             style={{

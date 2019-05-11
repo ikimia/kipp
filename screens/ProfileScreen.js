@@ -36,24 +36,23 @@ export default function ProfileScreen() {
           <BackButton />
         </View>
       </SafeAreaView>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", marginBottom: 20 }}>
         <Image
           source={{ uri: userProfile.picture }}
           style={{
             width: 150,
             height: 150,
             borderRadius: 75,
-            marginBottom: 15
+            marginBottom: 10
           }}
         />
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 15 }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
           {userProfile.name}
         </Text>
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 30
+            alignItems: "center"
           }}
         >
           <View style={{ marginEnd: 15 }}>
