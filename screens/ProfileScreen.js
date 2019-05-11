@@ -1,25 +1,19 @@
 import * as React from "react";
 import { useContext, useState } from "react";
-import {
-  ScrollView,
-  TouchableOpacity,
-  FlatList
-} from "react-native-gesture-handler";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
 import { Text, View, Image } from "react-native";
 import {
   SafeAreaView,
   NavigationContext,
   NavigationEvents
 } from "react-navigation";
-import Icon from "react-native-vector-icons/Feather";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { SocialProfile } from "../contexes/SocialProfile";
 import ElevatedButton from "../components/ElevatedButton";
 import { CreditCardStorage } from "../Storage";
-import { getCreditCardIcon } from "./CreditCardFunctions";
 import ListItem from "../components/ListItem";
 import ListHeader from "../components/ListHeader";
 import BackButton from "../components/BackButton";
+import CreditCardIcon from "../components/CreditCardIcon";
 
 export default function ProfileScreen() {
   const { navigate } = useContext(NavigationContext);
@@ -89,12 +83,7 @@ export default function ProfileScreen() {
                 onPress={() => {
                   navigate("SavedCreditCard", { cardNumber });
                 }}
-                iconElement={
-                  <FontAwesome
-                    name={getCreditCardIcon(cardNumber)}
-                    style={{ marginEnd: 10 }}
-                  />
-                }
+                iconElement={<CreditCardIcon cardNumber={cardNumber} />}
                 text={`Ends with ${cardNumber.slice(-4)}`}
               />
             )}

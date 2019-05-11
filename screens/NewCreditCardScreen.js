@@ -8,7 +8,6 @@ import {
   Header,
   Content,
   Text,
-  Icon,
   Form,
   Input,
   Item,
@@ -18,9 +17,9 @@ import {
 import { useTranslation } from "react-i18next";
 import BackButton from "../components/BackButton";
 import { NavigationContext } from "react-navigation";
-import { getCreditCardIcon } from "./CreditCardFunctions";
 import { useTextAlign } from "../hooks/direction";
 import { CreditCardStorage } from "../Storage";
+import CreditCardIcon from "../components/CreditCardIcon";
 
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
@@ -69,7 +68,7 @@ export default function NewCreditCardScreen() {
               maxLength={19}
               style={{ textAlign }}
             />
-            <Icon type="FontAwesome" name={getCreditCardIcon(cardNumber)} />
+            <CreditCardIcon cardNumber={cardNumber} style={{ fontSize: 25, marginEnd: 10 }} />
           </Item>
           <Item inlineLabel>
             <Label>{t("expiry")}</Label>
