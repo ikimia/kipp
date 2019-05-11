@@ -5,15 +5,31 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Icon from "react-native-vector-icons/Feather";
 
+const CODE_TIMEOUT = 180;
+
 const generateCode = () =>
   Math.random()
     .toString(10)
     .slice(2, 8);
 
+function getGreeting() {
+  const hours = new Date().getHours();
+  if (hours > 5 && hours < 12) {
+    return "Good Morning";
+  }
+  if (hours > 12 && hours < 17) {
+    return "Good Afternoon";
+  }
+  if (hours > 17) {
+    return "Good Evening";
+  }
+  return "Good Night";
+}
+
 function CountdownTimer({ code, onEnd }) {
-  const [total, setTotal] = useState(600);
+  const [total, setTotal] = useState(CODE_TIMEOUT);
   useEffect(() => {
-    setTotal(600);
+    setTotal(CODE_TIMEOUT);
     const timer = setInterval(() => {
       setTotal(prevTotal => {
         if (prevTotal > 0) {
@@ -88,7 +104,7 @@ export default function MainScren() {
                 fontSize: 25
               }}
             >
-              Pay
+              {getGreeting()}
             </Text>
             <Text>{userProfile.name}</Text>
           </View>
@@ -116,7 +132,7 @@ export default function MainScren() {
             }}
           >
             <Icon name="shopping-bag" size={15} />
-            <Text style={{ fontWeight: "bold" }}> Stores</Text>
+            <Text style={{ fontWeight: "bold" }}> Where can I use Kipp?</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -126,11 +142,12 @@ export default function MainScren() {
         >
           <View
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
               alignItems: "center",
               borderRadius: 10,
-              padding: 25,
-              marginBottom: 25
+              paddingTop: 25,
+              paddingHorizontal: 25,
+              paddingBottom: 15
             }}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
@@ -143,25 +160,26 @@ export default function MainScren() {
               valid for the next{" "}
               <CountdownTimer code={code} onEnd={setNewCode} /> minutes
             </Text>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={setNewCode}
+              style={{ marginTop: 15 }}
+            >
+              <View>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    textDecorationLine: "underline"
+                  }}
+                >
+                  Get Another Code
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            marginEnd: 30,
-            marginBottom: 30
-          }}
-        >
-          <TouchableOpacity
-            style={{ opacity: 0.7 }}
-            activeOpacity={0.5}
-            onPress={setNewCode}
-          >
-            <Icon name="refresh-cw" size={30} color="white" />
-          </TouchableOpacity>
-        </View>
+        <View style={{ flex: 1 }} />
       </SafeAreaView>
     </View>
   );
