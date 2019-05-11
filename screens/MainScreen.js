@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
-import { View, Text, Icon } from "native-base";
-import { NavigationEvents, SafeAreaView } from "react-navigation";
-import { TouchableHighlight } from "react-native-gesture-handler";
-import Logo from "../components/Logo";
-import { DARK_GRAY, OFFWHITE } from "../constants/Colors";
+import React, { useEffect, useState, useContext } from "react";
+import { Image, View, Text } from "react-native";
+import { SafeAreaView, NavigationContext } from "react-navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { SocialProfile } from "../contexes/SocialProfile";
+import Icon from "react-native-vector-icons/Feather";
 
 const generateCode = () =>
   Math.random()
     .toString(10)
     .slice(2, 8);
 
-function CountdownTimer({ round }) {
+function CountdownTimer({ code, onEnd }) {
   const [total, setTotal] = useState(600);
   useEffect(() => {
     setTotal(600);
@@ -21,13 +20,14 @@ function CountdownTimer({ round }) {
           return prevTotal - 1;
         }
         clearInterval(timer);
+        onEnd();
         return prevTotal;
       });
     }, 1000);
     return () => {
       clearInterval(timer);
     };
-  }, [round]);
+  }, [code]);
   const minutes = Math.floor(total / 60)
     .toString(10)
     .padStart(2, "0");
@@ -37,77 +37,101 @@ function CountdownTimer({ round }) {
 
 export default function MainScren() {
   const [code, setCode] = useState(generateCode());
-  const [validUntil, setValidUntil] = useState(Date.now() + 600000);
+  const { userProfile } = useContext(SocialProfile);
+  const { navigate } = useContext(NavigationContext);
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "stretch",
-        backgroundColor: DARK_GRAY
-      }}
-    >
-      <NavigationEvents
-        onWillFocus={() => {
-          StatusBar.setBarStyle("light-content");
+    <View style={{ flex: 1 }}>
+      <Image
+        source={require("../img/pay-backdrop.jpg")}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%"
         }}
       />
-      <View style={{ marginTop: 50, alignItems: "center" }}>
-        <Logo />
-      </View>
-      <View
+      <SafeAreaView
         style={{
-          alignItems: "center",
-          justifyContent: "center",
-          flex: 3
+          backgroundColor: "rgba(255, 255, 255, 0.8)"
         }}
       >
-        <Text
+        <View
           style={{
-            color: OFFWHITE,
-            fontWeight: "bold",
-            fontSize: 18
+            flexDirection: "row",
+            marginVertical: 10,
+            marginHorizontal: 15
           }}
         >
-          One-Time Code:
-        </Text>
-        <Text
-          style={{
-            color: OFFWHITE,
-            fontWeight: "bold",
-            fontSize: 55
-          }}
-        >
-          {code.match(/.{3}/g).join(" ")}
-        </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 14, color: OFFWHITE }}>
-          valid for the next <CountdownTimer round={validUntil} /> minutes
-        </Text>
-        <TouchableHighlight
-          onPress={() => {
-            setCode(generateCode());
-            setValidUntil(Date.now() + 600000);
-          }}
-          style={{ marginTop: 30, width: 60, height: 60, borderRadius: 30 }}
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 25
+              }}
+            >
+              Pay
+            </Text>
+            <Text>{userProfile.name}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigate("Profile")}>
+            <Image
+              source={{ uri: userProfile.picture }}
+              style={{ width: 46, height: 46 }}
+              borderRadius={23}
+            />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View
+          style={{ flex: 3, justifyContent: "center", alignItems: "center" }}
         >
           <View
             style={{
-              backgroundColor: "rgba(0,255,125,0.7)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
               alignItems: "center",
-              justifyContent: "center",
-              width: 60,
-              height: 60,
-              borderRadius: 30
+              borderRadius: 10,
+              padding: 25,
+              marginBottom: 25
             }}
           >
-            <Icon
-              type="FontAwesome"
-              name="refresh"
-              style={{ color: "#222", fontSize: 35 }}
-            />
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+              Pay with One-Time Code:
+            </Text>
+            <Text style={{ color: "white", fontSize: 48, fontWeight: "bold" }}>
+              {code.match(/.{3}/g).join(" ")}
+            </Text>
+            <Text style={{ color: "white", fontSize: 14 }}>
+              valid for the next{" "}
+              <CountdownTimer
+                code={code}
+                onEnd={() => {
+                  setCode(generateCode());
+                }}
+              />{" "}
+              minutes
+            </Text>
           </View>
-        </TouchableHighlight>
-      </View>
-      <View style={{ flex: 1 }} />
-    </SafeAreaView>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            marginEnd: 30,
+            marginBottom: 30
+          }}
+        >
+          <TouchableOpacity
+            style={{ opacity: 0.7 }}
+            activeOpacity={0.5}
+            onPress={() => {
+              setCode(generateCode());
+            }}
+          >
+            <Icon name="refresh-cw" size={30} color="white" />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
