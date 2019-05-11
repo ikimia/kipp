@@ -24,7 +24,7 @@ export default createStackNavigator(
     LanguageSettings: LanguageSettingsScreen
   },
   {
-    initialRouteName: "Stores",
+    initialRouteName: "Pay",
     defaultNavigationOptions: () => ({
       gesturesEnabled: true,
       gestureDirection: isRTL() ? "inverted" : "default"

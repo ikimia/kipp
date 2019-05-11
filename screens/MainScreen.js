@@ -35,14 +35,38 @@ function CountdownTimer({ code, onEnd }) {
   return `${minutes}:${seconds}`;
 }
 
+const BACKDROPS = [
+  require("../img/backdrops/0.jpg"),
+  require("../img/backdrops/1.jpg"),
+  require("../img/backdrops/2.jpg"),
+  require("../img/backdrops/3.jpg"),
+  require("../img/backdrops/4.jpg"),
+  require("../img/backdrops/5.jpg")
+];
+
+function getRandomBackdrop(prevIndex) {
+  for (;;) {
+    const index = Math.floor(Math.random() * BACKDROPS.length);
+    if (index !== prevIndex) {
+      return index;
+    }
+  }
+}
+
 export default function MainScren() {
   const [code, setCode] = useState(generateCode());
+  const [backdropIndex, setBackdropIndex] = useState(getRandomBackdrop(-1));
   const { userProfile } = useContext(SocialProfile);
   const { navigate } = useContext(NavigationContext);
+  const setNewCode = () => {
+    setCode(generateCode());
+    setBackdropIndex(getRandomBackdrop(backdropIndex));
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Image
-        source={require("../img/pay-backdrop.jpg")}
+        source={BACKDROPS[backdropIndex]}
         style={{
           position: "absolute",
           width: "100%",
@@ -117,13 +141,7 @@ export default function MainScren() {
             </Text>
             <Text style={{ color: "white", fontSize: 14 }}>
               valid for the next{" "}
-              <CountdownTimer
-                code={code}
-                onEnd={() => {
-                  setCode(generateCode());
-                }}
-              />{" "}
-              minutes
+              <CountdownTimer code={code} onEnd={setNewCode} /> minutes
             </Text>
           </View>
         </View>
@@ -139,9 +157,7 @@ export default function MainScren() {
           <TouchableOpacity
             style={{ opacity: 0.7 }}
             activeOpacity={0.5}
-            onPress={() => {
-              setCode(generateCode());
-            }}
+            onPress={setNewCode}
           >
             <Icon name="refresh-cw" size={30} color="white" />
           </TouchableOpacity>
