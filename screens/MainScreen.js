@@ -78,7 +78,11 @@ export default function MainScren() {
         </View>
       </SafeAreaView>
       <View style={{ marginTop: 1, alignItems: "flex-end" }}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigate("Stores");
+          }}
+        >
           <View
             style={{
               flexDirection: "row",
