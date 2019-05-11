@@ -62,6 +62,9 @@ export default function ProfileScreen() {
               value={24}
               title="Rewards"
               iconColor="darkred"
+              onPress={() => {
+                navigate("Rewards");
+              }}
             />
           </View>
           <ElevatedButton

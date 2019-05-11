@@ -7,6 +7,7 @@ import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 import MainScreen from "../screens/MainScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PurchasesScreen from "../screens/PurchasesScreen";
+import RewardsScreen from "../screens/RewardsScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -15,12 +16,13 @@ export default createStackNavigator(
     Pay: MainScreen,
     Profile: ProfileScreen,
     Purchases: PurchasesScreen,
+    Rewards: RewardsScreen,
     NewCreditCard: NewCreditCardScreen,
     SavedCreditCard: SavedCreditCardScreen,
     LanguageSettings: LanguageSettingsScreen
   },
   {
-    initialRouteName: "Purchases",
+    initialRouteName: "Profile",
     defaultNavigationOptions: () => ({
       gesturesEnabled: true,
       gestureDirection: isRTL() ? "inverted" : "default"

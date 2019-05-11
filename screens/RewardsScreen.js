@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Text, Content, View } from "native-base";
+import { Text, View } from "react-native";
 import DarkHeader from "../components/DarkHeader";
-import { OFFWHITE } from "../constants/Colors";
 import { FlatList, TouchableHighlight } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-navigation";
 
 const REWARDS = [
   ["20% off for the next month", "Zara"],
@@ -13,32 +13,32 @@ const REWARDS = [
 
 export default function RewardsScreen() {
   return (
-    <Container>
-      <DarkHeader title="REWARDS" />
-      <Content style={{ backgroundColor: OFFWHITE }}>
-        <FlatList
-          data={REWARDS}
-          keyExtractor={([reward]) => reward}
-          renderItem={({ item: [reward, store] }) => (
-            <TouchableHighlight style={{ marginBottom: 2 }} onPress={() => {}}>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  paddingVertical: 15,
-                  paddingHorizontal: 20
-                }}
-              >
-                <View>
-                  <Text>
-                    {reward} at{" "}
-                    <Text style={{ fontWeight: "bold" }}>{store}</Text>
-                  </Text>
-                </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <DarkHeader title="REWARDS" back />
+      <FlatList
+        data={REWARDS}
+        keyExtractor={([reward]) => reward}
+        renderItem={({ item: [reward, store] }) => (
+          <TouchableHighlight style={{ marginBottom: 2 }} onPress={() => {}}>
+            <View
+              style={{
+                backgroundColor: "white",
+                paddingVertical: 15,
+                paddingHorizontal: 20,
+                borderBottomColor: "#EEE",
+                borderBottomWidth: 2
+              }}
+            >
+              <View>
+                <Text>
+                  {reward} at{" "}
+                  <Text style={{ fontWeight: "bold" }}>{store}</Text>
+                </Text>
               </View>
-            </TouchableHighlight>
-          )}
-        />
-      </Content>
-    </Container>
+            </View>
+          </TouchableHighlight>
+        )}
+      />
+    </SafeAreaView>
   );
 }
