@@ -14,6 +14,7 @@ import ListItem from "../components/ListItem";
 import ListHeader from "../components/ListHeader";
 import BackButton from "../components/BackButton";
 import CreditCardIcon from "../components/CreditCardIcon";
+import Icon from "react-native-vector-icons/Feather";
 
 export default function ProfileScreen() {
   const { navigate } = useContext(NavigationContext);
@@ -32,8 +33,17 @@ export default function ProfileScreen() {
       />
 
       <SafeAreaView>
-        <View style={{ marginHorizontal: 15, marginVertical: 10 }}>
+        <View
+          style={{
+            paddingHorizontal: 15,
+            paddingVertical: 10,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
           <BackButton />
+          <Icon name="bell" size={25} style={{ marginTop: 5, marginEnd: 5 }} />
         </View>
       </SafeAreaView>
       <View style={{ alignItems: "center", marginBottom: 20 }}>
