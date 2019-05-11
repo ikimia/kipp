@@ -69,6 +69,9 @@ export default function ProfileScreen() {
             value={100}
             title="Purchases"
             iconColor="darkgreen"
+            onPress={() => {
+              navigate("Purchases");
+            }}
           />
         </View>
       </View>

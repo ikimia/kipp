@@ -1,20 +1,17 @@
 import React from "react";
-import { Container, Content } from "native-base";
+import { useTranslation } from "react-i18next";
+import Purchases from "../components/Purchases";
+import { SafeAreaView } from "react-navigation";
 
 import "moment/locale/he";
-import { useTranslation } from "react-i18next";
 import DarkHeader from "../components/DarkHeader";
-import Purchases from "../components/Purchases";
-import { OFFWHITE } from "../constants/Colors";
 
 export default function PurchasesScreen() {
-  const { t } = useTranslation("stores");
+  const { t } = useTranslation("purchases");
   return (
-    <Container style={{ backgroundColor: OFFWHITE }}>
-      <DarkHeader title={t("purchases:purchases")} />
-      <Content>
-        <Purchases />
-      </Content>
-    </Container>
+    <SafeAreaView style={{ flex: 1 }}>
+      <DarkHeader title={t("purchases")} back />
+      <Purchases />
+    </SafeAreaView>
   );
 }

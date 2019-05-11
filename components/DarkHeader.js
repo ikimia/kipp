@@ -1,21 +1,26 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
-import { Header, Left, Body, Title, Right } from "native-base";
-import { OFFWHITE, DARK_GRAY } from "../constants/Colors";
+import { View, Text } from "react-native";
 import BackButton from "./BackButton";
 
 export default function DarkHeader({ title, back = false }) {
   return (
-    <Header
-      style={{ backgroundColor: DARK_GRAY, borderBottomWidth: 0 }}
-      iosBarStyle="light-content"
+    <View
+      style={{
+        flexDirection: "row",
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        alignItems: "center",
+        borderBottomColor: "#EEE",
+        borderBottomWidth: 1
+      }}
     >
-      <Left>{back && <BackButton />}</Left>
-      <Body>
-        <Title style={{ color: OFFWHITE }}>{title}</Title>
-      </Body>
-      <Right />
-    </Header>
+      <View style={{ flex: 1 }}>{back && <BackButton />}</View>
+      <View style={{ flex: 3, alignItems: "center" }}>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>{title}</Text>
+      </View>
+      <View style={{ flex: 1 }} />
+    </View>
   );
 }
 DarkHeader.propTypes = {

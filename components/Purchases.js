@@ -35,7 +35,9 @@ export default function Purchases() {
             style={{
               backgroundColor: "white",
               paddingVertical: 15,
-              paddingHorizontal: 20
+              paddingHorizontal: 20,
+              borderBottomColor: "#EEE",
+              borderBottomWidth: 2
             }}
           >
             <View
