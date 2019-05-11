@@ -19,9 +19,10 @@ import { CreditCardStorage } from "../Storage";
 import { getCreditCardIcon } from "./CreditCardFunctions";
 import ListItem from "../components/ListItem";
 import ListHeader from "../components/ListHeader";
+import BackButton from "../components/BackButton";
 
 export default function ProfileScreen() {
-  const { navigate, goBack } = useContext(NavigationContext);
+  const { navigate } = useContext(NavigationContext);
   const { userProfile, logout } = useContext(SocialProfile);
   const [storedPaymentMethods, setStoredPaymentMethods] = useState([]);
   return (
@@ -38,9 +39,7 @@ export default function ProfileScreen() {
 
       <SafeAreaView>
         <View style={{ marginHorizontal: 15, marginVertical: 10 }}>
-          <TouchableOpacity onPress={() => goBack()}>
-            <Icon name="arrow-left" size={30} />
-          </TouchableOpacity>
+          <BackButton />
         </View>
       </SafeAreaView>
       <View style={{ alignItems: "center" }}>
