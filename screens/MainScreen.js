@@ -119,6 +119,7 @@ export default function MainScren() {
       </SafeAreaView>
       <View style={{ marginTop: 1, alignItems: "flex-end" }}>
         <TouchableOpacity
+          activeOpacity={0.8}
           onPress={() => {
             navigate("Stores");
           }}
