@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Image, View, Text } from "react-native";
 import { SafeAreaView, NavigationContext } from "react-navigation";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableOpacity,
+  BorderlessButton
+} from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -108,18 +111,17 @@ export default function MainScren() {
             </Text>
             <Text>{userProfile.name}</Text>
           </View>
-          <TouchableOpacity onPress={() => navigate("Profile")}>
+          <BorderlessButton onPress={() => navigate("Profile")}>
             <Image
               source={{ uri: userProfile.picture }}
               style={{ width: 46, height: 46 }}
               borderRadius={23}
             />
-          </TouchableOpacity>
+          </BorderlessButton>
         </View>
       </SafeAreaView>
       <View style={{ marginTop: 1, alignItems: "flex-end" }}>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <BorderlessButton
           onPress={() => {
             navigate("Stores");
           }}
@@ -135,7 +137,7 @@ export default function MainScren() {
             <Icon name="shopping-bag" size={15} />
             <Text style={{ fontWeight: "bold" }}> Where can I use Kipp?</Text>
           </View>
-        </TouchableOpacity>
+        </BorderlessButton>
       </View>
       <SafeAreaView style={{ flex: 1 }}>
         <View
