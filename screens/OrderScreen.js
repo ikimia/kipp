@@ -1,141 +1,60 @@
-import React, { useContext, useState, useEffect } from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import {
-  Container,
-  Content,
-  Text,
-  Button,
-  Icon,
-  Card,
-  CardItem,
-  Spinner
-} from "native-base";
-import { View } from "react-native";
-import StyleSheets from "../constants/StyleSheets";
+import { View, Text } from "react-native";
 import ReceiptItemsTable from "../components/ReceiptItemsTable";
-
+import Icon from "react-native-vector-icons/Feather";
 import { items, taxes, totalAmount } from "../constants/Data";
 import { useTranslation } from "react-i18next";
-import { SafeAreaView, NavigationContext } from "react-navigation";
-import { DARK_GRAY } from "../constants/Colors";
-import DarkHeader from "../components/DarkHeader";
+import { SafeAreaView } from "react-navigation";
+import BackButton from "../components/BackButton";
+import { ScrollView } from "react-native-gesture-handler";
 
-function Overlay({ onClose }) {
-  const [success, setSuccess] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSuccess(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-  return (
-    <SafeAreaView
-      style={{
-        position: "absolute",
-        backgroundColor: "black",
-        opacity: 0.95,
-        width: "100%",
-        height: "100%",
-        paddingTop: "30%"
-      }}
-    >
-      <Text style={{ color: "white", fontSize: 30, alignSelf: "center" }}>
-        Paying $83 to Zara
-      </Text>
-      {!success && <Spinner />}
-      {success && (
-        <Button
-          success
-          style={{ marginTop: 50, alignSelf: "center" }}
-          onPress={onClose}
-        >
-          <Text>Got It</Text>
-        </Button>
-      )}
-    </SafeAreaView>
-  );
-}
-Overlay.propTypes = {
-  onClose: PropTypes.func
-};
-
-export default function OrderScreen({ receiptNumber, storeName, hidePayment }) {
+export default function OrderScreen({ receiptNumber, storeName }) {
   const { t } = useTranslation("common");
-  const [showOverlay, setShowOverlay] = useState(false);
-  const { navigate } = useContext(NavigationContext);
   return (
-    <Container>
-      <View style={{ backgroundColor: DARK_GRAY }}>
-        <DarkHeader title="PURCHASE" back />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView>
         <View
           style={{
+            paddingVertical: 10,
             paddingHorizontal: 15,
-            paddingVertical: 10
+            borderBottomColor: "#EEE",
+            borderBottomWidth: 1
           }}
         >
+          <BackButton />
           <View
             style={{
+              marginTop: 5,
               flexDirection: "row",
-              justifyContent: "space-between",
-              paddingBottom: 10
+              justifyContent: "space-between"
             }}
           >
-            <Text style={{ color: "white", fontSize: 25, fontWeight: "900" }}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
               {t(`stores:${storeName}`)}
             </Text>
-            <Text style={{ color: "white", fontSize: 25, fontWeight: "900" }}>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
               {t("currencySign")}
               {totalAmount}
             </Text>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-            <Icon
-              name="information-circle"
-              style={{ color: "white", fontSize: 15, marginEnd: 5 }}
-            />
-            <Text style={{ color: "white", fontSize: 15 }}>
-              Receipt no. {receiptNumber}
-            </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Icon name="info" style={{ fontSize: 15, marginEnd: 5 }} />
+            <Text style={{ fontSize: 15 }}>Receipt no. {receiptNumber}</Text>
           </View>
         </View>
-      </View>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 15 }}>
-          <Content contentContainerStyle={{ alignItems: "center" }}>
-            <Card>
-              <CardItem>
-                <ReceiptItemsTable items={items} taxes={taxes} />
-              </CardItem>
-            </Card>
-          </Content>
-          {!hidePayment && (
-            <Button
-              onPress={() => {
-                setShowOverlay(true);
-              }}
-              block
-            >
-              <Text
-                style={[
-                  StyleSheets.textCenter,
-                  StyleSheets.textSize3,
-                  StyleSheets.textBold
-                ]}
-              >
-                {t("pay:makePayment")}
-              </Text>
-            </Button>
-          )}
-        </View>
       </SafeAreaView>
-      {showOverlay && (
-        <Overlay onClose={() => navigate("Pay", { resetCode: true })} />
-      )}
-    </Container>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 15 }}>
+          <View style={{ alignItems: "center" }}>
+            <ReceiptItemsTable items={items} taxes={taxes} />
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 OrderScreen.propTypes = {
   receiptNumber: PropTypes.string.isRequired,
-  storeName: PropTypes.string.isRequired,
-  hidePayment: PropTypes.bool
+  storeName: PropTypes.string.isRequired
 };

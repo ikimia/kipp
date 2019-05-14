@@ -8,11 +8,10 @@ export default function ListHeader({ text }) {
         backgroundColor: "#EFEFEF",
         borderBottomColor: "#CCC",
         borderBottomWidth: 1,
-        padding: 10,
-        fontSize: 16
+        padding: 10
       }}
     >
-      <Text>{text}</Text>
+      <Text style={{ fontSize: 14, color: "#111" }}>{text}</Text>
     </View>
   );
 }

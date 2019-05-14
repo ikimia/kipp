@@ -47,7 +47,7 @@ i18n
           done: "Done"
         },
         purchases: {
-          purchases: "PURCHASES"
+          purchases: "Purchases"
         },
         settings: {
           settings: "SETTINGS",

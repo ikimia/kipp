@@ -28,7 +28,6 @@ export default function Purchases() {
       keyExtractor={([name]) => name}
       renderItem={({ item: [name, timeAgo, location, amount] }) => (
         <TouchableHighlight
-          style={{ marginBottom: 2 }}
           onPress={() => navigate("PastOrder", { storeName: name })}
         >
           <View
@@ -37,7 +36,7 @@ export default function Purchases() {
               paddingVertical: 15,
               paddingHorizontal: 20,
               borderBottomColor: "#EEE",
-              borderBottomWidth: 2
+              borderBottomWidth: 1
             }}
           >
             <View

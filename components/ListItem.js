@@ -1,28 +1,30 @@
 import * as React from "react";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
 export default function ListItem({ onPress, iconElement, icon, text }) {
   return (
-    <TouchableHighlight onPress={onPress}>
-      <View
-        style={{
-          backgroundColor: "white",
-          flexDirection: "row",
-          padding: 10,
-          alignItems: "center",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
-        }}
-      >
-        <View style={{ width: 25 }}>
-          {iconElement ? iconElement : <Icon name={icon} />}
+    <RectButton
+      onPress={onPress}
+      style={{ backgroundColor: "white", padding: 10 }}
+    >
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 20 }}>
+          {iconElement ? iconElement : <Icon name={icon} size={18} />}
         </View>
-        <Text style={{ marginStart: 10 }}>{text}</Text>
-        <View style={{ flex: 1 }} />
-        <Icon name="chevron-right" />
+        <View
+          style={{
+            marginStart: 10,
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between"
+          }}
+        >
+          <Text style={{ fontSize: 16 }}>{text}</Text>
+          <Icon name="chevron-right" />
+        </View>
       </View>
-    </TouchableHighlight>
+    </RectButton>
   );
 }

@@ -8,7 +8,6 @@ import {
   NavigationEvents
 } from "react-navigation";
 import { SocialProfile } from "../contexes/SocialProfile";
-import ElevatedButton from "../components/ElevatedButton";
 import { CreditCardStorage } from "../Storage";
 import ListItem from "../components/ListItem";
 import ListHeader from "../components/ListHeader";
@@ -56,38 +55,27 @@ export default function ProfileScreen() {
             marginBottom: 10
           }}
         />
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
           {userProfile.name}
         </Text>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center"
-          }}
-        >
-          <View style={{ marginEnd: 15 }}>
-            <ElevatedButton
-              icon="gift"
-              value={4}
-              title="Rewards"
-              iconColor="darkred"
-              onPress={() => {
-                navigate("Rewards");
-              }}
-            />
-          </View>
-          <ElevatedButton
+      </View>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ marginBottom: 25 }}>
+          <ListItem
+            icon="gift"
+            text="Rewards"
+            onPress={() => {
+              navigate("Rewards");
+            }}
+          />
+          <ListItem
             icon="tag"
-            value={100}
-            title="Purchases"
-            iconColor="darkgreen"
+            text="Purchases"
             onPress={() => {
               navigate("Purchases");
             }}
           />
         </View>
-      </View>
-      <ScrollView style={{ flex: 1 }}>
         <View style={{ marginBottom: 25 }}>
           <ListHeader text="Saved Payment Methods" />
           <FlatList

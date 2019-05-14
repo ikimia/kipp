@@ -9,6 +9,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import PurchasesScreen from "../screens/PurchasesScreen";
 import RewardsScreen from "../screens/RewardsScreen";
 import StoresScreen from "../screens/StoresScreen";
+import PastOrderScreen from "../screens/PastOrderScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -17,6 +18,7 @@ export default createStackNavigator(
     Pay: MainScreen,
     Profile: ProfileScreen,
     Purchases: PurchasesScreen,
+    PastOrder: PastOrderScreen,
     Rewards: RewardsScreen,
     Stores: StoresScreen,
     NewCreditCard: NewCreditCardScreen,
