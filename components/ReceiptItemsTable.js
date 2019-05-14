@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import { useTranslation } from "react-i18next";
-import { Text } from "native-base";
 
 const LINE_LENGTH = 32;
 

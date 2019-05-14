@@ -1,32 +1,24 @@
 import React, { useContext } from "react";
-import moment from "moment";
-import { View, Text } from "native-base";
+import { View, Text } from "react-native";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
 import { TouchableHighlight, FlatList } from "react-native-gesture-handler";
 
 const data = [
-  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
-  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
-  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
-  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"]
+  ["foodStore", "foodStoreLocation"],
+  ["apparelStore", "apparelStoreLocation"],
+  ["gasStation", "gasStationLocation"],
+  ["ShoesStore", "ShoesStoreLocation"]
 ];
 
-const m = language => {
-  const localizedMoment = moment();
-  localizedMoment.locale(language);
-  return localizedMoment;
-};
-
-export default function Purchases() {
+export default function Stores() {
   const { navigate } = useContext(NavigationContext);
-  const { t, i18n } = useTranslation("common");
-  const { language } = i18n;
+  const { t } = useTranslation("common");
   return (
     <FlatList
       data={data}
       keyExtractor={([name]) => name}
-      renderItem={({ item: [name, timeAgo, location, amount] }) => (
+      renderItem={({ item: [name, location] }) => (
         <TouchableHighlight
           style={{ marginBottom: 2 }}
           onPress={() => navigate("PastOrder", { storeName: name })}

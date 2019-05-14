@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import moment from "moment";
-import { View, Text } from "native-base";
+import { View, Text } from "react-native";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
 import { TouchableHighlight, FlatList } from "react-native-gesture-handler";

@@ -1,6 +1,6 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import { Text } from "native-base";
+import { Text } from "react-native";
 
 export default function AlignedText({ children, style, ...props }) {
   return (

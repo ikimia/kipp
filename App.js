@@ -1,31 +1,25 @@
 import React, { Suspense } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, View, Text } from "react-native";
 
 import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
-import { StyleProvider, Text } from "native-base";
-import getTheme from "./native-base-theme/components";
 import AuthenticationFlow from "./screens/AuthenticationFlow";
 
 function App() {
   const direction = useDirection();
 
   return (
-    <StyleProvider style={getTheme()}>
-      <View style={[styles.container, { direction }]}>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-        {
-          <AuthenticationFlow
-            Loading={() => (
-              <View style={styles.loading}>
-                <Text>Loading...</Text>
-              </View>
-            )}
-            App={AppNavigator}
-          />
-        }
-      </View>
-    </StyleProvider>
+    <View style={[styles.container, { direction }]}>
+      {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+      <AuthenticationFlow
+        Loading={() => (
+          <View style={styles.loading}>
+            <Text>Loading...</Text>
+          </View>
+        )}
+        App={AppNavigator}
+      />
+    </View>
   );
 }
 
