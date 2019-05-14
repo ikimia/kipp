@@ -68,7 +68,7 @@ export default function ProfileScreen() {
           <View style={{ marginEnd: 15 }}>
             <ElevatedButton
               icon="gift"
-              value={24}
+              value={4}
               title="Rewards"
               iconColor="darkred"
               onPress={() => {

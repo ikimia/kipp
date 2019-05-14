@@ -39,7 +39,7 @@ export default function ElevatedButton({
             style={{ fontSize: 24, marginEnd: 10, color: iconColor }}
           />
           <View>
-            <Text style={{ fontSize: 18 }}>{value}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{value}</Text>
             <Text>{title}</Text>
           </View>
         </View>
