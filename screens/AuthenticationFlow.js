@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import Logo from "../components/Logo";
 import FBLoginButton from "../components/FBLoginButton";
 import { SocialProfile } from "../contexes/SocialProfile";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
@@ -84,7 +85,7 @@ export default function AuthenticationFlow({ Loading, App }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontSize: 80, fontWeight: "bold" }}>Kipp</Text>
+        <Logo fontSize={100} />
       </View>
       <View
         style={{

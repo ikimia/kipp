@@ -1,17 +1,14 @@
 import * as React from "react";
+import * as PropTypes from "prop-types";
 import { View, Text } from "react-native";
-import Hedgehog from "./Hedgehog";
-import { OFFWHITE } from "../constants/Colors";
 
-export default function Logo() {
+export default function Logo({ fontSize = 20 }) {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <View style={{ marginEnd: 10 }}>
-        <Hedgehog color={OFFWHITE} size={50} />
-      </View>
-      <Text style={{ fontWeight: "bold", fontSize: 30, color: OFFWHITE }}>
-        KEEPY
-      </Text>
+      <Text style={{ fontFamily: "Baumans", fontSize }}>Kipp</Text>
     </View>
   );
 }
+Logo.propTypes = {
+  fontSize: PropTypes.number
+};
