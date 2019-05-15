@@ -1,37 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "react-native";
-import {
-  Container,
-  Header,
-  View,
-  DeckSwiper,
-  Card,
-  CardItem,
-  Text,
-  Body,
-  Title
-} from "native-base";
+import { View, Text } from "react-native";
 import FBLoginButton from "../components/FBLoginButton";
 import { SocialProfile } from "../contexes/SocialProfile";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
 import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
 import PropTypes from "prop-types";
-
-const cards = [
-  {
-    text: "Easily pay with your phone, no credit card needed",
-    subtext: "Open the app and type the five digits you got",
-    image: require("../assets/screenshots/welcome.png")
-  },
-  {
-    text: "Card One",
-    image: require("../assets/screenshots/welcome.png")
-  },
-  {
-    text: "Card One",
-    image: require("../assets/screenshots/welcome.png")
-  }
-];
+import { SafeAreaView } from "react-navigation";
 
 async function getAccessToken() {
   let accessToken = await FacebookAccessTokenStorage.get();
@@ -108,34 +82,21 @@ export default function AuthenticationFlow({ Loading, App }) {
     );
   }
   return (
-    <Container>
-      <Header transparent>
-        <Body>
-          <Title>Welcome to Street Pay</Title>
-        </Body>
-      </Header>
-      <View style={{ flex: 2, flexDirection: "column" }}>
-        <DeckSwiper
-          dataSource={cards}
-          renderItem={item => (
-            <Card style={{ elevation: 3 }}>
-              <CardItem cardBody>
-                <Image style={{ height: 300, flex: 1 }} source={item.image} />
-              </CardItem>
-              <CardItem>
-                <View>
-                  <Text>{item.text}</Text>
-                  <Text style={{ fontSize: 14 }}>{item.subtext}</Text>
-                </View>
-              </CardItem>
-            </Card>
-          )}
-        />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 80, fontWeight: "bold" }}>Kipp</Text>
       </View>
-      <View style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          paddingHorizontal: 20
+        }}
+      >
         <FBLoginButton onLogin={login} />
       </View>
-    </Container>
+    </SafeAreaView>
   );
 }
 
