@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -76,6 +75,7 @@
 		F1B79517625B43DB965E6D57 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F92DCBFB672433F8828A83D /* libRNVectorIcons.a */; };
 		F4A7BC7309C4424FA80531E6 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB92E49FF6B24F70AC57A98F /* OpenSans-SemiBold.ttf */; };
 		F8A6C02A917C4BC7A768B1DB /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B02876D17C5450387D88696 /* OpenSans-Light.ttf */; };
+		FA662755BB2940F29540644A /* Baumans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16C80232373E4B47A59369AB /* Baumans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -466,6 +466,7 @@
 		F1E7E18CAF284795A65BEC06 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		F265D9E2FF314A89B5FA0364 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		FE559477C5AE4510BF25B10D /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
+		16C80232373E4B47A59369AB /* Baumans-Regular.ttf */ = {isa = PBXFileReference; name = "Baumans-Regular.ttf"; path = "../assets/fonts/Baumans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -825,6 +826,7 @@
 				05453B39CF824FB68E08A5CC /* UbuntuMono-BoldItalic.ttf */,
 				4FBFC920E4B0407EB9E7E903 /* UbuntuMono-Italic.ttf */,
 				7E0E61D703854AF1BF9524C9 /* UbuntuMono-Regular.ttf */,
+				16C80232373E4B47A59369AB /* Baumans-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1361,6 +1363,7 @@
 				39DFEEB9568A4CA794BA2F90 /* UbuntuMono-BoldItalic.ttf in Resources */,
 				E5A407669DE446558497E7DF /* UbuntuMono-Italic.ttf in Resources */,
 				E8BA1AC44ED2408CBD67D43C /* UbuntuMono-Regular.ttf in Resources */,
+				FA662755BB2940F29540644A /* Baumans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
