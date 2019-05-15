@@ -60,7 +60,7 @@ i18n
           newCreditCardAction: "New credit card",
           saveCreditCard: "Save credit card",
           removeCreditCard: "Remove credit card",
-          cardNumber: " Card number",
+          cardNumber: "Card number",
           expiry: "Expiry",
           securityCode: "Securiry code",
           language: "Language",
