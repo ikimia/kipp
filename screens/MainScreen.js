@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Image, View, Text } from "react-native";
-import { SafeAreaView, NavigationContext } from "react-navigation";
-import {
-  TouchableOpacity,
-  BorderlessButton
-} from "react-native-gesture-handler";
+import { Image, View, Text, StatusBar } from "react-native";
+import { SafeAreaView } from "react-navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
-import Icon from "react-native-vector-icons/Feather";
+import Logo from "../components/Logo";
 
 const CODE_TIMEOUT = 180;
 
@@ -14,20 +11,6 @@ const generateCode = () =>
   Math.random()
     .toString(10)
     .slice(2, 8);
-
-function getGreeting() {
-  const hours = new Date().getHours();
-  if (hours < 5) {
-    return "Good Night";
-  }
-  if (hours < 12) {
-    return "Good Morning";
-  }
-  if (hours < 17) {
-    return "Good Afternoon";
-  }
-  return "Good Evening";
-}
 
 function CountdownTimer({ code, onEnd }) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
@@ -76,7 +59,6 @@ export default function MainScren() {
   const [code, setCode] = useState(generateCode());
   const [backdropIndex, setBackdropIndex] = useState(getRandomBackdrop(-1));
   const { userProfile } = useContext(SocialProfile);
-  const { navigate } = useContext(NavigationContext);
   const setNewCode = () => {
     setCode(generateCode());
     setBackdropIndex(getRandomBackdrop(backdropIndex));
@@ -84,6 +66,7 @@ export default function MainScren() {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" />
       <Image
         source={BACKDROPS[backdropIndex]}
         style={{
@@ -92,82 +75,54 @@ export default function MainScren() {
           height: "100%"
         }}
       />
-      <SafeAreaView style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
-        <View
-          style={{
-            flexDirection: "row",
-            marginVertical: 10,
-            marginHorizontal: 15
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 25
-              }}
-            >
-              {getGreeting()}
-            </Text>
-            <Text>{userProfile.name}</Text>
-          </View>
-          <BorderlessButton onPress={() => navigate("Profile")}>
-            <Image
-              source={{ uri: userProfile.picture }}
-              style={{ width: 46, height: 46 }}
-              borderRadius={23}
-            />
-          </BorderlessButton>
-        </View>
-      </SafeAreaView>
-      <View style={{ marginTop: 1, alignItems: "flex-end" }}>
-        <BorderlessButton
-          onPress={() => {
-            navigate("Stores");
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              padding: 10,
-              borderBottomLeftRadius: 10,
-              backgroundColor: "rgba(255, 255, 255, 0.8)"
-            }}
-          >
-            <Icon name="shopping-bag" size={15} />
-            <Text style={{ fontWeight: "bold" }}> Where can I use Kipp?</Text>
-          </View>
-        </BorderlessButton>
-      </View>
+      <View
+        style={{
+          backgroundColor: "black",
+          opacity: 0.8,
+          position: "absolute",
+          width: "100%",
+          height: "100%"
+        }}
+      />
       <SafeAreaView style={{ flex: 1 }}>
-        <View
-          style={{ flex: 2, justifyContent: "center", alignItems: "center" }}
-        >
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <Logo color="white" fontSize={30} />
+          <Text style={{ fontFamily: "Open Sans", color: "white" }}>
+            {userProfile.name}
+          </Text>
+        </View>
+        <View style={{ flex: 1 }}>
           <View
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.7)",
               alignItems: "center",
-              borderRadius: 10,
-              paddingTop: 25,
-              paddingHorizontal: 25,
-              paddingBottom: 15
+              flex: 1,
+              paddingTop: 60,
+              paddingBottom: 50
             }}
           >
-            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+            <Text
+              style={{ fontFamily: "Open Sans", color: "white", fontSize: 16 }}
+            >
               Pay with One-Time Code:
             </Text>
-            <Text style={{ color: "white", fontSize: 48, fontWeight: "bold" }}>
+            <Text
+              style={{
+                fontFamily: "Open Sans",
+                color: "white",
+                fontSize: 70,
+                fontWeight: "bold"
+              }}
+            >
               {code.match(/.{3}/g).join(" ")}
             </Text>
-            <Text style={{ color: "white", fontSize: 14 }}>
-              valid for the next{" "}
+            <View style={{ flex: 1 }} />
+            <Text
+              style={{ fontFamily: "Open Sans", color: "white", fontSize: 14 }}
+            >
+              The code is valid for the next{" "}
               <CountdownTimer code={code} onEnd={setNewCode} /> minutes
             </Text>
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={setNewCode}
-              style={{ marginTop: 15 }}
-            >
+            <TouchableOpacity activeOpacity={0.5} onPress={setNewCode}>
               <View>
                 <Text
                   style={{
@@ -182,7 +137,6 @@ export default function MainScren() {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ flex: 1 }} />
       </SafeAreaView>
     </View>
   );
