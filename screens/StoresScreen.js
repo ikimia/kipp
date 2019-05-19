@@ -64,9 +64,8 @@ export default function StoresScreen() {
             borderBottomWidth: 1
           }}
         >
-          <BackButton />
           <Text style={{ fontSize: 25, fontWeight: "bold", marginVertical: 5 }}>
-            Stores
+            Explore
           </Text>
           <View
             style={{

@@ -105,7 +105,7 @@ const COLORS = ["#ed5565", "#f8ac59", "#23c6c8", "#1ab394", "#1c84c6"];
 export default function RewardsScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <DarkHeader title="Personal Rewards" back />
+      <DarkHeader title="Rewards" />
       <View style={{ borderBottomColor: "#EEE", borderBottomWidth: 1 }}>
         <Chips data={FILTERS} />
       </View>

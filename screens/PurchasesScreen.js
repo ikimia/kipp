@@ -10,7 +10,7 @@ export default function PurchasesScreen() {
   const { t } = useTranslation("purchases");
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <DarkHeader title={t("purchases")} back />
+      <DarkHeader title={t("purchases")} />
       <Purchases />
     </SafeAreaView>
   );
