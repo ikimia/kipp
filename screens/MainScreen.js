@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Image, View, Text, StatusBar, StyleSheet } from "react-native";
+import { View, Text, StatusBar, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
+import Backdrop, { PATTERNS } from "../components/Backdrop";
 
 const CODE_TIMEOUT = 120;
 
@@ -37,46 +38,30 @@ function CountdownTimer({ code, onEnd }) {
   return `${minutes}:${seconds}`;
 }
 
-const BACKDROPS = [
-  require("../img/backdrops/0.jpg"),
-  require("../img/backdrops/1.jpg"),
-  require("../img/backdrops/2.jpg"),
-  require("../img/backdrops/3.jpg"),
-  require("../img/backdrops/4.jpg"),
-  require("../img/backdrops/5.jpg")
-];
-
-function getRandomBackdrop(prevIndex) {
+function getRandomPattern(prevPattern) {
   for (;;) {
-    const index = Math.floor(Math.random() * BACKDROPS.length);
-    if (index !== prevIndex) {
-      return index;
+    const keys = Object.keys(PATTERNS);
+    const randomKeyIndex = Math.floor(Math.random() * keys.length);
+    const pattern = PATTERNS[keys[randomKeyIndex]];
+    if (pattern !== prevPattern) {
+      return pattern;
     }
   }
 }
 
 export default function MainScren() {
   const [code, setCode] = useState(generateCode());
-  const [backdropIndex, setBackdropIndex] = useState(getRandomBackdrop(-1));
+  const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
   const setNewCode = () => {
     setCode(generateCode());
-    setBackdropIndex(getRandomBackdrop(backdropIndex));
+    setPattern(getRandomPattern(pattern));
   };
 
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
-      <Image
-        source={BACKDROPS[backdropIndex]}
-        style={[StyleSheet.absoluteFill, { width: "100%", height: "100%" }]}
-      />
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { backgroundColor: "black", opacity: 0.3 }
-        ]}
-      />
+      <Backdrop pattern={PATTERNS[pattern]} />
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ alignItems: "center", padding: 20 }}>
           <Logo color="white" fontSize={30} />
