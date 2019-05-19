@@ -11,7 +11,6 @@ import { SocialProfile } from "../contexes/SocialProfile";
 import { CreditCardStorage } from "../Storage";
 import ListItem from "../components/ListItem";
 import ListHeader from "../components/ListHeader";
-import BackButton from "../components/BackButton";
 import CreditCardIcon from "../components/CreditCardIcon";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -32,20 +31,11 @@ export default function ProfileScreen() {
       />
 
       <SafeAreaView>
-        <View
-          style={{
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <BackButton />
+        <View style={{ padding: 15, alignItems: "flex-end" }}>
           <Icon name="bell" size={25} style={{ marginTop: 5, marginEnd: 5 }} />
         </View>
       </SafeAreaView>
-      <View style={{ alignItems: "center", marginBottom: 20 }}>
+      <View style={{ alignItems: "center", marginBottom: 30 }}>
         <Image
           source={{ uri: userProfile.picture }}
           style={{
@@ -60,22 +50,6 @@ export default function ProfileScreen() {
         </Text>
       </View>
       <ScrollView style={{ flex: 1 }}>
-        <View style={{ marginBottom: 25 }}>
-          <ListItem
-            icon="gift"
-            text="Rewards"
-            onPress={() => {
-              navigate("Rewards");
-            }}
-          />
-          <ListItem
-            icon="tag"
-            text="Purchases"
-            onPress={() => {
-              navigate("Purchases");
-            }}
-          />
-        </View>
         <View style={{ marginBottom: 25 }}>
           <ListHeader text="Saved Payment Methods" />
           <FlatList
