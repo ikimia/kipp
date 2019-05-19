@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Image, View, Text, StatusBar } from "react-native";
+import { Image, View, Text, StatusBar, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 
-const CODE_TIMEOUT = 180;
+const CODE_TIMEOUT = 120;
 
 const generateCode = () =>
   Math.random()
@@ -69,67 +69,45 @@ export default function MainScren() {
       <StatusBar barStyle="light-content" />
       <Image
         source={BACKDROPS[backdropIndex]}
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%"
-        }}
+        style={[StyleSheet.absoluteFill, { width: "100%", height: "100%" }]}
       />
       <View
-        style={{
-          backgroundColor: "black",
-          opacity: 0.8,
-          position: "absolute",
-          width: "100%",
-          height: "100%"
-        }}
+        style={[
+          StyleSheet.absoluteFill,
+          { backgroundColor: "black", opacity: 0.3 }
+        ]}
       />
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ alignItems: "center", marginTop: 20 }}>
+        <View style={{ alignItems: "center", padding: 20 }}>
           <Logo color="white" fontSize={30} />
-          <Text style={{ fontFamily: "Open Sans", color: "white" }}>
-            {userProfile.name}
-          </Text>
+          <Text style={styles.text}>{userProfile.name}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <View
             style={{
               alignItems: "center",
               flex: 1,
-              paddingTop: 60,
-              paddingBottom: 50
+              padding: 30
             }}
           >
-            <Text
-              style={{ fontFamily: "Open Sans", color: "white", fontSize: 16 }}
-            >
-              Pay with One-Time Code:
+            <Text style={[styles.text, { fontSize: 16 }]}>
+              One-Time Payment Code:
             </Text>
-            <Text
-              style={{
-                fontFamily: "Open Sans",
-                color: "white",
-                fontSize: 70,
-                fontWeight: "bold"
-              }}
-            >
+            <Text style={[styles.text, { fontSize: 70, fontWeight: "bold" }]}>
               {code.match(/.{3}/g).join(" ")}
             </Text>
             <View style={{ flex: 1 }} />
-            <Text
-              style={{ fontFamily: "Open Sans", color: "white", fontSize: 14 }}
-            >
+            <Text style={[styles.text, { fontSize: 14 }]}>
               The code is valid for the next{" "}
               <CountdownTimer code={code} onEnd={setNewCode} /> minutes
             </Text>
             <TouchableOpacity activeOpacity={0.5} onPress={setNewCode}>
               <View>
                 <Text
-                  style={{
-                    color: "white",
-                    fontWeight: "bold",
-                    textDecorationLine: "underline"
-                  }}
+                  style={[
+                    styles.text,
+                    { fontWeight: "bold", textDecorationLine: "underline" }
+                  ]}
                 >
                   Get Another Code
                 </Text>
@@ -141,3 +119,10 @@ export default function MainScren() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    color: "white",
+    fontFamily: "Open Sans"
+  }
+});

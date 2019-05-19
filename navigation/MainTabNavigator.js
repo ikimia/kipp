@@ -48,7 +48,7 @@ const stack = (stacks, initialRouteName) =>
 
 export default createBottomTabNavigator(
   {
-    Pay: stack({ Main: MainScreen, Stores: StoresScreen }, "Main"),
+    Pay: stack({ Main: MainScreen }, "Main"),
     Purchases: stack(
       {
         Purchases: PurchasesScreen,
@@ -57,6 +57,7 @@ export default createBottomTabNavigator(
       "Purchases"
     ),
     Rewards: stack({ Rewards: RewardsScreen }, "Rewards"),
+    Explore: stack({ Stores: StoresScreen }, "Stores"),
     Me: stack(
       {
         Profile: ProfileScreen,
@@ -73,6 +74,7 @@ export default createBottomTabNavigator(
       tabBarIcon({ focused, tintColor }) {
         const name = {
           Pay: "credit-card",
+          Explore: "search",
           Purchases: "tag",
           Rewards: "gift",
           Me: "user"
