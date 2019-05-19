@@ -15,7 +15,6 @@ export const PATTERNS = {
   ZigZag: "ZigZag",
   Checkerboard: "Checkerboard",
   Parallelogram: "Parallelogram",
-  HexagonDiamonds: "HexagonDiamonds",
   DiagonalStripes: "DiagonalStripes",
   Waves: "Waves",
   Triangles: "Triangles",
@@ -75,22 +74,6 @@ export default function Backdrop({ pattern }) {
               <Polygon points="200 210 0 290 0 190 200 110" />
               <Polygon points="200 10 0 90 0-10 200-90" />
             </G>
-          </G>
-        </Pattern>
-        <Pattern
-          id={PATTERNS.HexagonDiamonds}
-          width="150"
-          height="130"
-          patternUnits="userSpaceOnUse"
-        >
-          <Rect fill="#666" width="150" height="130" />
-          <G fill="#666">
-            <Polygon
-              stroke="#333"
-              strokeWidth="3.8"
-              strokeMiterlimit="10"
-              points="112.5,0 37.5,0 0,65 37.5,130 112.5,130 150,65 "
-            />
           </G>
         </Pattern>
         <Pattern
