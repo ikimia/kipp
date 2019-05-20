@@ -1,4 +1,4 @@
---- ../ios/StreetPay/AppDelegate.m	2019-05-20 13:38:15.000000000 +0300
+--- AppDelegate.m	2019-05-20 13:38:15.000000000 +0300
 +++ AppDelegate.m	2019-05-20 13:44:29.000000000 +0300
 @@ -11,10 +11,15 @@
  #import <React/RCTBundleURLProvider.h>
@@ -15,7 +15,7 @@
 +  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
    RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
    RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                    moduleName:@"StreetPay"
+                                                    moduleName:@"kipp"
 @@ -39,4 +44,20 @@
  #endif
  }

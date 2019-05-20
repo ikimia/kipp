@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 
-const languageStorageKey = "@StreetPay_language";
+const languageStorageKey = "@Kipp_language";
 export class LanguageStorage {
   static get() {
     return AsyncStorage.getItem(languageStorageKey);
@@ -10,7 +10,7 @@ export class LanguageStorage {
   }
 }
 
-const creditCardStorageKey = "@StreetPay_CreditCards";
+const creditCardStorageKey = "@Kipp_CreditCards";
 export class CreditCardStorage {
   static set(cardNumber, expirationDate, cvv) {
     return AsyncStorage.mergeItem(
@@ -39,7 +39,7 @@ export class CreditCardStorage {
   }
 }
 
-const facebookAccessTokenKey = "@StreetPay_facebookAccessToken";
+const facebookAccessTokenKey = "@Kipp_facebookAccessToken";
 export class FacebookAccessTokenStorage {
   static set(accessToken) {
     return AsyncStorage.setItem(
@@ -55,7 +55,7 @@ export class FacebookAccessTokenStorage {
   }
 }
 
-const facebookProfileKey = "@StreetPay_facebookProfile";
+const facebookProfileKey = "@Kipp_facebookProfile";
 export class FacebookProfileStorage {
   static set(profile) {
     return AsyncStorage.setItem(facebookProfileKey, JSON.stringify(profile));

@@ -1,4 +1,4 @@
---- ../ios/StreetPay/Info.plist	2019-05-20 13:50:11.000000000 +0300
+--- Info.plist	2019-05-20 13:50:11.000000000 +0300
 +++ Info.plist	2019-05-20 13:52:01.000000000 +0300
 @@ -2,6 +2,26 @@
  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

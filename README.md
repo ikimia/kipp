@@ -1,4 +1,4 @@
-# Street Pay
+# Kipp
 
 Top payments app of 2019, by Street Commerce
 
