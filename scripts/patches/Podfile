@@ -6,34 +6,30 @@ target 'kipp' do
 
   rn_path = '../node_modules/react-native'
 
-  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga"
   # https://github.com/facebook/react-native/blob/v0.59.4/React.podspec
-  pod 'React', path: rn_path, subspecs: [
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'CxxBridge',
     'DevSupport',
-    'RCTActionSheet',
     'RCTAnimation',
-    'RCTGeolocation',
-    'RCTImage',
-    'RCTLinkingIOS',
     'RCTNetwork',
-    'RCTSettings',
     'RCTText',
     'RCTWebSocket',
   ]
-  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
-  
-  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
   pod 'FBSDKCoreKit', '~> 4.42.0'
   pod 'FBSDKLoginKit', '~> 4.42.0'
   pod 'FBSDKShareKit', '~> 4.42.0'
-
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end
 

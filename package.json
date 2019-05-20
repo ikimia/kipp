@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "init": "react-native eject && react-native link && ./scripts/patch-ios.sh && cd ios && pod install",
+    "init": "npm install && react-native eject && react-native-asset && react-native link react-native-vector-icons && ./scripts/patch-ios.sh && cd ios && pod install",
     "ios": "react-native run-ios",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
@@ -20,7 +20,7 @@
     "react-dom": "^16.8.6",
     "react-i18next": "^10.8.0",
     "react-native": "0.59.4",
-    "react-native-fbsdk": "0.8.0",
+    "react-native-fbsdk": "^0.8.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-localize": "^1.1.2",
     "react-native-svg": "^9.4.0",
@@ -41,6 +41,7 @@
     "jest": "24.7.1",
     "metro-react-native-babel-preset": "0.53.1",
     "prettier": "^1.17.0",
+    "react-native-asset": "^1.1.3",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
