@@ -192,6 +192,7 @@ export default function Backdrop({ pattern }) {
         </LinearGradient>
         <LinearGradient id="Header" x1="0" x2="0" y1="0" y2="100%">
           <Stop offset="0" stopColor="#000" stopOpacity="0.5" />
+          <Stop offset="0.4" stopColor="#000" stopOpacity="0.2" />
           <Stop offset="1" stopColor="#000" stopOpacity="0" />
         </LinearGradient>
       </Defs>
