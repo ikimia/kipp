@@ -190,8 +190,13 @@ export default function Backdrop({ pattern }) {
           <Stop offset="0" stopColor="#80F" />
           <Stop offset="1" stopColor="#f40" />
         </LinearGradient>
+        <LinearGradient id="Header" x1="0" x2="0" y1="0" y2="100%">
+          <Stop offset="0" stopColor="#000" stopOpacity="0.5" />
+          <Stop offset="1" stopColor="#000" stopOpacity="0" />
+        </LinearGradient>
       </Defs>
       <Rect fill={`url(#${pattern})`} width="100%" height="100%" />
+      <Rect fill="url(#Header)" width="100%" height="33%" />
     </Svg>
   );
 }
