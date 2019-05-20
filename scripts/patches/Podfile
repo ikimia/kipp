@@ -31,6 +31,7 @@ target 'kipp' do
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end
 

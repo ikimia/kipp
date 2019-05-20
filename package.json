@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "init": "npm install && react-native eject && react-native-asset && react-native link react-native-vector-icons && ./scripts/patch-ios.sh && cd ios && pod install",
+    "cleaninit": "rm -rf node_modules ios android && npm run init",
+    "init": "npm install && react-native eject && react-native-asset && ./scripts/patch-ios.sh && cd ios && pod install",
     "ios": "react-native run-ios",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
