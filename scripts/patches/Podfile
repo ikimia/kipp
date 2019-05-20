@@ -24,7 +24,7 @@ target 'kipp' do
   ]
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
   
-  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'  pod 'FBSDKCoreKit', '~> 4.42.0'
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
   pod 'FBSDKCoreKit', '~> 4.42.0'
   pod 'FBSDKLoginKit', '~> 4.42.0'
   pod 'FBSDKShareKit', '~> 4.42.0'
