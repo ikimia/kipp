@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StatusBar, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
@@ -13,7 +13,7 @@ const generateCode = () =>
     .toString(10)
     .slice(2, 8);
 
-function CountdownTimer({ code, onEnd }) {
+function useTimer(code, onEnd) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
   useEffect(() => {
     setTotal(CODE_TIMEOUT);
@@ -64,40 +64,51 @@ export default function MainScren() {
       <Backdrop pattern={PATTERNS[pattern]} />
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ alignItems: "center", padding: 10 }}>
-          <Logo color="white" fontSize={30} />
-          <Text style={styles.text}>{userProfile.name}</Text>
+          <Logo color="white" fontSize={25} />
         </View>
-        <View style={{ flex: 1 }}>
-          <View
-            style={{
-              alignItems: "center",
-              flex: 1,
-              padding: 30
-            }}
-          >
+        <View style={{ flex: 2, justifyContent: "center" }}>
+          <View style={{ alignItems: "center" }}>
             <Text style={[styles.text, { fontSize: 16 }]}>
               One-Time Payment Code:
             </Text>
             <Text style={[styles.text, { fontSize: 70, fontWeight: "bold" }]}>
               {code.match(/.{3}/g).join(" ")}
             </Text>
-            <View style={{ flex: 1 }} />
-            <Text style={[styles.text, { fontSize: 14 }]}>
-              The code is valid for the next{" "}
-              <CountdownTimer code={code} onEnd={setNewCode} /> minutes
+          </View>
+        </View>
+        <View style={{ flex: 1 }} />
+        <View
+          style={{
+            marginHorizontal: 15,
+            marginBottom: 30,
+            padding: 5,
+            backgroundColor: "rgba(0, 0, 0, 0.2)"
+          }}
+        >
+          {[
+            `Good evening, ${userProfile.name}!`,
+            "To pay, give the code above at the counter.",
+            `The code is valid for the next ${useTimer(
+              code,
+              setNewCode
+            )} minutes.`
+          ].map((text, i) => (
+            <Text key={i} style={[styles.text, { fontSize: 14 }]}>
+              {text}
             </Text>
-            <TouchableOpacity activeOpacity={0.5} onPress={setNewCode}>
-              <View>
-                <Text
-                  style={[
-                    styles.text,
-                    { fontWeight: "bold", textDecorationLine: "underline" }
-                  ]}
-                >
-                  Get Another Code
-                </Text>
-              </View>
-            </TouchableOpacity>
+          ))}
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.text}>To get another code, </Text>
+            <BorderlessButton activeOpacity={0.5} onPress={setNewCode}>
+              <Text
+                style={[
+                  styles.text,
+                  { fontWeight: "bold", textDecorationLine: "underline" }
+                ]}
+              >
+                click here
+              </Text>
+            </BorderlessButton>
           </View>
         </View>
       </SafeAreaView>
