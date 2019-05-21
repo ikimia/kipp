@@ -14,7 +14,7 @@ import Svg, {
 export const PATTERNS = {
   ZigZag: "ZigZag",
   Checkerboard: "Checkerboard",
-  Parallelogram: "Parallelogram",
+  BubbleBall: "BubbleBall",
   DiagonalStripes: "DiagonalStripes",
   Waves: "Waves",
   Triangles: "Triangles",
@@ -56,24 +56,18 @@ export default function Backdrop({ pattern, noTopShadow }) {
           </G>
         </Pattern>
         <Pattern
-          id={PATTERNS.Parallelogram}
-          viewBox="0 0 400 200"
-          width="100"
-          height="50"
+          id={PATTERNS.BubbleBall}
+          width="20"
+          height="20"
+          viewBox="0 0 200 200"
           patternUnits="userSpaceOnUse"
         >
-          <Rect fill="#555555" width="400" height="200" />
-          <G stroke="#888" strokeWidth="0.4" strokeMiterlimit="10">
-            <G fill="none">
-              <Polygon points="400 90 200 10 200-90 400-10" />
-              <Polygon points="200 110 0 190 0 90 200 10" />
-              <Polygon points="400 290 200 210 200 110 400 190" />
-            </G>
-            <G fill="#555">
-              <Polygon points="400 190 200 110 200 10 400 90" />
-              <Polygon points="200 210 0 290 0 190 200 110" />
-              <Polygon points="200 10 0 90 0-10 200-90" />
-            </G>
+          <Rect fill="#555" width="200" height="200" />
+          <G stroke="#666" strokeWidth="9" strokeMiterlimit="10">
+            <Path
+              fill="#555"
+              d="M150 50c0-27.6-22.4-50-50-50S50 22.4 50 50C22.4 50 0 72.4 0 100c0 27.6 22.4 50 50 50c0 27.6 22.4 50 50 50s50-22.4 50-50c27.6 0 50-22.4 50-50C200 72.4 177.6 50 150 50z"
+            />
           </G>
         </Pattern>
         <Pattern
