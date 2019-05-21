@@ -24,7 +24,7 @@ const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
   ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
   ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
-  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"]
 ];
 
 const m = language => {

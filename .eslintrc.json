@@ -20,7 +20,8 @@
     }
   },
   "rules": {
-    "eqeqeq": 2
+    "eqeqeq": 2,
+    "react/prop-types": 0
   },
   "overrides": [{
     "files": ["**/__tests__/*-test.js"],

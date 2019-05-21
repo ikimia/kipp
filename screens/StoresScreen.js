@@ -1,7 +1,6 @@
 import * as React from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import BackButton from "../components/BackButton";
 import {
   TextInput,
   RectButton,

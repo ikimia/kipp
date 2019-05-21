@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Text, View, StatusBar, StyleSheet } from "react-native";
-import DarkHeader from "../components/DarkHeader";
-import { FlatList, RectButton, ScrollView } from "react-native-gesture-handler";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
-import Backdrop, { PATTERNS } from "../components/Backdrop";
 import ItemList from "../components/ItemList";
 
 function Chip({ title, icon }) {
@@ -28,35 +26,6 @@ function Chip({ title, icon }) {
   );
 }
 
-function SwitchChip({ value, onValueChange, title }) {
-  return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <RectButton
-        style={{
-          backgroundColor: value ? "#49beb7" : "#999",
-          marginEnd: 5,
-          borderRadius: 13,
-          height: 26,
-          width: 50
-        }}
-        onPress={() => onValueChange(!value)}
-      >
-        <View
-          style={{
-            height: 22,
-            width: 22,
-            margin: 2,
-            borderRadius: 11,
-            backgroundColor: "white",
-            alignSelf: value ? "flex-end" : "flex-start"
-          }}
-        />
-      </RectButton>
-      <Text style={{ marginStart: 5 }}>{title}</Text>
-    </View>
-  );
-}
-
 function Chips({ data }) {
   return (
     <ScrollView
@@ -68,26 +37,6 @@ function Chips({ data }) {
         <Chip key={title} icon={icon} title={title} />
       ))}
     </ScrollView>
-  );
-}
-
-function Progress({ value }) {
-  return (
-    <View
-      style={{
-        backgroundColor: "#999",
-        height: 4,
-        marginTop: 10
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "#000",
-          height: "100%",
-          width: `${100 * value}%`
-        }}
-      />
-    </View>
   );
 }
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-import { TouchableHighlight, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 export default function ElevatedButton({ title, icon, iconColor, onPress }) {
   return (
