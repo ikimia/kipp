@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, Text, StatusBar, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
@@ -57,10 +57,12 @@ export default function MainScren() {
     setCode(generateCode());
     setPattern(getRandomPattern(pattern));
   };
-
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
+      <NavigationEvents
+        onWillFocus={() => StatusBar.setBarStyle("light-content")}
+        onDidBlur={() => StatusBar.setBarStyle("default")}
+      />
       <Backdrop pattern={PATTERNS[pattern]} />
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ alignItems: "center", padding: 10 }}>

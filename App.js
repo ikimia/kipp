@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Platform, StatusBar, StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
@@ -10,7 +10,6 @@ function App() {
 
   return (
     <View style={[styles.container, { direction }]}>
-      {Platform.OS === "ios" && <StatusBar barStyle="default" />}
       <AuthenticationFlow
         Loading={() => (
           <View style={styles.loading}>

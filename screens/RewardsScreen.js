@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StatusBar, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
@@ -63,7 +63,6 @@ const REWARDS = [
 export default function RewardsScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView
         style={{
           paddingBottom: 10,

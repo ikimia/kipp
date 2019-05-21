@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import { TextInput, FlatList, ScrollView } from "react-native-gesture-handler";
+import { TextInput, FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import { ItemListItem } from "../components/ItemList";
 

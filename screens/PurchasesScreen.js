@@ -1,12 +1,11 @@
 import * as React from "react";
-import { View, Text, StatusBar, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Purchases from "../components/Purchases";
 import { SafeAreaView } from "react-navigation";
 
 export default function PurchasesScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView
         style={{
           backgroundColor: "#FAFAFA",

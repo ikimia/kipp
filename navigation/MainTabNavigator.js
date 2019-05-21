@@ -18,7 +18,7 @@ import PastOrderScreen from "../screens/PastOrderScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
-const stack = (stacks, initialRouteName) =>
+const stack = (stacks, initialRouteName, icon) =>
   createStackNavigator(stacks, {
     initialRouteName,
     defaultNavigationOptions: () => ({
@@ -26,6 +26,15 @@ const stack = (stacks, initialRouteName) =>
       gestureDirection: isRTL() ? "inverted" : "default"
     }),
     headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: true,
+      gestureDirection: isRTL() ? "inverted" : "default",
+      tabBarIcon({ focused, tintColor }) {
+        return (
+          <Icon name={icon} size={18} color={focused ? tintColor : "#666"} />
+        );
+      }
+    },
     transitionConfig: () => ({
       screenInterpolator: ({
         layout: { initWidth: width },
@@ -48,16 +57,17 @@ const stack = (stacks, initialRouteName) =>
 
 export default createBottomTabNavigator(
   {
-    Pay: stack({ Main: MainScreen }, "Main"),
+    Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
     Receipts: stack(
       {
         Purchases: PurchasesScreen,
         PastOrder: PastOrderScreen
       },
-      "Purchases"
+      "Purchases",
+      "tag"
     ),
-    Rewards: stack({ Rewards: RewardsScreen }, "Rewards"),
-    Explore: stack({ Stores: StoresScreen }, "Stores"),
+    Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
+    Explore: stack({ Stores: StoresScreen }, "Stores", "search"),
     Me: stack(
       {
         Profile: ProfileScreen,
@@ -65,45 +75,9 @@ export default createBottomTabNavigator(
         SavedCreditCard: SavedCreditCardScreen,
         LanguageSettings: LanguageSettingsScreen
       },
-      "Profile"
+      "Profile",
+      "user"
     )
   },
-  {
-    initialRouteName: "Pay",
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon({ focused, tintColor }) {
-        const name = {
-          Pay: "credit-card",
-          Explore: "search",
-          Receipts: "tag",
-          Rewards: "gift",
-          Me: "user"
-        }[navigation.state.key];
-        return (
-          <Icon name={name} size={18} color={focused ? tintColor : "#666"} />
-        );
-      },
-      gesturesEnabled: true,
-      gestureDirection: isRTL() ? "inverted" : "default"
-    }),
-    headerMode: "none",
-    transitionConfig: () => ({
-      screenInterpolator: ({
-        layout: { initWidth: width },
-        position,
-        scene: { index }
-      }) => {
-        const [inputRange, outputRange] = isRTL()
-          ? [[index, index + 1], [0, width]]
-          : [[index - 1, index], [width, 0]];
-        return {
-          transform: [
-            {
-              translateX: position.interpolate({ inputRange, outputRange })
-            }
-          ]
-        };
-      }
-    })
-  }
+  { initialRouteName: "Pay" }
 );
