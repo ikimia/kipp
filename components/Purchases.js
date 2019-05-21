@@ -1,15 +1,30 @@
 import React, { useContext } from "react";
 import moment from "moment";
-import { View, Text } from "react-native";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
-import { TouchableHighlight, FlatList } from "react-native-gesture-handler";
+import ItemList from "./ItemList";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
   ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
   ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
-  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"]
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
+  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
+  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
+  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
+  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
+  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
+  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
+  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
+  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
+  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
+  ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
+  ["apparelStore", [5, "days"], "apparelStoreLocation", "211"],
+  ["gasStation", [2, "weeks"], "gasStationLocation", "92"],
+  ["ShoesStore", [1, "month"], "ShoesStoreLocation", "142"],
 ];
 
 const m = language => {
@@ -23,48 +38,16 @@ export default function Purchases() {
   const { t, i18n } = useTranslation("common");
   const { language } = i18n;
   return (
-    <FlatList
-      data={data}
-      keyExtractor={([name]) => name}
-      renderItem={({ item: [name, timeAgo, location, amount] }) => (
-        <TouchableHighlight
-          onPress={() => navigate("PastOrder", { storeName: name })}
-        >
-          <View
-            style={{
-              backgroundColor: "white",
-              paddingVertical: 15,
-              paddingHorizontal: 20,
-              borderBottomColor: "#EEE",
-              borderBottomWidth: 1
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center"
-              }}
-            >
-              <View>
-                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                  {t(`stores:${name}`)}
-                </Text>
-                <Text style={{ fontSize: 12 }}>{t(`stores:${location}`)}</Text>
-                <Text style={{ fontSize: 12, color: "#666" }}>
-                  {m(language)
-                    .subtract(...timeAgo)
-                    .calendar()}
-                </Text>
-              </View>
-              <Text style={{ fontSize: 20 }}>
-                {t("common:currencySign")}
-                {amount}
-              </Text>
-            </View>
-          </View>
-        </TouchableHighlight>
-      )}
+    <ItemList
+      items={data}
+      onPress={([storeName]) => navigate("PastOrder", { storeName })}
+      getItemTitle={([name]) => t(`stores:${name}`)}
+      getItemText={([, timeAgo]) =>
+        m(language)
+          .subtract(...timeAgo)
+          .calendar()
+      }
+      getSideText={([, , , amount]) => `${t("common:currencySign")}${amount}`}
     />
   );
 }

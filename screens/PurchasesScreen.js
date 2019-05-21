@@ -1,17 +1,55 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import * as React from "react";
+import { View, Text, StatusBar, StyleSheet } from "react-native";
 import Purchases from "../components/Purchases";
 import { SafeAreaView } from "react-navigation";
 
-import "moment/locale/he";
-import DarkHeader from "../components/DarkHeader";
-
 export default function PurchasesScreen() {
-  const { t } = useTranslation("purchases");
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <DarkHeader title={t("purchases")} />
+    <View style={{ flex: 1 }}>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView
+        style={{
+          backgroundColor: "#FAFAFA",
+          borderBottomColor: "#EEE",
+          borderBottomWidth: 1
+        }}
+      >
+        <View>
+          <Text
+            style={[
+              styles.boldText,
+              {
+                marginVertical: 10,
+                marginHorizontal: 15,
+                fontSize: 30
+              }
+            ]}
+          >
+            Receipts
+          </Text>
+        </View>
+      </SafeAreaView>
       <Purchases />
-    </SafeAreaView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: "Open Sans"
+  },
+  boldText: {
+    fontFamily: "Open Sans",
+    fontWeight: "bold"
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3
+  }
+});

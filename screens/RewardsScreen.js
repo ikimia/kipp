@@ -5,6 +5,7 @@ import { FlatList, RectButton, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
+import ItemList from "../components/ItemList";
 
 function Chip({ title, icon }) {
   return (
@@ -113,9 +114,15 @@ const REWARDS = [
 export default function RewardsScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <Backdrop pattern={PATTERNS.ZigZag} noTopShadow />
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{ paddingBottom: 10, backgroundColor: "white" }}>
+      <SafeAreaView
+        style={{
+          paddingBottom: 10,
+          backgroundColor: "#FAFAFA",
+          borderBottomColor: "#EEE",
+          borderBottomWidth: 1
+        }}
+      >
         <View>
           <Text
             style={[
@@ -133,62 +140,15 @@ export default function RewardsScreen() {
         <Chips data={FILTERS} />
       </SafeAreaView>
       <View style={{ flex: 1 }}>
-        <FlatList
-          style={{ paddingHorizontal: 5 }}
+        <ItemList
+          items={REWARDS}
           data={REWARDS}
-          keyExtractor={([reward]) => reward}
-          ListHeaderComponent={() => <View style={{ marginBottom: 5 }} />}
-          renderItem={({
-            item: [reward, description, store, extra, important]
-          }) => (
-            <View style={[styles.shadow, { borderRadius: 10 }]}>
-              <RectButton
-                style={{
-                  backgroundColor: "white",
-                  flexDirection: "row-reverse",
-                  borderRadius: 10,
-                  padding: 15,
-                  margin: 5
-                }}
-              >
-                <View
-                  style={{
-                    flex: 1,
-                    alignSelf: "stretch",
-                    alignItems: "flex-end",
-                    marginStart: 15
-                  }}
-                >
-                  <View style={{ flex: 1, justifyContent: "center" }}>
-                    <Icon name={reward} size={30} />
-                  </View>
-                </View>
-                <View style={{ flex: 3 }}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={[styles.boldText, { fontSize: 20 }]}>
-                      {store}
-                    </Text>
-                    <Text style={[styles.boldText, { fontSize: 14 }]}>
-                      {description}
-                    </Text>
-                  </View>
-                  {extra && (
-                    <Text
-                      style={[
-                        styles.text,
-                        { fontStyle: "italic", marginTop: 10 },
-                        important
-                          ? { fontWeight: "bold", color: "darkred" }
-                          : {}
-                      ]}
-                    >
-                      {extra}
-                    </Text>
-                  )}
-                </View>
-              </RectButton>
-            </View>
-          )}
+          getItemTitle={([, , store]) => store}
+          getItemText={([, text]) => text}
+          getItemSecondaryText={([, , , text]) => text}
+          getItemSecondaryTextImportant={([, , , , important]) => important}
+          getSideText={([reward]) => <Icon name={reward} size={30} />}
+          onPress={() => {}}
         />
       </View>
     </View>

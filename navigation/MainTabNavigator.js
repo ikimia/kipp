@@ -69,7 +69,7 @@ export default createBottomTabNavigator(
     )
   },
   {
-    initialRouteName: "Pay",
+    initialRouteName: "Receipts",
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon({ focused, tintColor }) {
         const name = {
