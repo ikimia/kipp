@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";

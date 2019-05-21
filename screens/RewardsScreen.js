@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { RectButton, ScrollView, FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
