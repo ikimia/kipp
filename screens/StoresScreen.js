@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
-import { ItemListItem } from "../components/ItemList";
+import ItemListItem, { COLORS } from "../components/ItemListItem";
 
 const sections = [
   ["Featured", [["Zara"], ["Zara"], ["Zara"], ["Zara"], ["Zara"]]],
@@ -16,16 +16,6 @@ const nearbyStores = [
   ["Yuda"],
   ["Chop Chop"],
   ["Hamiznon"]
-];
-const COLORS = [
-  "#ff9f43",
-  "#ee5253",
-  "#5f27cd",
-  "#2e86de",
-  "#222f3e",
-  "#10ac84",
-  "#01a3a4",
-  "#f368e0"
 ];
 
 export default function StoresScreen() {

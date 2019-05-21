@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
-import ItemList from "./ItemList";
+import { FlatList } from "react-native-gesture-handler";
+import ItemListItem, { COLORS } from "./ItemListItem";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -38,16 +39,21 @@ export default function Purchases() {
   const { t, i18n } = useTranslation("common");
   const { language } = i18n;
   return (
-    <ItemList
-      items={data}
-      onPress={([storeName]) => navigate("PastOrder", { storeName })}
-      getItemTitle={([name]) => t(`stores:${name}`)}
-      getItemText={([, timeAgo]) =>
-        m(language)
-          .subtract(...timeAgo)
-          .calendar()
-      }
-      getSideText={([, , , amount]) => `${t("common:currencySign")}${amount}`}
+    <FlatList
+      data={data}
+      keyExtractor={(_, i) => `${i}`}
+      renderItem={({ item: [storeName, timeAgo, , amount], index: i }) => (
+        <ItemListItem
+          onPress={() => navigate("PastOrder", { storeName })}
+          color={COLORS[i % COLORS.length]}
+          logo={t(`stores:${storeName}`).slice(0, 1)}
+          title={t(`stores:${storeName}`)}
+          text={m(language)
+            .subtract(...timeAgo)
+            .calendar()}
+          sideText={`${t("common:currencySign")}${amount}`}
+        />
+      )}
     />
   );
 }

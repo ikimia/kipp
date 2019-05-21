@@ -1,8 +1,8 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { FlatList, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
-const COLORS = [
+export const COLORS = [
   "#ff9f43",
   "#ee5253",
   "#5f27cd",
@@ -13,7 +13,7 @@ const COLORS = [
   "#f368e0"
 ];
 
-export function ItemListItem({
+export default function ItemListItem({
   onPress,
   color,
   logo,
@@ -28,17 +28,14 @@ export function ItemListItem({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ padding: 15 }}>
           <View
-            style={[
-              // styles.shadow,
-              {
-                height: 50,
-                width: 50,
-                borderRadius: 10,
-                backgroundColor: color,
-                alignItems: "center",
-                justifyContent: "center"
-              }
-            ]}
+            style={{
+              height: 50,
+              width: 50,
+              borderRadius: 10,
+              backgroundColor: color,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
           >
             <Text style={[styles.boldText, { color: "white", fontSize: 20 }]}>
               {logo}
@@ -89,37 +86,6 @@ export function ItemListItem({
   );
 }
 
-export default function ItemList({
-  items,
-  onPress,
-  getItemTitle,
-  getItemText,
-  getItemSecondaryText,
-  getItemSecondaryTextImportant,
-  getSideText
-}) {
-  return (
-    <FlatList
-      data={items}
-      keyExtractor={(_, i) => `${i}`}
-      renderItem={({ item, index: i }) => (
-        <ItemListItem
-          onPress={() => onPress(item)}
-          color={COLORS[i % COLORS.length]}
-          logo={getItemTitle(item).slice(0, 1)}
-          title={getItemTitle(item)}
-          text={getItemText(item)}
-          secondaryText={getItemSecondaryText && getItemSecondaryText(item)}
-          secondaryTextImportant={
-            getItemSecondaryTextImportant && getItemSecondaryTextImportant(item)
-          }
-          sideText={getSideText(item)}
-        />
-      )}
-    />
-  );
-}
-
 const styles = StyleSheet.create({
   text: {
     fontFamily: "Open Sans"
@@ -127,15 +93,5 @@ const styles = StyleSheet.create({
   boldText: {
     fontFamily: "Open Sans",
     fontWeight: "bold"
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3
   }
 });

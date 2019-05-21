@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { RectButton, ScrollView, FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
-import ItemList from "../components/ItemList";
+import ItemListItem, { COLORS } from "../components/ItemListItem";
 
 function Chip({ title, icon }) {
   return (
@@ -88,15 +88,24 @@ export default function RewardsScreen() {
         <Chips data={FILTERS} />
       </SafeAreaView>
       <View style={{ flex: 1 }}>
-        <ItemList
-          items={REWARDS}
+        <FlatList
           data={REWARDS}
-          getItemTitle={([, , store]) => store}
-          getItemText={([, text]) => text}
-          getItemSecondaryText={([, , , text]) => text}
-          getItemSecondaryTextImportant={([, , , , important]) => important}
-          getSideText={([reward]) => <Icon name={reward} size={30} />}
-          onPress={() => {}}
+          keyExtractor={(_, i) => `${i}`}
+          renderItem={({
+            item: [reward, text, store, secondary, secondaryImportant],
+            index: i
+          }) => (
+            <ItemListItem
+              onPress={() => {}}
+              color={COLORS[i % COLORS.length]}
+              logo={store.slice(0, 1)}
+              title={store}
+              text={text}
+              secondaryText={secondary}
+              secondaryTextImportant={secondaryImportant}
+              sideText={<Icon name={reward} size={30} />}
+            />
+          )}
         />
       </View>
     </View>
@@ -110,15 +119,5 @@ const styles = StyleSheet.create({
   boldText: {
     fontFamily: "Open Sans",
     fontWeight: "bold"
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3
   }
 });
