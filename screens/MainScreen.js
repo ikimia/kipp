@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
+import StyledText from "../components/StyledText";
 
 const CODE_TIMEOUT = 120;
 
@@ -70,12 +71,12 @@ export default function MainScren() {
         </View>
         <View style={{ flex: 2, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
-            <Text style={[styles.text, { fontSize: 16 }]}>
+            <StyledText size={16} color="white">
               One-Time Payment Code:
-            </Text>
-            <Text style={[styles.text, { fontSize: 70, fontWeight: "bold" }]}>
+            </StyledText>
+            <StyledText bold size={70} color="white">
               {code.match(/.{3}/g).join(" ")}
-            </Text>
+            </StyledText>
           </View>
         </View>
         <View style={{ flex: 1 }} />
@@ -95,21 +96,16 @@ export default function MainScren() {
               setNewCode
             )} minutes.`
           ].map((text, i) => (
-            <Text key={i} style={[styles.text, { fontSize: 14 }]}>
+            <StyledText key={i} color="white">
               {text}
-            </Text>
+            </StyledText>
           ))}
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.text}>To get another code, </Text>
+            <StyledText color="white">To get another code, </StyledText>
             <BorderlessButton activeOpacity={0.5} onPress={setNewCode}>
-              <Text
-                style={[
-                  styles.text,
-                  { fontWeight: "bold", textDecorationLine: "underline" }
-                ]}
-              >
+              <StyledText bold underline color="white">
                 click here
-              </Text>
+              </StyledText>
             </BorderlessButton>
           </View>
         </View>
@@ -117,10 +113,3 @@ export default function MainScren() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    color: "white",
-    fontFamily: "Open Sans"
-  }
-});
