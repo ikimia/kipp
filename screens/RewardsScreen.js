@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StatusBar, StyleSheet } from "react-native";
 import DarkHeader from "../components/DarkHeader";
 import { FlatList, RectButton, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
+import Backdrop, { PATTERNS } from "../components/Backdrop";
 
 function Chip({ title, icon }) {
   return (
@@ -20,7 +21,7 @@ function Chip({ title, icon }) {
         style={{ opacity: 0.6, flexDirection: "row", alignItems: "center" }}
       >
         {icon && <Icon name={icon} style={{ marginEnd: 5 }} />}
-        <Text style={{ fontWeight: "600" }}>{title}</Text>
+        <Text style={styles.text}>{title}</Text>
       </View>
     </RectButton>
   );
@@ -60,10 +61,7 @@ function Chips({ data }) {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={{
-        padding: 10,
-        alignSelf: "stretch"
-      }}
+      style={{ alignSelf: "stretch", paddingHorizontal: 10 }}
     >
       {data.map(({ icon, title }) => (
         <Chip key={title} icon={icon} title={title} />
@@ -74,7 +72,13 @@ function Chips({ data }) {
 
 function Progress({ value }) {
   return (
-    <View style={{ backgroundColor: "#FFF", height: 4, opacity: 0.7 }}>
+    <View
+      style={{
+        backgroundColor: "#999",
+        height: 4,
+        marginTop: 10
+      }}
+    >
       <View
         style={{
           backgroundColor: "#000",
@@ -94,90 +98,119 @@ const FILTERS = [
 ];
 
 const REWARDS = [
-  ["percent", "20% on selected items", "Zara", "11/6"],
-  ["grid", "10th ice cream free", "Vaniglia", "28/5", { progress: 0.9 }],
-  ["gift", "Free Chocolate Milk", "Yuda", "22/5", { text: "Details inside" }],
-  ["clock", "Happy Hour until 11PM", "ShemTov", "tomorrow"]
+  ["percent", "20% on selected items", "Zara", "Details inside"],
+  ["grid", "10th ice cream free", "Vaniglia", "6 punches left"],
+  ["gift", "Free Chocolate Milk", "Yuda", "Details inside"],
+  [
+    "clock",
+    "Happy Hour until 11PM",
+    "ShemTov",
+    "Valid until tomorrow!",
+    "important"
+  ]
 ];
-
-const COLORS = ["#ed5565", "#f8ac59", "#23c6c8", "#1ab394", "#1c84c6"];
 
 export default function RewardsScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <DarkHeader title="Rewards" />
-      <View style={{ borderBottomColor: "#EEE", borderBottomWidth: 1 }}>
+    <View style={{ flex: 1 }}>
+      <Backdrop pattern={PATTERNS.ZigZag} noTopShadow />
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={{ paddingBottom: 10, backgroundColor: "white" }}>
+        <View>
+          <Text
+            style={[
+              styles.boldText,
+              {
+                marginVertical: 10,
+                marginHorizontal: 15,
+                fontSize: 30
+              }
+            ]}
+          >
+            Rewards
+          </Text>
+        </View>
         <Chips data={FILTERS} />
-      </View>
+      </SafeAreaView>
       <View style={{ flex: 1 }}>
         <FlatList
+          style={{ paddingHorizontal: 5 }}
           data={REWARDS}
           keyExtractor={([reward]) => reward}
-          ListHeaderComponent={() => <View style={{ height: 15 }} />}
+          ListHeaderComponent={() => <View style={{ marginBottom: 5 }} />}
           renderItem={({
-            item: [reward, description, store, validUntil, extra],
-            index
+            item: [reward, description, store, extra, important]
           }) => (
-            <RectButton
-              style={{
-                marginBottom: 1,
-                backgroundColor: COLORS[index % COLORS.length],
-                flexDirection: "row"
-              }}
-            >
-              <View
+            <View style={[styles.shadow, { borderRadius: 10 }]}>
+              <RectButton
                 style={{
-                  alignSelf: "stretch",
-                  justifyContent: "center",
-                  paddingHorizontal: 20
+                  backgroundColor: "white",
+                  flexDirection: "row-reverse",
+                  borderRadius: 10,
+                  padding: 15,
+                  margin: 5
                 }}
               >
-                <Icon name={reward} size={30} color="white" />
-              </View>
-              <View
-                style={{
-                  paddingVertical: 10,
-                  paddingHorizontal: 15,
-                  backgroundColor: "rgba(255, 255, 255, 0.5)",
-                  flex: 1,
-                  flexDirection: "row"
-                }}
-              >
-                <View style={{ flex: 1 }}>
-                  <View style={{ flexDirection: "row" }}>
-                    <Text style={{ fontSize: 20, fontWeight: "bold", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignSelf: "stretch",
+                    alignItems: "flex-end",
+                    marginStart: 15
+                  }}
+                >
+                  <View style={{ flex: 1, justifyContent: "center" }}>
+                    <Icon name={reward} size={30} />
+                  </View>
+                </View>
+                <View style={{ flex: 3 }}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.boldText, { fontSize: 20 }]}>
                       {store}
                     </Text>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: "bold",
-                        marginTop: 5,
-                        opacity: 0.8
-                      }}
-                    >
-                      valid until {validUntil}
+                    <Text style={[styles.boldText, { fontSize: 14 }]}>
+                      {description}
                     </Text>
                   </View>
-                  <Text style={{ fontSize: 14 }}>{description}</Text>
                   {extra && (
-                    <View style={{ marginTop: 10 }}>
-                      {extra.progress && <Progress value={extra.progress} />}
-                      {extra.text && (
-                        <Text
-                          style={{ fontWeight: "bold", fontStyle: "italic" }}
-                        >
-                          {extra.text}
-                        </Text>
-                      )}
-                    </View>
+                    <Text
+                      style={[
+                        styles.text,
+                        { fontStyle: "italic", marginTop: 10 },
+                        important
+                          ? { fontWeight: "bold", color: "darkred" }
+                          : {}
+                      ]}
+                    >
+                      {extra}
+                    </Text>
                   )}
                 </View>
-              </View>
-            </RectButton>
+              </RectButton>
+            </View>
           )}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: "Open Sans"
+  },
+  boldText: {
+    fontFamily: "Open Sans",
+    fontWeight: "bold"
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3
+  }
+});

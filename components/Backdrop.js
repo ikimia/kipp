@@ -21,9 +21,9 @@ export const PATTERNS = {
   Sunset: "Sunset"
 };
 
-export default function Backdrop({ pattern }) {
+export default function Backdrop({ pattern, noTopShadow }) {
   return (
-    <Svg style={StyleSheet.absoluteFill} width="100%" height="100%">
+    <Svg style={StyleSheet.absoluteFill}>
       <Defs>
         <Pattern
           id={PATTERNS.ZigZag}
@@ -196,7 +196,7 @@ export default function Backdrop({ pattern }) {
         </LinearGradient>
       </Defs>
       <Rect fill={`url(#${pattern})`} width="100%" height="100%" />
-      <Rect fill="url(#Header)" width="100%" height="20%" />
+      {!noTopShadow && <Rect fill="url(#Header)" width="100%" height="20%" />}
     </Svg>
   );
 }

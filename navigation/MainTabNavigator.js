@@ -49,7 +49,7 @@ const stack = (stacks, initialRouteName) =>
 export default createBottomTabNavigator(
   {
     Pay: stack({ Main: MainScreen }, "Main"),
-    Purchases: stack(
+    Receipts: stack(
       {
         Purchases: PurchasesScreen,
         PastOrder: PastOrderScreen
@@ -75,7 +75,7 @@ export default createBottomTabNavigator(
         const name = {
           Pay: "credit-card",
           Explore: "search",
-          Purchases: "tag",
+          Receipts: "tag",
           Rewards: "gift",
           Me: "user"
         }[navigation.state.key];

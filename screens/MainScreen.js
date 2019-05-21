@@ -63,7 +63,7 @@ export default function MainScren() {
       <StatusBar barStyle="light-content" />
       <Backdrop pattern={PATTERNS[pattern]} />
       <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ alignItems: "center", padding: 20 }}>
+        <View style={{ alignItems: "center", padding: 10 }}>
           <Logo color="white" fontSize={30} />
           <Text style={styles.text}>{userProfile.name}</Text>
         </View>
