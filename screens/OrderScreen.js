@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import ReceiptItemsTable from "../components/ReceiptItemsTable";
 import Icon from "react-native-vector-icons/Feather";
 import { items, taxes, totalAmount } from "../constants/Data";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-navigation";
 import BackButton from "../components/BackButton";
 import { ScrollView } from "react-native-gesture-handler";
+import StyledText from "../components/StyledText";
 
 export default function OrderScreen({ receiptNumber, storeName }) {
   const { t } = useTranslation("common");
@@ -30,17 +31,17 @@ export default function OrderScreen({ receiptNumber, storeName }) {
               justifyContent: "space-between"
             }}
           >
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+            <StyledText bold size={25}>
               {t(`stores:${storeName}`)}
-            </Text>
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+            </StyledText>
+            <StyledText bold size={25}>
               {t("currencySign")}
               {totalAmount}
-            </Text>
+            </StyledText>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Icon name="info" style={{ fontSize: 15, marginEnd: 5 }} />
-            <Text style={{ fontSize: 15 }}>Receipt no. {receiptNumber}</Text>
+            <StyledText size={15}>Receipt no. {receiptNumber}</StyledText>
           </View>
         </View>
       </SafeAreaView>

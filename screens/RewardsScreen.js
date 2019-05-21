@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { RectButton, ScrollView, FlatList } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
+import StyledText from "../components/StyledText";
 
 function Chip({ title, icon }) {
   return (
@@ -20,7 +21,7 @@ function Chip({ title, icon }) {
         style={{ opacity: 0.6, flexDirection: "row", alignItems: "center" }}
       >
         {icon && <Icon name={icon} style={{ marginEnd: 5 }} />}
-        <Text style={styles.text}>{title}</Text>
+        <StyledText>{title}</StyledText>
       </View>
     </RectButton>
   );
@@ -72,18 +73,16 @@ export default function RewardsScreen() {
         }}
       >
         <View>
-          <Text
-            style={[
-              styles.boldText,
-              {
-                marginVertical: 10,
-                marginHorizontal: 15,
-                fontSize: 30
-              }
-            ]}
+          <StyledText
+            bold
+            size={30}
+            style={{
+              marginVertical: 10,
+              marginHorizontal: 15
+            }}
           >
             Rewards
-          </Text>
+          </StyledText>
         </View>
         <Chips data={FILTERS} />
       </SafeAreaView>
@@ -111,13 +110,3 @@ export default function RewardsScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: "Open Sans"
-  },
-  boldText: {
-    fontFamily: "Open Sans",
-    fontWeight: "bold"
-  }
-});

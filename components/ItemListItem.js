@@ -1,6 +1,7 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
+import StyledText from "./StyledText";
 
 export const COLORS = [
   "#ff9f43",
@@ -37,9 +38,9 @@ export default function ItemListItem({
               justifyContent: "center"
             }}
           >
-            <Text style={[styles.boldText, { color: "white", fontSize: 20 }]}>
+            <StyledText bold color="white" size={20}>
               {logo}
-            </Text>
+            </StyledText>
           </View>
         </View>
         <View
@@ -55,43 +56,33 @@ export default function ItemListItem({
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.boldText, { fontSize: 16 }]}>{title}</Text>
-            <Text style={[styles.text, { fontSize: 12 }]}>{text}</Text>
+            <StyledText bold size={16}>
+              {title}
+            </StyledText>
+            <StyledText size={12}>{text}</StyledText>
             {secondaryText && (
-              <Text
-                style={[
-                  styles.text,
-                  {
-                    fontSize: 12,
-                    color: "#333",
-                    fontStyle: "italic",
-                    marginTop: 5,
-                    ...(secondaryTextImportant
-                      ? {
-                          fontWeight: "bold",
-                          color: "darkred"
-                        }
-                      : undefined)
-                  }
-                ]}
+              <StyledText
+                size={12}
+                color="#333"
+                style={{
+                  fontSize: 12,
+                  fontStyle: "italic",
+                  marginTop: 5,
+                  ...(secondaryTextImportant
+                    ? {
+                        fontWeight: "bold",
+                        color: "darkred"
+                      }
+                    : undefined)
+                }}
               >
                 {secondaryText}
-              </Text>
+              </StyledText>
             )}
           </View>
-          <Text style={[styles.text, { fontSize: 20 }]}>{sideText}</Text>
+          <StyledText size={20}>{sideText}</StyledText>
         </View>
       </View>
     </RectButton>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: "Open Sans"
-  },
-  boldText: {
-    fontFamily: "Open Sans",
-    fontWeight: "bold"
-  }
-});

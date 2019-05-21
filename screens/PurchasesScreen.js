@@ -1,7 +1,8 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import Purchases from "../components/Purchases";
 import { SafeAreaView } from "react-navigation";
+import StyledText from "../components/StyledText";
 
 export default function PurchasesScreen() {
   return (
@@ -14,41 +15,19 @@ export default function PurchasesScreen() {
         }}
       >
         <View>
-          <Text
-            style={[
-              styles.boldText,
-              {
-                marginVertical: 10,
-                marginHorizontal: 15,
-                fontSize: 30
-              }
-            ]}
+          <StyledText
+            bold
+            size={30}
+            style={{
+              marginVertical: 10,
+              marginHorizontal: 15
+            }}
           >
             Receipts
-          </Text>
+          </StyledText>
         </View>
       </SafeAreaView>
       <Purchases />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: "Open Sans"
-  },
-  boldText: {
-    fontFamily: "Open Sans",
-    fontWeight: "bold"
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3
-  }
-});

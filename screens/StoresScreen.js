@@ -1,9 +1,10 @@
 import * as React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
+import StyledText from "../components/StyledText";
 
 const sections = [
   ["Featured", [["Zara"], ["Zara"], ["Zara"], ["Zara"], ["Zara"]]],
@@ -30,15 +31,11 @@ export default function StoresScreen() {
       >
         <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
           <View style={{ flexDirection: "row", marginBottom: 5 }}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontWeight: "bold",
-                flex: 1
-              }}
-            >
-              Explore
-            </Text>
+            <View style={{ flex: 1 }}>
+              <StyledText bold size={30}>
+                Explore
+              </StyledText>
+            </View>
             <Icon name="map" style={{ fontSize: 20 }} />
           </View>
           <View
@@ -65,16 +62,16 @@ export default function StoresScreen() {
           <View style={{ paddingTop: 15 }}>
             {sections.map(([name, stores]) => (
               <View style={{ marginBottom: 30 }} key={name}>
-                <Text
+                <StyledText
+                  bold
+                  size={20}
                   style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
                     marginBottom: 10,
                     marginStart: 10
                   }}
                 >
                   {name}
-                </Text>
+                </StyledText>
                 <FlatList
                   horizontal
                   ListHeaderComponent={() => <View style={{ width: 5 }} />}
@@ -91,35 +88,29 @@ export default function StoresScreen() {
                           alignItems: "center"
                         }}
                       >
-                        <Text
-                          style={{
-                            color: "white",
-                            fontSize: 28,
-                            fontWeight: "bold"
-                          }}
-                        >
+                        <StyledText color="white" size={28} bold>
                           {storeName.slice(0, 1)}
-                        </Text>
+                        </StyledText>
                       </View>
-                      <Text style={{ marginTop: 5, fontSize: 16 }}>
+                      <StyledText size={16} style={{ marginTop: 5 }}>
                         {storeName}
-                      </Text>
-                      <Text style={{ fontSize: 12 }}>Clothing</Text>
+                      </StyledText>
+                      <StyledText size={12}>Clothing</StyledText>
                     </View>
                   )}
                 />
               </View>
             ))}
-            <Text
+            <StyledText
+              bold
+              size={20}
               style={{
-                fontSize: 20,
-                fontWeight: "bold",
                 marginBottom: 10,
                 marginStart: 10
               }}
             >
               Nearby
-            </Text>
+            </StyledText>
           </View>
         )}
         renderItem={({ item: [storeName], index: i }) => (
