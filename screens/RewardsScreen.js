@@ -1,10 +1,10 @@
 import * as React from "react";
 import { View } from "react-native";
 import { RectButton, ScrollView, FlatList } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-navigation";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
+import AppHeader from "../components/AppHeader";
 
 function Chip({ title, icon }) {
   return (
@@ -64,28 +64,13 @@ const REWARDS = [
 export default function RewardsScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView
-        style={{
-          paddingBottom: 10,
-          backgroundColor: "#FAFAFA",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
-        }}
-      >
-        <View>
-          <StyledText
-            bold
-            size={30}
-            style={{
-              marginVertical: 10,
-              marginHorizontal: 15
-            }}
-          >
-            Rewards
-          </StyledText>
-        </View>
-        <Chips data={FILTERS} />
-      </SafeAreaView>
+      <AppHeader
+        bottomComponent={
+          <View style={{ paddingTop: 10 }}>
+            <Chips data={FILTERS} />
+          </View>
+        }
+      />
       <View style={{ flex: 1 }}>
         <FlatList
           data={REWARDS}

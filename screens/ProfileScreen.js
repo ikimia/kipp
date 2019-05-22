@@ -2,30 +2,19 @@ import * as React from "react";
 import { useContext } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, Image } from "react-native";
-import { SafeAreaView, NavigationContext } from "react-navigation";
+import { NavigationContext } from "react-navigation";
 import { SocialProfile } from "../contexes/SocialProfile";
 import ListItem from "../components/ListItem";
 import Icon from "react-native-vector-icons/FontAwesome";
 import StyledText from "../components/StyledText";
+import AppHeader from "../components/AppHeader";
 
 export default function ProfileScreen() {
-  const { navigate, state } = useContext(NavigationContext);
+  const { navigate } = useContext(NavigationContext);
   const { userProfile, logout } = useContext(SocialProfile);
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView
-        style={{
-          backgroundColor: "#FAFAFA",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
-        }}
-      >
-        <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
-          <StyledText bold size={30}>
-            {state.routeName}
-          </StyledText>
-        </View>
-      </SafeAreaView>
+      <AppHeader />
       <ScrollView style={{ flex: 1 }}>
         <View
           style={{
