@@ -38,7 +38,8 @@ export default function ProfileScreen() {
             style={{
               position: "absolute",
               width: "100%",
-              height: 130,
+              height: 1130,
+              top: -1000,
               backgroundColor: "#3b5998"
             }}
           />
