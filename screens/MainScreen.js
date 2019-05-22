@@ -6,18 +6,17 @@ import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
+import { getCode } from "../Backend";
 
 const CODE_TIMEOUT = 120;
-
-const generateCode = () =>
-  Math.random()
-    .toString(10)
-    .slice(2, 8);
 
 function useTimer(code, onEnd) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
   useEffect(() => {
     setTotal(CODE_TIMEOUT);
+    if (!code) {
+      return;
+    }
     const timer = setInterval(() => {
       setTotal(prevTotal => {
         if (prevTotal > 0) {
@@ -51,13 +50,19 @@ function getRandomPattern(prevPattern) {
 }
 
 export default function MainScren() {
-  const [code, setCode] = useState(generateCode());
+  const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
-  const setNewCode = () => {
-    setCode(generateCode());
-    setPattern(getRandomPattern(pattern));
+  const setNewCode = (keepPattern = false) => {
+    setCode(null);
+    if (!keepPattern) {
+      setPattern(getRandomPattern(pattern));
+    }
+    getCode().then(setCode);
   };
+  useEffect(() => {
+    setNewCode(true);
+  }, []);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -75,7 +80,7 @@ export default function MainScren() {
               One-Time Payment Code:
             </StyledText>
             <StyledText bold size={70} color="white">
-              {code.match(/.{3}/g).join(" ")}
+              {(code || "******").match(/.{3}/g).join(" ")}
             </StyledText>
           </View>
         </View>
