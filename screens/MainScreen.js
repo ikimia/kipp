@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { View, StatusBar } from "react-native";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import { View, StatusBar, Animated } from "react-native";
 import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { SocialProfile } from "../contexes/SocialProfile";
@@ -7,6 +7,7 @@ import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
 import { getCode } from "../Backend";
+import { PulseIndicator as ActivityIndicator } from "react-native-indicators";
 
 const CODE_TIMEOUT = 120;
 
@@ -49,6 +50,51 @@ function getRandomPattern(prevPattern) {
   }
 }
 
+function PaymentCode({ code }) {
+  const loadingOpacity = useRef(new Animated.Value(0)).current;
+  const [codeElement, setCodeElement] = useState(null);
+  const fade = (toValue, duration) =>
+    new Promise(resolve =>
+      Animated.timing(loadingOpacity, { toValue, duration }).start(resolve)
+    );
+  useEffect(() => {
+    (async function() {
+      if (code === null) {
+        await fade(0, 100);
+        setCodeElement(
+          <View style={{ flexDirection: "row" }}>
+            {[...Array(7)].map((_, i) => (
+              <View key={i} style={{ width: 35 }}>
+                {i === 3 ? null : <ActivityIndicator size={35} color="white" />}
+              </View>
+            ))}
+          </View>
+        );
+        await fade(1, 100);
+      } else {
+        await fade(0, 250);
+        setCodeElement(
+          <StyledText bold size={70} color="white">
+            {code.match(/.{3}/g).join(" ")}
+          </StyledText>
+        );
+        await fade(1, 250);
+      }
+    })();
+  }, [code]);
+  return (
+    <Animated.View
+      style={{
+        height: 100,
+        justifyContent: "center",
+        opacity: loadingOpacity
+      }}
+    >
+      {codeElement}
+    </Animated.View>
+  );
+}
+
 export default function MainScren() {
   const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
@@ -79,9 +125,7 @@ export default function MainScren() {
             <StyledText size={16} color="white">
               One-Time Payment Code:
             </StyledText>
-            <StyledText bold size={70} color="white">
-              {(code || "******").match(/.{3}/g).join(" ")}
-            </StyledText>
+            <PaymentCode code={code} />
           </View>
         </View>
         <View style={{ flex: 1 }} />
@@ -107,7 +151,11 @@ export default function MainScren() {
           ))}
           <View style={{ flexDirection: "row" }}>
             <StyledText color="white">To get another code, </StyledText>
-            <BorderlessButton activeOpacity={0.5} onPress={setNewCode}>
+            <BorderlessButton
+              activeOpacity={0.5}
+              enabled={!!code}
+              onPress={setNewCode}
+            >
               <StyledText bold underline color="white">
                 click here
               </StyledText>
