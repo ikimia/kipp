@@ -1,61 +1,148 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
-import ReceiptItemsTable from "../components/ReceiptItemsTable";
-import Icon from "react-native-vector-icons/Feather";
-import { items, taxes, totalAmount } from "../constants/Data";
+import { items, totalAmount } from "../constants/Data";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-navigation";
 import BackButton from "../components/BackButton";
 import { ScrollView } from "react-native-gesture-handler";
 import StyledText from "../components/StyledText";
+import ListItem from "../components/ListItem";
 
-export default function OrderScreen({ receiptNumber, storeName }) {
-  const { t } = useTranslation("common");
+export default function OrderScreen() {
+  const { t } = useTranslation("stores");
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView>
+      <SafeAreaView
+        forceInset={{ top: "always" }}
+        style={{
+          paddingHorizontal: 15,
+          backgroundColor: "#FAFAFA",
+          borderBottomColor: "#EEE",
+          borderBottomWidth: 1
+        }}
+      >
         <View
           style={{
-            paddingVertical: 10,
-            paddingHorizontal: 15,
-            borderBottomColor: "#EEE",
-            borderBottomWidth: 1
+            marginVertical: 10,
+            flexDirection: "row",
+            alignItems: "center"
           }}
         >
-          <BackButton />
+          <View style={{ flex: 1 }}>
+            <BackButton />
+          </View>
           <View
+            style={{ flex: 3, flexDirection: "row", justifyContent: "center" }}
+          >
+            <StyledText bold size={18}>
+              Receipt
+            </StyledText>
+          </View>
+          <View style={{ flex: 1 }} />
+        </View>
+      </SafeAreaView>
+      <ScrollView style={{ flex: 1, paddingHorizontal: 10 }}>
+        <View style={{ alignItems: "center", marginVertical: 25 }}>
+          <StyledText size={20}>McDonalds</StyledText>
+          <StyledText color="#333">15/5/19 11:20</StyledText>
+        </View>
+        <View
+          style={{
+            borderBottomColor: "#999",
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            marginBottom: 5
+          }}
+        >
+          <StyledText bold>Purchase Details</StyledText>
+        </View>
+        {items.map((item, i) => (
+          <View
+            key={i}
             style={{
-              marginTop: 5,
+              borderBottomColor: "#EEE",
+              borderBottomWidth: 1,
+              paddingBottom: 5,
+              marginBottom: 5,
               flexDirection: "row",
               justifyContent: "space-between"
             }}
           >
-            <StyledText bold size={25}>
-              {t(`stores:${storeName}`)}
-            </StyledText>
-            <StyledText bold size={25}>
-              {t("currencySign")}
-              {totalAmount}
-            </StyledText>
+            <View style={{ flexDirection: "row" }}>
+              <StyledText>{t(item.description)}</StyledText>
+              {item.count > 1 ? (
+                <StyledText color="#666"> &times;{item.count}</StyledText>
+              ) : null}
+            </View>
+            <StyledText>${item.price * item.count}</StyledText>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Icon name="info" style={{ fontSize: 15, marginEnd: 5 }} />
-            <StyledText size={15}>Receipt no. {receiptNumber}</StyledText>
-          </View>
+        ))}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between"
+          }}
+        >
+          <StyledText bold>Total</StyledText>
+          <StyledText bold>${totalAmount}</StyledText>
         </View>
-      </SafeAreaView>
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 15 }}>
-          <View style={{ alignItems: "center" }}>
-            <ReceiptItemsTable items={items} taxes={taxes} />
-          </View>
+        <View
+          style={{
+            borderBottomColor: "#999",
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            marginBottom: 5,
+            marginTop: 20
+          }}
+        >
+          <StyledText bold>Businesss Details</StyledText>
         </View>
+        <View>
+          <StyledText>McDonalds</StyledText>
+          <StyledText>Aba Ahimeir 23, Tel Aviv, Israel</StyledText>
+        </View>
+        <View
+          style={{
+            borderBottomColor: "#999",
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            marginBottom: 5,
+            marginTop: 20
+          }}
+        >
+          <StyledText bold>Additional Information</StyledText>
+        </View>
+        <View>
+          <StyledText>Order ID: 12391241231</StyledText>
+        </View>
+        <View
+          style={{
+            borderBottomColor: "#999",
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            marginBottom: 5,
+            marginTop: 20
+          }}
+        >
+          <StyledText bold>Actions</StyledText>
+        </View>
+        <ListItem
+          last
+          small
+          icon="tag"
+          text="View original receipt"
+          noCheveron
+        />
+        <ListItem
+          last
+          small
+          icon="mail"
+          text="Send receipt to email"
+          noCheveron
+        />
+        <ListItem last small icon="phone" text="Contact business" noCheveron />
+        <View style={{ height: 100 }} />
       </ScrollView>
     </View>
   );
 }
-OrderScreen.propTypes = {
-  receiptNumber: PropTypes.string.isRequired,
-  storeName: PropTypes.string.isRequired
-};
