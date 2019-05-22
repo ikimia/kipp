@@ -74,6 +74,7 @@ export default function StoresScreen() {
                 </StyledText>
                 <FlatList
                   horizontal
+                  showsHorizontalScrollIndicator={false}
                   ListHeaderComponent={() => <View style={{ width: 5 }} />}
                   data={stores}
                   keyExtractor={(_, i) => `${i}`}
