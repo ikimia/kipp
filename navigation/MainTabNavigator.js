@@ -68,16 +68,16 @@ export default createBottomTabNavigator(
     ),
     Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
     Explore: stack({ Stores: StoresScreen }, "Stores", "search"),
-    Me: stack(
+    Settings: stack(
       {
-        Profile: ProfileScreen,
+        Settings: ProfileScreen,
         NewCreditCard: NewCreditCardScreen,
         SavedCreditCard: SavedCreditCardScreen,
         LanguageSettings: LanguageSettingsScreen
       },
-      "Profile",
-      "user"
+      "Settings",
+      "settings"
     )
   },
-  { initialRouteName: "Pay" }
+  { initialRouteName: "Settings" }
 );
