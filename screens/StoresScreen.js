@@ -1,10 +1,10 @@
 import * as React from "react";
 import { View } from "react-native";
-import { SafeAreaView } from "react-navigation";
 import { TextInput, FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
+import AppHeader from "../components/AppHeader";
 
 const sections = [
   ["Featured", [["Zara"], ["Zara"], ["Zara"], ["Zara"], ["Zara"]]],
@@ -22,29 +22,18 @@ const nearbyStores = [
 export default function StoresScreen() {
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView
-        style={{
-          backgroundColor: "#FAFAFA",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
-        }}
-      >
-        <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
-          <View style={{ flexDirection: "row", marginBottom: 5 }}>
-            <View style={{ flex: 1 }}>
-              <StyledText bold size={30}>
-                Explore
-              </StyledText>
-            </View>
-            <Icon name="map" style={{ fontSize: 20 }} />
-          </View>
+      <AppHeader
+        sideComponent={<Icon name="map" style={{ fontSize: 20 }} />}
+        bottomComponent={
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
               backgroundColor: "#EEE",
               padding: 10,
-              borderRadius: 10
+              borderRadius: 10,
+              marginTop: 5,
+              marginHorizontal: 15
             }}
           >
             <Icon
@@ -53,8 +42,8 @@ export default function StoresScreen() {
             />
             <TextInput placeholder="Search stores" />
           </View>
-        </View>
-      </SafeAreaView>
+        }
+      />
       <FlatList
         data={nearbyStores}
         keyExtractor={([storeName]) => storeName}
