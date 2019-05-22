@@ -102,7 +102,7 @@ export default function RewardsScreen() {
               text={text}
               secondaryText={secondary}
               secondaryTextImportant={secondaryImportant}
-              sideText={<Icon name={reward} size={30} />}
+              sideComponent={<Icon name={reward} size={30} />}
             />
           )}
         />

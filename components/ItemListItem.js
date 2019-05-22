@@ -22,7 +22,7 @@ export default function ItemListItem({
   text,
   secondaryText,
   secondaryTextImportant,
-  sideText
+  sideComponent
 }) {
   return (
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
@@ -80,7 +80,7 @@ export default function ItemListItem({
               </StyledText>
             )}
           </View>
-          <StyledText size={20}>{sideText}</StyledText>
+          {sideComponent}
         </View>
       </View>
     </RectButton>

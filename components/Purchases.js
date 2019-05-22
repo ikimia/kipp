@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
+import { View } from "react-native";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
 import { FlatList } from "react-native-gesture-handler";
 import ItemListItem, { COLORS } from "./ItemListItem";
+import StyledText from "./StyledText";
 
 const data = [
   ["foodStore", [3, "hours"], "foodStoreLocation", "45"],
@@ -51,7 +53,16 @@ export default function Purchases() {
           text={m(language)
             .subtract(...timeAgo)
             .calendar()}
-          sideText={`${t("common:currencySign")}${amount}`}
+          sideComponent={
+            <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+              <StyledText size={16} color="#666" style={{ marginEnd: 2 }}>
+                {t("common:currencySign")}
+              </StyledText>
+              <StyledText size={20} bold>
+                {amount}
+              </StyledText>
+            </View>
+          }
         />
       )}
     />
