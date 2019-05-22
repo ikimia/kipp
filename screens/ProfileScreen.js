@@ -36,7 +36,16 @@ export default function ProfileScreen() {
         >
           <View
             style={{
+              position: "absolute",
+              width: "100%",
+              height: 130,
+              backgroundColor: "#3b5998"
+            }}
+          />
+          <View
+            style={{
               borderColor: "#3b5998",
+              backgroundColor: "white",
               borderWidth: 3,
               height: 162,
               width: 162,
