@@ -1,7 +1,8 @@
 import React from "react";
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from "react-navigation";
 import i18next from "i18next";
 import Icon from "react-native-vector-icons/Feather";
@@ -55,32 +56,34 @@ const stack = (stacks, initialRouteName, icon) =>
     })
   });
 
-export default createBottomTabNavigator(
+export default createSwitchNavigator(
   {
-    Pay: stack(
-      { Main: MainScreen, Payment: PaymentScreen },
-      "Main",
-      "credit-card"
-    ),
-    Receipts: stack(
+    App: createBottomTabNavigator(
       {
-        Receipts: PurchasesScreen,
-        PastOrder: PastOrderScreen
+        Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
+        Receipts: stack(
+          {
+            Receipts: PurchasesScreen,
+            PastOrder: PastOrderScreen
+          },
+          "Receipts",
+          "tag"
+        ),
+        Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
+        Explore: stack({ Explore: StoresScreen }, "Explore", "search"),
+        Settings: stack(
+          {
+            Settings: ProfileScreen,
+            PaymentSettings: PaymentSettingsScreen,
+            LanguageSettings: LanguageSettingsScreen
+          },
+          "Settings",
+          "settings"
+        )
       },
-      "Receipts",
-      "tag"
+      { initialRouteName: "Pay" }
     ),
-    Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
-    Explore: stack({ Explore: StoresScreen }, "Explore", "search"),
-    Settings: stack(
-      {
-        Settings: ProfileScreen,
-        PaymentSettings: PaymentSettingsScreen,
-        LanguageSettings: LanguageSettingsScreen
-      },
-      "Settings",
-      "settings"
-    )
+    Payment: PaymentScreen
   },
-  { initialRouteName: "Pay" }
+  { initialRouteName: "App" }
 );
