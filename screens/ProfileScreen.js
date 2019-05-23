@@ -9,7 +9,6 @@ import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import CreditCardIcon from "../components/CreditCardIcon";
 import { CreditCardStorage } from "../Storage";
-import Backdrop from "../components/Backdrop";
 import { COLORS } from "../components/ItemListItem";
 
 function CreditCardPreview({ cardNumber, loading }) {
@@ -80,7 +79,7 @@ export default function ProfileScreen() {
             marginBottom: 20
           }}
         >
-          <Backdrop
+          <View
             style={{
               position: "absolute",
               width: "100%",
