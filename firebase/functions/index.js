@@ -1,8 +1,34 @@
 const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 
-exports.getCode = functions.https.onRequest((request, response) => {
+const serviceAccount = require("../serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://academic-works-241411.firebaseio.com"
+});
+
+exports.getCode = functions.https.onRequest((req, res) => {
   const code = Math.random()
     .toString(10)
     .slice(2, 8);
-  response.json({ data: { code } });
+  res.json({ data: { code } });
+});
+
+exports.charge = functions.https.onRequest(async (req, res) => {
+  const topic = req.body.paymentCode;
+  const message = {
+    data: {
+      price: "850",
+      storeName: "Yuda",
+      currency: "USD"
+    },
+    topic
+  };
+  await admin.messaging().send(message);
+  res.json({ topic });
+});
+
+exports.accept = functions.https.onRequest(async (req, res) => {
+  res.json({ status: "ok" });
 });
