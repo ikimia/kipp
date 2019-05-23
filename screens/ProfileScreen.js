@@ -9,6 +9,8 @@ import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import CreditCardIcon from "../components/CreditCardIcon";
 import { CreditCardStorage } from "../Storage";
+import Backdrop from "../components/Backdrop";
+import { COLORS } from "../components/ItemListItem";
 
 function CreditCardPreview({ cardNumber, loading }) {
   if (!loading && !cardNumber) {
@@ -18,6 +20,35 @@ function CreditCardPreview({ cardNumber, loading }) {
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <CreditCardIcon cardNumber={cardNumber} style={{ marginEnd: 5 }} />
       <StyledText size={16}>{(cardNumber || "••••").slice(-4)}</StyledText>
+    </View>
+  );
+}
+
+function ProfilePicture({ uri, radius, borderWidth = 3 }) {
+  const outerRadius = radius + 2 * borderWidth;
+  return (
+    <View
+      style={{
+        borderColor: "white",
+        borderWidth,
+        backgroundColor: COLORS[4],
+        height: 2 * outerRadius,
+        width: 2 * outerRadius,
+        borderRadius: outerRadius,
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <Image
+        source={{ uri }}
+        style={{
+          borderColor: "white",
+          borderWidth,
+          width: 2 * radius,
+          height: 2 * radius,
+          borderRadius: radius
+        }}
+      />
     </View>
   );
 }
@@ -49,34 +80,17 @@ export default function ProfileScreen() {
             marginBottom: 20
           }}
         >
-          <View
+          <Backdrop
             style={{
               position: "absolute",
               width: "100%",
               height: 1130,
               top: -1000,
-              backgroundColor: "#3b5998"
+              backgroundColor: COLORS[4]
             }}
           />
-          <View
-            style={{
-              borderColor: "#3b5998",
-              backgroundColor: "white",
-              borderWidth: 3,
-              height: 162,
-              width: 162,
-              borderRadius: 81,
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 10
-            }}
-          >
-            <Image
-              source={{ uri: userProfile.picture }}
-              style={{ width: 150, height: 150, borderRadius: 75 }}
-            />
-          </View>
-          <StyledText size={20} bold>
+          <ProfilePicture uri={userProfile.picture} radius={75} />
+          <StyledText size={20} bold style={{ marginTop: 10 }}>
             {userProfile.name}
           </StyledText>
           <CreditCardPreview loading={cardLoading} cardNumber={cardNumber} />
