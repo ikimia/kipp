@@ -4,13 +4,13 @@ import { View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import StyledText from "./StyledText";
 
-function getIcon(iconElement, icon) {
+function getIcon(iconElement, icon, small) {
   if (!icon && !iconElement) {
     return null;
   }
   return (
-    <View style={{ width: 20, margin: 10 }}>
-      {iconElement ? iconElement : <Icon name={icon} size={18} />}
+    <View style={{ width: small ? 15 : 20, margin: 10 }}>
+      {iconElement ? iconElement : <Icon name={icon} size={small ? 14 : 18} />}
     </View>
   );
 }
@@ -23,7 +23,8 @@ export default function ListItem({
   noCheveron,
   rightIcon,
   first,
-  last
+  last,
+  small
 }) {
   return (
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
@@ -31,15 +32,12 @@ export default function ListItem({
         style={{
           flexDirection: "row",
           alignItems: "center",
-          ...(first
-            ? { borderTopColor: "#EEE", borderTopWidth: 1 }
-            : undefined),
-          ...(last
-            ? { borderBottomColor: "#EEE", borderBottomWidth: 1 }
-            : undefined)
+          borderColor: "#EEE",
+          borderTopWidth: first ? 1 : undefined,
+          borderBottomWidth: last ? 1 : undefined
         }}
       >
-        {getIcon(iconElement, icon)}
+        {getIcon(iconElement, icon, small)}
         <View
           style={{
             flex: 1,
@@ -48,15 +46,11 @@ export default function ListItem({
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            ...(!last
-              ? {
-                  borderBottomColor: "#EEE",
-                  borderBottomWidth: 1
-                }
-              : undefined)
+            borderColor: "#EEE",
+            borderBottomWidth: last ? 0 : 1
           }}
         >
-          <StyledText size={16}>{text}</StyledText>
+          <StyledText size={small ? 14 : 16}>{text}</StyledText>
           {rightIcon && <Icon name={rightIcon} />}
           {!noCheveron && <Icon name="chevron-right" />}
         </View>

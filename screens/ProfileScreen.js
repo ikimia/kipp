@@ -1,31 +1,44 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, Image } from "react-native";
-import { SafeAreaView, NavigationContext } from "react-navigation";
+import { NavigationContext, NavigationEvents } from "react-navigation";
 import { SocialProfile } from "../contexes/SocialProfile";
 import ListItem from "../components/ListItem";
-import Icon from "react-native-vector-icons/FontAwesome";
 import StyledText from "../components/StyledText";
+import AppHeader from "../components/AppHeader";
+import CreditCardIcon from "../components/CreditCardIcon";
+import { CreditCardStorage } from "../Storage";
+
+function CreditCardPreview({ cardNumber, loading }) {
+  if (!loading && !cardNumber) {
+    return <StyledText>Payment Method Not Set</StyledText>;
+  }
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <CreditCardIcon cardNumber={cardNumber} style={{ marginEnd: 5 }} />
+      <StyledText size={16}>{(cardNumber || "••••").slice(-4)}</StyledText>
+    </View>
+  );
+}
 
 export default function ProfileScreen() {
-  const { navigate, state } = useContext(NavigationContext);
+  const { navigate } = useContext(NavigationContext);
   const { userProfile, logout } = useContext(SocialProfile);
+  const [cardNumber, setCardNumber] = useState(null);
+  const [cardLoading, setCardLoading] = useState(true);
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView
-        style={{
-          backgroundColor: "#FAFAFA",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
+      <NavigationEvents
+        onWillFocus={async () => {
+          const cardNumber = await CreditCardStorage.get();
+          setCardLoading(false);
+          if (cardNumber) {
+            setCardNumber(cardNumber.cardNumber);
+          }
         }}
-      >
-        <View style={{ paddingVertical: 10, paddingHorizontal: 15 }}>
-          <StyledText bold size={30}>
-            {state.routeName}
-          </StyledText>
-        </View>
-      </SafeAreaView>
+      />
+      <AppHeader />
       <ScrollView style={{ flex: 1 }}>
         <View
           style={{
@@ -58,29 +71,13 @@ export default function ProfileScreen() {
           >
             <Image
               source={{ uri: userProfile.picture }}
-              style={{
-                width: 150,
-                height: 150,
-                borderRadius: 75
-              }}
+              style={{ width: 150, height: 150, borderRadius: 75 }}
             />
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center"
-            }}
-          >
-            <Icon
-              name="facebook-official"
-              size={25}
-              color="#3b5998"
-              style={{ marginEnd: 5 }}
-            />
-            <StyledText size={20} bold>
-              {userProfile.name}
-            </StyledText>
-          </View>
+          <StyledText size={20} bold>
+            {userProfile.name}
+          </StyledText>
+          <CreditCardPreview loading={cardLoading} cardNumber={cardNumber} />
         </View>
         <View>
           <ListItem
