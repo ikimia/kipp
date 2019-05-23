@@ -1,6 +1,5 @@
-#!/bin/bash
-set -e
-if ! pip show pbxproj; then
+#!/bin/bash -e
+if ! pip3 show pbxproj > /dev/null; then
     echo python package pbxproj is missing, please run
     echo pip install pbxproj
     exit 1
