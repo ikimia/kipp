@@ -31,11 +31,13 @@ export default function ProfileScreen() {
     <View style={{ flex: 1 }}>
       <NavigationEvents
         onWillFocus={async () => {
-          const cardNumber = await CreditCardStorage.get();
-          setCardLoading(false);
-          if (cardNumber) {
-            setCardNumber(cardNumber.cardNumber);
+          const creditCard = await CreditCardStorage.get();
+          if (creditCard) {
+            setCardNumber(creditCard.cardNumber);
+          } else {
+            setCardNumber(null);
           }
+          setCardLoading(false);
         }}
       />
       <AppHeader />
@@ -83,7 +85,7 @@ export default function ProfileScreen() {
           <ListItem
             first
             onPress={() => {
-              navigate("NewCreditCard");
+              navigate("PaymentSettings");
             }}
             icon="credit-card"
             text="Payment"

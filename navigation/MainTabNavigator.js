@@ -7,14 +7,13 @@ import i18next from "i18next";
 import Icon from "react-native-vector-icons/Feather";
 
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
-import NewCreditCardScreen from "../screens/NewCreditCardScreen";
-import SavedCreditCardScreen from "../screens/SavedCreditCardScreen";
 import MainScreen from "../screens/MainScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PurchasesScreen from "../screens/PurchasesScreen";
 import RewardsScreen from "../screens/RewardsScreen";
 import StoresScreen from "../screens/StoresScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
+import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -71,8 +70,7 @@ export default createBottomTabNavigator(
     Settings: stack(
       {
         Settings: ProfileScreen,
-        NewCreditCard: NewCreditCardScreen,
-        SavedCreditCard: SavedCreditCardScreen,
+        PaymentSettings: PaymentSettingsScreen,
         LanguageSettings: LanguageSettingsScreen
       },
       "Settings",
