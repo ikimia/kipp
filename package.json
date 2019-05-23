@@ -7,7 +7,8 @@
     "init": "npm install && ./scripts/bootstrap-ios.sh",
     "ios": "react-native run-ios",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "diffs": "./scripts/generate_ios_diffs.sh"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.3.3",
