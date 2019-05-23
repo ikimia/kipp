@@ -114,13 +114,13 @@ export default function MainScren() {
           style={{
             marginHorizontal: 15,
             marginBottom: 30,
-            padding: 5,
+            padding: 10,
             backgroundColor: "rgba(0, 0, 0, 0.2)"
           }}
         >
           {[
             `Good evening, ${userProfile.name}!`,
-            "To pay, give the code above at the counter.",
+            "To pay, give the payment code to the seller.",
             `The code is valid for the next ${useTimer(
               code,
               setNewCode
