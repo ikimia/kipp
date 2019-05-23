@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, StatusBar } from "react-native";
-import { SafeAreaView, NavigationEvents } from "react-navigation";
+import { View, StatusBar, Alert } from "react-native";
+import {
+  SafeAreaView,
+  NavigationEvents,
+  NavigationContext
+} from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
-import firebase from "react-native-firebase";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
-import { getCode } from "../Backend";
+import * as Backend from "../Backend";
 import PaymentCode from "../components/PaymentCode";
 
 const CODE_TIMEOUT = 120;
@@ -51,24 +54,38 @@ function getRandomPattern(prevPattern) {
   }
 }
 
+function confirmPayment(storeName, price, onConfirm) {
+  Alert.alert(
+    "Confirm Payment",
+    `Confirm payment of $${price} to ${storeName}`,
+    [{ text: "No" }, { text: "Yes", onPress: onConfirm }]
+  );
+}
+
 export default function MainScren() {
   const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
-  useEffect(() => {
-    (async () => {
-      firebase.messaging().subscribeToTopic("lol");
-      firebase
-        .messaging()
-        .onMessage(message => alert(JSON.stringify(message.data)));
-    })();
-  }, []);
+  const { navigate } = useContext(NavigationContext);
   const setNewCode = (keepPattern = false) => {
     setCode(null);
     if (!keepPattern) {
       setPattern(getRandomPattern(pattern));
     }
-    getCode().then(setCode);
+    Backend.getCode().then(newCode => {
+      if (code) {
+        Backend.unsubscribe(code);
+      }
+      setCode(newCode);
+      Backend.subscribe(newCode, message => {
+        const {
+          data: { storeName, price }
+        } = message;
+        confirmPayment(storeName, price, () => {
+          navigate("Payment", { storeName, price });
+        });
+      });
+    });
   };
   useEffect(() => {
     setNewCode(true);

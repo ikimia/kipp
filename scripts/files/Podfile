@@ -26,6 +26,7 @@ target 'kipp' do
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
   pod 'Firebase/Core'
+  pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 

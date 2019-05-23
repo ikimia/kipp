@@ -16,13 +16,9 @@ exports.getCode = functions.https.onRequest((req, res) => {
 });
 
 exports.charge = functions.https.onRequest(async (req, res) => {
-  const topic = req.body.paymentCode;
+  const { paymentCode: topic, price, storeName } = req.body;
   const message = {
-    data: {
-      price: "850",
-      storeName: "Yuda",
-      currency: "USD"
-    },
+    data: { price, storeName },
     topic
   };
   await admin.messaging().send(message);
