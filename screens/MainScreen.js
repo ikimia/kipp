@@ -6,6 +6,7 @@ import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
+import firebase from "react-native-firebase";
 
 const CODE_TIMEOUT = 120;
 
@@ -54,6 +55,14 @@ export default function MainScren() {
   const [code, setCode] = useState(generateCode());
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
+  useEffect(() => {
+    (async () => {
+      firebase.messaging().subscribeToTopic("lol");
+      firebase
+        .messaging()
+        .onMessage(message => alert(JSON.stringify(message.data)));
+    })();
+  }, []);
   const setNewCode = () => {
     setCode(generateCode());
     setPattern(getRandomPattern(pattern));
