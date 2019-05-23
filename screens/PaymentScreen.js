@@ -1,26 +1,60 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { View, Image } from "react-native";
-import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
-import { NavigationContext } from "react-navigation";
+import { NavigationContext, NavigationEvents } from "react-navigation";
+import { RectButton } from "react-native-gesture-handler";
+import { COLORS } from "../components/ItemListItem";
+
+const payingImage = require("../assets/img/paying.gif");
+const successImage = require("../assets/img/success.gif");
 
 export default function PaymentScreen() {
-  const { getParam } = useContext(NavigationContext);
+  const [success, setSuccess] = useState(false);
+  const { getParam, navigate } = useContext(NavigationContext);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSuccess(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [success]);
   return (
-    <View style={{ flex: 1 }}>
-      <SmallHeader title="Payment" />
-      <View style={{ padding: 15, flex: 1, alignItems: "center" }}>
-        <StyledText bold size={20}>
-          Paying ${getParam("price")} to {getParam("storeName")}
-        </StyledText>
-        {/* <Image
-          source={{
-            uri:
-              "https://media.gq.com/photos/5768367b5db2e8cb18c9e9d3/master/w_1280%2Cc_limit/BrowserPreview_tmp-2.gif"
-          }}
-          style={{ height: 200, width: 200 }}
-        /> */}
+    <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 30 }}>
+      <NavigationEvents
+        onWillFocus={() => {
+          setSuccess(false);
+        }}
+      />
+      <View style={{ alignItems: "center" }}>
+        <View style={{ height: 200, justifyContent: "center" }}>
+          <StyledText bold size={30}>
+            {success
+              ? "Success!"
+              : `Paying $${getParam("price")} to ${getParam("storeName")}`}
+          </StyledText>
+        </View>
+        <Image
+          source={success ? successImage : payingImage}
+          style={{ height: 250 }}
+        />
+        <View style={{ height: 100, justifyContent: "center" }}>
+          <RectButton
+            style={{
+              display: success ? "flex" : "none",
+              backgroundColor: COLORS[5],
+              paddingVertical: 10,
+              paddingHorizontal: 15,
+              borderRadius: 5
+            }}
+            onPress={() => navigate("Main")}
+          >
+            <View>
+              <StyledText size={16} color="white">
+                Continue
+              </StyledText>
+            </View>
+          </RectButton>
+        </View>
       </View>
     </View>
   );
