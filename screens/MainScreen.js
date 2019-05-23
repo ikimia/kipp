@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { View, StatusBar } from "react-native";
 import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
+import firebase from "react-native-firebase";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
@@ -54,6 +55,14 @@ export default function MainScren() {
   const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
+  useEffect(() => {
+    (async () => {
+      firebase.messaging().subscribeToTopic("lol");
+      firebase
+        .messaging()
+        .onMessage(message => alert(JSON.stringify(message.data)));
+    })();
+  }, []);
   const setNewCode = (keepPattern = false) => {
     setCode(null);
     if (!keepPattern) {
