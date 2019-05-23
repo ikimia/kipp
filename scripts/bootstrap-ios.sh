@@ -1,7 +1,7 @@
 #!/bin/bash -e
 if ! pip3 show pbxproj > /dev/null; then
     echo python package pbxproj is missing, please run
-    echo pip install pbxproj
+    echo pip3 install pbxproj
     exit 1
 fi
 rm -rf ios
@@ -15,12 +15,12 @@ pushd ios
     ln -s ../scripts/files/Podfile
     ln -s ../scripts/files/Podfile.lock
     git add .
-    git ci -m'Add podfile'
+    git commit -m'Add podfile'
 
     for file in ../scripts/patches_ios/*.patch; do
         git apply $file
         git add .
-        git ci -m"Apply $(basename ${file})"
+        git commit -m"Apply $(basename ${file})"
     done
     pod install
 popd
@@ -28,12 +28,12 @@ popd
 react-native-asset
 pushd ios
     git add .
-    git ci -m'Link assets'
+    git commit -m'Link assets'
 popd
 
 pushd ios
     python3 ../scripts/add_file_to_ios.py ../scripts/files/GoogleService-Info.plist
 
     git add .
-    git ci -m"Add GoogleService-Info.plist"
+    git commit -m"Add GoogleService-Info.plist"
 popd
