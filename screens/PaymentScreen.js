@@ -26,31 +26,39 @@ export default function PaymentScreen() {
         }}
       />
       <View style={{ alignItems: "center" }}>
-        <View style={{ height: 200, justifyContent: "center" }}>
-          <StyledText bold size={30}>
+        <View style={{ height: 120, justifyContent: "center" }}>
+          <StyledText bold size={success ? 45 : 20}>
             {success
               ? "Success!"
               : `Paying $${getParam("price")} to ${getParam("storeName")}`}
           </StyledText>
         </View>
-        <Image
-          source={success ? successImage : payingImage}
-          style={{ height: 250 }}
-        />
-        <View style={{ height: 100, justifyContent: "center" }}>
+        <View style={{ height: 300 }}>
+          <Image
+            source={success ? successImage : payingImage}
+            style={{ height: 300, width: 300 }}
+          />
+        </View>
+        <View
+          style={{
+            height: 100,
+            justifyContent: "center",
+            alignSelf: "stretch"
+          }}
+        >
           <RectButton
             style={{
               display: success ? "flex" : "none",
-              backgroundColor: COLORS[5],
+              backgroundColor: COLORS[4],
               paddingVertical: 10,
-              paddingHorizontal: 15,
-              borderRadius: 5
+              borderRadius: 5,
+              alignItems: "center"
             }}
             onPress={() => navigate("Main")}
           >
             <View>
-              <StyledText size={16} color="white">
-                Continue
+              <StyledText bold size={16} color="white">
+                GO BACK
               </StyledText>
             </View>
           </RectButton>
