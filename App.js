@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
 import AuthenticationFlow from "./screens/AuthenticationFlow";
+import StyledText from "./components/StyledText";
 
 function App() {
   const direction = useDirection();
@@ -13,7 +14,7 @@ function App() {
       <AuthenticationFlow
         Loading={() => (
           <View style={styles.loading}>
-            <Text>Loading...</Text>
+            <StyledText>Loading...</StyledText>
           </View>
         )}
         App={AppNavigator}

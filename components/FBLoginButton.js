@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { LoginManager } from "react-native-fbsdk";
 import * as PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/Ionicons";
 import { RectButton } from "react-native-gesture-handler";
+import StyledText from "./StyledText";
 
 export default function FBLoginButton({ onLogin, onCancel, onError }) {
   return (
     <RectButton
-      style={{ backgroundColor: "#157EFB", borderRadius: 5, width: "100%" }}
+      style={{ backgroundColor: "#157EFB", borderRadius: 5 }}
       onPress={() => {
         LoginManager.logInWithReadPermissions(["public_profile", "email"])
           .then(result => {
@@ -35,9 +36,9 @@ export default function FBLoginButton({ onLogin, onCancel, onError }) {
           name="logo-facebook"
           style={{ fontSize: 22, color: "white", marginEnd: 10 }}
         />
-        <Text style={{ color: "white", fontSize: 17 }}>
+        <StyledText color="white" size={16}>
           Login with Facebook
-        </Text>
+        </StyledText>
       </View>
     </RectButton>
   );

@@ -88,12 +88,7 @@ export default function AuthenticationFlow({ Loading, App }) {
         <Logo fontSize={100} />
       </View>
       <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 20
-        }}
+        style={{ flex: 1, justifyContent: "center", paddingHorizontal: 20 }}
       >
         <FBLoginButton onLogin={login} />
       </View>
