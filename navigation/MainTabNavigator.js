@@ -14,6 +14,7 @@ import RewardsScreen from "../screens/RewardsScreen";
 import StoresScreen from "../screens/StoresScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
+import PaymentScreen from "../screens/PaymentScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -56,7 +57,11 @@ const stack = (stacks, initialRouteName, icon) =>
 
 export default createBottomTabNavigator(
   {
-    Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
+    Pay: stack(
+      { Main: MainScreen, Payment: PaymentScreen },
+      "Main",
+      "credit-card"
+    ),
     Receipts: stack(
       {
         Receipts: PurchasesScreen,

@@ -1,5 +1,4 @@
-import * as firebase from "firebase/app";
-import "firebase/functions";
+import firebase from "react-native-firebase";
 
 firebase.initializeApp({
   apiKey: "AIzaSyA1k_ABLit8ZREapKqb9KZ-dlaI-mOt1E0",
@@ -16,4 +15,13 @@ export async function getCode() {
   const getCodeFromBackend = firebase.functions().httpsCallable("getCode");
   const result = await getCodeFromBackend();
   return result.data.code;
+}
+
+export function subscribe(topic, onMessage) {
+  firebase.messaging().subscribeToTopic(topic);
+  firebase.messaging().onMessage(onMessage);
+}
+
+export function unsubscribe(topic) {
+  firebase.messaging().unsubscribeFromTopic(topic);
 }
