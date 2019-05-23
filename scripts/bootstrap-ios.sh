@@ -1,5 +1,10 @@
 #!/bin/bash
 set -e
+if ! pip show pbxproj; then
+    echo python package pbxproj is missing, please run
+    echo pip install pbxproj
+    exit 1
+fi
 rm -rf ios
 react-native eject
 pushd ios
