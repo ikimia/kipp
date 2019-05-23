@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "cleaninit": "rm -rf node_modules ios android && npm run init",
-    "init": "npm install && react-native eject && ./scripts/patch-ios.sh && cd ios && pod install && cd - && react-native-asset",
+    "init": "npm install && ./scripts/bootstrap-ios.sh",
     "ios": "react-native run-ios",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "diffs": "./scripts/generate_ios_diffs.sh"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.3.3",
@@ -23,6 +24,7 @@
     "react-i18next": "^10.8.0",
     "react-native": "0.59.4",
     "react-native-fbsdk": "^0.8.0",
+    "react-native-firebase": "^5.3.1",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-indicators": "^0.13.0",
     "react-native-localize": "^1.1.2",

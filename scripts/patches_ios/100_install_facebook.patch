@@ -1,0 +1,96 @@
+diff --git i/kipp/AppDelegate.m w/kipp/AppDelegate.m
+index c8afb5d..11748be 100644
+--- i/kipp/AppDelegate.m
++++ w/kipp/AppDelegate.m
+@@ -11,10 +11,15 @@
+ #import <React/RCTBundleURLProvider.h>
+ #import <React/RCTRootView.h>
+ 
++#import <FBSDKCoreKit/FBSDKCoreKit.h>
++#import <FBSDKLoginKit/FBSDKLoginKit.h>
++#import <FBSDKShareKit/FBSDKShareKit.h>
++
+ @implementation AppDelegate
+ 
+ - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+ {
++  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
+                                                    moduleName:@"kipp"
+@@ -39,4 +44,20 @@
+ #endif
+ }
+ 
++- (BOOL)application:(UIApplication *)application
++ openURL:(NSURL *)url
++ options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
++BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
++ openURL:url
++ sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
++ annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
++ ];
++ // Add any custom logic here.
++ return handled;
++}
++
++- (void)applicationDidBecomeActive:(UIApplication *)application {
++ [FBSDKAppEvents activateApp];
++}
++
+ @end
+diff --git i/kipp/Info.plist w/kipp/Info.plist
+index 39b500e..58cddff 100644
+--- i/kipp/Info.plist
++++ w/kipp/Info.plist
+@@ -2,6 +2,26 @@
+ <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+ <dict>
++	<key>CFBundleURLTypes</key>
++	<array>
++		<dict>
++			<key>CFBundleURLSchemes</key>
++			<array>
++				<string>fb633862357078952</string>
++			</array>
++		</dict>
++	</array>
++	<key>FacebookAppID</key>
++	<string>633862357078952</string>
++	<key>FacebookDisplayName</key>
++	<string>Street Pay</string>
++	<key>LSApplicationQueriesSchemes</key>
++	<array>
++		<string>fbapi</string>
++		<string>fb-messenger-share-api</string>
++		<string>fbauth2</string>
++		<string>fbshareextension</string>
++	</array>
+ 	<key>CFBundleDevelopmentRegion</key>
+ 	<string>en</string>
+ 	<key>CFBundleDisplayName</key>
+@@ -56,5 +76,23 @@
+ 			</dict>
+ 		</dict>
+ 	</dict>
++	<key>UIAppFonts</key>
++	<array>
++		<string>AntDesign.ttf</string>
++		<string>Entypo.ttf</string>
++		<string>EvilIcons.ttf</string>
++		<string>Feather.ttf</string>
++		<string>FontAwesome.ttf</string>
++		<string>FontAwesome5_Brands.ttf</string>
++		<string>FontAwesome5_Regular.ttf</string>
++		<string>FontAwesome5_Solid.ttf</string>
++		<string>Foundation.ttf</string>
++		<string>Ionicons.ttf</string>
++		<string>MaterialCommunityIcons.ttf</string>
++		<string>MaterialIcons.ttf</string>
++		<string>Octicons.ttf</string>
++		<string>SimpleLineIcons.ttf</string>
++		<string>Zocial.ttf</string>
++	</array>
+ </dict>
+ </plist>
