@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { useTranslation } from "react-i18next";
+import StyledText from "./StyledText";
 
 const LINE_LENGTH = 32;
 
@@ -20,9 +21,9 @@ const toText = elements => {
 };
 
 const Line = ({ elements, bold }) => (
-  <Text style={bold ? boldLineTextStyle : lineTextStyle}>
+  <StyledText style={bold ? boldLineTextStyle : lineTextStyle}>
     {toText(elements)}
-  </Text>
+  </StyledText>
 );
 Line.propTypes = {
   elements: PropTypes.array.isRequired,
