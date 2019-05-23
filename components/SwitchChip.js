@@ -1,6 +1,7 @@
 import * as React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
+import StyledText from "./StyledText";
 
 export default function SwitchChip({ value, onValueChange, title }) {
   return (
@@ -26,7 +27,7 @@ export default function SwitchChip({ value, onValueChange, title }) {
           }}
         />
       </RectButton>
-      <Text style={{ marginStart: 5 }}>{title}</Text>
+      <StyledText style={{ marginStart: 5 }}>{title}</StyledText>
     </View>
   );
 }
