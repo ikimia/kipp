@@ -2,45 +2,16 @@ import * as React from "react";
 import { View } from "react-native";
 import { items, totalAmount } from "../constants/Data";
 import { useTranslation } from "react-i18next";
-import { SafeAreaView } from "react-navigation";
-import BackButton from "../components/BackButton";
 import { ScrollView } from "react-native-gesture-handler";
 import StyledText from "../components/StyledText";
 import ListItem from "../components/ListItem";
+import SmallHeader from "../components/SmallHeader";
 
 export default function OrderScreen() {
   const { t } = useTranslation("stores");
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView
-        forceInset={{ top: "always" }}
-        style={{
-          paddingHorizontal: 15,
-          backgroundColor: "#FAFAFA",
-          borderBottomColor: "#EEE",
-          borderBottomWidth: 1
-        }}
-      >
-        <View
-          style={{
-            marginVertical: 10,
-            flexDirection: "row",
-            alignItems: "center"
-          }}
-        >
-          <View style={{ flex: 1 }}>
-            <BackButton />
-          </View>
-          <View
-            style={{ flex: 3, flexDirection: "row", justifyContent: "center" }}
-          >
-            <StyledText bold size={18}>
-              Receipt
-            </StyledText>
-          </View>
-          <View style={{ flex: 1 }} />
-        </View>
-      </SafeAreaView>
+      <SmallHeader title="Receipt" />
       <ScrollView style={{ flex: 1, paddingHorizontal: 10 }}>
         <View style={{ alignItems: "center", marginVertical: 25 }}>
           <StyledText size={20}>McDonalds</StyledText>
