@@ -2,23 +2,23 @@ import React, { useEffect, useState, useContext } from "react";
 import { View, StatusBar } from "react-native";
 import { SafeAreaView, NavigationEvents } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
+import firebase from "react-native-firebase";
 import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
-import firebase from "react-native-firebase";
+import { getCode } from "../Backend";
+import PaymentCode from "../components/PaymentCode";
 
 const CODE_TIMEOUT = 120;
-
-const generateCode = () =>
-  Math.random()
-    .toString(10)
-    .slice(2, 8);
 
 function useTimer(code, onEnd) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
   useEffect(() => {
     setTotal(CODE_TIMEOUT);
+    if (!code) {
+      return;
+    }
     const timer = setInterval(() => {
       setTotal(prevTotal => {
         if (prevTotal > 0) {
@@ -52,7 +52,7 @@ function getRandomPattern(prevPattern) {
 }
 
 export default function MainScren() {
-  const [code, setCode] = useState(generateCode());
+  const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { userProfile } = useContext(SocialProfile);
   useEffect(() => {
@@ -63,10 +63,16 @@ export default function MainScren() {
         .onMessage(message => alert(JSON.stringify(message.data)));
     })();
   }, []);
-  const setNewCode = () => {
-    setCode(generateCode());
-    setPattern(getRandomPattern(pattern));
+  const setNewCode = (keepPattern = false) => {
+    setCode(null);
+    if (!keepPattern) {
+      setPattern(getRandomPattern(pattern));
+    }
+    getCode().then(setCode);
   };
+  useEffect(() => {
+    setNewCode(true);
+  }, []);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -83,9 +89,7 @@ export default function MainScren() {
             <StyledText size={16} color="white">
               One-Time Payment Code:
             </StyledText>
-            <StyledText bold size={70} color="white">
-              {code.match(/.{3}/g).join(" ")}
-            </StyledText>
+            <PaymentCode code={code} />
           </View>
         </View>
         <View style={{ flex: 1 }} />
@@ -111,7 +115,11 @@ export default function MainScren() {
           ))}
           <View style={{ flexDirection: "row" }}>
             <StyledText color="white">To get another code, </StyledText>
-            <BorderlessButton activeOpacity={0.5} onPress={setNewCode}>
+            <BorderlessButton
+              activeOpacity={0.5}
+              enabled={!!code}
+              onPress={setNewCode}
+            >
               <StyledText bold underline color="white">
                 click here
               </StyledText>
