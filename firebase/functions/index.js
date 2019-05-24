@@ -25,6 +25,19 @@ exports.charge = functions.https.onRequest(async (req, res) => {
   res.json({ topic });
 });
 
+exports.demo = functions.https.onRequest(async (req, res) => {
+  const { paymentCode: topic, price, storeName, secret } = req.body;
+  if (secret !== "kippisbest") {
+    return res.status(403).send();
+  }
+  const message = {
+    data: { price, storeName },
+    topic
+  };
+  await admin.messaging().send(message);
+  res.send();
+});
+
 exports.accept = functions.https.onRequest(async (req, res) => {
   res.json({ status: "ok" });
 });
