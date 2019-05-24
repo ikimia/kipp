@@ -15,6 +15,20 @@ import PaymentCode from "../components/PaymentCode";
 
 const CODE_TIMEOUT = 120;
 
+function getGreeting() {
+  const hours = new Date().getHours();
+  if (hours < 5) {
+    return "Good night";
+  }
+  if (hours < 12) {
+    return "Good morning";
+  }
+  if (hours < 17) {
+    return "Good afternoon";
+  }
+  return "Good evening";
+}
+
 function useTimer(code, onEnd) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
   useEffect(() => {
@@ -119,7 +133,7 @@ export default function MainScren() {
           }}
         >
           {[
-            `Good evening, ${userProfile.name}!`,
+            `${getGreeting()}, ${userProfile.name}!`,
             "To pay, give the payment code to the seller.",
             `The code is valid for the next ${useTimer(
               code,
