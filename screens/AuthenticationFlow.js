@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import Logo from "../components/Logo";
-import FBLoginButton from "../components/FBLoginButton";
-import { SocialProfile } from "../contexes/SocialProfile";
-import { AccessToken, LoginManager } from "react-native-fbsdk";
-import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
 import PropTypes from "prop-types";
 import { SafeAreaView } from "react-navigation";
+import { AccessToken, LoginManager } from "react-native-fbsdk";
+
+import { SocialProfile } from "../contexes/SocialProfile";
+import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
+import Logo from "../components/Logo";
+import FBLoginButton from "../components/FBLoginButton";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 
 async function getAccessToken() {
