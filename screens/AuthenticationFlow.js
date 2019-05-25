@@ -3,6 +3,7 @@ import { View } from "react-native";
 import PropTypes from "prop-types";
 import { SafeAreaView } from "react-navigation";
 import { AccessToken, LoginManager } from "react-native-fbsdk";
+import firebase from "react-native-firebase";
 
 import { SocialProfile } from "../contexes/SocialProfile";
 import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
@@ -37,16 +38,19 @@ async function initFacebookProfile() {
       ...profile
     };
   }
-
-  const { name, picture } = await (await fetch(
-    "https://graph.facebook.com/v3.2/me?fields=picture.type(large),name",
-    { headers: { Authorization: `Bearer ${accessToken.accessToken}` } }
-  )).json();
+  const credential = firebase.auth.FacebookAuthProvider.credential(
+    accessToken.accessToken
+  );
+  const firebaseUserCredential = await firebase
+    .auth()
+    .signInWithCredential(credential);
+  const { displayName } = firebaseUserCredential;
+  const { picture } = firebaseUserCredential.additionalUserInfo.profile;
 
   profile = {
     permissions,
     userId,
-    name,
+    name: displayName,
     picture: picture.data.url,
     isLoggedIn: true
   };

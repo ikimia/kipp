@@ -13,6 +13,9 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.42.0):
     - FBSDKCoreKit
+  - Firebase/Auth (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.4.2)
   - Firebase/Core (5.20.2):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.1)
@@ -34,6 +37,11 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
   - FirebaseAnalyticsInterop (1.2.0)
+  - FirebaseAuth (5.4.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (5.4.1):
     - GoogleUtilities/Environment (~> 5.2)
@@ -169,9 +177,10 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.42.0)
   - FBSDKLoginKit (~> 4.42.0)
   - FBSDKShareKit (~> 4.42.0)
-  - Firebase/Core
-  - Firebase/Functions
-  - Firebase/Messaging
+  - Firebase/Auth (~> 5.20.1)
+  - Firebase/Core (~> 5.20.1)
+  - Firebase/Functions (~> 5.20.1)
+  - Firebase/Messaging (~> 5.20.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
@@ -201,6 +210,7 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
+    - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseFunctions
@@ -248,6 +258,7 @@ SPEC CHECKSUMS:
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
+  FirebaseAuth: dd7bbf03a5aee0eafb3a1aee4d2812bd74bac890
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
   FirebaseFunctions: 35b530c69ef8c322c414104280d36a06347a5d49
@@ -270,6 +281,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: e85b671ed45bb8c1b54f94e08b0e8fca41759dac
+PODFILE CHECKSUM: 85a18d43011ccb2a45841e50676cbd404ae17d18
 
 COCOAPODS: 1.6.1
