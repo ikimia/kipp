@@ -7,6 +7,7 @@ import { AccessToken, LoginManager } from "react-native-fbsdk";
 import { FacebookAccessTokenStorage, FacebookProfileStorage } from "../Storage";
 import PropTypes from "prop-types";
 import { SafeAreaView } from "react-navigation";
+import Backdrop, { PATTERNS } from "../components/Backdrop";
 
 async function getAccessToken() {
   let accessToken = await FacebookAccessTokenStorage.get();
@@ -84,8 +85,9 @@ export default function AuthenticationFlow({ Loading, App }) {
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Backdrop pattern={PATTERNS.Triangles} />
       <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
-        <Logo fontSize={100} />
+        <Logo fontSize={100} color="white" />
       </View>
       <View
         style={{ flex: 1, justifyContent: "center", paddingHorizontal: 20 }}

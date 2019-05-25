@@ -9,7 +9,7 @@ import StyledText from "./StyledText";
 export default function FBLoginButton({ onLogin, onCancel, onError }) {
   return (
     <RectButton
-      style={{ backgroundColor: "#157EFB", borderRadius: 5 }}
+      style={{ backgroundColor: "#3b5998", borderRadius: 5 }}
       onPress={() => {
         LoginManager.logInWithReadPermissions(["public_profile", "email"])
           .then(result => {
