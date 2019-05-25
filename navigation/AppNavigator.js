@@ -20,7 +20,7 @@ const AppContainer = createAppContainer(
 export default function AppNavigator() {
   return (
     <AppContainer
-      onNavigationStateChange={(prevState, currentState, action) => {
+      onNavigationStateChange={(prevState, currentState) => {
         const currentScreen = getActiveRouteName(currentState);
         const prevScreen = getActiveRouteName(prevState);
         if (prevScreen !== currentScreen) {
