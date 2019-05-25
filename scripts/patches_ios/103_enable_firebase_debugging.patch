@@ -1,0 +1,17 @@
+diff --git c/kipp.xcodeproj/xcshareddata/xcschemes/kipp.xcscheme i/kipp.xcodeproj/xcshareddata/xcschemes/kipp.xcscheme
+index 4bdc8e8..8ec0751 100644
+--- c/kipp.xcodeproj/xcshareddata/xcschemes/kipp.xcscheme
++++ i/kipp.xcodeproj/xcshareddata/xcschemes/kipp.xcscheme
+@@ -99,6 +99,12 @@
+             ReferencedContainer = "container:kipp.xcodeproj">
+          </BuildableReference>
+       </BuildableProductRunnable>
++      <CommandLineArguments>
++         <CommandLineArgument
++            argument = "-FIRAnalyticsDebugEnabled"
++            isEnabled = "YES">
++         </CommandLineArgument>
++      </CommandLineArguments>
+       <AdditionalOptions>
+       </AdditionalOptions>
+    </LaunchAction>
