@@ -8,17 +8,21 @@ rm -rf ios
 react-native eject
 pushd ios
     git init
-    ln -s ../scripts/files/.gitignore
+    ln -s ../scripts/files/.gitignore .
     git add .
     git commit -m'react native eject'
 
-    ln -s ../scripts/files/Podfile
-    ln -s ../scripts/files/Podfile.lock
+    ln -s ../scripts/files/Podfile .
+    ln -s ../scripts/files/Podfile.lock .
     git add .
     git commit -m'Add podfile'
 
     for file in ../scripts/patches_ios/*.patch; do
-        git apply $file
+        if basename ${file} | grep -iq '^x'; then
+            echo "Ignoring $(basename ${file})"
+            continue
+        fi
+        git apply "$file"
         git add .
         git commit -m"Apply $(basename ${file})"
     done
