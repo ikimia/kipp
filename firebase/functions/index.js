@@ -9,10 +9,15 @@ admin.initializeApp({
 });
 
 exports.getCode = functions.https.onRequest((req, res) => {
+  const tokenId = req.get("Authorization").split("Bearer ")[1];
   const code = Math.random()
     .toString(10)
     .slice(2, 8);
-  res.json({ data: { code } });
+  admin
+    .auth()
+    .verifyIdToken(tokenId)
+    .then(decoded => res.status(200).send({ data: { code, decoded } }))
+    .catch(err => res.status(401).send(err));
 });
 
 exports.charge = functions.https.onRequest(async (req, res) => {
