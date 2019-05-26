@@ -3,13 +3,14 @@ import { useContext, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { View, Image } from "react-native";
 import { NavigationContext, NavigationEvents } from "react-navigation";
-import { SocialProfile } from "../contexes/SocialProfile";
 import ListItem from "../components/ListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import CreditCardIcon from "../components/CreditCardIcon";
 import { CreditCardStorage } from "../Storage";
 import { COLORS } from "../components/ItemListItem";
+import { LoginManager } from "react-native-fbsdk";
+import firebase from "react-native-firebase";
 
 function CreditCardPreview({ cardNumber, loading }) {
   if (!loading && !cardNumber) {
@@ -54,9 +55,9 @@ function ProfilePicture({ uri, radius, borderWidth = 3 }) {
 
 export default function ProfileScreen() {
   const { navigate } = useContext(NavigationContext);
-  const { userProfile, logout } = useContext(SocialProfile);
   const [cardNumber, setCardNumber] = useState(null);
   const [cardLoading, setCardLoading] = useState(true);
+  const currentUser = firebase.auth().currentUser;
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -88,9 +89,12 @@ export default function ProfileScreen() {
               backgroundColor: COLORS[4]
             }}
           />
-          <ProfilePicture uri={userProfile.picture} radius={75} />
+          <ProfilePicture
+            uri={`${currentUser.photoURL}?type=large`}
+            radius={75}
+          />
           <StyledText size={20} bold style={{ marginTop: 10 }}>
-            {userProfile.name}
+            {currentUser.displayName}
           </StyledText>
           <CreditCardPreview loading={cardLoading} cardNumber={cardNumber} />
         </View>
@@ -110,7 +114,16 @@ export default function ProfileScreen() {
               navigate("LanguageSettings");
             }}
           />
-          <ListItem last icon="log-out" text="Sign Out" onPress={logout} />
+          <ListItem
+            last
+            icon="log-out"
+            text="Sign Out"
+            onPress={() => {
+              LoginManager.logOut();
+              firebase.auth().signOut();
+              navigate("Auth");
+            }}
+          />
         </View>
       </ScrollView>
     </View>
