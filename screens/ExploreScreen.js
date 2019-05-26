@@ -19,7 +19,7 @@ const nearbyStores = [
   ["Hamiznon"]
 ];
 
-export default function StoresScreen() {
+export default function ExploreScreen() {
   return (
     <View style={{ flex: 1 }}>
       <AppHeader

@@ -11,7 +11,7 @@ import MainScreen from "../screens/MainScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PurchasesScreen from "../screens/PurchasesScreen";
 import RewardsScreen from "../screens/RewardsScreen";
-import StoresScreen from "../screens/StoresScreen";
+import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 
@@ -66,7 +66,7 @@ export default createBottomTabNavigator(
       "tag"
     ),
     Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
-    Explore: stack({ Explore: StoresScreen }, "Explore", "search"),
+    Explore: stack({ Explore: ExploreScreen }, "Explore", "search"),
     Settings: stack(
       {
         Settings: ProfileScreen,
