@@ -17,6 +17,10 @@ pushd ios
     git add .
     git commit -m'Add podfile'
 
+    cp -r ../scripts/files/AppIcon.appiconset kipp/Images.xcassets/
+    git add .
+    git commit -m'Add app icon'
+
     for file in ../scripts/patches_ios/*.patch; do
         if basename ${file} | grep -iq '^x'; then
             echo "Ignoring $(basename ${file})"
