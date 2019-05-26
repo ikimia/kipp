@@ -44,7 +44,7 @@ async function initFacebookProfile() {
   const firebaseUserCredential = await firebase
     .auth()
     .signInWithCredential(credential);
-  const { displayName } = firebaseUserCredential;
+  const { displayName } = firebaseUserCredential.user;
   const { picture } = firebaseUserCredential.additionalUserInfo.profile;
 
   profile = {

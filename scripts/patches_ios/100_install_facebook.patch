@@ -59,7 +59,7 @@ index 39b500e..58cddff 100644
 +	<key>FacebookAppID</key>
 +	<string>633862357078952</string>
 +	<key>FacebookDisplayName</key>
-+	<string>Street Pay</string>
++	<string>Kipp</string>
 +	<key>LSApplicationQueriesSchemes</key>
 +	<array>
 +		<string>fbapi</string>
