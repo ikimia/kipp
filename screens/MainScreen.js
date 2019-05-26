@@ -6,12 +6,12 @@ import {
   NavigationContext
 } from "react-navigation";
 import { BorderlessButton } from "react-native-gesture-handler";
-import { SocialProfile } from "../contexes/SocialProfile";
 import Logo from "../components/Logo";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
 import * as Backend from "../Backend";
 import PaymentCode from "../components/PaymentCode";
+import firebase from "react-native-firebase";
 
 const CODE_TIMEOUT = 120;
 
@@ -79,7 +79,6 @@ function confirmPayment(storeName, price, onConfirm) {
 export default function MainScren() {
   const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
-  const { userProfile } = useContext(SocialProfile);
   const { navigate } = useContext(NavigationContext);
   const setNewCode = (keepPattern = false) => {
     setCode(null);
@@ -133,7 +132,7 @@ export default function MainScren() {
           }}
         >
           {[
-            `${getGreeting()}, ${userProfile.name}!`,
+            `${getGreeting()}, ${firebase.auth().currentUser.displayName}!`,
             "To pay, give the payment code to the seller.",
             `The code is valid for the next ${useTimer(
               code,

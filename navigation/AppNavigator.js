@@ -3,6 +3,8 @@ import firebase from "react-native-firebase";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import MainTabNavigator from "./MainTabNavigator";
 import PaymentScreen from "../screens/PaymentScreen";
+import AuthenticationFlow from "../screens/AuthenticationFlow";
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 
 function getActiveRouteName(navigationState) {
   if (!navigationState) {
@@ -17,8 +19,13 @@ function getActiveRouteName(navigationState) {
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(
-    { App: MainTabNavigator, Payment: PaymentScreen },
-    { initialRouteName: "App" }
+    {
+      AuthLoading: AuthLoadingScreen,
+      Auth: AuthenticationFlow,
+      App: MainTabNavigator,
+      Payment: PaymentScreen
+    },
+    { initialRouteName: "AuthLoading" }
   )
 );
 export default function AppNavigator() {
