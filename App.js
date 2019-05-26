@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { View } from "react-native";
 import AppNavigator from "./navigation/AppNavigator";
 import { useDirection } from "./hooks/direction";
+
 function App() {
   const direction = useDirection();
   return (
