@@ -1,8 +1,7 @@
 import React from "react";
 import {
   createStackNavigator,
-  createBottomTabNavigator,
-  createSwitchNavigator
+  createBottomTabNavigator
 } from "react-navigation";
 import i18next from "i18next";
 import Icon from "react-native-vector-icons/Feather";
@@ -15,7 +14,6 @@ import RewardsScreen from "../screens/RewardsScreen";
 import StoresScreen from "../screens/StoresScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
-import PaymentScreen from "../screens/PaymentScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -56,34 +54,28 @@ const stack = (stacks, initialRouteName, icon) =>
     })
   });
 
-export default createSwitchNavigator(
+export default createBottomTabNavigator(
   {
-    App: createBottomTabNavigator(
+    Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
+    Receipts: stack(
       {
-        Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
-        Receipts: stack(
-          {
-            Receipts: PurchasesScreen,
-            PastOrder: PastOrderScreen
-          },
-          "Receipts",
-          "tag"
-        ),
-        Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
-        Explore: stack({ Explore: StoresScreen }, "Explore", "search"),
-        Settings: stack(
-          {
-            Settings: ProfileScreen,
-            PaymentSettings: PaymentSettingsScreen,
-            LanguageSettings: LanguageSettingsScreen
-          },
-          "Settings",
-          "settings"
-        )
+        Receipts: PurchasesScreen,
+        PastOrder: PastOrderScreen
       },
-      { initialRouteName: "Pay" }
+      "Receipts",
+      "tag"
     ),
-    Payment: PaymentScreen
+    Rewards: stack({ Rewards: RewardsScreen }, "Rewards", "gift"),
+    Explore: stack({ Explore: StoresScreen }, "Explore", "search"),
+    Settings: stack(
+      {
+        Settings: ProfileScreen,
+        PaymentSettings: PaymentSettingsScreen,
+        LanguageSettings: LanguageSettingsScreen
+      },
+      "Settings",
+      "settings"
+    )
   },
-  { initialRouteName: "App" }
+  { initialRouteName: "Pay" }
 );
