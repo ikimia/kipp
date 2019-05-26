@@ -24,7 +24,7 @@ export default function AppNavigator() {
         const currentScreen = getActiveRouteName(currentState);
         const prevScreen = getActiveRouteName(prevState);
         if (prevScreen !== currentScreen) {
-          firebase.analytics().setCurrentScreen(currentScreen, currentScreen);
+          firebase.analytics().setCurrentScreen(currentScreen);
         }
       }}
     />
