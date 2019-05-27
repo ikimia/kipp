@@ -9,36 +9,21 @@ import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
-import { getCompanyName, getCompanyAddress, RandomLogo } from "../FakeData";
+import {
+  getCompanyName,
+  getCompanyAddress,
+  RandomLogo,
+  repeat
+} from "../FakeData";
 
 const sections = [
-  [
-    "Nearby",
-    Array(3)
-      .fill()
-      .map(() => [getCompanyName(), getCompanyAddress()])
-  ],
-  [
-    "Recently Visited",
-    Array(3)
-      .fill()
-      .map(() => [getCompanyName(), getCompanyAddress()])
-  ]
+  ["Nearby", repeat(3, () => [getCompanyName(), getCompanyAddress()])],
+  ["Recently Visited", repeat(3, () => [getCompanyName(), getCompanyAddress()])]
 ];
 
 const lanes = [
-  [
-    "Featured",
-    Array(5)
-      .fill()
-      .map(getCompanyName)
-  ],
-  [
-    "Offers Memberships",
-    Array(5)
-      .fill()
-      .map(getCompanyName)
-  ]
+  ["Featured", repeat(5, getCompanyName)],
+  ["Offers Memberships", repeat(5, getCompanyName)]
 ];
 
 const Header = ({ title }) => (
