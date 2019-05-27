@@ -27,7 +27,7 @@ export default function ItemListItem({
   return (
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ padding: 15 }}>
+        <View style={{ paddingHorizontal: 15 }}>
           <View
             style={{
               height: 50,

@@ -1,23 +1,65 @@
 import * as React from "react";
 import { View } from "react-native";
-import { TextInput, FlatList } from "react-native-gesture-handler";
+import {
+  TextInput,
+  FlatList,
+  BorderlessButton
+} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
+import { getCompanyName, getCompanyAddress, RandomLogo } from "../FakeData";
 
 const sections = [
-  ["Featured", [["Zara"], ["Zara"], ["Zara"], ["Zara"], ["Zara"]]],
-  ["Recently Visited", [["Zara"], ["Zara"], ["Zara"], ["Zara"], ["Zara"]]]
+  [
+    "Nearby",
+    Array(3)
+      .fill()
+      .map(() => [getCompanyName(), getCompanyAddress()])
+  ],
+  [
+    "Recently Visited",
+    Array(3)
+      .fill()
+      .map(() => [getCompanyName(), getCompanyAddress()])
+  ]
 ];
 
-const nearbyStores = [
-  ["Castro"],
-  ["McDonalds"],
-  ["Yuda"],
-  ["Chop Chop"],
-  ["Hamiznon"]
+const lanes = [
+  [
+    "Featured",
+    Array(5)
+      .fill()
+      .map(getCompanyName)
+  ],
+  [
+    "Offers Memberships",
+    Array(5)
+      .fill()
+      .map(getCompanyName)
+  ]
 ];
+
+const Header = ({ title }) => (
+  <View
+    style={{
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "flex-end",
+      margin: 10
+    }}
+  >
+    <StyledText bold size={20}>
+      {title}
+    </StyledText>
+    <BorderlessButton activeOpacity={0.5}>
+      <StyledText size={16} color="#777">
+        see all
+      </StyledText>
+    </BorderlessButton>
+  </View>
+);
 
 export default function ExploreScreen() {
   return (
@@ -45,71 +87,46 @@ export default function ExploreScreen() {
         }
       />
       <FlatList
-        data={nearbyStores}
+        data={sections}
         keyExtractor={([storeName]) => storeName}
         ListHeaderComponent={() => (
-          <View style={{ paddingTop: 15 }}>
-            {sections.map(([name, stores]) => (
-              <View style={{ marginBottom: 30 }} key={name}>
-                <StyledText
-                  bold
-                  size={20}
-                  style={{
-                    marginBottom: 10,
-                    marginStart: 10
-                  }}
-                >
-                  {name}
-                </StyledText>
+          <View style={{ paddingTop: 10 }}>
+            {lanes.map(([title, stores]) => (
+              <View key={title}>
+                <Header title={title} />
                 <FlatList
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   ListHeaderComponent={() => <View style={{ width: 5 }} />}
                   data={stores}
                   keyExtractor={(_, i) => `${i}`}
-                  renderItem={({ item: [storeName], index: i }) => (
-                    <View style={{ marginHorizontal: 5 }}>
-                      <View
-                        style={{
-                          height: 80,
-                          width: 80,
-                          backgroundColor: COLORS[i % COLORS.length],
-                          justifyContent: "center",
-                          alignItems: "center"
-                        }}
-                      >
-                        <StyledText color="white" size={28} bold>
-                          {storeName.slice(0, 1)}
-                        </StyledText>
-                      </View>
-                      <StyledText size={16} style={{ marginTop: 5 }}>
+                  renderItem={({ item: storeName }) => (
+                    <View style={{ marginHorizontal: 6, width: 120 }}>
+                      <RandomLogo />
+                      <StyledText size={14} bold style={{ marginTop: 5 }}>
                         {storeName}
                       </StyledText>
-                      <StyledText size={12}>Clothing</StyledText>
+                      <StyledText size={10}>Clothing</StyledText>
                     </View>
                   )}
                 />
               </View>
             ))}
-            <StyledText
-              bold
-              size={20}
-              style={{
-                marginBottom: 10,
-                marginStart: 10
-              }}
-            >
-              Nearby
-            </StyledText>
           </View>
         )}
-        renderItem={({ item: [storeName], index: i }) => (
-          <ItemListItem
-            color={COLORS[COLORS.length - 1 - (i % COLORS.length)]}
-            logo={storeName.slice(0, 1)}
-            title={storeName}
-            text="אחד העם 13, תל אביב"
-          />
+        renderItem={({ item: [sectionName, stores], index: i }) => (
+          <View>
+            <Header title={sectionName} />
+            {stores.map(([storeName, storeLocation], j) => (
+              <ItemListItem
+                key={j}
+                color={COLORS[(j + 1 + i * stores.length) % COLORS.length]}
+                logo={storeName.slice(0, 1)}
+                title={storeName}
+                text={storeLocation}
+              />
+            ))}
+          </View>
         )}
       />
     </View>
