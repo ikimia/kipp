@@ -1,10 +1,15 @@
 import * as React from "react";
 import { View } from "react-native";
-import { RectButton, ScrollView, FlatList } from "react-native-gesture-handler";
+import {
+  RectButton,
+  ScrollView,
+  FlatList,
+  BorderlessButton
+} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
-import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
+import { RandomLogo, getCompanyName, repeat } from "../FakeData";
 
 function Chip({ title, icon }) {
   return (
@@ -20,7 +25,7 @@ function Chip({ title, icon }) {
       <View
         style={{ opacity: 0.6, flexDirection: "row", alignItems: "center" }}
       >
-        {icon && <Icon name={icon} style={{ marginEnd: 5 }} />}
+        {<Icon name={icon} style={{ marginEnd: 5 }} />}
         <StyledText>{title}</StyledText>
       </View>
     </RectButton>
@@ -48,18 +53,7 @@ const FILTERS = [
   { icon: "clock", title: "Relevant Now" }
 ];
 
-const REWARDS = [
-  ["percent", "20% on selected items", "Zara", "Details inside"],
-  ["grid", "10th ice cream free", "Vaniglia", "6 punches left"],
-  ["gift", "Free Chocolate Milk", "Yuda", "Details inside"],
-  [
-    "clock",
-    "Happy Hour until 11PM",
-    "ShemTov",
-    "Valid until tomorrow!",
-    "important"
-  ]
-];
+const REWARDS = repeat(6, getCompanyName);
 
 export default function MembershipsScreen() {
   return (
@@ -75,20 +69,28 @@ export default function MembershipsScreen() {
         <FlatList
           data={REWARDS}
           keyExtractor={(_, i) => `${i}`}
-          renderItem={({
-            item: [reward, text, store, secondary, secondaryImportant],
-            index: i
-          }) => (
-            <ItemListItem
-              onPress={() => {}}
-              color={COLORS[i % COLORS.length]}
-              logo={store.slice(0, 1)}
-              title={store}
-              text={text}
-              secondaryText={secondary}
-              secondaryTextImportant={secondaryImportant}
-              sideComponent={<Icon name={reward} size={30} />}
-            />
+          renderItem={({ item: store }) => (
+            <View style={{ alignItems: "center" }}>
+              <View
+                style={{
+                  marginBottom: 25,
+                  borderRadius: 3,
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 6
+                  },
+                  shadowOpacity: 0.37,
+                  shadowRadius: 7.49,
+
+                  elevation: 12
+                }}
+              >
+                <BorderlessButton activeOpacity={0.5}>
+                  <RandomLogo height={180} width={350} text={store} />
+                </BorderlessButton>
+              </View>
+            </View>
           )}
         />
       </View>
