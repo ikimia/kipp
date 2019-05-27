@@ -29,6 +29,7 @@ target 'kipp' do
   pod 'Firebase/Functions', '~> 5.20.1'
   pod 'Firebase/Messaging', '~> 5.20.1'
   pod 'Firebase/Auth', '~> 5.20.1'
+  pod 'Firebase/Firestore', '~> 5.20.1'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'

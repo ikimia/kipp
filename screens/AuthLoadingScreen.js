@@ -2,15 +2,12 @@ import * as React from "react";
 import { useEffect, useContext } from "react";
 import { View } from "react-native";
 import { NavigationContext } from "react-navigation";
-import firebase from "react-native-firebase";
+import { getCurrentUser } from "../Backend";
 
 export default function AuthLoadingScreen() {
   const { navigate } = useContext(NavigationContext);
   useEffect(() => {
-    (async function() {
-      const currentUser = await firebase.auth().currentUser;
-      navigate(currentUser ? "App" : "Auth");
-    })();
+    navigate(getCurrentUser() ? "App" : "Auth");
   }, []);
   return <View />;
 }

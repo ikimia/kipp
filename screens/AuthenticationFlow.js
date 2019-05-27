@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { View } from "react-native";
 import { SafeAreaView, NavigationContext } from "react-navigation";
 import { AccessToken } from "react-native-fbsdk";
-import firebase from "react-native-firebase";
 
 import Logo from "../components/Logo";
 import FBLoginButton from "../components/FBLoginButton";
 import Backdrop, { PATTERNS } from "../components/Backdrop";
+import { signIn } from "../Backend";
 
 export default function AuthenticationFlow() {
   const { navigate } = useContext(NavigationContext);
@@ -16,10 +16,7 @@ export default function AuthenticationFlow() {
     if (!accessToken) {
       return;
     }
-    const credential = firebase.auth.FacebookAuthProvider.credential(
-      accessToken.accessToken
-    );
-    await firebase.auth().signInWithCredential(credential);
+    await signIn(accessToken.accessToken);
     navigate("App");
   };
   return (

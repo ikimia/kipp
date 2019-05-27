@@ -10,7 +10,7 @@ import CreditCardIcon from "../components/CreditCardIcon";
 import { CreditCardStorage } from "../Storage";
 import { COLORS } from "../components/ItemListItem";
 import { LoginManager } from "react-native-fbsdk";
-import firebase from "react-native-firebase";
+import { getCurrentUser, signOut } from "../Backend";
 
 function CreditCardPreview({ cardNumber, loading }) {
   if (!loading && !cardNumber) {
@@ -57,7 +57,7 @@ export default function ProfileScreen() {
   const { navigate } = useContext(NavigationContext);
   const [cardNumber, setCardNumber] = useState(null);
   const [cardLoading, setCardLoading] = useState(true);
-  const currentUser = firebase.auth().currentUser;
+  const currentUser = getCurrentUser();
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -120,7 +120,7 @@ export default function ProfileScreen() {
             text="Sign Out"
             onPress={() => {
               LoginManager.logOut();
-              firebase.auth().signOut();
+              signOut();
               navigate("Auth");
             }}
           />
