@@ -61,7 +61,7 @@ const REWARDS = [
   ]
 ];
 
-export default function RewardsScreen() {
+export default function MembershipsScreen() {
   return (
     <View style={{ flex: 1 }}>
       <AppHeader
