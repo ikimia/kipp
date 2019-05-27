@@ -45,3 +45,13 @@ pushd ios
     git add .
     git commit -m"Add GoogleService-Info.plist"
 popd
+
+RNFIREBASE_FUNCTIONS_MD5=$(md5 -q node_modules/react-native-firebase/ios/RNFirebase/functions/RNFirebaseFunctions.m)
+if [[ $RNFIREBASE_FUNCTIONS_MD5 == "da28fda6243be263ec00ba38d98de436" ]]; then
+    cp scripts/files/RNFirebaseFunctions.m node_modules/react-native-firebase/ios/RNFirebase/functions/
+elif [[ $RNFIREBASE_FUNCTIONS_MD5 == $(md5 -q scripts/files/RNFirebaseFunctions.m) ]]; then
+    echo "RNFirebase Functions already replaced"
+else
+    echo "Unexpected version of RNFirebase"
+    exit 1
+fi
