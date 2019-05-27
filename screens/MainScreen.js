@@ -11,7 +11,6 @@ import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
 import * as Backend from "../Backend";
 import PaymentCode from "../components/PaymentCode";
-import firebase from "react-native-firebase";
 
 const CODE_TIMEOUT = 120;
 
@@ -132,7 +131,7 @@ export default function MainScren() {
           }}
         >
           {[
-            `${getGreeting()}, ${firebase.auth().currentUser.displayName}!`,
+            `${getGreeting()}, ${Backend.getCurrentUser().displayName}!`,
             "To pay, give the payment code to the seller.",
             `The code is valid for the next ${useTimer(
               code,

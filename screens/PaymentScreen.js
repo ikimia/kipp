@@ -1,10 +1,11 @@
 import * as React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { View, Image } from "react-native";
 import StyledText from "../components/StyledText";
 import { NavigationContext, NavigationEvents } from "react-navigation";
 import { RectButton } from "react-native-gesture-handler";
 import { COLORS } from "../components/ItemListItem";
+import { acceptPayment } from "../Backend";
 
 const payingImage = require("../assets/img/paying.gif");
 const successImage = require("../assets/img/success.gif");
@@ -12,16 +13,16 @@ const successImage = require("../assets/img/success.gif");
 export default function PaymentScreen() {
   const [success, setSuccess] = useState(false);
   const { getParam, navigate } = useContext(NavigationContext);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSuccess(true);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [success]);
   return (
     <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 30 }}>
       <NavigationEvents
-        onWillFocus={() => {
+        onWillFocus={async () => {
+          const storeName = getParam("storeName");
+          const price = getParam("price");
+          await acceptPayment(storeName, price);
+          setSuccess(true);
+        }}
+        onDidBlur={async () => {
           setSuccess(false);
         }}
       />

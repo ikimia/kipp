@@ -1,10 +1,10 @@
 import React from "react";
-import firebase from "react-native-firebase";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import MainTabNavigator from "./MainTabNavigator";
 import PaymentScreen from "../screens/PaymentScreen";
 import AuthenticationFlow from "../screens/AuthenticationFlow";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
+import { reportNavigation } from "../Backend";
 
 function getActiveRouteName(navigationState) {
   if (!navigationState) {
@@ -35,7 +35,7 @@ export default function AppNavigator() {
         const currentScreen = getActiveRouteName(currentState);
         const prevScreen = getActiveRouteName(prevState);
         if (prevScreen !== currentScreen) {
-          firebase.analytics().setCurrentScreen(currentScreen);
+          reportNavigation(currentScreen);
         }
       }}
     />
