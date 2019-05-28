@@ -18,6 +18,7 @@ export const getCode = firebaseFunction("getCode");
 export const acceptPayment = firebaseFunction("acceptPayment");
 export const getExploreData = firebaseFunction("getExploreData");
 export const getUserMemberships = firebaseFunction("getUserMemberships");
+export const getExploreListStores = firebaseFunction("getExploreListStores");
 
 export function subscribe(topic, onMessage) {
   firebase.messaging().subscribeToTopic(topic);
