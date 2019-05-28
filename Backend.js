@@ -1,6 +1,6 @@
 import firebase from "react-native-firebase";
 
-const functions = firebase.functions();
+const functions = firebase.functions("europe-west1");
 
 // eslint-disable-next-line no-undef
 if (__DEV__) {
