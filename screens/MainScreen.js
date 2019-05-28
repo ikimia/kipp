@@ -84,7 +84,7 @@ export default function MainScren() {
     if (!keepPattern) {
       setPattern(getRandomPattern(pattern));
     }
-    Backend.getCode().then(newCode => {
+    Backend.getCode().then(({ code: newCode }) => {
       if (code) {
         Backend.unsubscribe(code);
       }

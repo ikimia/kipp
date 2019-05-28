@@ -1,3 +1,7 @@
+const {
+  company: { companyName: getStoreName },
+  address: { streetAddress: getStoreAddress }
+} = require("faker");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
@@ -58,5 +62,31 @@ exports.acceptPayment = functions.https.onRequest(
       .collection("receipts")
       .add({ uid, storeName, price, created });
     res.json({ data: null });
+  })
+);
+
+function repeat(num, func) {
+  return Array(num)
+    .fill()
+    .map(() => func());
+}
+
+exports.getExploreData = functions.https.onRequest(
+  auth(async (req, res) => {
+    const lanes = [
+      ["Featured", repeat(5, getStoreName)],
+      ["Offers Memberships", repeat(5, getStoreName)]
+    ];
+    const sections = [
+      ["Nearby", repeat(3, () => [getStoreName(), getStoreAddress()])],
+      ["Recently Visited", repeat(3, () => [getStoreName(), getStoreAddress()])]
+    ];
+    res.json({ data: { lanes, sections } });
+  })
+);
+
+exports.getUserMemberships = functions.https.onRequest(
+  auth(async (req, res) => {
+    res.json({ data: repeat(6, getStoreName) });
   })
 );
