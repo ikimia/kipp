@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { View } from "react-native";
-import { items, totalAmount } from "../constants/Data";
+import { items } from "../constants/Data";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
 import StyledText from "../components/StyledText";
@@ -65,7 +65,7 @@ export default function OrderScreen({ receiptId }) {
             }}
           >
             <StyledText bold>Total</StyledText>
-            <StyledText bold>${totalAmount}</StyledText>
+            <StyledText bold>${receipt.price}</StyledText>
           </View>
           <View
             style={{
@@ -79,7 +79,7 @@ export default function OrderScreen({ receiptId }) {
             <StyledText bold>Businesss Details</StyledText>
           </View>
           <View>
-            <StyledText>McDonalds</StyledText>
+            <StyledText>{receipt.storeName}</StyledText>
             <StyledText>Aba Ahimeir 23, Tel Aviv, Israel</StyledText>
           </View>
           <View
@@ -94,7 +94,7 @@ export default function OrderScreen({ receiptId }) {
             <StyledText bold>Additional Information</StyledText>
           </View>
           <View>
-            <StyledText>Order ID: 12391241231</StyledText>
+            <StyledText>Order ID: {receipt.id}</StyledText>
           </View>
           <View
             style={{
