@@ -17,7 +17,7 @@ const defineFunction = handler =>
 
 function auth(next) {
   return async function(req, res) {
-    const [, tokenId] = req.get("Authorization").split("Bearer ");
+    const tokenId = req.get("Authorization").slice("Bearer ".length);
     try {
       req.user = await admin.auth().verifyIdToken(tokenId);
       next(req, res);
