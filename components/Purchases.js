@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, RefreshControl } from "react-native";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
@@ -8,8 +8,8 @@ import ItemListItem, { COLORS } from "./ItemListItem";
 import StyledText from "./StyledText";
 import { getReceipts } from "../Backend";
 
-const m = language => {
-  const localizedMoment = moment();
+const m = (language, created) => {
+  const localizedMoment = moment(created);
   localizedMoment.locale(language);
   return localizedMoment;
 };
@@ -27,22 +27,24 @@ export default function Purchases() {
   return (
     <FlatList
       data={data}
-      refreshing={refreshing}
-      onRefresh={async () => {
-        setRefreshing(true);
-        await refreshData();
-        setRefreshing(false);
-      }}
+      refreshControl={
+        <RefreshControl
+          onRefresh={async () => {
+            setRefreshing(true);
+            await refreshData();
+            setRefreshing(false);
+          }}
+          refreshing={refreshing}
+        />
+      }
       keyExtractor={(_, i) => `${i}`}
-      renderItem={({ item: { storeName, price, created = 1 }, index: i }) => (
+      renderItem={({ item: { storeName, price, created }, index: i }) => (
         <ItemListItem
           onPress={() => navigate("PastOrder", { storeName })}
           color={COLORS[i % COLORS.length]}
           logo={storeName.slice(0, 1)}
           title={storeName}
-          text={m(language)
-            .subtract(created, "day")
-            .calendar()}
+          text={m(language, created).calendar()}
           sideComponent={
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
               <StyledText size={16} color="#666" style={{ marginEnd: 2 }}>
