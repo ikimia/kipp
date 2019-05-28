@@ -200,7 +200,7 @@ PODS:
     - React/RCTBlob
   - RNCAsyncStorage (1.3.3):
     - React
-  - RNFirebase (5.3.1):
+  - RNFirebase (5.4.0):
     - Firebase/Core
     - React
   - RNGestureHandler (1.1.0):
@@ -326,7 +326,7 @@ SPEC CHECKSUMS:
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
   RNCAsyncStorage: e71d854855f99b1fc46d468858265608b917bbb8
-  RNFirebase: f20e5e4ceaa632aebb1a29a9a91022ae0469c633
+  RNFirebase: 23f9e86efabd055d5d4178730f767694208b2f53
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
