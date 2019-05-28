@@ -14,6 +14,7 @@ import MembershipsScreen from "../screens/MembershipsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
+import ExploreListScreen from "../screens/ExploreListScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -70,7 +71,14 @@ export default createBottomTabNavigator(
       "Memberships",
       "gift"
     ),
-    Explore: stack({ Explore: ExploreScreen }, "Explore", "search"),
+    Explore: stack(
+      {
+        Explore: ExploreScreen,
+        ExploreList: ExploreListScreen
+      },
+      "Explore",
+      "search"
+    ),
     Settings: stack(
       {
         Settings: ProfileScreen,
@@ -81,5 +89,5 @@ export default createBottomTabNavigator(
       "settings"
     )
   },
-  { initialRouteName: "Pay" }
+  { initialRouteName: "Explore" }
 );
