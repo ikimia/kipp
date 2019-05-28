@@ -46,7 +46,7 @@ exports.charge = defineFunction(async (req, res) => {
   res.json({ topic });
 });
 
-exports.demo = functions.https.onRequest(async (req, res) => {
+exports.demo = defineFunction(async (req, res) => {
   const { paymentCode: topic, price, storeName, secret } = req.body;
   if (secret !== "kippisbest") {
     return res.status(403).send();
