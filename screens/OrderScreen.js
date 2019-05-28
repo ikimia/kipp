@@ -10,6 +10,30 @@ import SmallHeader from "../components/SmallHeader";
 import { getReceipt } from "../Backend";
 import moment from "moment";
 
+function Section({ title, children }) {
+  return (
+    <View style={{ marginBottom: 20 }}>
+      <View
+        style={{
+          borderBottomColor: "#999",
+          borderBottomWidth: 1,
+          paddingBottom: 5,
+          marginBottom: 5
+        }}
+      >
+        <StyledText bold>{title}</StyledText>
+      </View>
+      {children}
+    </View>
+  );
+}
+
+const ACTIONS = [
+  { icon: "tag", text: "View original receipt" },
+  { icon: "mail", text: "Send receipt to email" },
+  { icon: "phone", text: "Contact business" }
+];
+
 export default function OrderScreen({ receiptId }) {
   const { t } = useTranslation("stores");
   const [receipt, setReceipt] = useState(null);
@@ -27,108 +51,57 @@ export default function OrderScreen({ receiptId }) {
               {moment(receipt.created).format("L LT")}
             </StyledText>
           </View>
-          <View
-            style={{
-              borderBottomColor: "#999",
-              borderBottomWidth: 1,
-              paddingBottom: 5,
-              marginBottom: 5
-            }}
-          >
-            <StyledText bold>Purchase Details</StyledText>
-          </View>
-          {items.map((item, i) => (
+          <Section title="Purchase Details">
+            {items.map((item, i) => (
+              <View
+                key={i}
+                style={{
+                  borderBottomColor: "#EEE",
+                  borderBottomWidth: 1,
+                  paddingBottom: 5,
+                  marginBottom: 5,
+                  flexDirection: "row",
+                  justifyContent: "space-between"
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <StyledText>{t(item.description)}</StyledText>
+                  {item.count > 1 ? (
+                    <StyledText color="#666"> &times;{item.count}</StyledText>
+                  ) : null}
+                </View>
+                <StyledText>${item.price * item.count}</StyledText>
+              </View>
+            ))}
             <View
-              key={i}
               style={{
-                borderBottomColor: "#EEE",
-                borderBottomWidth: 1,
-                paddingBottom: 5,
-                marginBottom: 5,
                 flexDirection: "row",
                 justifyContent: "space-between"
               }}
             >
-              <View style={{ flexDirection: "row" }}>
-                <StyledText>{t(item.description)}</StyledText>
-                {item.count > 1 ? (
-                  <StyledText color="#666"> &times;{item.count}</StyledText>
-                ) : null}
-              </View>
-              <StyledText>${item.price * item.count}</StyledText>
+              <StyledText bold>Total</StyledText>
+              <StyledText bold>${receipt.price}</StyledText>
             </View>
-          ))}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between"
-            }}
-          >
-            <StyledText bold>Total</StyledText>
-            <StyledText bold>${receipt.price}</StyledText>
-          </View>
-          <View
-            style={{
-              borderBottomColor: "#999",
-              borderBottomWidth: 1,
-              paddingBottom: 5,
-              marginBottom: 5,
-              marginTop: 20
-            }}
-          >
-            <StyledText bold>Businesss Details</StyledText>
-          </View>
-          <View>
+          </Section>
+          <Section title="Business Details">
             <StyledText>{receipt.storeName}</StyledText>
             <StyledText>Aba Ahimeir 23, Tel Aviv, Israel</StyledText>
-          </View>
-          <View
-            style={{
-              borderBottomColor: "#999",
-              borderBottomWidth: 1,
-              paddingBottom: 5,
-              marginBottom: 5,
-              marginTop: 20
-            }}
-          >
-            <StyledText bold>Additional Information</StyledText>
-          </View>
-          <View>
+          </Section>
+          <Section title="Additional Information">
             <StyledText>Order ID: {receipt.id}</StyledText>
-          </View>
-          <View
-            style={{
-              borderBottomColor: "#999",
-              borderBottomWidth: 1,
-              paddingBottom: 5,
-              marginBottom: 5,
-              marginTop: 20
-            }}
-          >
-            <StyledText bold>Actions</StyledText>
-          </View>
-          <ListItem
-            last
-            small
-            icon="tag"
-            text="View original receipt"
-            noCheveron
-          />
-          <ListItem
-            last
-            small
-            icon="mail"
-            text="Send receipt to email"
-            noCheveron
-          />
-          <ListItem
-            last
-            small
-            icon="phone"
-            text="Contact business"
-            noCheveron
-          />
-          <View style={{ height: 100 }} />
+          </Section>
+          <Section title="Actions">
+            {ACTIONS.map(({ icon, text }) => (
+              <ListItem
+                key={icon}
+                last
+                small
+                icon={icon}
+                text={text}
+                noCheveron
+              />
+            ))}
+          </Section>
         </ScrollView>
       )}
     </View>
