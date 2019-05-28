@@ -37,10 +37,10 @@ export default function Purchases() {
           refreshing={refreshing}
         />
       }
-      keyExtractor={(_, i) => `${i}`}
-      renderItem={({ item: { storeName, price, created }, index: i }) => (
+      keyExtractor={({ id }) => id}
+      renderItem={({ item: { id, storeName, price, created }, index: i }) => (
         <ItemListItem
-          onPress={() => navigate("PastOrder", { storeName })}
+          onPress={() => navigate("PastOrder", { receiptId: id })}
           color={COLORS[i % COLORS.length]}
           logo={storeName.slice(0, 1)}
           title={storeName}

@@ -46,3 +46,32 @@ export function getCurrentUser() {
 export function reportNavigation(screenName) {
   firebase.analytics().setCurrentScreen(screenName);
 }
+
+const createReceipt = doc => ({
+  id: doc.id,
+  uid: doc.get("uid"),
+  storeName: doc.get("storeName"),
+  price: doc.get("price"),
+  created: doc.get("created").toMillis()
+});
+
+export async function getReceipts() {
+  const docs = await firebase
+    .firestore()
+    .collection("receipts")
+    .where("uid", "==", getCurrentUser().uid)
+    .get();
+  const receipts = [];
+  docs.forEach(doc => receipts.push(createReceipt(doc)));
+  receipts.sort((a, b) => b.created - a.created);
+  return receipts;
+}
+
+export async function getReceipt(id) {
+  const doc = await firebase
+    .firestore()
+    .collection("receipts")
+    .doc(id)
+    .get();
+  return createReceipt(doc);
+}
