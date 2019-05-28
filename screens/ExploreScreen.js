@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import {
   TextInput,
@@ -12,26 +12,34 @@ import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import { RandomLogo } from "../FakeData";
 import { getExploreData } from "../Backend";
+import { NavigationContext } from "react-navigation";
 
-const Header = ({ title }) => (
-  <View
-    style={{
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "flex-end",
-      margin: 10
-    }}
-  >
-    <StyledText bold size={20}>
-      {title}
-    </StyledText>
-    <BorderlessButton activeOpacity={0.5}>
-      <StyledText size={16} color="#777">
-        see all
+const Header = ({ title }) => {
+  const { navigate } = useContext(NavigationContext);
+
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+        margin: 10
+      }}
+    >
+      <StyledText bold size={20}>
+        {title}
       </StyledText>
-    </BorderlessButton>
-  </View>
-);
+      <BorderlessButton
+        activeOpacity={0.5}
+        onPress={() => navigate("ExploreList", { title })}
+      >
+        <StyledText size={16} color="#777">
+          see all
+        </StyledText>
+      </BorderlessButton>
+    </View>
+  );
+};
 
 export default function ExploreScreen() {
   const [lanes, setLanes] = useState([]);

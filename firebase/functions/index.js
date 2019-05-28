@@ -85,6 +85,13 @@ exports.getExploreData = functions.https.onRequest(
   })
 );
 
+exports.getExploreListStores = functions.https.onRequest(
+  auth(async (req, res) => {
+    const data = repeat(20, () => [getStoreName(), getStoreAddress()]);
+    res.json({ data });
+  })
+);
+
 exports.getUserMemberships = functions.https.onRequest(
   auth(async (req, res) => {
     res.json({ data: repeat(6, getStoreName) });
