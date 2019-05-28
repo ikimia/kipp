@@ -89,5 +89,5 @@ export default createBottomTabNavigator(
       "settings"
     )
   },
-  { initialRouteName: "Explore" }
+  { initialRouteName: "Pay" }
 );
