@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { View } from "react-native";
 import {
   TextInput,
@@ -9,22 +10,8 @@ import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
-import {
-  getCompanyName,
-  getCompanyAddress,
-  RandomLogo,
-  repeat
-} from "../FakeData";
-
-const sections = [
-  ["Nearby", repeat(3, () => [getCompanyName(), getCompanyAddress()])],
-  ["Recently Visited", repeat(3, () => [getCompanyName(), getCompanyAddress()])]
-];
-
-const lanes = [
-  ["Featured", repeat(5, getCompanyName)],
-  ["Offers Memberships", repeat(5, getCompanyName)]
-];
+import { RandomLogo } from "../FakeData";
+import { getExploreData } from "../Backend";
 
 const Header = ({ title }) => (
   <View
@@ -47,10 +34,19 @@ const Header = ({ title }) => (
 );
 
 export default function ExploreScreen() {
+  const [lanes, setLanes] = useState([]);
+  const [sections, setSections] = useState([]);
+  useEffect(() => {
+    (async function() {
+      const updatedData = await getExploreData();
+      setLanes(updatedData.lanes);
+      setSections(updatedData.sections);
+    })();
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <AppHeader
-        sideComponent={<Icon name="map" style={{ fontSize: 20 }} />}
         bottomComponent={
           <View
             style={{
@@ -84,10 +80,10 @@ export default function ExploreScreen() {
                   showsHorizontalScrollIndicator={false}
                   ListHeaderComponent={() => <View style={{ width: 5 }} />}
                   data={stores}
-                  keyExtractor={(_, i) => `${i}`}
+                  keyExtractor={x => x}
                   renderItem={({ item: storeName }) => (
                     <View style={{ marginHorizontal: 6, width: 120 }}>
-                      <RandomLogo />
+                      <RandomLogo seed={storeName} />
                       <StyledText size={14} bold style={{ marginTop: 5 }}>
                         {storeName}
                       </StyledText>

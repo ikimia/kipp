@@ -2,24 +2,7 @@ import * as React from "react";
 import { Image, View } from "react-native";
 import StyledText from "./components/StyledText";
 
-const faker = require("faker");
-faker.seed(127);
-
-export function getCompanyName() {
-  return faker.company.companyName();
-}
-
-export function getCompanyAddress() {
-  return faker.address.streetAddress();
-}
-
-export function repeat(num, func) {
-  return Array(num)
-    .fill()
-    .map(() => func());
-}
-
-export function RandomLogo({ text, height = 120, width = 120 }) {
+export function RandomLogo({ text, height = 120, width = 120, seed = null }) {
   return (
     <View
       style={{
@@ -38,7 +21,11 @@ export function RandomLogo({ text, height = 120, width = 120 }) {
           right: 0,
           bottom: 0
         }}
-        source={{ uri: `https://picsum.photos/${width}/${height}` }}
+        source={{
+          uri: `https://picsum.photos/${width}/${height}${
+            seed ? "?random=" + seed : ""
+          }`
+        }}
       />
       {text ? (
         <View>

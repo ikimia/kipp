@@ -7,11 +7,17 @@ if (__DEV__) {
   functions.useFunctionsEmulator("http://localhost:5001");
 }
 
-export async function getCode() {
-  const getCodeFromBackend = functions.httpsCallable("getCode");
-  const result = await getCodeFromBackend();
-  return result.data.code;
+function firebaseFunction(funcName) {
+  return async function(...args) {
+    const callable = functions.httpsCallable(funcName);
+    const result = await callable(...args);
+    return result.data;
+  };
 }
+export const getCode = firebaseFunction("getCode");
+export const acceptPayment = firebaseFunction("acceptPayment");
+export const getExploreData = firebaseFunction("getExploreData");
+export const getUserMemberships = firebaseFunction("getUserMemberships");
 
 export function subscribe(topic, onMessage) {
   firebase.messaging().subscribeToTopic(topic);
@@ -20,11 +26,6 @@ export function subscribe(topic, onMessage) {
 
 export function unsubscribe(topic) {
   firebase.messaging().unsubscribeFromTopic(topic);
-}
-
-export async function acceptPayment(storeName, price) {
-  const acceptPaymentFunction = functions.httpsCallable("acceptPayment");
-  await acceptPaymentFunction({ storeName, price });
 }
 
 export async function signIn(facebookAccessToken) {
