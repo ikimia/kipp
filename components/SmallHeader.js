@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-navigation";
 import BackButton from "./BackButton";
 import StyledText from "./StyledText";
 
-export default function SmallHeader({ title }) {
+export default function SmallHeader({ title, right }) {
   return (
     <SafeAreaView
       style={{
@@ -24,14 +24,12 @@ export default function SmallHeader({ title }) {
         <View style={{ flex: 1 }}>
           <BackButton />
         </View>
-        <View
-          style={{ flex: 3, flexDirection: "row", justifyContent: "center" }}
-        >
+        <View style={{ flex: 3, alignItems: "center" }}>
           <StyledText bold size={18}>
             {title}
           </StyledText>
         </View>
-        <View style={{ flex: 1 }} />
+        <View style={{ flex: 1, alignItems: "flex-end" }}>{right}</View>
       </View>
     </SafeAreaView>
   );
