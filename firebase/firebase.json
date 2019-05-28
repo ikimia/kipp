@@ -1,11 +1,4 @@
 {
-  "hosting": {
-    "public": "public",
-    "rewrites": [{
-      "source": "/charge",
-      "function": "demo"
-    }]
-  },
   "firestore": {
     "rules": "firestore.rules"
   }
