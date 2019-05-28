@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { View } from "react-native";
 import {
   RectButton,
@@ -9,7 +10,8 @@ import {
 import Icon from "react-native-vector-icons/Feather";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
-import { RandomLogo, getCompanyName, repeat } from "../FakeData";
+import { RandomLogo } from "../FakeData";
+import { getUserMemberships } from "../Backend";
 
 function Chip({ title, icon }) {
   return (
@@ -53,9 +55,14 @@ const FILTERS = [
   { icon: "clock", title: "Relevant Now" }
 ];
 
-const REWARDS = repeat(6, getCompanyName);
-
 export default function MembershipsScreen() {
+  const [memberships, setMemberships] = useState([]);
+  useEffect(() => {
+    (async function() {
+      setMemberships(await getUserMemberships());
+    })();
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <AppHeader
@@ -67,7 +74,7 @@ export default function MembershipsScreen() {
       />
       <View style={{ flex: 1 }}>
         <FlatList
-          data={REWARDS}
+          data={memberships}
           keyExtractor={(_, i) => `${i}`}
           renderItem={({ item: store }) => (
             <View style={{ alignItems: "center" }}>
