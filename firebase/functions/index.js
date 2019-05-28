@@ -50,6 +50,12 @@ exports.demo = functions.https.onRequest(async (req, res) => {
 
 exports.acceptPayment = functions.https.onRequest(
   auth(async (req, res) => {
-    res.send();
+    const uid = req.user.uid;
+    const { storeName, price } = req.body.data;
+    admin
+      .firestore()
+      .collection("receipts")
+      .add({ uid, storeName, price });
+    res.json({ data: null });
   })
 );
