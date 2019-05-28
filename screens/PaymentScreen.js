@@ -19,7 +19,7 @@ export default function PaymentScreen() {
         onWillFocus={async () => {
           const storeName = getParam("storeName");
           const price = getParam("price");
-          await acceptPayment(storeName, price);
+          await acceptPayment({ storeName, price });
           setSuccess(true);
         }}
         onDidBlur={async () => {
