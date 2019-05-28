@@ -88,6 +88,13 @@ exports.getExploreData = defineFunction(
   })
 );
 
+exports.getExploreListStores = defineFunction(
+  auth(async (req, res) => {
+    const data = repeat(20, () => [getStoreName(), getStoreAddress()]);
+    res.json({ data });
+  })
+);
+
 exports.getUserMemberships = defineFunction(
   auth(async (req, res) => {
     res.json({ data: repeat(6, getStoreName) });
