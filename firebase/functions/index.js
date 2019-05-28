@@ -53,7 +53,7 @@ exports.acceptPayment = functions.https.onRequest(
     const uid = req.user.uid;
     const { storeName, price } = req.body.data;
     const created = admin.firestore.FieldValue.serverTimestamp();
-    admin
+    await admin
       .firestore()
       .collection("receipts")
       .add({ uid, storeName, price, created });
