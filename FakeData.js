@@ -2,7 +2,13 @@ import * as React from "react";
 import { Image, View } from "react-native";
 import StyledText from "./components/StyledText";
 
-export function RandomLogo({ text, height = 120, width = 120, seed = null }) {
+export function RandomLogo({
+  text,
+  height = 120,
+  width = 120,
+  seed = null,
+  flat
+}) {
   return (
     <View
       style={{
@@ -14,7 +20,7 @@ export function RandomLogo({ text, height = 120, width = 120, seed = null }) {
     >
       <Image
         style={{
-          borderRadius: 3,
+          borderRadius: flat ? 0 : 3,
           position: "absolute",
           top: 0,
           left: 0,

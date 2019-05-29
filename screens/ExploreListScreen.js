@@ -8,8 +8,8 @@ import { getExploreListStores } from "../Backend";
 import SmallHeader from "../components/SmallHeader";
 
 export default function ExploreListScreen() {
-  const navigation = useContext(NavigationContext);
-  const title = navigation.getParam("title");
+  const { getParam, navigate } = useContext(NavigationContext);
+  const title = getParam("title");
   const [stores, setStores] = useState([]);
   useEffect(() => {
     (async function() {
@@ -24,6 +24,7 @@ export default function ExploreListScreen() {
         keyExtractor={x => x[0]}
         renderItem={({ item: [storeName, storeLocation], index: i }) => (
           <ItemListItem
+            onPress={() => navigate("Store")}
             color={COLORS[i % COLORS.length]}
             logo={storeName.slice(0, 1)}
             title={storeName}
