@@ -11,22 +11,9 @@ import Backdrop, { PATTERNS } from "../components/Backdrop";
 import StyledText from "../components/StyledText";
 import * as Backend from "../Backend";
 import PaymentCode from "../components/PaymentCode";
+import Icon from "react-native-vector-icons/Feather";
 
 const CODE_TIMEOUT = 120;
-
-function getGreeting() {
-  const hours = new Date().getHours();
-  if (hours < 5) {
-    return "Good night";
-  }
-  if (hours < 12) {
-    return "Good morning";
-  }
-  if (hours < 17) {
-    return "Good afternoon";
-  }
-  return "Good evening";
-}
 
 function useTimer(code, onEnd) {
   const [total, setTotal] = useState(CODE_TIMEOUT);
@@ -115,46 +102,45 @@ export default function MainScren() {
         </View>
         <View style={{ flex: 2, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
-            <StyledText size={16} color="white">
+            <StyledText size={18} color="white">
               One-Time Payment Code:
             </StyledText>
             <PaymentCode code={code} />
           </View>
-        </View>
-        <View style={{ flex: 1 }} />
-        <View
-          style={{
-            marginHorizontal: 15,
-            marginBottom: 30,
-            padding: 10,
-            backgroundColor: "rgba(0, 0, 0, 0.2)"
-          }}
-        >
-          {[
-            `${getGreeting()}, ${Backend.getCurrentUser().displayName}!`,
-            "To pay, give the payment code to the seller.",
-            `The code is valid for the next ${useTimer(
-              code,
-              setNewCode
-            )} minutes.`
-          ].map((text, i) => (
-            <StyledText key={i} color="white">
-              {text}
-            </StyledText>
-          ))}
-          <View style={{ flexDirection: "row" }}>
-            <StyledText color="white">To get another code, </StyledText>
-            <BorderlessButton
-              activeOpacity={0.5}
-              enabled={!!code}
-              onPress={setNewCode}
-            >
-              <StyledText bold underline color="white">
-                click here
+          <View
+            style={{
+              alignSelf: "center",
+              marginHorizontal: 15,
+              marginBottom: 30,
+              padding: 10,
+              flexDirection: "row"
+            }}
+          >
+            <View>
+              <StyledText color="white">
+                The code will expire{"\n"}
+                in <StyledText bold>
+                  {useTimer(code, setNewCode)}
+                </StyledText>{" "}
+                minutes
               </StyledText>
-            </BorderlessButton>
+            </View>
+            <View
+              style={{
+                borderStartColor: "white",
+                borderStartWidth: 1,
+                paddingStart: 15,
+                marginStart: 15,
+                justifyContent: "center"
+              }}
+            >
+              <BorderlessButton enabled={!!code} onPress={setNewCode}>
+                <Icon color="white" name="refresh-cw" size={30} />
+              </BorderlessButton>
+            </View>
           </View>
         </View>
+        <View style={{ flex: 1 }} />
       </SafeAreaView>
     </View>
   );
