@@ -100,47 +100,39 @@ export default function MainScren() {
         <View style={{ alignItems: "center", padding: 10 }}>
           <Logo color="white" fontSize={25} />
         </View>
-        <View style={{ flex: 2, justifyContent: "center" }}>
+        <View style={{ flex: 4, justifyContent: "center" }}>
           <View style={{ alignItems: "center" }}>
             <StyledText size={18} color="white">
               One-Time Payment Code:
             </StyledText>
             <PaymentCode code={code} />
-          </View>
-          <View
-            style={{
-              alignSelf: "center",
-              marginHorizontal: 15,
-              marginBottom: 30,
-              padding: 10,
-              flexDirection: "row"
-            }}
-          >
-            <View>
-              <StyledText color="white">
-                The code will expire{"\n"}
-                in <StyledText bold>
-                  {useTimer(code, setNewCode)}
-                </StyledText>{" "}
-                minutes
-              </StyledText>
-            </View>
-            <View
-              style={{
-                borderStartColor: "white",
-                borderStartWidth: 1,
-                paddingStart: 15,
-                marginStart: 15,
-                justifyContent: "center"
-              }}
-            >
-              <BorderlessButton enabled={!!code} onPress={setNewCode}>
-                <Icon color="white" name="refresh-cw" size={30} />
-              </BorderlessButton>
+            <View style={{ flexDirection: "row" }}>
+              <View>
+                <StyledText color="white">
+                  The code will expire{"\n"}
+                  in <StyledText bold>
+                    {useTimer(code, setNewCode)}
+                  </StyledText>{" "}
+                  minutes
+                </StyledText>
+              </View>
+              <View
+                style={{
+                  borderStartColor: "white",
+                  borderStartWidth: 1,
+                  paddingStart: 15,
+                  marginStart: 15,
+                  justifyContent: "center"
+                }}
+              >
+                <BorderlessButton enabled={!!code} onPress={setNewCode}>
+                  <Icon color="white" name="refresh-cw" size={30} />
+                </BorderlessButton>
+              </View>
             </View>
           </View>
         </View>
-        <View style={{ flex: 1 }} />
+        <View style={{ flex: 3 }} />
       </SafeAreaView>
     </View>
   );
