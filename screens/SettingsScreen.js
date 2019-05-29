@@ -68,7 +68,7 @@ function confirmSignOut(onPress) {
   };
 }
 
-export default function ProfileScreen() {
+export default function SettingsScreen() {
   const { navigate } = useContext(NavigationContext);
   const [cardNumber, setCardNumber] = useState(null);
   const [cardLoading, setCardLoading] = useState(true);

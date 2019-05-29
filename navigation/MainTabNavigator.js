@@ -8,8 +8,8 @@ import Icon from "react-native-vector-icons/Feather";
 
 import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import MainScreen from "../screens/MainScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import PurchasesScreen from "../screens/PurchasesScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import ReceiptsScreen from "../screens/ReceiptsScreen";
 import MembershipsScreen from "../screens/MembershipsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
@@ -60,7 +60,7 @@ export default createBottomTabNavigator(
     Pay: stack({ Main: MainScreen }, "Main", "credit-card"),
     Receipts: stack(
       {
-        Receipts: PurchasesScreen,
+        Receipts: ReceiptsScreen,
         PastOrder: PastOrderScreen
       },
       "Receipts",
@@ -81,7 +81,7 @@ export default createBottomTabNavigator(
     ),
     Settings: stack(
       {
-        Settings: ProfileScreen,
+        Settings: SettingsScreen,
         PaymentSettings: PaymentSettingsScreen,
         LanguageSettings: LanguageSettingsScreen
       },
