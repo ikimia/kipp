@@ -3,7 +3,7 @@ import { View } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
 import Icon from "react-native-vector-icons/Feather";
-import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { ScrollView, BorderlessButton } from "react-native-gesture-handler";
 import { RandomLogo } from "../FakeData";
 import { COLORS } from "../components/ItemListItem";
 
@@ -67,12 +67,12 @@ export default function StoreScreen() {
                   </View>
                 ))}
               </View>
-              <View style={{ justifyContent: "center" }}>
-                <RectButton style={{ padding: 10 }}>
+              <View>
+                <BorderlessButton>
                   <StyledText bold color={COLORS[5]}>
                     JOIN NOW
                   </StyledText>
-                </RectButton>
+                </BorderlessButton>
               </View>
             </View>
           </Section>
@@ -85,9 +85,9 @@ export default function StoreScreen() {
               <StyledText>Israel</StyledText>
             </View>
             <View>
-              <RectButton style={{ padding: 10 }}>
+              <BorderlessButton>
                 <StyledText color={COLORS[5]}>Map</StyledText>
-              </RectButton>
+              </BorderlessButton>
             </View>
           </View>
         </Section>
