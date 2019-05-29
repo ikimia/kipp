@@ -4,7 +4,8 @@ import { View } from "react-native";
 import {
   TextInput,
   FlatList,
-  BorderlessButton
+  BorderlessButton,
+  RectButton
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
@@ -42,6 +43,7 @@ const Header = ({ title }) => {
 };
 
 export default function ExploreScreen() {
+  const { navigate } = useContext(NavigationContext);
   const [lanes, setLanes] = useState([]);
   const [sections, setSections] = useState([]);
   useEffect(() => {
@@ -91,11 +93,13 @@ export default function ExploreScreen() {
                   keyExtractor={x => x}
                   renderItem={({ item: storeName }) => (
                     <View style={{ marginHorizontal: 6, width: 120 }}>
-                      <RandomLogo seed={storeName} />
-                      <StyledText size={14} bold style={{ marginTop: 5 }}>
-                        {storeName}
-                      </StyledText>
-                      <StyledText size={10}>Clothing</StyledText>
+                      <RectButton onPress={() => navigate("Store")}>
+                        <RandomLogo seed={storeName} />
+                        <StyledText size={14} bold style={{ marginTop: 5 }}>
+                          {storeName}
+                        </StyledText>
+                        <StyledText size={10}>Clothing</StyledText>
+                      </RectButton>
                     </View>
                   )}
                 />
@@ -109,6 +113,7 @@ export default function ExploreScreen() {
             {stores.map(([storeName, storeLocation], j) => (
               <ItemListItem
                 key={j}
+                onPress={() => navigate("Store")}
                 color={COLORS[(j + 1 + i * stores.length) % COLORS.length]}
                 logo={storeName.slice(0, 1)}
                 title={storeName}

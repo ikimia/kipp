@@ -15,6 +15,7 @@ import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import ExploreListScreen from "../screens/ExploreListScreen";
+import StoreScreen from "../screens/StoreScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -70,7 +71,8 @@ export default createBottomTabNavigator(
     Explore: stack(
       {
         Explore: ExploreScreen,
-        ExploreList: ExploreListScreen
+        ExploreList: ExploreListScreen,
+        Store: StoreScreen
       },
       "Explore",
       "search"
