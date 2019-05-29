@@ -10,7 +10,7 @@ import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import MainScreen from "../screens/MainScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ReceiptsScreen from "../screens/ReceiptsScreen";
-import MembershipsScreen from "../screens/MembershipsScreen";
+import FollowingScreen from "../screens/FollowingScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
@@ -66,11 +66,7 @@ export default createBottomTabNavigator(
       "Receipts",
       "tag"
     ),
-    Memberships: stack(
-      { Memberships: MembershipsScreen },
-      "Memberships",
-      "gift"
-    ),
+    Following: stack({ Following: FollowingScreen }, "Following", "gift"),
     Explore: stack(
       {
         Explore: ExploreScreen,

@@ -55,7 +55,7 @@ const FILTERS = [
   { icon: "clock", title: "Relevant Now" }
 ];
 
-export default function MembershipsScreen() {
+export default function FollowingScreen() {
   const [memberships, setMemberships] = useState([]);
   useEffect(() => {
     (async function() {
