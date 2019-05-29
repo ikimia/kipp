@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { View, Image } from "react-native";
+import { View, Image, Alert } from "react-native";
 import { NavigationContext, NavigationEvents } from "react-navigation";
 import ListItem from "../components/ListItem";
 import StyledText from "../components/StyledText";
@@ -53,6 +53,21 @@ function ProfilePicture({ uri, radius, borderWidth = 3 }) {
   );
 }
 
+function confirmSignOut(onPress) {
+  return () => {
+    Alert.alert("Sign out from Kipp?", "", [
+      {
+        text: "Cancel",
+        style: "cancel"
+      },
+      {
+        text: "OK",
+        onPress
+      }
+    ]);
+  };
+}
+
 export default function ProfileScreen() {
   const { navigate } = useContext(NavigationContext);
   const [cardNumber, setCardNumber] = useState(null);
@@ -98,7 +113,7 @@ export default function ProfileScreen() {
           </StyledText>
           <CreditCardPreview loading={cardLoading} cardNumber={cardNumber} />
         </View>
-        <View>
+        <View style={{ marginBottom: 60 }}>
           <ListItem
             first
             onPress={() => {
@@ -110,21 +125,24 @@ export default function ProfileScreen() {
           <ListItem
             icon="globe"
             text="Language"
+            last
             onPress={() => {
               navigate("LanguageSettings");
             }}
           />
-          <ListItem
-            last
-            icon="log-out"
-            text="Sign Out"
-            onPress={() => {
-              LoginManager.logOut();
-              signOut();
-              navigate("Auth");
-            }}
-          />
         </View>
+        <ListItem
+          last
+          first
+          noCheveron
+          icon="log-out"
+          text="Sign Out"
+          onPress={confirmSignOut(async () => {
+            LoginManager.logOut();
+            await signOut();
+            navigate("Auth");
+          })}
+        />
       </ScrollView>
     </View>
   );
