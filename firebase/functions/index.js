@@ -36,22 +36,23 @@ exports.getCode = defineFunction(
   })
 );
 
-async function charge(price, storeName, topic, orderId) {
+async function charge(price, storeName, topic) {
   const created = admin.firestore.FieldValue.serverTimestamp();
-  await admin
+  const ref = await admin
     .firestore()
     .collection("receipts")
-    .doc(orderId)
     .set({ storeName, price, created, status: "pending" });
-  await admin.messaging().send({ topic, data: { price, storeName, orderId } });
+  await admin
+    .messaging()
+    .send({ topic, data: { price, storeName, orderId: ref.id } });
 }
 
 exports.demo = defineFunction(async (req, res) => {
-  const { paymentCode: topic, price, storeName, secret, orderId } = req.body;
+  const { paymentCode: topic, price, storeName, secret } = req.body;
   if (secret !== "kippisbest") {
     return res.status(403).send();
   }
-  await charge(price, storeName, topic, orderId);
+  await charge(price, storeName, topic);
   res.send();
 });
 
