@@ -37,14 +37,15 @@ exports.getCode = defineFunction(
 );
 
 async function charge(price, storeName, topic) {
-  await admin.messaging().send({ topic, data: { price, storeName } });
+  const created = admin.firestore.FieldValue.serverTimestamp();
+  const ref = await admin
+    .firestore()
+    .collection("receipts")
+    .add({ storeName, price, created, status: "pending" });
+  await admin
+    .messaging()
+    .send({ topic, data: { price, storeName, orderId: ref.id } });
 }
-
-exports.charge = defineFunction(async (req, res) => {
-  const { paymentCode: topic, price, storeName } = req.body;
-  await charge(price, storeName, topic);
-  res.json({ topic });
-});
 
 exports.demo = defineFunction(async (req, res) => {
   const { paymentCode: topic, price, storeName, secret } = req.body;
@@ -58,13 +59,13 @@ exports.demo = defineFunction(async (req, res) => {
 exports.acceptPayment = defineFunction(
   auth(async (req, res) => {
     const uid = req.user.uid;
-    const { storeName, price } = req.body.data;
-    const created = admin.firestore.FieldValue.serverTimestamp();
-    await admin
+    const { orderId } = req.body.data;
+    const orderRef = await admin
       .firestore()
       .collection("receipts")
-      .add({ uid, storeName, price, created });
-    res.json({ data: null });
+      .doc(orderId);
+    orderRef.set({ orderId, uid, status: "done" }, { merge: true });
+    res.json({ data: { receiptId: orderId } });
   })
 );
 
