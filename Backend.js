@@ -20,13 +20,13 @@ export const getExploreData = firebaseFunction("getExploreData");
 export const getUserMemberships = firebaseFunction("getUserMemberships");
 export const getExploreListStores = firebaseFunction("getExploreListStores");
 
-export function subscribe(topic, onMessage) {
-  firebase.messaging().subscribeToTopic(topic);
-  firebase.messaging().onMessage(onMessage);
+export function onChargeAttempt(handler) {
+  return firebase.messaging().onMessage(handler);
 }
 
-export function unsubscribe(topic) {
-  firebase.messaging().unsubscribeFromTopic(topic);
+export function subscribe(topic) {
+  firebase.messaging().subscribeToTopic(topic);
+  return () => firebase.messaging().unsubscribeFromTopic(topic);
 }
 
 export async function signIn(facebookAccessToken) {

@@ -27,15 +27,16 @@ const stack = (stacks, initialRouteName, icon) =>
       gestureDirection: isRTL() ? "inverted" : "default"
     }),
     headerMode: "none",
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       gesturesEnabled: true,
       gestureDirection: isRTL() ? "inverted" : "default",
       tabBarIcon({ focused, tintColor }) {
         return (
           <Icon name={icon} size={18} color={focused ? tintColor : "#666"} />
         );
-      }
-    },
+      },
+      tabBarVisible: !navigation.getParam("tabBarHidden")
+    }),
     transitionConfig: () => ({
       screenInterpolator: ({
         layout: { initWidth: width },
