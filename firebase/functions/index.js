@@ -41,7 +41,7 @@ async function charge(price, storeName, topic) {
   const ref = await admin
     .firestore()
     .collection("receipts")
-    .set({ storeName, price, created, status: "pending" });
+    .add({ storeName, price, created, status: "pending" });
   await admin
     .messaging()
     .send({ topic, data: { price, storeName, orderId: ref.id } });
