@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { View, StatusBar, Alert } from "react-native";
 import {
   SafeAreaView,
@@ -66,6 +66,7 @@ export default function MainScren() {
   const [code, setCode] = useState(null);
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { navigate } = useContext(NavigationContext);
+  const mutablePattern = useRef({ value: pattern }).current;
   const setNewCode = (keepPattern = false) => {
     setCode(null);
     if (!keepPattern) {
@@ -78,10 +79,10 @@ export default function MainScren() {
       setCode(newCode);
       Backend.subscribe(newCode, message => {
         const {
-          data: { storeName, price }
+          data: { storeName, price, orderId }
         } = message;
         confirmPayment(storeName, price, () => {
-          navigate("Payment", { storeName, price });
+          navigate("Payment", { orderId, backdrop: mutablePattern.value });
         });
       });
     });
@@ -89,6 +90,9 @@ export default function MainScren() {
   useEffect(() => {
     setNewCode(true);
   }, []);
+  useEffect(() => {
+    mutablePattern.value = pattern;
+  }, [pattern]);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
