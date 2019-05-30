@@ -1,10 +1,9 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
 import Icon from "react-native-vector-icons/Feather";
 import { ScrollView, BorderlessButton } from "react-native-gesture-handler";
-import { RandomLogo } from "../FakeData";
 import { COLORS } from "../components/ItemListItem";
 
 const about = [
@@ -20,9 +19,9 @@ const features = [
   "And much more"
 ];
 
-function Section({ title, children }) {
+function Section({ title, children, marginBottom = 10 }) {
   return (
-    <View style={{ padding: 10 }}>
+    <View style={{ padding: 10, marginBottom }}>
       <View style={{ paddingBottom: 10 }}>
         <StyledText bold size={18}>
           {title}
@@ -39,14 +38,40 @@ export default function StoreScreen() {
     <View style={{ flex: 1 }}>
       <SmallHeader title={title} />
       <ScrollView>
-        <View>
-          <RandomLogo width={500} height={150} flat />
-        </View>
-        <View style={{ padding: 10 }}>
-          <StyledText bold size={22}>
-            {title}
-          </StyledText>
-          <StyledText>Open today until 23:00</StyledText>
+        <View
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 10,
+            flexDirection: "row"
+          }}
+        >
+          <Image
+            source={require("../assets/img/zaralogo.jpg")}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 50,
+              borderColor: "#EEE",
+              borderWidth: 1
+            }}
+          />
+          <View style={{ paddingStart: 15 }}>
+            <StyledText bold size={22}>
+              {title}
+            </StyledText>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View
+                style={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: "lightgreen",
+                  marginEnd: 5
+                }}
+              />
+              <StyledText>Open today until 23:00</StyledText>
+            </View>
+          </View>
         </View>
         <View
           style={{
@@ -55,10 +80,10 @@ export default function StoreScreen() {
             borderBottomWidth: 1,
             borderColor: "#EEE",
             paddingHorizontal: 5,
-            marginVertical: 20
+            marginBottom: 20
           }}
         >
-          <Section title="Membership Features">
+          <Section title="Membership" marginBottom={0}>
             <View style={{ flexDirection: "row" }}>
               <View style={{ flex: 1 }}>
                 {features.map(text => (
