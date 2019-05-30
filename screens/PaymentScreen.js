@@ -85,7 +85,7 @@ export default function PaymentScreen() {
                   borderRadius: 5
                 }}
                 onPress={() => {
-                  alert(receiptId);
+                  navigate("PastOrder", { receiptId });
                 }}
               >
                 <View>
