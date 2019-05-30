@@ -1,70 +1,108 @@
 import * as React from "react";
 import { useContext, useState } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import StyledText from "../components/StyledText";
-import { NavigationContext, NavigationEvents } from "react-navigation";
-import { RectButton } from "react-native-gesture-handler";
-import { COLORS } from "../components/ItemListItem";
+import {
+  NavigationContext,
+  NavigationEvents,
+  SafeAreaView
+} from "react-navigation";
+import { RectButton, BorderlessButton } from "react-native-gesture-handler";
 import { acceptPayment } from "../Backend";
-
-const payingImage = require("../assets/img/paying.gif");
-const successImage = require("../assets/img/success.gif");
+import Backdrop from "../components/Backdrop";
+import Logo from "../components/Logo";
+import { Bubbles, Checkmark } from "../components/animations";
 
 export default function PaymentScreen() {
   const [success, setSuccess] = useState(false);
+  const [showCheckmark, setShowCheckmark] = useState(false);
   const { getParam, navigate } = useContext(NavigationContext);
   return (
-    <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 30 }}>
-      <NavigationEvents
-        onWillFocus={async () => {
-          const storeName = getParam("storeName");
-          const price = getParam("price");
-          await acceptPayment({ storeName, price });
-          setSuccess(true);
-        }}
-        onDidBlur={async () => {
-          setSuccess(false);
-        }}
-      />
-      <View style={{ alignItems: "center" }}>
-        <View style={{ height: 120, justifyContent: "center" }}>
-          <StyledText bold size={success ? 45 : 20}>
-            {success
-              ? "Success!"
-              : `Paying $${getParam("price")} to ${getParam("storeName")}`}
-          </StyledText>
+    <View style={{ flex: 1 }}>
+      <Backdrop pattern={getParam("backdrop")} />
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationEvents
+          onWillFocus={async () => {
+            await acceptPayment({ orderId: getParam("orderId") });
+            setSuccess(true);
+          }}
+          onDidBlur={() => {
+            setSuccess(false);
+          }}
+        />
+        <View style={{ alignItems: "center", padding: 10 }}>
+          <Logo color="white" fontSize={25} />
         </View>
-        <View style={{ height: 300 }}>
-          <Image
-            source={success ? successImage : payingImage}
-            style={{ height: 300, width: 300 }}
-          />
+        <View
+          style={{ flex: 4, alignItems: "center", justifyContent: "flex-end" }}
+        >
+          <View>
+            {showCheckmark ? (
+              <Checkmark />
+            ) : (
+              <Bubbles
+                shouldFinish={success}
+                onDone={() => setShowCheckmark(true)}
+              />
+            )}
+          </View>
+          <View style={{ marginTop: 25 }}>
+            <StyledText color="white" bold size={20}>
+              {showCheckmark ? "Payment Completed" : "Processing Payment"}
+            </StyledText>
+          </View>
         </View>
         <View
           style={{
-            height: 100,
+            flex: 3,
             justifyContent: "center",
-            alignSelf: "stretch"
+            alignItems: "center"
           }}
         >
-          <RectButton
-            style={{
-              display: success ? "flex" : "none",
-              backgroundColor: COLORS[4],
-              paddingVertical: 10,
-              borderRadius: 5,
-              alignItems: "center"
-            }}
-            onPress={() => navigate("Main")}
-          >
-            <View>
-              <StyledText bold size={16} color="white">
-                GO BACK
-              </StyledText>
+          {showCheckmark ? (
+            <View
+              style={{
+                borderRadius: 5,
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 5
+              }}
+            >
+              <RectButton
+                style={{
+                  backgroundColor: "white",
+                  padding: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 5
+                }}
+              >
+                <View>
+                  <StyledText size={20} bold>
+                    View Receipt
+                  </StyledText>
+                </View>
+              </RectButton>
             </View>
-          </RectButton>
+          ) : null}
         </View>
-      </View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          {showCheckmark ? (
+            <BorderlessButton onPress={() => navigate("Pay")}>
+              <View>
+                <StyledText size={20} bold color="white">
+                  Done
+                </StyledText>
+              </View>
+            </BorderlessButton>
+          ) : null}
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
