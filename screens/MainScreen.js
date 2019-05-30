@@ -89,7 +89,7 @@ export default function MainScren() {
           navigate("Payment", { orderId, backdrop: mutablePattern.value });
         });
       });
-      return Backend.unsubscribe(code);
+      return () => Backend.unsubscribe(code);
     }
   }, [code]);
   return (
