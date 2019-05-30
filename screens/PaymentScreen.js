@@ -15,6 +15,7 @@ import { Bubbles, Checkmark } from "../components/animations";
 
 export default function PaymentScreen() {
   const [success, setSuccess] = useState(false);
+  const [receiptId, setReceiptId] = useState(false);
   const [showCheckmark, setShowCheckmark] = useState(false);
   const { getParam, navigate } = useContext(NavigationContext);
   return (
@@ -23,7 +24,9 @@ export default function PaymentScreen() {
       <SafeAreaView style={{ flex: 1 }}>
         <NavigationEvents
           onWillFocus={async () => {
-            await acceptPayment({ orderId: getParam("orderId") });
+            const orderId = getParam("orderId");
+            const result = await acceptPayment({ orderId });
+            setReceiptId(result.receiptId);
             setSuccess(true);
           }}
           onDidBlur={() => {
@@ -80,6 +83,9 @@ export default function PaymentScreen() {
                   padding: 10,
                   paddingHorizontal: 20,
                   borderRadius: 5
+                }}
+                onPress={() => {
+                  alert(receiptId);
                 }}
               >
                 <View>

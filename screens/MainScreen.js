@@ -67,25 +67,13 @@ export default function MainScren() {
   const [pattern, setPattern] = useState(getRandomPattern(-1));
   const { navigate } = useContext(NavigationContext);
   const mutablePattern = useRef({ value: pattern }).current;
-  const setNewCode = (keepPattern = false) => {
+  const setNewCode = async (keepPattern = false) => {
     setCode(null);
     if (!keepPattern) {
       setPattern(getRandomPattern(pattern));
     }
-    Backend.getCode().then(({ code: newCode }) => {
-      if (code) {
-        Backend.unsubscribe(code);
-      }
-      setCode(newCode);
-      Backend.subscribe(newCode, message => {
-        const {
-          data: { storeName, price, orderId }
-        } = message;
-        confirmPayment(storeName, price, () => {
-          navigate("Payment", { orderId, backdrop: mutablePattern.value });
-        });
-      });
-    });
+    const { code: newCode } = await Backend.getCode();
+    setCode(newCode);
   };
   useEffect(() => {
     setNewCode(true);
@@ -93,6 +81,17 @@ export default function MainScren() {
   useEffect(() => {
     mutablePattern.value = pattern;
   }, [pattern]);
+  useEffect(() => {
+    if (code) {
+      Backend.subscribe(code, message => {
+        const { storeName, price, orderId } = message.data;
+        confirmPayment(storeName, price, () => {
+          navigate("Payment", { orderId, backdrop: mutablePattern.value });
+        });
+      });
+      return Backend.unsubscribe(code);
+    }
+  }, [code]);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
