@@ -79,3 +79,10 @@ export async function getReceipt(id) {
     .get();
   return createReceipt(doc);
 }
+
+export function getStoreLogo(id) {
+  return firebase
+    .storage()
+    .ref(`logos/${id}`)
+    .getDownloadURL();
+}
