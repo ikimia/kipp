@@ -1,16 +1,13 @@
-import React from "react";
+import * as React from "react";
+import { useState } from "react";
 import { View, Image } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
 import Icon from "react-native-vector-icons/Feather";
 import { ScrollView, BorderlessButton } from "react-native-gesture-handler";
 import { COLORS } from "../components/ItemListItem";
-
-const about = [
-  ["Phone Number", "054-6811459", "phone"],
-  ["Email", "contact@zara.co.il", "mail"],
-  ["Website", "www.zara.co.il", "globe"]
-];
+import { NavigationEvents } from "react-navigation";
+import firebase from "react-native-firebase";
 
 const features = [
   "10% off for the first month",
@@ -32,11 +29,33 @@ function Section({ title, children, marginBottom = 10 }) {
   );
 }
 
+function formatContact(type, value) {
+  if (type === "phone") {
+    if (value[0] === "0") {
+      return value.replace(/^0(2|3|4|8|9|7\d|5\d)(\d{3})(\d+)$/, "0$1-$2-$3");
+    }
+    if (value[0] === "1") {
+      return value.replace(/^1(\d{3})(\d{3})(\d+)$/, "1-$1-$2-$3");
+    }
+  }
+  return value;
+}
+
 export default function StoreScreen() {
-  const title = "Zara";
+  const [store, setStore] = useState({ name: "Store" });
   return (
     <View style={{ flex: 1 }}>
-      <SmallHeader title={title} />
+      <NavigationEvents
+        onWillFocus={async ({ state: { params = {} } }) => {
+          const doc = await firebase
+            .firestore()
+            .collection("stores")
+            .doc(params.storeId)
+            .get();
+          setStore(doc.data());
+        }}
+      />
+      <SmallHeader title={store.name} />
       <ScrollView>
         <View
           style={{
@@ -57,7 +76,7 @@ export default function StoreScreen() {
           />
           <View style={{ paddingStart: 15 }}>
             <StyledText bold size={22}>
-              {title}
+              {store.name}
             </StyledText>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <View
@@ -105,8 +124,8 @@ export default function StoreScreen() {
         <Section title="Location">
           <View style={{ flexDirection: "row" }}>
             <View style={{ flex: 1 }}>
-              <StyledText>Harakevet 15</StyledText>
-              <StyledText>Tel Aviv</StyledText>
+              <StyledText>{store.address1}</StyledText>
+              <StyledText>{store.city}</StyledText>
               <StyledText>Israel</StyledText>
             </View>
             <View>
@@ -118,16 +137,16 @@ export default function StoreScreen() {
         </Section>
         <Section title="Contact">
           <View>
-            {about.map(([key, value, icon]) => (
+            {(store.contact || []).map(({ type, value }) => (
               <View
-                key={key}
+                key={value}
                 style={{
                   flexDirection: "row",
                   alignItems: "center"
                 }}
               >
                 <View style={{ marginHorizontal: 10 }}>
-                  <Icon name={icon} size={20} />
+                  <Icon name={type} size={20} />
                 </View>
                 <View
                   style={{
@@ -138,7 +157,9 @@ export default function StoreScreen() {
                     borderBottomWidth: 1
                   }}
                 >
-                  <StyledText size={16}>{value}</StyledText>
+                  <StyledText size={16}>
+                    {formatContact(type, value)}
+                  </StyledText>
                 </View>
               </View>
             ))}
