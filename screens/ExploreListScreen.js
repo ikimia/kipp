@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import { NavigationContext } from "react-navigation";
 import { FlatList } from "react-native-gesture-handler";
-import ItemListItem, { COLORS } from "../components/ItemListItem";
+import ItemListItem from "../components/ItemListItem";
 import { getExploreListStores2 } from "../Backend";
 import SmallHeader from "../components/SmallHeader";
 
@@ -23,7 +23,6 @@ export default function ExploreListScreen() {
         renderItem={({ item: { id, name, address1, city }, index: i }) => (
           <ItemListItem
             onPress={() => navigate("Store", { storeId: id })}
-            color={COLORS[i % COLORS.length]}
             logo={name.slice(0, 1)}
             title={name}
             text={`${address1}, ${city}`}

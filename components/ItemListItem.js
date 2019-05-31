@@ -2,6 +2,7 @@ import * as React from "react";
 import { View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import StyledText from "./StyledText";
+import murmurhash from "murmurhash";
 
 export const COLORS = [
   "#ff9f43",
@@ -16,7 +17,6 @@ export const COLORS = [
 
 export default function ItemListItem({
   onPress,
-  color,
   logo,
   title,
   text,
@@ -33,7 +33,7 @@ export default function ItemListItem({
               height: 50,
               width: 50,
               borderRadius: 10,
-              backgroundColor: color,
+              backgroundColor: COLORS[murmurhash(title) % COLORS.length],
               alignItems: "center",
               justifyContent: "center"
             }}
