@@ -17,8 +17,10 @@ function firebaseFunction(funcName) {
 export const getCode = firebaseFunction("getCode");
 export const acceptPayment = firebaseFunction("acceptPayment");
 export const getExploreData = firebaseFunction("getExploreData");
+export const getExploreData2 = firebaseFunction("getExploreData2");
 export const getUserMemberships = firebaseFunction("getUserMemberships");
 export const getExploreListStores = firebaseFunction("getExploreListStores");
+export const getExploreListStores2 = firebaseFunction("getExploreListStores2");
 
 export function onChargeAttempt(handler) {
   return firebase.messaging().onMessage(handler);
