@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
 import Icon from "react-native-vector-icons/Feather";
@@ -8,7 +8,7 @@ import { ScrollView, BorderlessButton } from "react-native-gesture-handler";
 import { COLORS } from "../components/ItemListItem";
 import { NavigationEvents } from "react-navigation";
 import firebase from "react-native-firebase";
-import { getStoreLogo } from "../Backend";
+import StoreLogo from "../components/StoreLogo";
 
 const features = [
   "10% off for the first month",
@@ -44,7 +44,6 @@ function formatContact(type, value) {
 
 export default function StoreScreen() {
   const [store, setStore] = useState({ name: "Store" });
-  const [imageURI, setImageURI] = useState(null);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -54,8 +53,7 @@ export default function StoreScreen() {
             .collection("stores")
             .doc(params.storeId)
             .get();
-          setStore(doc.data());
-          getStoreLogo(doc.id).then(setImageURI, () => {});
+          setStore({ id: params.storeId, ...doc.data() });
         }}
       />
       <SmallHeader title={store.name} />
@@ -67,16 +65,8 @@ export default function StoreScreen() {
             flexDirection: "row"
           }}
         >
-          <Image
-            source={{ uri: imageURI }}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 50,
-              borderColor: "#EEE",
-              borderWidth: 1
-            }}
-          />
+          <StoreLogo storeId={store.id} storeName={store.name} size={100} />
+
           <View style={{ paddingStart: 15 }}>
             <StyledText bold size={22}>
               {store.name}

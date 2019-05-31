@@ -17,6 +17,7 @@ export const COLORS = [
 
 export default function ItemListItem({
   onPress,
+  logoComponent,
   logo,
   title,
   text,
@@ -28,20 +29,22 @@ export default function ItemListItem({
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ paddingHorizontal: 15 }}>
-          <View
-            style={{
-              height: 50,
-              width: 50,
-              borderRadius: 10,
-              backgroundColor: COLORS[murmurhash(title) % COLORS.length],
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <StyledText bold color="white" size={20}>
-              {logo}
-            </StyledText>
-          </View>
+          {logoComponent || (
+            <View
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 10,
+                backgroundColor: COLORS[murmurhash(title) % COLORS.length],
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <StyledText bold color="white" size={20}>
+                {logo}
+              </StyledText>
+            </View>
+          )}
         </View>
         <View
           style={{
