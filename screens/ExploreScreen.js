@@ -9,7 +9,7 @@ import {
   ScrollView
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
-import ItemListItem, { COLORS } from "../components/ItemListItem";
+import ItemListItem from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import { RandomLogo } from "../FakeData";
@@ -101,7 +101,6 @@ function StoresSection({ title, stores = [], onStorePress }) {
         <ItemListItem
           key={storeId}
           onPress={() => onStorePress(storeId)}
-          color={COLORS[i % COLORS.length]}
           logo={storeName.slice(0, 1)}
           title={storeName}
           text={`${address1}, ${city}`}

@@ -3,7 +3,7 @@ import { View, RefreshControl, SectionList } from "react-native";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { NavigationContext } from "react-navigation";
-import ItemListItem, { COLORS } from "./ItemListItem";
+import ItemListItem from "./ItemListItem";
 import StyledText from "./StyledText";
 import { getReceipts } from "../Backend";
 import groupBy from "lodash/groupBy";
@@ -78,7 +78,6 @@ export default function Purchases() {
       renderItem={({ item: { id, storeName, price, created }, index: i }) => (
         <ItemListItem
           onPress={() => navigate("PastOrder", { receiptId: id })}
-          color={COLORS[i % COLORS.length]}
           logo={storeName.slice(0, 1)}
           title={storeName}
           text={m(language, created).calendar()}
