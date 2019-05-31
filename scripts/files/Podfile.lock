@@ -36,6 +36,9 @@ PODS:
   - Firebase/Messaging (5.20.2):
     - Firebase/CoreOnly
     - FirebaseMessaging (= 3.5.0)
+  - Firebase/Storage (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.1.1)
   - FirebaseAnalytics (5.8.1):
     - FirebaseCore (~> 5.4)
     - FirebaseInstanceID (~> 3.8)
@@ -86,6 +89,10 @@ PODS:
     - GoogleUtilities/Reachability (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
     - Protobuf (~> 3.1)
+  - FirebaseStorage (3.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -227,6 +234,7 @@ DEPENDENCIES:
   - Firebase/Firestore (~> 5.20.1)
   - Firebase/Functions (~> 5.20.1)
   - Firebase/Messaging (~> 5.20.1)
+  - Firebase/Storage (~> 5.20.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - lottie-ios (from `../node_modules/lottie-ios`)
@@ -266,6 +274,7 @@ SPEC REPOS:
     - FirebaseFunctions
     - FirebaseInstanceID
     - FirebaseMessaging
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleUtilities
     - "gRPC-C++"
@@ -323,6 +332,7 @@ SPEC CHECKSUMS:
   FirebaseFunctions: 35b530c69ef8c322c414104280d36a06347a5d49
   FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
   FirebaseMessaging: 4235f949ce1c4e827aeb19705ba5c53f9b85aa10
+  FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
@@ -345,6 +355,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 0431394bf0e6354decdb2430d22d7569f06114c1
+PODFILE CHECKSUM: b9c14660b890d41024272d0cb325cf84ef2c515f
 
 COCOAPODS: 1.6.1
