@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { NavigationContext } from "react-navigation";
 import { FlatList } from "react-native-gesture-handler";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
-import { getExploreListStores } from "../Backend";
+import { getExploreListStores2 } from "../Backend";
 import SmallHeader from "../components/SmallHeader";
 
 export default function ExploreListScreen() {
@@ -12,23 +12,21 @@ export default function ExploreListScreen() {
   const title = getParam("title");
   const [stores, setStores] = useState([]);
   useEffect(() => {
-    (async function() {
-      setStores(await getExploreListStores());
-    })();
+    getExploreListStores2().then(setStores);
   }, []);
   return (
     <View style={{ flex: 1 }}>
       <SmallHeader title={title} />
       <FlatList
         data={stores}
-        keyExtractor={x => x[0]}
-        renderItem={({ item: [storeName, storeLocation], index: i }) => (
+        keyExtractor={({ id }) => id}
+        renderItem={({ item: { id, name, address1, city }, index: i }) => (
           <ItemListItem
-            onPress={() => navigate("Store")}
+            onPress={() => navigate("Store", { storeId: id })}
             color={COLORS[i % COLORS.length]}
-            logo={storeName.slice(0, 1)}
-            title={storeName}
-            text={storeLocation}
+            logo={name.slice(0, 1)}
+            title={name}
+            text={`${address1}, ${city}`}
           />
         )}
       />

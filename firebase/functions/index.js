@@ -89,10 +89,48 @@ exports.getExploreData = defineFunction(
   })
 );
 
+async function getAllStores() {
+  const docs = await admin
+    .firestore()
+    .collection("stores")
+    .get();
+  const stores = [];
+  docs.forEach(doc => {
+    stores.push({
+      id: doc.id,
+      name: doc.get("name"),
+      address1: doc.get("address1"),
+      city: doc.get("city"),
+      category: doc.get("category")
+    });
+  });
+  return stores;
+}
+
+exports.getExploreData2 = defineFunction(
+  auth(async (req, res) => {
+    const allStores = await getAllStores();
+    res.json({
+      data: {
+        featured: allStores.slice(0, 5),
+        offersMembership: allStores.slice(5, 10),
+        nearby: allStores.slice(-6, -3),
+        recentlyVisited: allStores.slice(-3)
+      }
+    });
+  })
+);
+
 exports.getExploreListStores = defineFunction(
   auth(async (req, res) => {
     const data = repeat(20, () => [getStoreName(), getStoreAddress()]);
     res.json({ data });
+  })
+);
+
+exports.getExploreListStores2 = defineFunction(
+  auth(async (req, res) => {
+    res.json({ data: await getAllStores() });
   })
 );
 
