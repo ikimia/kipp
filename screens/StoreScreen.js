@@ -8,6 +8,7 @@ import { ScrollView, BorderlessButton } from "react-native-gesture-handler";
 import { COLORS } from "../components/ItemListItem";
 import { NavigationEvents } from "react-navigation";
 import firebase from "react-native-firebase";
+import { getStoreLogo } from "../Backend";
 
 const features = [
   "10% off for the first month",
@@ -43,6 +44,7 @@ function formatContact(type, value) {
 
 export default function StoreScreen() {
   const [store, setStore] = useState({ name: "Store" });
+  const [imageURI, setImageURI] = useState(null);
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
@@ -53,6 +55,7 @@ export default function StoreScreen() {
             .doc(params.storeId)
             .get();
           setStore(doc.data());
+          getStoreLogo(doc.id).then(setImageURI, () => {});
         }}
       />
       <SmallHeader title={store.name} />
@@ -65,7 +68,7 @@ export default function StoreScreen() {
           }}
         >
           <Image
-            source={require("../assets/img/zaralogo.jpg")}
+            source={{ uri: imageURI }}
             style={{
               width: 100,
               height: 100,

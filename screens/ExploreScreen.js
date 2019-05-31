@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import {
   TextInput,
   FlatList,
@@ -12,8 +12,7 @@ import Icon from "react-native-vector-icons/Feather";
 import ItemListItem from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
-import { RandomLogo } from "../FakeData";
-import { getExploreData2 } from "../Backend";
+import { getExploreData2, getStoreLogo } from "../Backend";
 import { NavigationContext } from "react-navigation";
 
 const Header = ({ title }) => {
@@ -67,6 +66,23 @@ function StoreSearch() {
   );
 }
 
+function StoreLogo({ storeId }) {
+  const [uri, setURI] = useState(null);
+  useEffect(() => {
+    getStoreLogo(storeId).then(setURI, () => {});
+  }, []);
+  return (
+    <Image
+      source={{ uri }}
+      style={{
+        borderRadius: 5,
+        width: 120,
+        height: 120
+      }}
+    />
+  );
+}
+
 function StoresLane({ title, stores = [], onStorePress }) {
   return (
     <View>
@@ -80,7 +96,7 @@ function StoresLane({ title, stores = [], onStorePress }) {
         renderItem={({ item: { id: storeId, name: storeName, category } }) => (
           <View style={{ marginHorizontal: 6, width: 120 }}>
             <RectButton onPress={() => onStorePress(storeId)}>
-              <RandomLogo seed={storeName} />
+              <StoreLogo storeId={storeId} />
               <StyledText size={14} bold style={{ marginTop: 5 }}>
                 {storeName}
               </StyledText>
@@ -97,7 +113,7 @@ function StoresSection({ title, stores = [], onStorePress }) {
   return (
     <View>
       <Header title={title} />
-      {stores.map(({ id: storeId, name: storeName, address1, city }, i) => (
+      {stores.map(({ id: storeId, name: storeName, address1, city }) => (
         <ItemListItem
           key={storeId}
           onPress={() => onStorePress(storeId)}
