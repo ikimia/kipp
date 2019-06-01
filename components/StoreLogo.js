@@ -3,13 +3,12 @@ import { Image, View } from "react-native";
 import { COLORS } from "./ItemListItem";
 import murmurhash from "murmurhash";
 import StyledText from "./StyledText";
+import FastImage from "react-native-fast-image";
 
 export default function StoreLogo({ logoURL, storeName, size = 120 }) {
   const style = { borderRadius: 5, width: size, height: size };
   if (logoURL) {
-    return (
-      <Image source={{ uri: logoURL, cache: "force-cache" }} style={style} />
-    );
+    return <FastImage source={{ uri: logoURL }} style={style} />;
   }
   return (
     <View

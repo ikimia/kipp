@@ -152,6 +152,9 @@ PODS:
   - Protobuf (3.7.0)
   - React (0.59.8):
     - React/Core (= 0.59.8)
+  - react-native-fast-image (6.0.1):
+    - React
+    - SDWebImage (~> 5.0)
   - react-native-fbsdk (0.8.0):
     - React
     - react-native-fbsdk/Core (= 0.8.0)
@@ -222,6 +225,9 @@ PODS:
     - React
   - RNVectorIcons (6.4.2):
     - React
+  - SDWebImage (5.0.1):
+    - SDWebImage/Core (= 5.0.1)
+  - SDWebImage/Core (5.0.1)
   - yoga (0.59.8.React)
 
 DEPENDENCIES:
@@ -239,6 +245,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - react-native-fast-image (from `../node_modules/react-native-fast-image`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
@@ -283,6 +290,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SDWebImage
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -297,6 +305,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-react-native"
   React:
     :path: "../node_modules/react-native"
+  react-native-fast-image:
+    :path: "../node_modules/react-native-fast-image"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   RNCAsyncStorage:
@@ -346,6 +356,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
+  react-native-fast-image: 3a421727f63d96f766c4b4a2d86fe4987f084c87
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
   RNCAsyncStorage: e71d854855f99b1fc46d468858265608b917bbb8
   RNFirebase: 23f9e86efabd055d5d4178730f767694208b2f53
@@ -353,8 +364,9 @@ SPEC CHECKSUMS:
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
+  SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: b9c14660b890d41024272d0cb325cf84ef2c515f
+PODFILE CHECKSUM: a9d72c78604be8e214028951dd78044688b49c21
 
 COCOAPODS: 1.6.1
