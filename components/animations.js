@@ -4,6 +4,7 @@ import { Animated, Easing } from "react-native";
 import Animation from "lottie-react-native";
 import bubble from "../assets/lottie/bubble.json";
 import checkmark from "../assets/lottie/checkmark.json";
+import processing from "../assets/lottie/processing.json";
 
 export function Bubbles({ shouldFinish, onDone }) {
   const progress = useRef(new Animated.Value(0)).current;
@@ -63,6 +64,16 @@ export function Checkmark() {
       source={checkmark}
       autoPlay={true}
       loop={false}
+    />
+  );
+}
+
+export function Processing() {
+  return (
+    <Animation
+      source={processing}
+      style={{ width: 150, height: 150 }}
+      autoPlay
     />
   );
 }

@@ -5,12 +5,11 @@ import StyledText from "../components/StyledText";
 import { NavigationContext } from "react-navigation";
 import { RectButton, BorderlessButton } from "react-native-gesture-handler";
 import { acceptPayment } from "../Backend";
-import { Bubbles, Checkmark } from "../components/animations";
+import { Checkmark, Processing } from "../components/animations";
 
 export default function PaymentScreen({ orderId, onDone }) {
   const [success, setSuccess] = useState(false);
   const [receiptId, setReceiptId] = useState(false);
-  const [showCheckmark, setShowCheckmark] = useState(false);
   const { navigate } = useContext(NavigationContext);
   useEffect(() => {
     (async () => {
@@ -24,24 +23,15 @@ export default function PaymentScreen({ orderId, onDone }) {
       <View
         style={{ flex: 4, alignItems: "center", justifyContent: "flex-end" }}
       >
-        <View>
-          {showCheckmark ? (
-            <Checkmark />
-          ) : (
-            <Bubbles
-              shouldFinish={success}
-              onDone={() => setShowCheckmark(true)}
-            />
-          )}
-        </View>
+        <View>{success ? <Checkmark /> : <Processing />}</View>
         <View style={{ marginTop: 25 }}>
           <StyledText color="white" bold size={20}>
-            {showCheckmark ? "Payment Completed" : "Processing Payment"}
+            {success ? "Payment Completed" : "Processing Payment"}
           </StyledText>
         </View>
       </View>
       <View style={{ flex: 3, justifyContent: "center", alignItems: "center" }}>
-        {showCheckmark ? (
+        {success ? (
           <View
             style={{
               borderRadius: 5,
@@ -78,7 +68,7 @@ export default function PaymentScreen({ orderId, onDone }) {
         ) : null}
       </View>
       <View style={{ flex: 1, alignItems: "center" }}>
-        {showCheckmark ? (
+        {success ? (
           <BorderlessButton onPress={onDone}>
             <View>
               <StyledText size={20} bold color="white">
