@@ -6,7 +6,7 @@ import StyledText from "./StyledText";
 
 function getIcon(iconElement, icon, small) {
   if (!icon && !iconElement) {
-    return null;
+    return <View style={{ width: 10 }} />;
   }
   return (
     <View style={{ width: small ? 15 : 20, margin: 10 }}>
