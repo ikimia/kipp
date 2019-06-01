@@ -24,7 +24,9 @@ export default function ExploreListScreen() {
         renderItem={({ item: { id, name, address1, city, logoURL } }) => (
           <ItemListItem
             onPress={() => navigate("Store", { storeId: id })}
-            logoComponent={<StoreLogo storeName={name} logoURL={logoURL} />}
+            logoComponent={
+              <StoreLogo storeName={name} logoURL={logoURL} size={50} />
+            }
             title={name}
             text={`${address1}, ${city}`}
           />
