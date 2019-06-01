@@ -21,7 +21,7 @@ export default function AuthenticationFlow() {
   };
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 20 }}>
-      <Backdrop pattern={PATTERNS.Triangles} />
+      <Backdrop pattern={PATTERNS[2]} />
       <View style={{ flex: 5, justifyContent: "center", alignItems: "center" }}>
         <Logo fontSize={100} color="white" />
       </View>
