@@ -57,108 +57,113 @@ export default function StoreScreen() {
         }}
       />
       <SmallHeader title={store.name} />
-      <ScrollView>
-        <View
-          style={{
-            paddingVertical: 20,
-            paddingHorizontal: 10,
-            flexDirection: "row"
-          }}
-        >
-          <StoreLogo storeId={store.id} storeName={store.name} size={100} />
-
-          <View style={{ paddingStart: 15 }}>
-            <StyledText bold size={22}>
-              {store.name}
-            </StyledText>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: "lightgreen",
-                  marginEnd: 5
-                }}
-              />
-              <StyledText>Open today until 23:00</StyledText>
+      {store.id && (
+        <ScrollView>
+          <View
+            style={{
+              paddingVertical: 20,
+              paddingHorizontal: 10,
+              flexDirection: "row"
+            }}
+          >
+            <StoreLogo
+              logoURL={store.logoURL}
+              storeName={store.name}
+              size={100}
+            />
+            <View style={{ paddingStart: 15 }}>
+              <StyledText bold size={22}>
+                {store.name}
+              </StyledText>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 5,
+                    backgroundColor: "lightgreen",
+                    marginEnd: 5
+                  }}
+                />
+                <StyledText>Open today until 23:00</StyledText>
+              </View>
             </View>
           </View>
-        </View>
-        <View
-          style={{
-            backgroundColor: "#FAFAFA",
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: "#EEE",
-            paddingHorizontal: 5,
-            marginBottom: 20
-          }}
-        >
-          <Section title="Membership" marginBottom={0}>
+          <View
+            style={{
+              backgroundColor: "#FAFAFA",
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderColor: "#EEE",
+              paddingHorizontal: 5,
+              marginBottom: 20
+            }}
+          >
+            <Section title="Membership" marginBottom={0}>
+              <View style={{ flexDirection: "row" }}>
+                <View style={{ flex: 1 }}>
+                  {features.map(text => (
+                    <View key={text}>
+                      <StyledText>• {text}</StyledText>
+                    </View>
+                  ))}
+                </View>
+                <View>
+                  <BorderlessButton>
+                    <StyledText bold color={COLORS[5]}>
+                      JOIN NOW
+                    </StyledText>
+                  </BorderlessButton>
+                </View>
+              </View>
+            </Section>
+          </View>
+          <Section title="Location">
             <View style={{ flexDirection: "row" }}>
               <View style={{ flex: 1 }}>
-                {features.map(text => (
-                  <View key={text}>
-                    <StyledText>• {text}</StyledText>
-                  </View>
-                ))}
+                <StyledText>{store.address1}</StyledText>
+                <StyledText>{store.city}</StyledText>
+                <StyledText>Israel</StyledText>
               </View>
               <View>
                 <BorderlessButton>
-                  <StyledText bold color={COLORS[5]}>
-                    JOIN NOW
-                  </StyledText>
+                  <StyledText color={COLORS[5]}>Map</StyledText>
                 </BorderlessButton>
               </View>
             </View>
           </Section>
-        </View>
-        <Section title="Location">
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ flex: 1 }}>
-              <StyledText>{store.address1}</StyledText>
-              <StyledText>{store.city}</StyledText>
-              <StyledText>Israel</StyledText>
-            </View>
+          <Section title="Contact">
             <View>
-              <BorderlessButton>
-                <StyledText color={COLORS[5]}>Map</StyledText>
-              </BorderlessButton>
-            </View>
-          </View>
-        </Section>
-        <Section title="Contact">
-          <View>
-            {(store.contact || []).map(({ type, value }) => (
-              <View
-                key={value}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center"
-                }}
-              >
-                <View style={{ marginHorizontal: 10 }}>
-                  <Icon name={type} size={20} />
-                </View>
+              {(store.contact || []).map(({ type, value }) => (
                 <View
+                  key={value}
                   style={{
-                    flex: 1,
-                    paddingStart: 5,
-                    paddingVertical: 15,
-                    borderBottomColor: "#EEE",
-                    borderBottomWidth: 1
+                    flexDirection: "row",
+                    alignItems: "center"
                   }}
                 >
-                  <StyledText size={16}>
-                    {formatContact(type, value)}
-                  </StyledText>
+                  <View style={{ marginHorizontal: 10 }}>
+                    <Icon name={type} size={20} />
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      paddingStart: 5,
+                      paddingVertical: 15,
+                      borderBottomColor: "#EEE",
+                      borderBottomWidth: 1
+                    }}
+                  >
+                    <StyledText size={16}>
+                      {formatContact(type, value)}
+                    </StyledText>
+                  </View>
                 </View>
-              </View>
-            ))}
-          </View>
-        </Section>
-      </ScrollView>
+              ))}
+            </View>
+          </Section>
+        </ScrollView>
+      )}
     </View>
   );
 }
