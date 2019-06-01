@@ -122,23 +122,24 @@ export default function MainScren() {
   const [orderId, setOrderId] = useState(null);
   const [showPaymentScreen, setShowPaymentScreen] = useState(false);
   const { dispatch } = useContext(NavigationContext);
+  const setTabBarHidden = tabBarHidden => {
+    dispatch(
+      NavigationActions.setParams({
+        key: "Pay",
+        params: { tabBarHidden }
+      })
+    );
+  };
   useEffect(() => {
     return Backend.onChargeAttempt(message => {
       const { storeName, price, orderId: orderIdFromBackend } = message.data;
       confirmPayment(storeName, price, () => {
+        setTabBarHidden(true);
         setOrderId(orderIdFromBackend);
         setShowPaymentScreen(true);
       });
     });
   }, []);
-  useEffect(() => {
-    dispatch(
-      NavigationActions.setParams({
-        key: "Pay",
-        params: { tabBarHidden: showPaymentScreen }
-      })
-    );
-  }, [showPaymentScreen]);
   const [pattern, setPattern] = useState(getRandomPattern(null));
   const setNewPattern = () => setPattern(getRandomPattern(pattern));
   return (
@@ -157,6 +158,7 @@ export default function MainScren() {
             orderId={orderId}
             onDone={() => {
               setShowPaymentScreen(false);
+              setTabBarHidden(false);
               setNewPattern();
             }}
           />
