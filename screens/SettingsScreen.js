@@ -26,6 +26,7 @@ function CreditCardPreview({ cardNumber, loading }) {
 
 function ProfilePicture({ uri, radius, borderWidth = 3 }) {
   const outerRadius = radius + 2 * borderWidth;
+  const size = 2 * radius;
   return (
     <View
       style={{
@@ -40,12 +41,12 @@ function ProfilePicture({ uri, radius, borderWidth = 3 }) {
       }}
     >
       <Image
-        source={{ uri }}
+        source={{ uri: `${uri}?width=${size}&height=${size}` }}
         style={{
           borderColor: "white",
           borderWidth,
-          width: 2 * radius,
-          height: 2 * radius,
+          width: size,
+          height: size,
           borderRadius: radius
         }}
       />
@@ -104,10 +105,7 @@ export default function SettingsScreen() {
               backgroundColor: COLORS[4]
             }}
           />
-          <ProfilePicture
-            uri={`${currentUser.photoURL}?type=large`}
-            radius={75}
-          />
+          <ProfilePicture uri={currentUser.photoURL} radius={75} />
           <StyledText size={20} bold style={{ marginTop: 10 }}>
             {currentUser.displayName}
           </StyledText>
