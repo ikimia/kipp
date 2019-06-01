@@ -11,6 +11,7 @@ import { CreditCardStorage } from "../Storage";
 import { COLORS } from "../components/ItemListItem";
 import { LoginManager } from "react-native-fbsdk";
 import { getCurrentUser, signOut } from "../Backend";
+import FastImage from "react-native-fast-image";
 
 function CreditCardPreview({ cardNumber, loading }) {
   if (!loading && !cardNumber) {
@@ -40,7 +41,7 @@ function ProfilePicture({ uri, radius, borderWidth = 3 }) {
         justifyContent: "center"
       }}
     >
-      <Image
+      <FastImage
         source={{ uri: `${uri}?width=${size}&height=${size}` }}
         style={{
           borderColor: "white",
