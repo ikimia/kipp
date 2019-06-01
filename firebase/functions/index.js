@@ -101,7 +101,8 @@ async function getAllStores() {
       name: doc.get("name"),
       address1: doc.get("address1"),
       city: doc.get("city"),
-      category: doc.get("category")
+      category: doc.get("category"),
+      logoURL: doc.get("logoURL")
     });
   });
   return stores;

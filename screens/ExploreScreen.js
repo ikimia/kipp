@@ -77,10 +77,12 @@ function StoresLane({ title, stores = [], onStorePress }) {
         ListHeaderComponent={() => <View style={{ width: 5 }} />}
         data={stores}
         keyExtractor={({ id }) => id}
-        renderItem={({ item: { id: storeId, name: storeName, category } }) => (
+        renderItem={({
+          item: { id: storeId, name: storeName, category, logoURL }
+        }) => (
           <View style={{ marginHorizontal: 6, width: 120 }}>
             <RectButton onPress={() => onStorePress(storeId)}>
-              <StoreLogo storeId={storeId} storeName={storeName} />
+              <StoreLogo logoURL={logoURL} storeName={storeName} />
               <StyledText size={14} bold style={{ marginTop: 5 }}>
                 {storeName}
               </StyledText>
@@ -97,18 +99,20 @@ function StoresSection({ title, stores = [], onStorePress }) {
   return (
     <View>
       <Header title={title} />
-      {stores.map(({ id: storeId, name: storeName, address1, city }) => (
-        <ItemListItem
-          key={storeId}
-          onPress={() => onStorePress(storeId)}
-          logoComponent={
-            <StoreLogo storeId={storeId} storeName={storeName} size={50} />
-          }
-          logo={storeName.slice(0, 1)}
-          title={storeName}
-          text={`${address1}, ${city}`}
-        />
-      ))}
+      {stores.map(
+        ({ id: storeId, name: storeName, address1, city, logoURL }) => (
+          <ItemListItem
+            key={storeId}
+            onPress={() => onStorePress(storeId)}
+            logoComponent={
+              <StoreLogo logoURL={logoURL} storeName={storeName} size={50} />
+            }
+            logo={storeName.slice(0, 1)}
+            title={storeName}
+            text={`${address1}, ${city}`}
+          />
+        )
+      )}
     </View>
   );
 }
