@@ -1,13 +1,13 @@
 import * as React from "react";
-import { View } from "react-native";
 import Purchases from "../components/Purchases";
 import AppHeader from "../components/AppHeader";
+import Container from "../components/Container";
 
 export default function ReceiptsScreen() {
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <AppHeader />
       <Purchases />
-    </View>
+    </Container>
   );
 }

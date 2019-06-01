@@ -7,13 +7,14 @@ import DarkHeader from "../components/DarkHeader";
 import { ScrollView } from "react-native-gesture-handler";
 import ListHeader from "../components/ListHeader";
 import ListItem from "../components/ListItem";
+import Container from "../components/Container";
 
 const ITEMS = ["en", "he"];
 
 export default function LanguageSettingsScreen() {
   const { t, i18n } = useTranslation("settings");
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <SafeAreaView>
         <DarkHeader back title={t("language")} />
       </SafeAreaView>
@@ -32,6 +33,6 @@ export default function LanguageSettingsScreen() {
           />
         ))}
       </ScrollView>
-    </View>
+    </Container>
   );
 }

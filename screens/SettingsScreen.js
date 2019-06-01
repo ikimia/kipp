@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { View, Image, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import { NavigationContext, NavigationEvents } from "react-navigation";
 import ListItem from "../components/ListItem";
 import StyledText from "../components/StyledText";
@@ -12,6 +12,7 @@ import { COLORS } from "../components/ItemListItem";
 import { LoginManager } from "react-native-fbsdk";
 import { getCurrentUser, signOut } from "../Backend";
 import FastImage from "react-native-fast-image";
+import Container from "../components/Container";
 
 function CreditCardPreview({ cardNumber, loading }) {
   if (!loading && !cardNumber) {
@@ -76,7 +77,7 @@ export default function SettingsScreen() {
   const [cardLoading, setCardLoading] = useState(true);
   const currentUser = getCurrentUser();
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <NavigationEvents
         onWillFocus={async () => {
           const creditCard = await CreditCardStorage.get();
@@ -143,6 +144,6 @@ export default function SettingsScreen() {
           })}
         />
       </ScrollView>
-    </View>
+    </Container>
   );
 }

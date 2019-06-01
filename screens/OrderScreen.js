@@ -9,6 +9,7 @@ import ListItem from "../components/ListItem";
 import SmallHeader from "../components/SmallHeader";
 import { getReceipt } from "../Backend";
 import moment from "moment";
+import Container from "../components/Container";
 
 function Section({ title, children }) {
   return (
@@ -41,7 +42,7 @@ export default function OrderScreen({ receiptId }) {
     getReceipt(receiptId).then(setReceipt);
   }, []);
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <SmallHeader title="Receipt" />
       {receipt && (
         <ScrollView style={{ flex: 1, paddingHorizontal: 10 }}>
@@ -104,6 +105,6 @@ export default function OrderScreen({ receiptId }) {
           </Section>
         </ScrollView>
       )}
-    </View>
+    </Container>
   );
 }
