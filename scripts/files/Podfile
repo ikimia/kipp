@@ -44,9 +44,9 @@ target 'kipp' do
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'react-native-fast-image', :path => '../node_modules/react-native-fast-image'
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
 end
 

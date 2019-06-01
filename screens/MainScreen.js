@@ -47,9 +47,7 @@ function useTimer(code, onEnd) {
 
 function getRandomPattern(prevPattern) {
   for (;;) {
-    const keys = Object.keys(PATTERNS);
-    const randomKeyIndex = Math.floor(Math.random() * keys.length);
-    const pattern = PATTERNS[keys[randomKeyIndex]];
+    const pattern = PATTERNS[Math.floor(Math.random() * PATTERNS.length)];
     if (pattern !== prevPattern) {
       return pattern;
     }
@@ -149,7 +147,7 @@ export default function MainScren() {
         onWillFocus={() => StatusBar.setBarStyle("light-content")}
         onDidBlur={() => StatusBar.setBarStyle("default")}
       />
-      <Backdrop pattern={PATTERNS[pattern]} />
+      <Backdrop pattern={pattern} />
       <SafeAreaView style={{ flex: 1 }}>
         <View style={{ alignItems: "center", padding: 10 }}>
           <Logo color="white" fontSize={25} />
