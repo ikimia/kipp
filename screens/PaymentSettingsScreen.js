@@ -14,6 +14,7 @@ import { NavigationContext, NavigationEvents } from "react-navigation";
 import { CreditCardStorage } from "../Storage";
 import StyledText from "../components/StyledText";
 import { COLORS } from "../components/ItemListItem";
+import Container from "../components/Container";
 const formatCardNumber = cardNumber =>
   cardNumber ? cardNumber.match(/.{1,4}/g).join(" ") : "";
 
@@ -101,7 +102,7 @@ export default function PaymentSettingsScreen() {
   const [savedCardLoading, setSavedCardLoading] = useState(true);
 
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <NavigationEvents
         onWillFocus={async () => {
           const creditCard = await CreditCardStorage.get();
@@ -179,6 +180,6 @@ export default function PaymentSettingsScreen() {
           />
         )}
       </ScrollView>
-    </View>
+    </Container>
   );
 }

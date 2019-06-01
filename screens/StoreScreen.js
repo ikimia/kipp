@@ -9,6 +9,7 @@ import { COLORS } from "../components/ItemListItem";
 import { NavigationEvents } from "react-navigation";
 import firebase from "react-native-firebase";
 import StoreLogo from "../components/StoreLogo";
+import Container from "../components/Container";
 
 const features = [
   "10% off for the first month",
@@ -45,7 +46,7 @@ function formatContact(type, value) {
 export default function StoreScreen() {
   const [store, setStore] = useState({ name: "Store" });
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <NavigationEvents
         onWillFocus={async ({ state: { params = {} } }) => {
           const doc = await firebase
@@ -164,6 +165,6 @@ export default function StoreScreen() {
           </Section>
         </ScrollView>
       )}
-    </View>
+    </Container>
   );
 }

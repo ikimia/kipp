@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
-import { View } from "react-native";
 import { NavigationContext } from "react-navigation";
 import { FlatList } from "react-native-gesture-handler";
 import ItemListItem from "../components/ItemListItem";
 import { getExploreListStores2 } from "../Backend";
 import SmallHeader from "../components/SmallHeader";
 import StoreLogo from "../components/StoreLogo";
+import Container from "../components/Container";
 
 export default function ExploreListScreen() {
   const { getParam, navigate } = useContext(NavigationContext);
@@ -16,7 +16,7 @@ export default function ExploreListScreen() {
     getExploreListStores2().then(setStores);
   }, []);
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <SmallHeader title={title} />
       <FlatList
         data={stores}
@@ -30,6 +30,6 @@ export default function ExploreListScreen() {
           />
         )}
       />
-    </View>
+    </Container>
   );
 }

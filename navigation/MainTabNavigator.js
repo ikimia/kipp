@@ -88,5 +88,16 @@ export default createBottomTabNavigator(
       "settings"
     )
   },
-  { initialRouteName: "Pay" }
+  {
+    initialRouteName: "Pay",
+    tabBarOptions: {
+      style: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        left: 0,
+        backgroundColor: "rgba(255,255,255,0.9)"
+      }
+    }
+  }
 );

@@ -12,6 +12,7 @@ import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import { RandomLogo } from "../FakeData";
 import { getUserMemberships } from "../Backend";
+import Container from "../components/Container";
 
 function Chip({ title, icon }) {
   return (
@@ -64,7 +65,7 @@ export default function FollowingScreen() {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <AppHeader
         bottomComponent={
           <View style={{ paddingTop: 10 }}>
@@ -101,6 +102,6 @@ export default function FollowingScreen() {
           )}
         />
       </View>
-    </View>
+    </Container>
   );
 }

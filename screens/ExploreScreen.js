@@ -15,6 +15,7 @@ import AppHeader from "../components/AppHeader";
 import { getExploreData2 } from "../Backend";
 import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
+import Container from "../components/Container";
 
 const Header = ({ title }) => {
   const { navigate } = useContext(NavigationContext);
@@ -125,7 +126,7 @@ export default function ExploreScreen() {
   }, []);
   const navigateToStore = storeId => navigate("Store", { storeId });
   return (
-    <View style={{ flex: 1 }}>
+    <Container>
       <AppHeader bottomComponent={<StoreSearch />} />
       <ScrollView style={{ flex: 1 }}>
         <StoresLane
@@ -149,6 +150,6 @@ export default function ExploreScreen() {
           onStorePress={navigateToStore}
         />
       </ScrollView>
-    </View>
+    </Container>
   );
 }
