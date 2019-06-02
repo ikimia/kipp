@@ -56,6 +56,10 @@ exports.demo = defineFunction(async (req, res) => {
   res.send();
 });
 
+exports.stores = defineFunction(async (req, res) => {
+  res.send({ data: await getAllStores() });
+});
+
 exports.acceptPayment = defineFunction(
   auth(async (req, res) => {
     const uid = req.user.uid;
