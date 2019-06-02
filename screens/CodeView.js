@@ -41,6 +41,7 @@ function useTimer(code, onEnd) {
 export default function CodeView({ onCodeChange }) {
   const [code, setCode] = useState(null);
   const setNewCode = async (firstCode = false) => {
+    setCode(null);
     if (!firstCode) {
       onCodeChange();
     }

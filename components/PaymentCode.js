@@ -14,7 +14,6 @@ export default function PaymentCode({ code }) {
   useEffect(() => {
     (async function() {
       if (code === null) {
-        await fade(0, 150);
         setCodeElement(
           <View style={{ flexDirection: "row" }}>
             {[...Array(7)].map((_, i) => (
@@ -24,7 +23,6 @@ export default function PaymentCode({ code }) {
             ))}
           </View>
         );
-        await fade(1, 250);
       } else {
         await fade(0, 150);
         setCodeElement(
