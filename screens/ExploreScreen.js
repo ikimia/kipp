@@ -26,7 +26,8 @@ const Header = ({ title }) => {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        margin: 10
+        margin: 10,
+        marginTop: 0
       }}
     >
       <StyledText bold size={20}>
@@ -69,9 +70,7 @@ function StoreSearch() {
 
 function StoresLane({ title, stores = [], onStorePress }) {
   return (
-    <View
-      style={{ backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}
-    >
+    <View style={{ marginVertical: 20 }}>
       <Header title={title} />
       <FlatList
         horizontal
@@ -99,7 +98,7 @@ function StoresLane({ title, stores = [], onStorePress }) {
 
 function StoresSection({ title, stores = [], onStorePress }) {
   return (
-    <View style={{ backgroundColor: "white", marginTop: 10 }}>
+    <View style={{ marginVertical: 20 }}>
       <Header title={title} />
       {stores.map(
         ({ id: storeId, name: storeName, address1, city, logoURL }, i) => (
@@ -120,6 +119,18 @@ function StoresSection({ title, stores = [], onStorePress }) {
   );
 }
 
+function Separator() {
+  return (
+    <View
+      style={{
+        borderTopColor: "#EEE",
+        borderTopWidth: 1,
+        marginHorizontal: 10
+      }}
+    />
+  );
+}
+
 export default function ExploreScreen() {
   const { navigate } = useContext(NavigationContext);
   const [data, setData] = useState({});
@@ -130,17 +141,19 @@ export default function ExploreScreen() {
   return (
     <Container>
       <AppHeader bottomComponent={<StoreSearch />} />
-      <ScrollView style={{ flex: 1, backgroundColor: "#EEE" }}>
+      <ScrollView style={{ flex: 1 }}>
         <StoresLane
           title="Featured"
           stores={data.featured}
           onStorePress={navigateToStore}
         />
+        <Separator />
         <StoresSection
           title="Recently Visited"
           stores={data.recentlyVisited}
           onStorePress={navigateToStore}
         />
+        <Separator />
         <StoresSection
           title="Nearby"
           stores={data.nearby}

@@ -10,7 +10,6 @@ import LanguageSettingsScreen from "../screens/LanguageSettingsScreen";
 import MainScreen from "../screens/MainScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ReceiptsScreen from "../screens/ReceiptsScreen";
-import FollowingScreen from "../screens/OffersScreen";
 import ExploreScreen from "../screens/ExploreScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
@@ -68,7 +67,6 @@ export default createBottomTabNavigator(
       "Receipts",
       "tag"
     ),
-    Offers: stack({ Offers: FollowingScreen }, "Offers", "gift"),
     Explore: stack(
       {
         Explore: ExploreScreen,
