@@ -134,11 +134,6 @@ export default function ExploreScreen() {
           stores={data.featured}
           onStorePress={navigateToStore}
         />
-        <StoresLane
-          title="Offers Membership"
-          stores={data.offersMembership}
-          onStorePress={navigateToStore}
-        />
         <StoresSection
           title="Recently Visited"
           stores={data.recentlyVisited}

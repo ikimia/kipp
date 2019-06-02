@@ -4,7 +4,7 @@ const functions = firebase.functions("europe-west1");
 
 // eslint-disable-next-line no-undef
 if (__DEV__) {
-  functions.useFunctionsEmulator("http://localhost:5001");
+  // functions.useFunctionsEmulator("http://localhost:5001");
 }
 
 function firebaseFunction(funcName) {
