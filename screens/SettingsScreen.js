@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useContext, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { View, Alert } from "react-native";
+import { View, ActionSheetIOS } from "react-native";
 import { NavigationContext, NavigationEvents } from "react-navigation";
 import ListItem from "../components/ListItem";
 import StyledText from "../components/StyledText";
@@ -56,18 +56,21 @@ function ProfilePicture({ uri, radius, borderWidth = 3 }) {
   );
 }
 
-function confirmSignOut(onPress) {
+function confirmSignOut(onSignOut) {
   return () => {
-    Alert.alert("Sign out from Kipp?", "", [
+    ActionSheetIOS.showActionSheetWithOptions(
       {
-        text: "Cancel",
-        style: "cancel"
+        message: "Are you sure you want to sign out?",
+        options: ["Cancel", "Sign Out"],
+        destructiveButtonIndex: 1,
+        cancelButtonIndex: 0
       },
-      {
-        text: "OK",
-        onPress
+      index => {
+        if (index === 1) {
+          onSignOut();
+        }
       }
-    ]);
+    );
   };
 }
 
