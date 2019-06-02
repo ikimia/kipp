@@ -1,7 +1,3 @@
-const {
-  company: { companyName: getStoreName },
-  address: { streetAddress: getStoreAddress }
-} = require("faker");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
@@ -73,26 +69,6 @@ exports.acceptPayment = defineFunction(
   })
 );
 
-function repeat(num, func) {
-  return Array(num)
-    .fill()
-    .map(() => func());
-}
-
-exports.getExploreData = defineFunction(
-  auth(async (req, res) => {
-    const lanes = [
-      ["Featured", repeat(5, getStoreName)],
-      ["Offers Memberships", repeat(5, getStoreName)]
-    ];
-    const sections = [
-      ["Nearby", repeat(3, () => [getStoreName(), getStoreAddress()])],
-      ["Recently Visited", repeat(3, () => [getStoreName(), getStoreAddress()])]
-    ];
-    res.json({ data: { lanes, sections } });
-  })
-);
-
 async function getAllStores() {
   const docs = await admin
     .firestore()
@@ -112,7 +88,7 @@ async function getAllStores() {
   return stores;
 }
 
-exports.getExploreData2 = defineFunction(
+exports.getExploreData = defineFunction(
   auth(async (req, res) => {
     const allStores = await getAllStores();
     res.json({
@@ -128,19 +104,6 @@ exports.getExploreData2 = defineFunction(
 
 exports.getExploreListStores = defineFunction(
   auth(async (req, res) => {
-    const data = repeat(20, () => [getStoreName(), getStoreAddress()]);
-    res.json({ data });
-  })
-);
-
-exports.getExploreListStores2 = defineFunction(
-  auth(async (req, res) => {
     res.json({ data: await getAllStores() });
-  })
-);
-
-exports.getUserMemberships = defineFunction(
-  auth(async (req, res) => {
-    res.json({ data: repeat(6, getStoreName) });
   })
 );
