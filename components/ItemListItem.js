@@ -19,6 +19,7 @@ export default function ItemListItem({
   onPress,
   logoComponent,
   logo,
+  last,
   title,
   text,
   secondaryText,
@@ -53,9 +54,13 @@ export default function ItemListItem({
             alignSelf: "stretch",
             padding: 15,
             paddingStart: 0,
-            borderBottomColor: "#EEE",
-            borderBottomWidth: 1,
-            alignItems: "center"
+            alignItems: "center",
+            ...(!last
+              ? {
+                  borderBottomColor: "#EEE",
+                  borderBottomWidth: 1
+                }
+              : undefined)
           }}
         >
           <View style={{ flex: 1 }}>

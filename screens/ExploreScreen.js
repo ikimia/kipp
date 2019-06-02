@@ -9,7 +9,7 @@ import {
   ScrollView
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
-import ItemListItem from "../components/ItemListItem";
+import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import { getExploreData2 } from "../Backend";
@@ -25,21 +25,20 @@ const Header = ({ title }) => {
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "flex-end",
-        marginTop: 20,
-        marginBottom: 10,
-        marginHorizontal: 10
+        alignItems: "center",
+        margin: 10
       }}
     >
       <StyledText bold size={20}>
         {title}
       </StyledText>
       <BorderlessButton
+        style={{ marginEnd: 5 }}
         activeOpacity={0.5}
         onPress={() => navigate("ExploreList", { title })}
       >
-        <StyledText size={16} color="#777">
-          see all
+        <StyledText size={14} color={COLORS[3]}>
+          See All
         </StyledText>
       </BorderlessButton>
     </View>
@@ -70,7 +69,9 @@ function StoreSearch() {
 
 function StoresLane({ title, stores = [], onStorePress }) {
   return (
-    <View>
+    <View
+      style={{ backgroundColor: "white", marginTop: 10, paddingBottom: 10 }}
+    >
       <Header title={title} />
       <FlatList
         horizontal
@@ -98,10 +99,10 @@ function StoresLane({ title, stores = [], onStorePress }) {
 
 function StoresSection({ title, stores = [], onStorePress }) {
   return (
-    <View>
+    <View style={{ backgroundColor: "white", marginTop: 10 }}>
       <Header title={title} />
       {stores.map(
-        ({ id: storeId, name: storeName, address1, city, logoURL }) => (
+        ({ id: storeId, name: storeName, address1, city, logoURL }, i) => (
           <ItemListItem
             key={storeId}
             onPress={() => onStorePress(storeId)}
@@ -111,6 +112,7 @@ function StoresSection({ title, stores = [], onStorePress }) {
             logo={storeName.slice(0, 1)}
             title={storeName}
             text={`${address1}, ${city}`}
+            last={i === stores.length - 1}
           />
         )
       )}
@@ -128,7 +130,7 @@ export default function ExploreScreen() {
   return (
     <Container>
       <AppHeader bottomComponent={<StoreSearch />} />
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: "#EEE" }}>
         <StoresLane
           title="Featured"
           stores={data.featured}
