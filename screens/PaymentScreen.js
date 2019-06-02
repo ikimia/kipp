@@ -21,7 +21,7 @@ export default function PaymentScreen({ orderId, onDone }) {
   return (
     <View style={{ flex: 1 }}>
       <View
-        style={{ flex: 4, alignItems: "center", justifyContent: "flex-end" }}
+        style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}
       >
         <View>{success ? <Checkmark /> : <Processing />}</View>
         <View style={{ marginTop: 25 }}>
@@ -30,53 +30,57 @@ export default function PaymentScreen({ orderId, onDone }) {
           </StyledText>
         </View>
       </View>
-      <View style={{ flex: 3, justifyContent: "center", alignItems: "center" }}>
-        {success ? (
-          <View
-            style={{
-              borderRadius: 5,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 2
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-
-              elevation: 5
-            }}
-          >
-            <RectButton
+      <View style={{ flex: 1 }}>
+        <View
+          style={{ flex: 2, justifyContent: "center", alignItems: "center" }}
+        >
+          {success ? (
+            <View
               style={{
-                backgroundColor: "white",
-                padding: 10,
-                paddingHorizontal: 20,
-                borderRadius: 5
-              }}
-              onPress={() => {
-                onDone();
-                navigate("PastOrder", { receiptId });
+                borderRadius: 5,
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 5
               }}
             >
+              <RectButton
+                style={{
+                  backgroundColor: "white",
+                  padding: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 5
+                }}
+                onPress={() => {
+                  onDone();
+                  navigate("PastOrder", { receiptId });
+                }}
+              >
+                <View>
+                  <StyledText size={20} bold>
+                    View Receipt
+                  </StyledText>
+                </View>
+              </RectButton>
+            </View>
+          ) : null}
+        </View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          {success ? (
+            <BorderlessButton onPress={onDone}>
               <View>
-                <StyledText size={20} bold>
-                  View Receipt
+                <StyledText size={20} bold color="white">
+                  Done
                 </StyledText>
               </View>
-            </RectButton>
-          </View>
-        ) : null}
-      </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        {success ? (
-          <BorderlessButton onPress={onDone}>
-            <View>
-              <StyledText size={20} bold color="white">
-                Done
-              </StyledText>
-            </View>
-          </BorderlessButton>
-        ) : null}
+            </BorderlessButton>
+          ) : null}
+        </View>
       </View>
     </View>
   );
