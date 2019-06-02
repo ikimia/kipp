@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useReducer } from "react";
 import { View, StatusBar, Alert } from "react-native";
 import {
   SafeAreaView,
@@ -140,8 +140,11 @@ export default function MainScren() {
       });
     });
   }, []);
-  const [pattern, setPattern] = useState(getRandomPattern(null));
-  const setNewPattern = () => setPattern(getRandomPattern(pattern));
+  const [pattern, setNewPattern] = useReducer(
+    getRandomPattern,
+    null,
+    getRandomPattern
+  );
   return (
     <View style={{ flex: 1 }}>
       <NavigationEvents
