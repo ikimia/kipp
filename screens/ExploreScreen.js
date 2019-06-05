@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/Feather";
 import ItemListItem, { COLORS } from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
-import { getExploreData2 } from "../Backend";
+import { getExploreData } from "../Backend";
 import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
@@ -135,7 +135,7 @@ export default function ExploreScreen() {
   const { navigate } = useContext(NavigationContext);
   const [data, setData] = useState({});
   useEffect(() => {
-    getExploreData2().then(setData);
+    getExploreData().then(setData);
   }, []);
   const navigateToStore = storeId => navigate("Store", { storeId });
   return (

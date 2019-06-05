@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { NavigationContext } from "react-navigation";
 import { FlatList } from "react-native-gesture-handler";
 import ItemListItem from "../components/ItemListItem";
-import { getExploreListStores2 } from "../Backend";
+import { getExploreListStores } from "../Backend";
 import SmallHeader from "../components/SmallHeader";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
@@ -13,7 +13,7 @@ export default function ExploreListScreen() {
   const title = getParam("title");
   const [stores, setStores] = useState([]);
   useEffect(() => {
-    getExploreListStores2().then(setStores);
+    getExploreListStores().then(setStores);
   }, []);
   return (
     <Container>
