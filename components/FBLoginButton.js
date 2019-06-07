@@ -37,7 +37,7 @@ export default function FBLoginButton({ onLogin, onCancel, onError }) {
           style={{ fontSize: 22, color: "white", marginEnd: 10 }}
         />
         <StyledText color="white" size={16}>
-          Login with Facebook
+          Continue with Facebook
         </StyledText>
       </View>
     </RectButton>

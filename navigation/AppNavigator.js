@@ -2,7 +2,7 @@ import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import MainTabNavigator from "./MainTabNavigator";
 import PaymentScreen from "../screens/PaymentScreen";
-import AuthenticationFlow from "../screens/AuthenticationFlow";
+import AuthenticationFlow from "../screens/authentication/AuthenticationFlow";
 import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 import { reportNavigation } from "../Backend";
 
