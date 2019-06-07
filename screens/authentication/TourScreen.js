@@ -86,7 +86,7 @@ export default function TourScreen() {
         }}
       />
       <Backdrop pattern={PATTERNS[1]} />
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", marginVertical: 10 }}>
         <Pagination size={TOUR.length} index={activeSlide} />
       </View>
       <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
