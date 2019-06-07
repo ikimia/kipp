@@ -216,6 +216,8 @@ PODS:
     - React/RCTBlob
   - RNCAsyncStorage (1.3.3):
     - React
+  - RNDeviceInfo (2.1.1):
+    - React
   - RNFirebase (5.4.0):
     - Firebase/Core
     - React
@@ -228,6 +230,8 @@ PODS:
   - SDWebImage (5.0.1):
     - SDWebImage/Core (= 5.0.1)
   - SDWebImage/Core (5.0.1)
+  - TouchID (4.4.1):
+    - React
   - yoga (0.59.8.React)
 
 DEPENDENCIES:
@@ -257,10 +261,12 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - TouchID (from `../node_modules/react-native-touch-id`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -313,6 +319,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFirebase:
     :path: "../node_modules/react-native-firebase/ios"
   RNGestureHandler:
@@ -321,6 +329,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-localize"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  TouchID:
+    :path: "../node_modules/react-native-touch-id"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -360,13 +370,15 @@ SPEC CHECKSUMS:
   react-native-fast-image: 3a421727f63d96f766c4b4a2d86fe4987f084c87
   react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
   RNCAsyncStorage: e71d854855f99b1fc46d468858265608b917bbb8
+  RNDeviceInfo: e597edb4f21157bc83ba420c0ba6962ab9fec322
   RNFirebase: 23f9e86efabd055d5d4178730f767694208b2f53
   RNGestureHandler: b65d391f4f570178d657b99a16ec99d09b8656b0
   RNLocalize: 22decec67a71411dfe5e4d880cbe66ef1d27426c
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
+  TouchID: ba4c656d849cceabc2e4eef722dea5e55959ecf4
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: accca6fce6092eb45d139ec925088d24346c45c8
+PODFILE CHECKSUM: f9095900a76e9c4b3297795d7b41b6eb472ab3cc
 
 COCOAPODS: 1.6.1
