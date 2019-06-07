@@ -11,6 +11,8 @@ import Backdrop, { PATTERNS } from "../components/Backdrop";
 import * as Backend from "../Backend";
 import PaymentScreen from "./PaymentScreen";
 import CodeView from "./CodeView";
+import TouchID from "react-native-touch-id";
+import DeviceInfo from "react-native-device-info";
 
 function getRandomPattern(prevPattern) {
   for (;;) {
@@ -44,7 +46,10 @@ export default function MainScren() {
   useEffect(() => {
     return Backend.onChargeAttempt(message => {
       const { storeName, price, orderId: orderIdFromBackend } = message.data;
-      confirmPayment(storeName, price, () => {
+      confirmPayment(storeName, price, async () => {
+        if (!DeviceInfo.isEmulator()) {
+          await TouchID.authenticate();
+        }
         setTabBarHidden(true);
         setOrderId(orderIdFromBackend);
         setShowPaymentScreen(true);
