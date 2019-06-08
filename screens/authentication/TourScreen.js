@@ -14,22 +14,32 @@ import { RectButton } from "react-native-gesture-handler";
 
 const TOUR = [
   {
+    emoji: "👋",
     title: "Welcome to Kipp",
-    text: "Your life are about to change!\nContinue to know more."
+    text: "Your life is about to change!\nContinue to know more."
   },
   {
+    emoji: "💸",
     title: "Say Goodbye to Your Wallet",
     text:
       "Kipp lets you pay without your wallet.\nOnce everything is set, your credit card will be stored on your device."
   },
   {
-    title: "Get Promotions You Want",
+    emoji: "🔒",
+    title: "Be More Secure",
+    text:
+      "When you pay with Kipp, nobody gets your credit card number. It will always be safe with you."
+  },
+  {
+    emoji: "🎁",
+    title: "Get The Promotions You Want",
     text:
       "Based on what you buy, we will show you only the promotions that you are interested in.\nNo BS, we promise."
   },
   {
+    emoji: "💃",
     title: "Ready to Get Started?",
-    text: "Continue in order to sign in."
+    text: "Continue and sign in."
   }
 ];
 
@@ -92,7 +102,15 @@ export default function TourScreen() {
       <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
         <Logo fontSize={100} color="white" />
       </View>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
+        <StyledText
+          fontFamily="Noto Emoji"
+          size={60}
+          color="white"
+          style={{ marginBottom: 10 }}
+        >
+          {TOUR[activeSlide].emoji}
+        </StyledText>
         <StyledText bold color="white" size={18} style={{ marginBottom: 15 }}>
           {TOUR[activeSlide].title}
         </StyledText>
