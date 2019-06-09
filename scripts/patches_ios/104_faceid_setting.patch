@@ -1,0 +1,13 @@
+diff --git a/kipp/Info.plist b/kipp/Info.plist
+index ce8f84c..b08d88f 100644
+--- a/kipp/Info.plist
++++ b/kipp/Info.plist
+@@ -52,6 +52,8 @@
+ 	<array>
+ 		<string>armv7</string>
+ 	</array>
++	<key>NSFaceIDUsageDescription</key>
++	<string>If available, Face ID is required for secure payment.</string>
+ 	<key>UISupportedInterfaceOrientations</key>
+ 	<array>
+ 		<string>UIInterfaceOrientationPortrait</string>
