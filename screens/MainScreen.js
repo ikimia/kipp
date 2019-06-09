@@ -48,7 +48,7 @@ export default function MainScren() {
       const { storeName, price, orderId: orderIdFromBackend } = message.data;
       confirmPayment(storeName, price, async () => {
         if (!DeviceInfo.isEmulator()) {
-          await TouchID.authenticate();
+          await TouchID.authenticate().catch(err => alert(err));
         }
         setTabBarHidden(true);
         setOrderId(orderIdFromBackend);
