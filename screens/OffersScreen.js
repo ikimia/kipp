@@ -12,6 +12,7 @@ import AppHeader from "../components/AppHeader";
 import Container from "../components/Container";
 import ItemListItem from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
+import { getOffers } from "../Backend";
 
 function SearchInput() {
   return (
@@ -65,36 +66,6 @@ function Badge({ size = 20, number = 1 }) {
   );
 }
 
-async function getOffers() {
-  return [
-    {
-      id: "12312",
-      storeName: "McDonalds",
-      address: "Ibn Gabirol St 92",
-      text: "Get a beach towel with this coupon"
-    },
-    {
-      id: "2222",
-      storeName: "Burger King",
-      address: "Ibn Gabirol St 92",
-      text: "Get a free burger",
-      starred: true
-    },
-    {
-      id: "333",
-      storeName: "Otello",
-      address: "Dizengoff St 151",
-      text: "Get free ice scream"
-    },
-    {
-      id: "444",
-      storeName: "Arcaffe",
-      address: "Ibn Gabirol St 100",
-      text: "Free coffee with every sandwich"
-    }
-  ];
-}
-
 function Star({ selected }) {
   const [name, color] = selected ? ["star", "gold"] : ["star-o", "#666"];
   return <FontAwesome name={name} color={color} size={20} />;
@@ -103,9 +74,9 @@ function Star({ selected }) {
 function OfferListItem({ offer, onStar }) {
   return (
     <ItemListItem
-      logo={offer.storeName[0]}
+      logo={offer.store.name[0]}
       title={offer.text}
-      secondaryTitle={offer.storeName}
+      secondaryTitle={offer.store.name}
       sideComponent={
         <View style={{ paddingStart: 10 }}>
           <BorderlessButton onPress={onStar}>

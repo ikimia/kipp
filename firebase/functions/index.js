@@ -107,3 +107,23 @@ exports.getExploreListStores = defineFunction(
     res.json({ data: await getAllStores() });
   })
 );
+
+exports.getOffers = defineFunction(
+  auth(async (req, res) => {
+    const data = [];
+    const offers = await admin
+      .firestore()
+      .collection("offers")
+      .listDocuments();
+    for (const offer of offers) {
+      const offerData = await offer.get();
+      const store = await offerData.get("store").get();
+      data.push(
+        Object.assign({}, offerData.data(), {
+          store: store.data()
+        })
+      );
+    }
+    res.json({ data });
+  })
+);
