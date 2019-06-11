@@ -1,17 +1,19 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
 import {
   RectButton,
   ScrollView,
   FlatList,
-  TextInput
+  TextInput,
+  BorderlessButton
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Feather";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import StyledText from "../components/StyledText";
 import AppHeader from "../components/AppHeader";
 import Container from "../components/Container";
-import StoreLogo from "../components/StoreLogo";
+import ItemListItem from "../components/ItemListItem";
 
 function Chip({ title, icon }) {
   return (
@@ -88,7 +90,8 @@ async function getOffers() {
       id: "2222",
       storeName: "Burger King",
       address: "Ibn Gabirol St 92",
-      text: "Get a free burger"
+      text: "Get a free burger",
+      starred: true
     },
     {
       id: "333",
@@ -105,6 +108,33 @@ async function getOffers() {
   ];
 }
 
+function Star({ selected }) {
+  const [name, color] = selected ? ["star", "gold"] : ["star-o", "#666"];
+  return <FontAwesome name={name} color={color} size={20} />;
+}
+
+function OfferListItem({ offer }) {
+  const [starred, setStarred] = useState(!!offer.starred);
+  return (
+    <ItemListItem
+      logo={offer.storeName[0]}
+      title={offer.text}
+      secondaryTitle={offer.storeName}
+      sideComponent={
+        <View style={{ paddingStart: 10 }}>
+          <BorderlessButton
+            onPress={() => {
+              setStarred(v => !v);
+            }}
+          >
+            <Star selected={starred} />
+          </BorderlessButton>
+        </View>
+      }
+    />
+  );
+}
+
 export default function OffersScreen() {
   const [offers, setOffers] = useState([]);
   useEffect(() => {
@@ -114,75 +144,12 @@ export default function OffersScreen() {
   return (
     <Container>
       <AppHeader bottomComponent={<SearchInput />} />
-      <View style={{ flex: 1, backgroundColor: "#EEE" }}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={offers}
           keyExtractor={({ id }) => id}
-          style={{ paddingVertical: 10 }}
-          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item: offer }) => (
-            <View style={{ backgroundColor: "white" }}>
-              <View style={{ padding: 10 }}>
-                <View style={{ flexDirection: "row" }}>
-                  <StoreLogo storeName={offer.storeName} size={50} />
-                  <View style={{ marginStart: 10 }}>
-                    <View>
-                      <StyledText bold size={16}>
-                        {offer.storeName}
-                      </StyledText>
-                      <StyledText color="#666" size={12}>
-                        {offer.address}
-                      </StyledText>
-                    </View>
-                  </View>
-                </View>
-                <View style={{ paddingTop: 10 }}>
-                  <StyledText>{offer.text}</StyledText>
-                </View>
-              </View>
-              {offer.attachment && (
-                <View>
-                  <Image
-                    source={offer.attachment}
-                    style={{ height: 200, width: "100%" }}
-                  />
-                </View>
-              )}
-              <View
-                style={{
-                  flexDirection: "row",
-                  borderTopWidth: 1,
-                  borderTopColor: "#CCC"
-                }}
-              >
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: 10
-                  }}
-                >
-                  <Icon name="plus-square" style={{ marginEnd: 5 }} size={14} />
-                  <StyledText bold>Use</StyledText>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: 10
-                  }}
-                >
-                  <Icon name="share" style={{ marginEnd: 5 }} size={14} />
-                  <StyledText bold>Share</StyledText>
-                </View>
-              </View>
-            </View>
-          )}
+          renderItem={({ item: offer }) => <OfferListItem offer={offer} />}
         />
       </View>
     </Container>

@@ -20,10 +20,9 @@ export default function ItemListItem({
   logoComponent,
   logo,
   last,
+  secondaryTitle,
   title,
   text,
-  secondaryText,
-  secondaryTextImportant,
   sideComponent
 }) {
   return (
@@ -64,29 +63,13 @@ export default function ItemListItem({
           }}
         >
           <View style={{ flex: 1 }}>
+            {secondaryTitle && (
+              <StyledText color="#333">{secondaryTitle}</StyledText>
+            )}
             <StyledText bold size={16}>
               {title}
             </StyledText>
-            <StyledText size={12}>{text}</StyledText>
-            {secondaryText && (
-              <StyledText
-                size={12}
-                color="#333"
-                style={{
-                  fontSize: 12,
-                  fontStyle: "italic",
-                  marginTop: 5,
-                  ...(secondaryTextImportant
-                    ? {
-                        fontWeight: "bold",
-                        color: "darkred"
-                      }
-                    : undefined)
-                }}
-              >
-                {secondaryText}
-              </StyledText>
-            )}
+            {text && <StyledText size={12}>{text}</StyledText>}
           </View>
           {sideComponent}
         </View>
