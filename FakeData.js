@@ -1,53 +1,39 @@
-import * as React from "react";
-import { Image, View } from "react-native";
-import StyledText from "./components/StyledText";
+const offers = {
+  "12312": {
+    id: "12312",
+    storeName: "McDonalds",
+    address: "Ibn Gabirol St 92",
+    text: "Get a beach towel with this coupon",
+    code: "51231"
+  },
+  "2222": {
+    id: "2222",
+    storeName: "Burger King",
+    address: "Ibn Gabirol St 92",
+    text: "Get a free burger",
+    starred: true,
+    code: "94120"
+  },
+  "333": {
+    id: "333",
+    storeName: "Otello",
+    address: "Dizengoff St 151",
+    text: "Get free ice scream",
+    code: "48163"
+  },
+  "444": {
+    id: "444",
+    storeName: "Arcaffe",
+    address: "Ibn Gabirol St 100",
+    text: "Free coffee with every sandwich",
+    code: "13997"
+  }
+};
 
-export function RandomLogo({
-  text,
-  height = 120,
-  width = 120,
-  seed = null,
-  flat
-}) {
-  return (
-    <View
-      style={{
-        height,
-        width,
-        alignItems: "flex-end",
-        flexDirection: "row"
-      }}
-    >
-      <Image
-        style={{
-          borderRadius: flat ? 0 : 3,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0
-        }}
-        source={{
-          uri: `https://picsum.photos/${width}/${height}${
-            seed ? "?random=" + seed : ""
-          }`
-        }}
-      />
-      {text ? (
-        <View>
-          <View
-            style={{
-              margin: 10,
-              backgroundColor: "rgba(0,0,0, 0.5)",
-              padding: 5
-            }}
-          >
-            <StyledText bold color="white" size={18}>
-              {text}
-            </StyledText>
-          </View>
-        </View>
-      ) : null}
-    </View>
-  );
+export function getOffers() {
+  return Promise.resolve(Object.values(offers));
+}
+
+export function getOffer(offerId) {
+  return Promise.resolve(offers[offerId]);
 }

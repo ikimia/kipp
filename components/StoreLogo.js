@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import { COLORS } from "./ItemListItem";
 import murmurhash from "murmurhash";
 import StyledText from "./StyledText";

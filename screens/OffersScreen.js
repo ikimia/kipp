@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import {
   FlatList,
@@ -13,6 +13,7 @@ import Container from "../components/Container";
 import ItemListItem from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import { getOffers } from "../Backend";
+import { NavigationContext } from "react-navigation";
 
 function SearchInput() {
   return (
@@ -72,11 +73,13 @@ function Star({ selected }) {
 }
 
 function OfferListItem({ offer, onStar }) {
+  const { navigate } = useContext(NavigationContext);
   return (
     <ItemListItem
       logo={offer.store.name[0]}
       title={offer.text}
       secondaryTitle={offer.store.name}
+      onPress={() => navigate("Offer", { offerId: offer.id })}
       sideComponent={
         <View style={{ paddingStart: 10 }}>
           <BorderlessButton onPress={onStar}>
