@@ -120,7 +120,8 @@ exports.getOffers = defineFunction(
       const store = await offerData.get("store").get();
       data.push(
         Object.assign({}, offerData.data(), {
-          store: store.data()
+          store: store.data(),
+          id: offer.id
         })
       );
     }

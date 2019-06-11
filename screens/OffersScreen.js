@@ -77,10 +77,10 @@ function OfferListItem({ offer, onStar }) {
   const { navigate } = useContext(NavigationContext);
   return (
     <ItemListItem
-      logoComponent={<StoreLogo size={50} storeName={offer.storeName} />}
+      logoComponent={<StoreLogo size={50} storeName={offer.store.name} />}
       title={offer.text}
       secondaryTitle={offer.store.name}
-      onPress={() => navigate("Offer", { offerId: offer.id })}
+      onPress={() => navigate("Offer", { offer })}
       sideComponent={
         <View style={{ paddingStart: 10 }}>
           <BorderlessButton onPress={onStar}>

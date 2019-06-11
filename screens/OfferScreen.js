@@ -1,24 +1,19 @@
 import * as React from "react";
-import { useState } from "react";
+import { useContext } from "react";
 import { View } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
 import Icon from "react-native-vector-icons/Feather";
 import { ScrollView } from "react-native-gesture-handler";
-import { NavigationEvents } from "react-navigation";
+import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
-import { getOffer } from "../FakeData";
 
 export default function OfferScreen() {
-  const [offer, setOffer] = useState(null);
+  const { getParam } = useContext(NavigationContext);
+  const offer = getParam("offer");
   return (
     <Container>
-      <NavigationEvents
-        onWillFocus={({ state: { params: { offerId } = {} } }) => {
-          getOffer(offerId).then(setOffer);
-        }}
-      />
       <SmallHeader title="Offer" />
       {offer && (
         <ScrollView style={{ flex: 1 }}>
