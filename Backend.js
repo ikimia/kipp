@@ -18,6 +18,7 @@ export const getCode = firebaseFunction("getCode");
 export const acceptPayment = firebaseFunction("acceptPayment");
 export const getExploreData = firebaseFunction("getExploreData");
 export const getExploreListStores = firebaseFunction("getExploreListStores");
+export const getOffers = firebaseFunction("getOffers");
 
 export function onChargeAttempt(handler) {
   return firebase.messaging().onMessage(handler);
