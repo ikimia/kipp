@@ -83,7 +83,13 @@ export default function Purchases() {
           title={storeName}
           text={m(language, created).calendar()}
           sideComponent={
-            <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-end",
+                padding: 15
+              }}
+            >
               <StyledText size={16} color="#666" style={{ marginEnd: 2 }}>
                 {t("common:currencySign")}
               </StyledText>
