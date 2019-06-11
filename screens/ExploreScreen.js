@@ -108,7 +108,6 @@ function StoresSection({ title, stores = [], onStorePress }) {
             logoComponent={
               <StoreLogo logoURL={logoURL} storeName={storeName} size={50} />
             }
-            logo={storeName.slice(0, 1)}
             title={storeName}
             text={`${address1}, ${city}`}
             last={i === stores.length - 1}

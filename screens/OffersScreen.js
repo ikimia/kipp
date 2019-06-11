@@ -14,6 +14,7 @@ import ItemListItem from "../components/ItemListItem";
 import StyledText from "../components/StyledText";
 import { getOffers } from "../Backend";
 import { NavigationContext } from "react-navigation";
+import StoreLogo from "../components/StoreLogo";
 
 function SearchInput() {
   return (
@@ -76,7 +77,7 @@ function OfferListItem({ offer, onStar }) {
   const { navigate } = useContext(NavigationContext);
   return (
     <ItemListItem
-      logo={offer.store.name[0]}
+      logoComponent={<StoreLogo size={50} storeName={offer.storeName} />}
       title={offer.text}
       secondaryTitle={offer.store.name}
       onPress={() => navigate("Offer", { offerId: offer.id })}

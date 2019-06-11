@@ -8,6 +8,7 @@ import StyledText from "./StyledText";
 import { getReceipts } from "../Backend";
 import groupBy from "lodash/groupBy";
 import ItemListSectionHeader from "./ItemListSectionHeader";
+import StoreLogo from "./StoreLogo";
 
 const createSections = (() => {
   const startOf = unitOfTime =>
@@ -75,10 +76,10 @@ export default function Purchases() {
         />
       }
       keyExtractor={({ id }) => id}
-      renderItem={({ item: { id, storeName, price, created }, index: i }) => (
+      renderItem={({ item: { id, storeName, price, created } }) => (
         <ItemListItem
           onPress={() => navigate("PastOrder", { receiptId: id })}
-          logo={storeName.slice(0, 1)}
+          logoComponent={<StoreLogo storeName={storeName} size={50} />}
           title={storeName}
           text={m(language, created).calendar()}
           sideComponent={

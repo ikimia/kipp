@@ -2,7 +2,6 @@ import * as React from "react";
 import { View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import StyledText from "./StyledText";
-import murmurhash from "murmurhash";
 
 export const COLORS = [
   "#ff9f43",
@@ -18,7 +17,6 @@ export const COLORS = [
 export default function ItemListItem({
   onPress,
   logoComponent,
-  logo,
   last,
   secondaryTitle,
   title,
@@ -28,24 +26,7 @@ export default function ItemListItem({
   return (
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ paddingHorizontal: 15 }}>
-          {logoComponent || (
-            <View
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 10,
-                backgroundColor: COLORS[murmurhash(title) % COLORS.length],
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <StyledText bold color="white" size={20}>
-                {logo}
-              </StyledText>
-            </View>
-          )}
-        </View>
+        <View style={{ paddingHorizontal: 15 }}>{logoComponent}</View>
         <View
           style={{
             flex: 1,
