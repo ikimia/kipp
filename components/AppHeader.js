@@ -20,7 +20,8 @@ export default function AppHeader({ sideComponent, bottomComponent }) {
           paddingTop: 10,
           paddingHorizontal: 15,
           flexDirection: "row",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          alignItems: "center"
         }}
       >
         <StyledText bold size={30}>
