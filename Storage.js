@@ -10,19 +10,6 @@ export class LanguageStorage {
   }
 }
 
-const OfferStorageKey = "@Kipp_offer";
-export class OfferStorage {
-  static get() {
-    return AsyncStorage.getItem(OfferStorageKey).then(JSON.parse);
-  }
-  static set(offer) {
-    return AsyncStorage.setItem(OfferStorageKey, JSON.stringify(offer));
-  }
-  static delete() {
-    return AsyncStorage.removeItem(OfferStorageKey);
-  }
-}
-
 const creditCardStorageKey = "@Kipp_CreditCard";
 export class CreditCardStorage {
   static set(cardNumber, expirationDate, cvv) {

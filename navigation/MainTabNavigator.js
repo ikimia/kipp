@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import { View } from "react-native";
 import i18next from "i18next";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -12,7 +11,6 @@ import MainScreen from "../screens/MainScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import ReceiptsScreen from "../screens/ReceiptsScreen";
 import ExploreScreen from "../screens/ExploreScreen";
-import FollowingScreen from "../screens/OffersScreen";
 import PastOrderScreen from "../screens/PastOrderScreen";
 import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import ExploreListScreen from "../screens/ExploreListScreen";
@@ -33,26 +31,7 @@ const stack = (stacks, initialRouteName, icon) =>
       gestureDirection: isRTL() ? "inverted" : "default",
       tabBarIcon({ focused, tintColor }) {
         return (
-          <View>
-            <Icon
-              style={{ marginEnd: 3 }}
-              name={icon}
-              size={20}
-              color={focused ? tintColor : "#666"}
-            />
-            {navigation.getParam("showNotification") && (
-              <View
-                style={{
-                  height: 10,
-                  width: 10,
-                  backgroundColor: "#10ac84",
-                  position: "absolute",
-                  right: 0,
-                  borderRadius: 5
-                }}
-              />
-            )}
-          </View>
+          <Icon name={icon} size={20} color={focused ? tintColor : "#666"} />
         );
       },
       tabBarVisible: !navigation.getParam("tabBarHidden")
@@ -88,7 +67,6 @@ export default createBottomTabNavigator(
       "Receipts",
       "tag"
     ),
-    Offers: stack({ Offers: FollowingScreen }, "Offers", "gift"),
     Explore: stack(
       {
         Explore: ExploreScreen,
