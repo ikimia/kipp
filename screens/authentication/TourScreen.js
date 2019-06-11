@@ -8,7 +8,7 @@ import {
 } from "react-navigation";
 
 import Logo from "../../components/Logo";
-import Backdrop, { PATTERNS } from "../../components/Backdrop";
+import Backdrop, { TOUR_PATTERN } from "../../components/Backdrop";
 import StyledText from "../../components/StyledText";
 import { RectButton } from "react-native-gesture-handler";
 
@@ -95,7 +95,7 @@ export default function TourScreen() {
           StatusBar.setBarStyle("light-content");
         }}
       />
-      <Backdrop pattern={PATTERNS[1]} />
+      <Backdrop pattern={TOUR_PATTERN} />
       <View style={{ alignItems: "center", marginVertical: 10 }}>
         <Pagination size={TOUR.length} index={activeSlide} />
       </View>

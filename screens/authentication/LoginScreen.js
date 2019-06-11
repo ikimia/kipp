@@ -6,7 +6,7 @@ import { AccessToken } from "react-native-fbsdk";
 
 import Logo from "../../components/Logo";
 import FBLoginButton from "../../components/FBLoginButton";
-import Backdrop, { PATTERNS } from "../../components/Backdrop";
+import Backdrop, { TOUR_PATTERN } from "../../components/Backdrop";
 import { signIn } from "../../Backend";
 import StyledText from "../../components/StyledText";
 import { RectButton, BorderlessButton } from "react-native-gesture-handler";
@@ -23,7 +23,7 @@ export default function LoginScreen() {
   };
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 20 }}>
-      <Backdrop pattern={PATTERNS[1]} />
+      <Backdrop pattern={TOUR_PATTERN} />
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={{ alignItems: "center" }}>
           <Logo fontSize={100} color="white" />
