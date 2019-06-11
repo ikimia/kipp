@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { View } from "react-native";
 import SmallHeader from "../components/SmallHeader";
 import StyledText from "../components/StyledText";
@@ -8,10 +8,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
+import { revealOffer } from "../Backend";
 
 export default function OfferScreen() {
   const { getParam } = useContext(NavigationContext);
-  const offer = getParam("offer");
+  const [offer, setOffer] = useState();
+  const offerId = getParam("offerId");
+  revealOffer({ offerId }).then(setOffer);
   return (
     <Container>
       <SmallHeader title="Offer" />
@@ -20,9 +23,9 @@ export default function OfferScreen() {
           <View style={{ alignItems: "center", padding: 20 }}>
             <View style={{ marginVertical: 20, alignItems: "center" }}>
               <View style={{ marginBottom: 10 }}>
-                <StoreLogo storeName={offer.storeName} size={100} />
+                <StoreLogo storeName={offer.store.name} size={100} />
               </View>
-              <StyledText size={16}>{offer.storeName}</StyledText>
+              <StyledText size={16}>{offer.store.name}</StyledText>
             </View>
             <Icon name="star" size={25} />
           </View>

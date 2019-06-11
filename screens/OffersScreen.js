@@ -80,7 +80,7 @@ function OfferListItem({ offer, onStar }) {
       logoComponent={<StoreLogo size={50} storeName={offer.store.name} />}
       title={offer.text}
       secondaryTitle={offer.store.name}
-      onPress={() => navigate("Offer", { offer })}
+      onPress={() => navigate("Offer", { offerId: offer.id })}
       sideComponent={
         <View style={{ paddingStart: 10 }}>
           <BorderlessButton onPress={onStar}>
