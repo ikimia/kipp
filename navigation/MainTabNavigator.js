@@ -16,6 +16,7 @@ import PaymentSettingsScreen from "../screens/PaymentSettingsScreen";
 import ExploreListScreen from "../screens/ExploreListScreen";
 import StoreScreen from "../screens/StoreScreen";
 import OffersScreen from "../screens/OffersScreen";
+import OfferScreen from "../screens/OfferScreen";
 
 const isRTL = () => (i18next.language || "").startsWith("he");
 
@@ -68,7 +69,11 @@ export default createBottomTabNavigator(
       "Receipts",
       "tag"
     ),
-    Offers: stack({ Offers: OffersScreen }, "Offers", "gift"),
+    Offers: stack(
+      { Offers: OffersScreen, Offer: OfferScreen },
+      "Offers",
+      "gift"
+    ),
     Explore: stack(
       {
         Explore: ExploreScreen,
