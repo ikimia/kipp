@@ -23,7 +23,7 @@ export default function LoginScreen() {
   };
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: 20 }}>
-      <Backdrop pattern={PATTERNS[1]} />
+      <Backdrop pattern={PATTERNS[12]} />
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={{ alignItems: "center" }}>
           <Logo fontSize={100} color="white" />

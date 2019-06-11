@@ -95,7 +95,7 @@ export default function TourScreen() {
           StatusBar.setBarStyle("light-content");
         }}
       />
-      <Backdrop pattern={PATTERNS[1]} />
+      <Backdrop pattern={PATTERNS[12]} />
       <View style={{ alignItems: "center", marginVertical: 10 }}>
         <Pagination size={TOUR.length} index={activeSlide} />
       </View>
