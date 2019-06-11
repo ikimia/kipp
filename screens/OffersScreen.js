@@ -82,11 +82,12 @@ function OfferListItem({ offer, onStar }) {
       secondaryTitle={offer.store.name}
       onPress={() => navigate("Offer", { offerId: offer.id })}
       sideComponent={
-        <View style={{ paddingStart: 10 }}>
-          <BorderlessButton onPress={onStar}>
-            <Star selected={offer.starred} />
-          </BorderlessButton>
-        </View>
+        <BorderlessButton
+          onPress={onStar}
+          style={{ justifyContent: "center", padding: 15 }}
+        >
+          <Star selected={offer.starred} />
+        </BorderlessButton>
       }
     />
   );

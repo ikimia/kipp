@@ -25,15 +25,15 @@ export default function ItemListItem({
 }) {
   return (
     <RectButton onPress={onPress} style={{ backgroundColor: "white" }}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ paddingHorizontal: 15 }}>{logoComponent}</View>
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ paddingHorizontal: 15, alignSelf: "center" }}>
+          {logoComponent}
+        </View>
         <View
           style={{
             flex: 1,
             flexDirection: "row",
             alignSelf: "stretch",
-            padding: 15,
-            paddingStart: 0,
             alignItems: "center",
             ...(!last
               ? {
@@ -43,7 +43,9 @@ export default function ItemListItem({
               : undefined)
           }}
         >
-          <View style={{ flex: 1 }}>
+          <View
+            style={{ flex: 1, paddingVertical: 15, justifyContent: "center" }}
+          >
             {secondaryTitle && (
               <StyledText color="#333">{secondaryTitle}</StyledText>
             )}
