@@ -23,7 +23,11 @@ export default function OfferScreen() {
           <View style={{ alignItems: "center", padding: 20 }}>
             <View style={{ marginVertical: 20, alignItems: "center" }}>
               <View style={{ marginBottom: 10 }}>
-                <StoreLogo storeName={offer.store.name} size={100} />
+                <StoreLogo
+                  storeName={offer.store.name}
+                  logoURL={offer.store.logoURL}
+                  size={100}
+                />
               </View>
               <StyledText size={16}>{offer.store.name}</StyledText>
             </View>
