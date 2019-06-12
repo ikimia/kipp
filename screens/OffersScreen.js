@@ -77,7 +77,13 @@ function OfferListItem({ offer, onStar }) {
   const { navigate } = useContext(NavigationContext);
   return (
     <ItemListItem
-      logoComponent={<StoreLogo size={50} storeName={offer.store.name} />}
+      logoComponent={
+        <StoreLogo
+          size={50}
+          storeName={offer.store.name}
+          logoURL={offer.store.logoURL}
+        />
+      }
       title={offer.text}
       secondaryTitle={offer.store.name}
       onPress={() => navigate("Offer", { offerId: offer.id })}
