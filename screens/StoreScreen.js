@@ -11,13 +11,6 @@ import firebase from "react-native-firebase";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
 
-const features = [
-  "10% off for the first month",
-  "Birthday gift",
-  "Punch card",
-  "And much more"
-];
-
 function Section({ title, children, marginBottom = 10 }) {
   return (
     <View style={{ padding: 10, marginBottom }}>
@@ -89,35 +82,6 @@ export default function StoreScreen() {
                 <StyledText>Open today until 23:00</StyledText>
               </View>
             </View>
-          </View>
-          <View
-            style={{
-              backgroundColor: "#FAFAFA",
-              borderTopWidth: 1,
-              borderBottomWidth: 1,
-              borderColor: "#EEE",
-              paddingHorizontal: 5,
-              marginBottom: 20
-            }}
-          >
-            <Section title="Membership" marginBottom={0}>
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ flex: 1 }}>
-                  {features.map(text => (
-                    <View key={text}>
-                      <StyledText>• {text}</StyledText>
-                    </View>
-                  ))}
-                </View>
-                <View>
-                  <BorderlessButton>
-                    <StyledText bold color={COLORS[5]}>
-                      JOIN NOW
-                    </StyledText>
-                  </BorderlessButton>
-                </View>
-              </View>
-            </Section>
           </View>
           <Section title="Location">
             <View style={{ flexDirection: "row" }}>
