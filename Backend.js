@@ -50,13 +50,17 @@ export function reportNavigation(screenName) {
   firebase.analytics().setCurrentScreen(screenName);
 }
 
-const createReceipt = doc => ({
-  id: doc.id,
-  uid: doc.get("uid"),
-  storeName: doc.get("storeName"),
-  price: doc.get("price"),
-  created: doc.get("created").toMillis()
-});
+const createReceipt = async doc => {
+  const store = await doc.get("store").get();
+
+  return {
+    id: doc.id,
+    uid: doc.get("uid"),
+    storeName: store.get("name"),
+    price: doc.get("price"),
+    created: doc.get("created").toMillis()
+  };
+};
 
 export async function getReceipts() {
   const docs = await firebase
@@ -64,8 +68,9 @@ export async function getReceipts() {
     .collection("receipts")
     .where("uid", "==", getCurrentUser().uid)
     .get();
-  const receipts = [];
+  let receipts = [];
   docs.forEach(doc => receipts.push(createReceipt(doc)));
+  receipts = await Promise.all(receipts);
   receipts.sort((a, b) => b.created - a.created);
   return receipts;
 }
@@ -77,11 +82,4 @@ export async function getReceipt(id) {
     .doc(id)
     .get();
   return createReceipt(doc);
-}
-
-export function getStoreLogo(id) {
-  return firebase
-    .storage()
-    .ref(`logos/${id}`)
-    .getDownloadURL();
 }
