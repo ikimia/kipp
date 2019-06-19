@@ -17,10 +17,10 @@ exports.getCode = (req, res) => {
   res.json({ data: { code } });
 };
 
-async function charge(price, storeName, topic) {
+async function charge(price, storeId, topic, storeName) {
   const created = admin.firestore.FieldValue.serverTimestamp();
   const ref = await receiptsCollection.add({
-    storeName,
+    store: admin.firestore().doc(`/stores/${storeId}`),
     price,
     created,
     status: "pending"
@@ -31,11 +31,11 @@ async function charge(price, storeName, topic) {
 }
 
 exports.demo = async (req, res) => {
-  const { paymentCode: topic, price, storeName, secret } = req.body;
+  const { paymentCode: topic, price, secret, storeId, storeName } = req.body;
   if (secret !== "kippisbest") {
     return res.status(403).send();
   }
-  await charge(price, storeName, topic);
+  await charge(price, storeId, topic, storeName);
   res.send();
 };
 exports.demo.noAuth = true;
