@@ -83,7 +83,7 @@ function StoresLane({ title, stores = [], onStorePress }) {
         }) => (
           <View style={{ marginHorizontal: 6, width: 120 }}>
             <RectButton onPress={() => onStorePress(storeId)}>
-              <StoreLogo logoURL={logoURL} storeName={storeName} />
+              <StoreLogo logoURL={logoURL} />
               <StyledText size={14} bold style={{ marginTop: 5 }}>
                 {storeName}
               </StyledText>
@@ -105,9 +105,7 @@ function StoresSection({ title, stores = [], onStorePress }) {
           <ItemListItem
             key={storeId}
             onPress={() => onStorePress(storeId)}
-            logoComponent={
-              <StoreLogo logoURL={logoURL} storeName={storeName} size={50} />
-            }
+            logoComponent={<StoreLogo logoURL={logoURL} size={50} />}
             title={storeName}
             text={`${address1}, ${city}`}
             last={i === stores.length - 1}
