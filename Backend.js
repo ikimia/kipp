@@ -57,6 +57,7 @@ const createReceipt = async doc => {
     id: doc.id,
     uid: doc.get("uid"),
     storeName: store.get("name"),
+    logoURL: store.get("logoURL"),
     price: doc.get("price"),
     created: doc.get("created").toMillis()
   };

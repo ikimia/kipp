@@ -76,10 +76,10 @@ export default function Purchases() {
         />
       }
       keyExtractor={({ id }) => id}
-      renderItem={({ item: { id, storeName, price, created } }) => (
+      renderItem={({ item: { id, storeName, logoURL, price, created } }) => (
         <ItemListItem
           onPress={() => navigate("PastOrder", { receiptId: id })}
-          logoComponent={<StoreLogo storeName={storeName} size={50} />}
+          logoComponent={<StoreLogo logoURL={logoURL} size={50} />}
           title={storeName}
           text={m(language, created).calendar()}
           sideComponent={

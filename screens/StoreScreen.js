@@ -60,11 +60,7 @@ export default function StoreScreen() {
               flexDirection: "row"
             }}
           >
-            <StoreLogo
-              logoURL={store.logoURL}
-              storeName={store.name}
-              size={100}
-            />
+            <StoreLogo logoURL={store.logoURL} size={100} />
             <View style={{ paddingStart: 15 }}>
               <StyledText bold size={22}>
                 {store.name}
