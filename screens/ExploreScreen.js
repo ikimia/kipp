@@ -16,6 +16,7 @@ import { getExploreData } from "../Backend";
 import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
 import Container from "../components/Container";
+import SearchInput from "../components/SearchInput";
 
 const Header = ({ title }) => {
   const { navigate } = useContext(NavigationContext);
@@ -45,28 +46,6 @@ const Header = ({ title }) => {
     </View>
   );
 };
-
-function StoreSearch() {
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#EEE",
-        padding: 10,
-        borderRadius: 10,
-        marginTop: 5,
-        marginHorizontal: 15
-      }}
-    >
-      <Icon
-        name="search"
-        style={{ fontSize: 15, color: "#999", marginEnd: 5 }}
-      />
-      <TextInput placeholder="Search stores" />
-    </View>
-  );
-}
 
 function StoresLane({ title, stores = [], onStorePress }) {
   return (
@@ -137,7 +116,7 @@ export default function ExploreScreen() {
   const navigateToStore = storeId => navigate("Store", { storeId });
   return (
     <Container>
-      <AppHeader bottomComponent={<StoreSearch />} />
+      <AppHeader bottomComponent={<SearchInput />} />
       <ScrollView style={{ flex: 1 }}>
         <StoresLane
           title="Featured"
