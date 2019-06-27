@@ -1,12 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
-import {
-  FlatList,
-  TextInput,
-  BorderlessButton
-} from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/Feather";
+import { FlatList, BorderlessButton } from "react-native-gesture-handler";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AppHeader from "../components/AppHeader";
 import Container from "../components/Container";
@@ -15,28 +10,7 @@ import StyledText from "../components/StyledText";
 import { getOffers } from "../Backend";
 import { NavigationContext } from "react-navigation";
 import StoreLogo from "../components/StoreLogo";
-
-function SearchInput() {
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#EEE",
-        padding: 10,
-        borderRadius: 10,
-        marginTop: 5,
-        marginHorizontal: 15
-      }}
-    >
-      <Icon
-        name="search"
-        style={{ fontSize: 15, color: "#999", marginEnd: 5 }}
-      />
-      <TextInput placeholder="Search offers" />
-    </View>
-  );
-}
+import SearchInput from "../components/SearchInput";
 
 function Badge({ size = 20, number = 1 }) {
   return (
