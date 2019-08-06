@@ -1,6 +1,8 @@
-# Kipp
+# Kipp (discontinued)
 
-Top payments app of 2019, by Street Commerce
+This Project has been discontinued :cry:  
+[@moshe](https://github.com/moshe) and I have decided to open the code for people who want to see best-practices we used building this app.  
+The code is licensed under the Apache 2.0 license.
 
 ---
 
